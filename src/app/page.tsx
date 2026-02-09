@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   ArrowRight,
-  Briefcase,
   Landmark,
   MapPin,
   Megaphone,
@@ -10,6 +9,9 @@ import {
   Search,
   Users,
   CircleHelp,
+  AreaChart,
+  Code,
+  UserCog,
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
@@ -29,12 +31,14 @@ export default function HomePage() {
   const featuredJobs = DUMMY_JOBS.slice(0, 9);
 
   const jobCategories = [
-    { name: 'Retail & Products', icon: Briefcase },
-    { name: 'Content Writer', icon: PenSquare },
-    { name: 'Marketing & Sale', icon: Megaphone },
-    { name: 'Customer Help', icon: CircleHelp },
-    { name: 'Finance', icon: Landmark },
-    { name: 'Human Resource', icon: Users },
+    { name: 'Content Writer', icon: PenSquare, jobCount: 29 },
+    { name: 'Market Research', icon: AreaChart, jobCount: 7 },
+    { name: 'Marketing & Sale', icon: Megaphone, jobCount: 9 },
+    { name: 'Customer Help', icon: CircleHelp, jobCount: 4 },
+    { name: 'Finance', icon: Landmark, jobCount: 9 },
+    { name: 'Software', icon: Code, jobCount: 4 },
+    { name: 'Human Resource', icon: Users, jobCount: 10 },
+    { name: 'Management', icon: UserCog, jobCount: 6 },
   ];
 
   const locations = [
@@ -123,19 +127,22 @@ export default function HomePage() {
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <div className="mb-10 text-center">
-              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">We are HIRING</h2>
+              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Browse by category</h2>
               <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                Let’s Work Together & Explore Opportunities
+                Find the job that’s perfect for you. about 800+ new jobs everyday
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {jobCategories.map((category) => (
-                <Card key={category.name} className="group cursor-pointer overflow-hidden text-center transition-all hover:border-primary hover:shadow-lg">
-                  <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
-                    <div className="rounded-full bg-primary/10 p-4 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                      <category.icon className="h-8 w-8" />
+                <Card key={category.name} className="group cursor-pointer overflow-hidden transition-all hover:border-primary hover:shadow-lg">
+                  <CardContent className="flex flex-col items-start gap-4 p-6">
+                     <div className="rounded-md bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                        <category.icon className="h-8 w-8" />
                     </div>
-                    <p className="font-semibold text-sm">{category.name}</p>
+                    <div>
+                        <h3 className="font-semibold text-lg">{category.name}</h3>
+                        <p className="text-sm text-muted-foreground">{category.jobCount} Jobs Available</p>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -152,7 +159,7 @@ export default function HomePage() {
                 Hand-picked opportunities from the best companies in the industry.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {featuredJobs.map((job) => (
                 <JobCard key={job.id} job={job} />
               ))}
