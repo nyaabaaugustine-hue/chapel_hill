@@ -10,6 +10,8 @@ import { ArrowRight } from 'lucide-react';
 
 export default function EmployerDashboard() {
   const recentApplicants = DUMMY_APPLICANTS.slice(0, 5);
+  const interviewsScheduled = DUMMY_APPLICANTS.filter(a => a.status === 'Interview').length;
+  const hiredCount = DUMMY_APPLICANTS.filter(a => a.status === 'Hired').length;
 
   return (
     <div className="space-y-8">
@@ -44,7 +46,7 @@ export default function EmployerDashboard() {
             <CardTitle>Interviews Scheduled</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-4xl font-bold">8</p>
+            <p className="text-4xl font-bold">{interviewsScheduled}</p>
             <p className="text-sm text-muted-foreground">2 today</p>
           </CardContent>
         </Card>
@@ -53,7 +55,7 @@ export default function EmployerDashboard() {
             <CardTitle>Hired</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-4xl font-bold">3</p>
+            <p className="text-4xl font-bold">{hiredCount}</p>
             <p className="text-sm text-muted-foreground">This month</p>
           </CardContent>
         </Card>

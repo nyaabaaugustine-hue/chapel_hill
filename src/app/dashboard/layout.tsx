@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Briefcase, FileText, Home, UserCircle, Settings } from 'lucide-react';
 import {
   SidebarProvider,
@@ -17,6 +20,7 @@ import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const userAvatar = PlaceHolderImages.find((img) => img.id === 'avatar-1');
 
   return (
@@ -29,7 +33,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <SidebarContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive>
+                <SidebarMenuButton asChild isActive={pathname === '/dashboard'}>
                   <Link href="/dashboard">
                     <Home />
                     <span>Overview</span>
@@ -37,7 +41,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname === '/dashboard/profile'}>
                   <Link href="/dashboard/profile">
                     <UserCircle />
                     <span>My Profile</span>
@@ -45,7 +49,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname === '/dashboard/applications'}>
                   <Link href="/dashboard/applications">
                     <FileText />
                     <span>My Applications</span>
@@ -53,7 +57,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname.startsWith('/jobs')}>
                   <Link href="/jobs">
                     <Briefcase />
                     <span>Find Jobs</span>

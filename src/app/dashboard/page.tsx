@@ -1,12 +1,13 @@
 import { DUMMY_JOBS, DUMMY_APPLICATIONS } from '@/lib/data';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import JobCard from '@/components/job-card';
 import { Badge } from '@/components/ui/badge';
 import JobRecommendations from '@/components/job-recommendations';
 
 export default function JobSeekerDashboard() {
-  const recentApplications = DUMMY_APPLICATIONS.slice(0, 2);
+  const recentApplications = DUMMY_APPLICATIONS.slice(0, 4);
+  const savedJobs = DUMMY_JOBS.filter((job, index) => [3, 4, 6, 8, 10].includes(index));
 
   return (
     <div className="space-y-8">
@@ -60,8 +61,8 @@ export default function JobSeekerDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-center">
-              <p className="text-3xl font-bold">12</p>
-              <p className="text-sm text-muted-foreground">You have 12 saved jobs.</p>
+              <p className="text-3xl font-bold">{savedJobs.length}</p>
+              <p className="text-sm text-muted-foreground">You have {savedJobs.length} saved jobs.</p>
             </div>
           </CardContent>
         </Card>
@@ -92,8 +93,9 @@ export default function JobSeekerDashboard() {
       <div>
         <h2 className="font-headline text-2xl font-bold">Saved Jobs</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <JobCard job={DUMMY_JOBS[3]} />
-            <JobCard job={DUMMY_JOBS[4]} />
+            {savedJobs.map(job => (
+              <JobCard key={job.id} job={job} />
+            ))}
         </div>
       </div>
     </div>

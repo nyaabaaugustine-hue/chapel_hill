@@ -1,11 +1,11 @@
 import { DUMMY_JOBS } from '@/lib/data';
 import ModerationCard from '@/app/admin/components/moderation-card';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function ModerationPage() {
-    const pendingJobs = DUMMY_JOBS.slice(0,3);
-    const flaggedJobs = [DUMMY_JOBS[4]];
+    const pendingJobs = DUMMY_JOBS.slice(0,5);
+    const flaggedJobs = DUMMY_JOBS.slice(5, 7);
 
   return (
     <div className="space-y-8">

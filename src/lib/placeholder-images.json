@@ -43,6 +43,42 @@
       "imageHint": "company logo"
     },
     {
+      "id": "company-logo-7",
+      "description": "Logo for a creative studio.",
+      "imageUrl": "https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "company-logo-8",
+      "description": "Logo for an e-commerce brand.",
+      "imageUrl": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "company-logo-9",
+      "description": "Logo for a consulting firm.",
+      "imageUrl": "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "company-logo-10",
+      "description": "Logo for a travel company.",
+      "imageUrl": "https://images.unsplash.com/photo-1527632946-86485521ac28?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "company-logo-11",
+      "description": "Logo for a food and beverage company.",
+      "imageUrl": "https://images.unsplash.com/photo-1551024709-8f232a5a087c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "company-logo-12",
+      "description": "Logo for a real estate agency.",
+      "imageUrl": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "company logo"
+    },
+    {
       "id": "avatar-1",
       "description": "Avatar for a user.",
       "imageUrl": "https://images.unsplash.com/photo-1590086782792-42dd2350140d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -70,6 +106,48 @@
       "id": "avatar-5",
       "description": "Avatar for a fifth user.",
       "imageUrl": "https://images.unsplash.com/photo-1521119989659-a83eee488004?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-6",
+      "description": "Avatar for a sixth user.",
+      "imageUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-7",
+      "description": "Avatar for a seventh user.",
+      "imageUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-8",
+      "description": "Avatar for an eighth user.",
+      "imageUrl": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-9",
+      "description": "Avatar for a ninth user.",
+      "imageUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-10",
+      "description": "Avatar for a tenth user.",
+      "imageUrl": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-11",
+      "description": "Avatar for an eleventh user.",
+      "imageUrl": "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-12",
+      "description": "Avatar for a twelfth user.",
+      "imageUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       "imageHint": "person portrait"
     }
   ]

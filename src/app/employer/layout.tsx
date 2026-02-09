@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { BarChart, Briefcase, Building, FileText, Home, MessageSquare, PlusCircle, Settings, Users } from 'lucide-react';
 import {
   SidebarProvider,
@@ -17,6 +20,7 @@ import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function EmployerLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const companyLogo = PlaceHolderImages.find((img) => img.id === 'company-logo-1');
 
   return (
@@ -31,7 +35,7 @@ export default function EmployerLayout({ children }: { children: React.ReactNode
           <SidebarContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive>
+                <SidebarMenuButton asChild isActive={pathname === '/employer'}>
                   <Link href="/employer">
                     <Home />
                     <span>Overview</span>
@@ -39,7 +43,7 @@ export default function EmployerLayout({ children }: { children: React.ReactNode
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname.startsWith('/employer/jobs')}>
                   <Link href="/employer/jobs">
                     <Briefcase />
                     <span>Jobs</span>
@@ -47,7 +51,7 @@ export default function EmployerLayout({ children }: { children: React.ReactNode
                 </SidebarMenuButton>
               </SidebarMenuItem>
                <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname.startsWith('/employer/applicants')}>
                   <Link href="/employer/applicants">
                     <Users />
                     <span>Applicants</span>
@@ -55,7 +59,7 @@ export default function EmployerLayout({ children }: { children: React.ReactNode
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname.startsWith('/employer/messages')}>
                   <Link href="/employer/messages">
                     <MessageSquare />
                     <span>Messages</span>
@@ -63,7 +67,7 @@ export default function EmployerLayout({ children }: { children: React.ReactNode
                 </SidebarMenuButton>
               </SidebarMenuItem>
                <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname.startsWith('/employer/analytics')}>
                   <Link href="/employer/analytics">
                     <BarChart />
                     <span>Analytics</span>
@@ -71,7 +75,7 @@ export default function EmployerLayout({ children }: { children: React.ReactNode
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname.startsWith('/employer/company-profile')}>
                   <Link href="/employer/company-profile">
                     <Building />
                     <span>Company Profile</span>

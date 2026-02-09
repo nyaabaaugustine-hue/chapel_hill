@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { BarChart, Briefcase, DollarSign, Home, Shield, Users } from 'lucide-react';
 import {
   SidebarProvider,
@@ -16,6 +19,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const adminAvatar = PlaceHolderImages.find((img) => img.id === 'avatar-2');
 
   return (
@@ -28,7 +32,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <SidebarContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild >
+                <SidebarMenuButton asChild isActive={pathname === '/admin'}>
                   <Link href="/admin">
                     <Home />
                     <span>Overview</span>
@@ -36,7 +40,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive>
+                <SidebarMenuButton asChild isActive={pathname === '/admin/moderation'}>
                   <Link href="/admin/moderation">
                     <Shield />
                     <span>Job Moderation</span>
@@ -44,7 +48,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </SidebarMenuButton>
               </SidebarMenuItem>
                <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname === '/admin/users'}>
                   <Link href="/admin/users">
                     <Users />
                     <span>User Management</span>
@@ -52,7 +56,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname === '/admin/jobs'}>
                   <Link href="/admin/jobs">
                     <Briefcase />
                     <span>Job Listings</span>
@@ -60,7 +64,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </SidebarMenuButton>
               </SidebarMenuItem>
                <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname === '/admin/financials'}>
                   <Link href="/admin/financials">
                     <DollarSign />
                     <span>Financials</span>
@@ -68,7 +72,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname === '/admin/analytics'}>
                   <Link href="/admin/analytics">
                     <BarChart />
                     <span>Analytics</span>
