@@ -45,11 +45,6 @@ export default function HomePage() {
     { name: 'Berlin, Germany', companies: 3, jobs: 3 },
   ];
 
-  const chunk = <T,>(arr: T[], size: number) =>
-    Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size));
-
-  const categoryChunks = chunk(jobCategories, 8);
-
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
@@ -131,49 +126,49 @@ export default function HomePage() {
             <Carousel
               opts={{
                 align: 'start',
+                loop: true,
               }}
               className="w-full"
             >
               <CarouselContent>
-                {categoryChunks.map((chunk, index) => (
-                  <CarouselItem key={index}>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                      {chunk.map((category) => {
-                        const categoryImage = PlaceHolderImages.find((img) => img.id === category.imageId);
-                        return (
-                          <Link href="/jobs" key={category.name} className="block">
-                            <Card className="group h-full cursor-pointer overflow-hidden transition-all hover:shadow-lg">
+                {jobCategories.map((category) => {
+                  const categoryImage = PlaceHolderImages.find((img) => img.id === category.imageId);
+                  return (
+                    <CarouselItem key={category.name} className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                      <div className="p-1">
+                        <Link href="/jobs" className="block">
+                          <Card className="group h-full transition-all hover:shadow-lg hover:border-primary">
+                            <CardContent className="p-4 flex items-center gap-4">
                               {categoryImage && (
-                                <div className="overflow-hidden rounded-t-lg">
-                                  <Image
-                                    src={categoryImage.imageUrl}
-                                    alt={category.name}
-                                    width={300}
-                                    height={200}
-                                    className="w-full object-cover aspect-[4/3] transition-transform duration-300 group-hover:scale-105"
-                                    data-ai-hint={categoryImage.imageHint}
-                                  />
-                                </div>
+                                <Image
+                                  src={categoryImage.imageUrl}
+                                  alt={category.name}
+                                  width={64}
+                                  height={64}
+                                  className="rounded-lg object-cover"
+                                  data-ai-hint={categoryImage.imageHint}
+                                />
                               )}
-                              <CardContent className="p-4 text-center">
-                                <h3 className="font-semibold">{category.name}</h3>
+                              <div>
+                                <h3 className="font-semibold group-hover:text-primary transition-colors">{category.name}</h3>
                                 <p className="text-sm text-muted-foreground">
                                   {category.jobCount} Jobs Available
                                 </p>
-                              </CardContent>
-                            </Card>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </CarouselItem>
-                ))}
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </Link>
+                      </div>
+                    </CarouselItem>
+                  );
+                })}
               </CarouselContent>
               <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
               <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
             </Carousel>
           </div>
         </section>
+
 
         {/* Featured Jobs Section */}
         <section className="bg-secondary py-16 md:py-24">
