@@ -6,9 +6,12 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 export default function Header() {
   const navLinks = [
-    { href: '/jobs', label: 'Find Jobs' },
-    { href: '/companies', label: 'Companies' },
-    { href: '/dashboard', label: 'Dashboard' },
+    { href: '/', label: 'Home' },
+    { href: '/jobs', label: 'Find a Job' },
+    { href: '#', label: 'Companies' },
+    { href: '#', label: 'Candidates' },
+    { href: '#', label: 'Pages' },
+    { href: '#', label: 'Blog' },
   ];
 
   return (
@@ -20,7 +23,7 @@ export default function Header() {
         <nav className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (
             <Link
-              key={link.href}
+              key={link.href + link.label}
               href={link.href}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
@@ -29,11 +32,8 @@ export default function Header() {
           ))}
         </nav>
         <div className="hidden items-center gap-4 md:flex">
-          <Button variant="ghost" asChild>
-            <Link href="/employer/jobs/new">Post a Job</Link>
-          </Button>
           <Button asChild>
-            <Link href="/dashboard">Login</Link>
+            <Link href="/dashboard">Register</Link>
           </Button>
         </div>
         <Sheet>
@@ -51,7 +51,7 @@ export default function Header() {
               <nav className="flex flex-col gap-4">
                 {navLinks.map((link) => (
                   <Link
-                    key={link.href}
+                    key={link.href + link.label}
                     href={link.href}
                     className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
                   >
@@ -60,11 +60,8 @@ export default function Header() {
                 ))}
               </nav>
               <div className="flex flex-col gap-4">
-                <Button variant="outline" asChild>
-                  <Link href="/employer/jobs/new">Post a Job</Link>
-                </Button>
-                <Button asChild>
-                  <Link href="/dashboard">Login</Link>
+                 <Button asChild>
+                    <Link href="/dashboard">Register</Link>
                 </Button>
               </div>
             </div>

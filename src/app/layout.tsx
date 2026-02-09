@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk' });
 
 export const metadata: Metadata = {
-  title: 'ReactHire',
-  description: 'The modern React job platform for top talent.',
+  title: 'JobBox',
+  description: 'The Easiest Way to Get Your New Job',
 };
 
 export default function RootLayout({

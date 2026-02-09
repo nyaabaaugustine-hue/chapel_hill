@@ -3,8 +3,6 @@ import Link from 'next/link';
 import {
   ArrowRight,
   Briefcase,
-  Building,
-  ChevronRight,
   Landmark,
   MapPin,
   Megaphone,
@@ -16,7 +14,7 @@ import {
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
@@ -154,7 +152,7 @@ export default function HomePage() {
                 Hand-picked opportunities from the best companies in the industry.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {featuredJobs.map((job) => (
                 <JobCard key={job.id} job={job} />
               ))}
