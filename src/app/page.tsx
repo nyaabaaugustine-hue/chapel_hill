@@ -2,24 +2,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   ArrowRight,
-  Landmark,
-  Megaphone,
-  PenSquare,
   Search,
   Users,
-  CircleHelp,
-  AreaChart,
-  Code,
-  UserCog,
+  Star,
+  UserPlus,
+  FileText,
+  Send,
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
-import { DUMMY_JOBS } from '@/lib/data';
+import { DUMMY_JOBS, DUMMY_REVIEWS } from '@/lib/data';
 import JobCard from '@/components/job-card';
 import {
   Carousel,
@@ -28,23 +25,25 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 
 export default function HomePage() {
   const heroBanner1 = PlaceHolderImages.find((img) => img.id === 'hero-banner-1');
   const heroBanner2 = PlaceHolderImages.find((img) => img.id === 'hero-banner-2');
   const chartImage = PlaceHolderImages.find((img) => img.id === 'chart-image');
 
-  const featuredJobs = DUMMY_JOBS.slice(0, 8);
+  const featuredJobs = DUMMY_JOBS.slice(0, 9);
 
   const jobCategories = [
-    { name: 'Human Resource', icon: UserCog, jobCount: 10 },
-    { name: 'Content Writer', icon: PenSquare, jobCount: 29 },
-    { name: 'Marketing & Sale', icon: Megaphone, jobCount: 9 },
-    { name: 'Finance', icon: Landmark, jobCount: 9 },
-    { name: 'Management', icon: Users, jobCount: 6 },
-    { name: 'Market Research', icon: AreaChart, jobCount: 7 },
-    { name: 'Customer Help', icon: CircleHelp, jobCount: 4 },
-    { name: 'Software', icon: Code, jobCount: 4 },
+    { name: 'Human Resource', imageId: 'category-human-resource', jobCount: 10 },
+    { name: 'Content Writer', imageId: 'category-content-writer', jobCount: 29 },
+    { name: 'Marketing & Sale', imageId: 'category-marketing-sale', jobCount: 9 },
+    { name: 'Finance', imageId: 'category-finance', jobCount: 9 },
+    { name: 'Management', imageId: 'category-management', jobCount: 6 },
+    { name: 'Market Research', imageId: 'category-market-research', jobCount: 7 },
+    { name: 'Customer Help', imageId: 'category-customer-help', jobCount: 4 },
+    { name: 'Software', imageId: 'category-software', jobCount: 4 },
   ];
 
   const locations = [
@@ -63,6 +62,7 @@ export default function HomePage() {
   
   const categorySlides = chunk([...jobCategories, ...jobCategories], 8);
 
+  const reviews = DUMMY_REVIEWS;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -152,19 +152,31 @@ export default function HomePage() {
                 {categorySlides.map((slide, index) => (
                   <CarouselItem key={index}>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-1">
-                      {slide.map((category, catIndex) => (
-                        <Link href="/jobs" key={`${category.name}-${index}-${catIndex}`} className="block">
-                          <Card className="group h-full p-4 flex flex-col items-center justify-center text-center transition-all hover:shadow-lg hover:border-primary aspect-square md:aspect-auto">
-                            <div className="mb-4 rounded-full bg-primary/10 p-3">
-                              <category.icon className="h-8 w-8 text-primary" />
-                            </div>
-                            <h3 className="font-semibold text-base mb-1 group-hover:text-primary transition-colors">{category.name}</h3>
-                            <p className="text-sm text-muted-foreground">
-                              {category.jobCount} Jobs Available
-                            </p>
-                          </Card>
-                        </Link>
-                      ))}
+                      {slide.map((category, catIndex) => {
+                         const categoryImage = PlaceHolderImages.find((img) => img.id === category.imageId);
+                         return(
+                          <Link href="/jobs" key={`${category.name}-${index}-${catIndex}`} className="block">
+                            <Card className="group p-3 flex flex-col items-center justify-center text-center transition-all hover:shadow-lg hover:border-primary">
+                              {categoryImage ? (
+                                <Image
+                                  src={categoryImage.imageUrl}
+                                  alt={category.name}
+                                  width={40}
+                                  height={40}
+                                  className="mb-2 h-10 w-10 rounded-lg object-cover"
+                                  data-ai-hint={categoryImage.imageHint}
+                                />
+                              ) : (
+                                <div className="mb-2 h-10 w-10 rounded-lg bg-muted" />
+                              )}
+                              <h3 className="font-semibold text-base mb-1 group-hover:text-primary transition-colors">{category.name}</h3>
+                              <p className="text-sm text-muted-foreground">
+                                {category.jobCount} Jobs Available
+                              </p>
+                            </Card>
+                          </Link>
+                         )
+                        })}
                     </div>
                   </CarouselItem>
                 ))}
@@ -175,9 +187,41 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* How It Works Section */}
+        <section className="bg-secondary py-16 md:py-24">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="mb-10 text-center">
+                    <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">How It Works</h2>
+                    <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">A simple process to find your next career opportunity.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <Card className="text-center p-6">
+                        <div className="mb-4 inline-block rounded-full bg-primary/10 p-4">
+                            <UserPlus className="h-8 w-8 text-primary" />
+                        </div>
+                        <h3 className="font-headline text-xl font-bold mb-2">1. Create an Account</h3>
+                        <p className="text-muted-foreground">Sign up for free and create your profile to showcase your skills and experience.</p>
+                    </Card>
+                    <Card className="text-center p-6">
+                        <div className="mb-4 inline-block rounded-full bg-primary/10 p-4">
+                            <FileText className="h-8 w-8 text-primary" />
+                        </div>
+                        <h3 className="font-headline text-xl font-bold mb-2">2. Complete Your Profile</h3>
+                        <p className="text-muted-foreground">Add your resume, work history, and skills to attract top employers.</p>
+                    </Card>
+                    <Card className="text-center p-6">
+                        <div className="mb-4 inline-block rounded-full bg-primary/10 p-4">
+                            <Send className="h-8 w-8 text-primary" />
+                        </div>
+                        <h3 className="font-headline text-xl font-bold mb-2">3. Apply for Jobs</h3>
+                        <p className="text-muted-foreground">Search and apply for jobs that match your career goals with a single click.</p>
+                    </Card>
+                </div>
+            </div>
+        </section>
 
         {/* Featured Jobs Section */}
-        <section className="bg-secondary py-16 md:py-24">
+        <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <div className="mb-10 text-center">
               <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Featured Jobs</h2>
@@ -185,7 +229,7 @@ export default function HomePage() {
                 Hand-picked opportunities from the best companies in the industry.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {featuredJobs.map((job) => (
                 <JobCard key={job.id} job={job} />
               ))}
@@ -200,8 +244,92 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Locations Section */}
+        {/* For Job Seekers/Employers Section */}
+        <section className="bg-secondary py-16 md:py-24">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div className="rounded-lg bg-card p-8">
+                        <h3 className="font-headline text-2xl font-bold mb-4">For Job Seekers</h3>
+                        <p className="text-muted-foreground mb-6">Find your dream job from thousands of openings. We have jobs from the best companies in the world.</p>
+                        <ul className="space-y-3 text-muted-foreground mb-8">
+                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Access to exclusive job openings.</li>
+                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Create a professional resume with our builder.</li>
+                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Get AI-powered job recommendations.</li>
+                        </ul>
+                        <Button asChild>
+                        <Link href="/jobs">Browse All Jobs <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                        </Button>
+                    </div>
+                    <div className="rounded-lg bg-card p-8">
+                        <h3 className="font-headline text-2xl font-bold mb-4">For Employers</h3>
+                        <p className="text-muted-foreground mb-6">Post your job and find the perfect candidate for your company. We have a large pool of talented developers.</p>
+                        <ul className="space-y-3 text-muted-foreground mb-8">
+                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Post a job in minutes.</li>
+                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Access to a large pool of qualified candidates.</li>
+                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> AI-powered candidate matching.</li>
+                        </ul>
+                        <Button asChild>
+                        <Link href="/employer/jobs/new">Post a Job <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* Testimonials Section */}
         <section className="py-16 md:py-24">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="mb-10 text-center">
+                    <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">What Our Customers Say</h2>
+                    <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                        Listen to the stories of our satisfied users who found their dream jobs through JobBox.
+                    </p>
+                </div>
+                <Carousel
+                    opts={{ align: "start", loop: true }}
+                    className="w-full"
+                >
+                    <CarouselContent>
+                        {reviews.map((review) => {
+                            const authorAvatar = PlaceHolderImages.find((img) => img.id === review.user.avatar);
+                            return (
+                                <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/3">
+                                    <div className="p-1 h-full">
+                                        <Card className="flex flex-col h-full">
+                                            <CardContent className="p-6 flex-grow">
+                                                <div className="flex mb-4">
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <Star key={i} className={`h-5 w-5 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} />
+                                                    ))}
+                                                </div>
+                                                <p className="text-muted-foreground italic">"{review.comment}"</p>
+                                            </CardContent>
+                                            <CardFooter className="p-6 pt-0">
+                                                <div className="flex items-center gap-4">
+                                                    <Avatar>
+                                                        {authorAvatar && <AvatarImage src={authorAvatar.imageUrl} alt={review.user.name} />}
+                                                        <AvatarFallback>{review.user.name.charAt(0)}</AvatarFallback>
+                                                    </Avatar>
+                                                    <div>
+                                                        <p className="font-semibold">{review.user.name}</p>
+                                                        <p className="text-sm text-muted-foreground">{review.user.role}</p>
+                                                    </div>
+                                                </div>
+                                            </CardFooter>
+                                        </Card>
+                                    </div>
+                                </CarouselItem>
+                            );
+                        })}
+                    </CarouselContent>
+                    <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
+                    <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
+                </Carousel>
+            </div>
+        </section>
+
+        {/* Locations Section */}
+        <section className="bg-secondary py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -238,7 +366,7 @@ export default function HomePage() {
         </section>
 
         {/* Newsletter CTA Section */}
-        <section className="bg-secondary py-16 md:py-24">
+        <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-2xl mx-auto">
               <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">

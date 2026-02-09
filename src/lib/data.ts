@@ -377,13 +377,13 @@ export const DUMMY_REVIEWS: Review[] = [
     id: '1',
     user: DUMMY_USERS[0],
     rating: 5,
-    comment: 'ReactHire helped me find my dream job in just two weeks! The platform is intuitive and the recommendations were spot on.',
+    comment: 'JobBox helped me find my dream job in just two weeks! The platform is intuitive and the recommendations were spot on.',
   },
   {
     id: '2',
     user: DUMMY_USERS[1],
     rating: 5,
-    comment: 'As a hiring manager, ReactHire is my go-to. We found our new lead developer here and the process was seamless.',
+    comment: 'As a hiring manager, JobBox is my go-to. We found our new lead developer here and the process was seamless.',
   },
   {
     id: '3',
@@ -402,6 +402,24 @@ export const DUMMY_REVIEWS: Review[] = [
     user: DUMMY_USERS[9],
     rating: 4,
     comment: 'A very user-friendly interface. It made my job search much less stressful.',
+  },
+  {
+    id: '6',
+    user: DUMMY_USERS[12],
+    rating: 5,
+    comment: 'The AI recommendations were surprisingly accurate. Found a perfect fit for my skills.',
+  },
+  {
+    id: '7',
+    user: DUMMY_USERS[15],
+    rating: 4,
+    comment: 'I appreciate the focus on React-specific jobs. It cuts through the noise of generic job boards.',
+  },
+  {
+    id: '8',
+    user: DUMMY_USERS[18],
+    rating: 5,
+    comment: 'The entire process from application to offer was smooth. Highly recommend JobBox!',
   },
 ];
 
@@ -497,3 +515,4 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
     content: '<p>Lorem ipsum...</p>',
   },
 ];
+
