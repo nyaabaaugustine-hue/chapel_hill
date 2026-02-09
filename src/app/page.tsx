@@ -22,6 +22,13 @@ import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
 import { DUMMY_JOBS } from '@/lib/data';
 import JobCard from '@/components/job-card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 
 export default function HomePage() {
   const heroBanner1 = PlaceHolderImages.find((img) => img.id === 'hero-banner-1');
@@ -49,6 +56,14 @@ export default function HomePage() {
     { name: 'Copenhagen, Denmark', companies: 4, jobs: 9 },
     { name: 'Berlin, Germany', companies: 3, jobs: 3 },
   ];
+  
+  const chunk = <T,>(arr: T[], size: number) =>
+  Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+    arr.slice(i * size, i * size + size)
+  );
+
+  const categoryChunks = chunk(jobCategories, 8);
+
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -132,20 +147,40 @@ export default function HomePage() {
                 Find the job that’s perfect for you. about 800+ new jobs everyday
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {jobCategories.map((category) => (
-                <Card key={category.name} className="group cursor-pointer overflow-hidden transition-all hover:border-primary hover:shadow-lg">
-                  <CardContent className="flex flex-col items-start gap-4 p-6">
-                     <div className="rounded-md bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                        <category.icon className="h-8 w-8" />
-                    </div>
-                    <div>
-                        <h3 className="font-semibold text-lg">{category.name}</h3>
-                        <p className="text-sm text-muted-foreground">{category.jobCount} Jobs Available</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="relative">
+              <Carousel
+                opts={{
+                  align: 'start',
+                }}
+                className="w-full"
+              >
+                <CarouselContent>
+                  {categoryChunks.map((chunk, index) => (
+                    <CarouselItem key={index}>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        {chunk.map((category) => (
+                          <Card
+                            key={category.name}
+                            className="group cursor-pointer overflow-hidden transition-all hover:border-primary hover:shadow-lg"
+                          >
+                            <CardContent className="flex h-full flex-col items-center justify-center gap-4 p-6 text-center">
+                              <div className="rounded-md bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                                <category.icon className="h-8 w-8" />
+                              </div>
+                              <div>
+                                <h3 className="font-semibold text-lg">{category.name}</h3>
+                                <p className="text-sm text-muted-foreground">{category.jobCount} Jobs Available</p>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
+                <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
+              </Carousel>
             </div>
           </div>
         </section>
