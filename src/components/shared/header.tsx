@@ -15,9 +15,9 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background shadow-sm">
-      <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-4 md:px-6">
-        <div className="flex items-center gap-6">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm">
+      <div className="mx-auto flex h-20 max-w-screen-xl items-center justify-between px-6 lg:px-12">
+        <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
             <Logo />
           </Link>
@@ -37,7 +37,7 @@ export default function Header() {
           <Button variant="ghost" asChild>
             <Link href="/login">Login</Link>
           </Button>
-          <Button asChild>
+          <Button asChild className="bg-accent-gradient rounded-xl px-5 py-2.5 font-semibold shadow-md transition-transform hover:scale-105">
             <Link href="/register">Sign Up</Link>
           </Button>
         </div>
@@ -68,7 +68,7 @@ export default function Header() {
                  <Button variant="ghost" asChild>
                     <Link href="/login">Login</Link>
                 </Button>
-                 <Button asChild>
+                 <Button asChild className="bg-accent-gradient rounded-xl px-5 py-2.5 font-semibold shadow-md">
                     <Link href="/register">Sign Up</Link>
                 </Button>
               </div>

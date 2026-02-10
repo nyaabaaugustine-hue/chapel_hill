@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 47% 11%;
     --primary: 243 76% 58%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 226 100% 98%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 226 100% 98%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 226 100% 98%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222 47% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
     --ring: 243 76% 58%;
     --radius: 0.5rem;
     --chart-1: 197 71% 52%;
@@ -46,5 +46,16 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+  }
+}
+
+@layer utilities {
+  .bg-accent-gradient {
+    background-image: linear-gradient(to right, #6366F1, #8B5CF6);
+  }
+  .bg-hero-glow {
+    background-image: radial-gradient(circle at 20% 30%, rgba(99,102,241,0.1), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(139,92,246,0.1), transparent 40%);
   }
 }

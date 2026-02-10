@@ -20,6 +20,7 @@ import {
   TrendingUp,
   Users,
   Headset,
+  CheckCircle,
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
@@ -37,26 +38,14 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import BlogPostCard from '@/components/blog-post-card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils';
-import { useState } from 'react';
 import { Separator } from '@/components/ui/separator';
-
+import { cn } from '@/lib/utils';
+import JobCard from '@/components/job-card';
 
 export default function HomePage() {
-  const findJobImg1 = PlaceHolderImages.find((img) => img.id === 'find-job-1');
-  const findJobImg2 = PlaceHolderImages.find((img) => img.id === 'find-job-2');
-  const findJobImg3 = PlaceHolderImages.find((img) => img.id === 'find-job-3');
-
-  const jobsOfTheDay = DUMMY_JOBS.slice(0, 9);
   const topRecruiters = DUMMY_COMPANIES.slice(0, 12);
   const blogPosts = DUMMY_BLOG_POSTS.slice(0, 3);
-  const jobCategories = JOB_CATEGORIES;
-
-  const jobFilters = ['All', 'Retail & Products', 'Content Writer', 'Marketing & Sale', 'Customer Help', 'Finance', 'Human Resource']
-  const [activeFilter, setActiveFilter] = useState('All');
+  const jobsOfTheDay = DUMMY_JOBS.slice(0, 6);
 
   const howItWorks = [
     {
@@ -87,256 +76,136 @@ export default function HomePage() {
     Headset: Headset,
   };
 
+  const trustIndicators = [
+    { text: '12,430 jobs available' },
+    { text: '4,500 companies hiring' },
+    { text: '98% candidate satisfaction' },
+  ];
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="w-full bg-gradient-to-b from-indigo-50 to-slate-50 dark:from-slate-900/50 dark:to-slate-900 py-16 md:py-24 lg:py-24">
-          <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 md:grid-cols-2 md:px-6 md:gap-16">
+        <section className="relative w-full py-20 lg:py-24">
+          <div className="absolute inset-0 bg-hero-glow -z-10"></div>
+          <div className="container mx-auto grid max-w-screen-xl grid-cols-1 gap-12 px-6 lg:grid-cols-2 lg:px-12 lg:gap-16">
             <div className="flex flex-col justify-center space-y-6">
-              <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+              <h1 className="font-body text-5xl font-extrabold tracking-tight sm:text-6xl !leading-tight">
                 Find Work That Moves Your Career Forward
               </h1>
-              <p className="max-w-xl text-lg text-slate-600 dark:text-slate-400">
+              <p className="max-w-xl text-lg text-muted-foreground">
                 Clear, calm, no fluff.
               </p>
-              <div className="rounded-xl bg-background p-6 shadow-lg">
-                <form className="space-y-4">
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div className="relative">
-                      <Label htmlFor="job-title" className="sr-only">Job title</Label>
-                      <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                      <Input id="job-title" type="search" placeholder="Job title, keyword..." className="w-full pl-10" />
-                    </div>
-                    <div className="relative">
-                      <Label htmlFor="location" className="sr-only">Location</Label>
-                      <MapPin className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                      <Input id="location" type="search" placeholder="City, state, or zip code" className="w-full pl-10" />
-                    </div>
+              <div className="rounded-2xl bg-background p-4 shadow-xl border border-border/50">
+                <form className="flex items-center h-[72px]">
+                  <div className="flex flex-1 items-center h-full">
+                    <Search className="h-5 w-5 text-muted-foreground mx-4" />
+                    <Input id="job-title" type="search" placeholder="Job title, keyword..." className="border-none focus-visible:ring-0 h-full text-base" />
+                    <Separator orientation="vertical" className="h-8" />
+                     <MapPin className="h-5 w-5 text-muted-foreground mx-4" />
+                    <Input id="location" type="search" placeholder="City or zip code" className="border-none focus-visible:ring-0 h-full text-base" />
                   </div>
-                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      <div className="relative">
-                        <Label htmlFor="experience" className="sr-only">Experience</Label>
-                        <Briefcase className="absolute left-3 top-1/2 z-10 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                        <Select>
-                          <SelectTrigger className="w-full pl-10">
-                            <SelectValue placeholder="Experience Level" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="entry">Entry-level</SelectItem>
-                            <SelectItem value="mid">Mid-level</SelectItem>
-                            <SelectItem value="senior">Senior-level</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="flex items-center justify-center space-x-2 rounded-lg border bg-white px-3 dark:bg-slate-950 dark:border-slate-800">
-                        <Label htmlFor="remote-only">Remote Only</Label>
-                        <Switch id="remote-only" />
-                      </div>
-                    </div>
-                  <Button type="submit" className="w-full" size="lg">
+                  <Button type="submit" className="bg-accent-gradient rounded-xl h-[52px] px-6 font-semibold text-base hover:scale-105 transition-transform">
                     Find Jobs
                   </Button>
                 </form>
               </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-sm font-medium text-slate-500">Popular Searches:</span>
-                <Badge variant="outline">Design</Badge>
-                <Badge variant="outline">Development</Badge>
-                <Badge variant="outline">Manager</Badge>
-                <Badge variant="outline">Senior</Badge>
+              <div className="flex items-center gap-6 pt-4">
+                {trustIndicators.map((item, index) => (
+                  <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <span>{item.text}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="relative hidden items-center justify-center md:flex">
-              <div className="grid grid-cols-2 gap-4">
-                {findJobImg1 && (
-                  <Image
-                    src={findJobImg1.imageUrl}
-                    alt={findJobImg1.description}
-                    width={300}
-                    height={400}
-                    className="col-span-1 row-span-2 h-full rounded-xl object-cover"
-                    data-ai-hint={findJobImg1.imageHint}
-                    priority
-                  />
-                )}
-                {findJobImg2 && (
-                  <Image
-                    src={findJobImg2.imageUrl}
-                    alt={findJobImg2.description}
-                    width={300}
-                    height={190}
-                    className="h-full w-full rounded-xl object-cover"
-                    data-ai-hint={findJobImg2.imageHint}
-                  />
-                )}
-                {findJobImg3 && (
-                  <Image
-                    src={findJobImg3.imageUrl}
-                    alt={findJobImg3.description}
-                    width={300}
-                    height={190}
-                    className="h-full w-full rounded-xl object-cover"
-                    data-ai-hint={findJobImg3.imageHint}
-                  />
-                )}
+            <div className="relative hidden items-center justify-center lg:flex">
+              <div className="w-full max-w-md space-y-4">
+                <div className="transform -rotate-3 transition-transform hover:rotate-0 hover:scale-105">
+                  <JobCard job={DUMMY_JOBS[0]} />
+                </div>
+                <div className="transform rotate-2 transition-transform hover:rotate-0 hover:scale-105 ml-12">
+                   <JobCard job={DUMMY_JOBS[1]} />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Categories Section */}
-        <section className="py-24 bg-slate-50 dark:bg-slate-900/70">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+        <section className="py-20 lg:py-24 bg-secondary">
+          <div className="container mx-auto max-w-screen-xl px-6 lg:px-12">
             <div className="mb-12 text-center">
-              <h2 className="font-headline text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
+              <h2 className="font-headline text-3xl font-semibold tracking-tight sm:text-4xl">
                 Browse by Category
               </h2>
-              <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400">
+              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                 Find the job that fits your skills. Over 800 new jobs posted daily.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {jobCategories.map((category) => {
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8">
+              {JOB_CATEGORIES.map((category) => {
                 const IconComponent = iconMap[category.icon];
                 return (
                   <Link href="/jobs" key={category.name} className="group block">
-                    <Card className={cn(
-                        "h-full rounded-xl p-6 text-left transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-lg",
-                        "text-center"
+                    <div className={cn(
+                        "h-full rounded-xl p-4 text-center transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg",
+                         category.bgColor
                     )}>
-                       <div className={cn("flex h-12 w-12 items-center justify-center rounded-lg mb-4 mx-auto", category.iconBgColor)}>
+                       <div className={cn("flex h-12 w-12 items-center justify-center rounded-lg mb-2 mx-auto", category.iconBgColor)}>
                           {IconComponent && <IconComponent className={cn("h-6 w-6", category.color)} />}
                         </div>
-                        <h3 className={cn("font-semibold", 'text-foreground')}>
+                        <h3 className={cn("font-semibold text-sm", category.color)}>
                           {category.name}
                         </h3>
-                        <p className={cn("text-sm", 'text-muted-foreground')}>
-                          {category.jobCount} Jobs Available
-                        </p>
-                    </Card>
+                    </div>
                   </Link>
                 );
               })}
             </div>
           </div>
         </section>
-
-        {/* Hiring Banner Section */}
-        <section className="py-16 md:py-24 bg-background">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid items-center gap-4 rounded-lg bg-primary/10 p-6 md:p-8 md:grid-cols-3 md:gap-8">
-              <div className="md:col-span-2">
-                <h2 className="font-headline text-3xl font-bold text-foreground">We are HIRING</h2>
-                <p className="mt-2 text-lg text-muted-foreground">
-                  Let’s Work Together & Explore Opportunities
-                </p>
-              </div>
-              <div className="text-left md:text-right">
-                <Button size="lg" asChild>
-                  <Link href="/employer/jobs/new">
-                    Post a Job <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
         
         {/* Jobs of the day Section */}
-        <section className="py-16 md:py-24 bg-background">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="mb-10 text-center">
-              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Jobs of the day</h2>
+        <section className="py-20 lg:py-24 bg-background">
+          <div className="container mx-auto max-w-screen-xl px-6 lg:px-12">
+            <div className="mb-12 text-center">
+              <h2 className="font-headline text-3xl font-semibold tracking-tight sm:text-4xl">Featured Jobs</h2>
               <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                 Search and connect with the right candidates faster.
               </p>
             </div>
-            
-            <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
-                {jobFilters.map((filter) => (
-                    <Button 
-                        key={filter}
-                        variant={activeFilter === filter ? 'default' : 'outline'}
-                        size="sm"
-                        onClick={() => setActiveFilter(filter)}
-                        className={cn(
-                            'rounded-md',
-                            activeFilter === filter 
-                                ? 'bg-primary/10 text-primary hover:bg-primary/20' 
-                                : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                        )}
-                    >
-                        {filter}
-                    </Button>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {jobsOfTheDay.map((job) => (
+                    <JobCard key={job.id} job={job}/>
                 ))}
             </div>
-
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {jobsOfTheDay.map((job) => {
-                    const companyLogo = PlaceHolderImages.find((img) => img.id === job.company.logo);
-                    return (
-                        <Card key={job.id} className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg">
-                            <CardContent className="flex flex-1 flex-col p-6">
-                                <div className="flex items-start gap-4">
-                                    {companyLogo && (
-                                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-primary/10 p-1">
-                                            <Image
-                                                src={companyLogo.imageUrl}
-                                                alt={`${job.company.name} logo`}
-                                                width={40}
-                                                height={40}
-                                                className="h-full w-full object-contain"
-                                            />
-                                        </div>
-                                    )}
-                                    <div className="flex-1">
-                                        <p className="font-medium text-slate-900">{job.company.name}</p>
-                                        <p className="text-sm text-slate-500">{job.location}</p>
-                                    </div>
-                                </div>
-
-                                <div className="my-4 flex-1">
-                                    <Link href={`/jobs/${job.id}`} className="block">
-                                        <h3 className="font-semibold text-slate-900 hover:text-primary">{job.title}</h3>
-                                    </Link>
-                                    <p className="mt-1 text-sm text-slate-500 line-clamp-2">{job.description}</p>
-                                </div>
-                                
-                                <Separator className="my-4" />
-
-                                <div className="flex items-center justify-between">
-                                    <p className="font-bold text-primary">{job.salaryRange}</p>
-                                    <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                                        <Link href={`/jobs/${job.id}`}>
-                                        Apply Now
-                                        </Link>
-                                    </Button>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    )
-                })}
+             <div className="mt-12 text-center">
+                <Button asChild size="lg" variant="outline">
+                    <Link href="/jobs">
+                    Browse All Jobs <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                </Button>
             </div>
           </div>
         </section>
 
          {/* How it works */}
-        <section className="py-16 md:py-24 bg-secondary">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="mb-10 text-center">
-              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">How It Works?</h2>
+        <section className="py-20 lg:py-24 bg-secondary">
+          <div className="container mx-auto max-w-screen-xl px-6 lg:px-12">
+            <div className="mb-12 text-center">
+              <h2 className="font-headline text-3xl font-semibold tracking-tight sm:text-4xl">How It Works?</h2>
               <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                 Just 3 easy steps to new opportunities
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {howItWorks.map((step, index) => (
-                <Card key={index} className="p-6 md:p-8 text-center">
+                <Card key={index} className="p-6 md:p-8 text-center bg-background shadow-sm border-border/80">
                   <div className="flex justify-center mb-4">{step.icon}</div>
-                  <h3 className="font-headline text-xl font-bold mb-2">{step.title}</h3>
+                  <h3 className="font-headline text-xl font-semibold mb-2">{step.title}</h3>
                   <p className="text-muted-foreground">{step.description}</p>
                 </Card>
               ))}
@@ -344,61 +213,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Find the one that's right for you */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className='relative'>
-                 {findJobImg1 && (
-                  <Image
-                    src={findJobImg1.imageUrl}
-                    alt={findJobImg1.description}
-                    width={500}
-                    height={500}
-                    className="rounded-lg object-cover"
-                    data-ai-hint={findJobImg1.imageHint}
-                  />
-                )}
-                 {findJobImg2 && (
-                  <Image
-                    src={findJobImg2.imageUrl}
-                    alt={findJobImg2.description}
-                    width={200}
-                    height={200}
-                    className="rounded-lg object-cover absolute -bottom-10 -right-10 shadow-lg border-4 border-background"
-                    data-ai-hint={findJobImg2.imageHint}
-                  />
-                )}
-                 {findJobImg3 && (
-                  <Image
-                    src={findJobImg3.imageUrl}
-                    alt={findJobImg3.description}
-                    width={150}
-                    height={150}
-                    className="rounded-lg object-cover absolute top-10 -left-10 shadow-lg border-4 border-background"
-                    data-ai-hint={findJobImg3.imageHint}
-                  />
-                )}
-              </div>
-              <div className='space-y-4'>
-                <Badge variant="outline">Millions Of Jobs</Badge>
-                <h2 className="font-headline text-4xl font-bold">Find The One That’s Right For You</h2>
-                <p className="text-muted-foreground mt-2">Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 600,000 companies worldwide.</p>
-                <div className='flex gap-4 pt-4'>
-                  <Button size="lg">Get Started</Button>
-                  <Button size="lg" variant="outline">Learn More</Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
         {/* Top Recruiters Section */}
-        <section className="bg-secondary py-16 md:py-24">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="mb-10 text-center">
-              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Top Recruiters</h2>
+        <section className="bg-background py-20 lg:py-24">
+          <div className="container mx-auto max-w-screen-xl px-6 lg:px-12">
+            <div className="mb-12 text-center">
+              <h2 className="font-headline text-3xl font-semibold tracking-tight sm:text-4xl">Top Recruiters</h2>
               <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                 Discover your next career move, freelance gig, or internship
               </p>
@@ -440,10 +259,10 @@ export default function HomePage() {
         </section>
         
        {/* Testimonials */}
-        <section className="py-16 md:py-24">
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="mb-10 text-center">
-                    <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">What Our Customers Say</h2>
+        <section className="py-20 lg:py-24 bg-secondary">
+            <div className="container mx-auto max-w-screen-xl px-6 lg:px-12">
+                <div className="mb-12 text-center">
+                    <h2 className="font-headline text-3xl font-semibold tracking-tight sm:text-4xl">What Our Customers Say</h2>
                     <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                         Hear from satisfied job seekers and recruiters who found success with JobBox.
                     </p>
@@ -460,7 +279,7 @@ export default function HomePage() {
                           const userAvatar = PlaceHolderImages.find(img => img.id === review.user.avatar);
                           return (
                             <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/3">
-                                <Card className="h-full flex flex-col">
+                                <Card className="h-full flex flex-col bg-background">
                                     <CardContent className="flex-grow p-6">
                                         <div className="flex items-center mb-4">
                                             {[...Array(5)].map((_, i) => (
@@ -469,7 +288,7 @@ export default function HomePage() {
                                         </div>
                                         <p className="text-muted-foreground">"{review.comment}"</p>
                                     </CardContent>
-                                    <CardContent className="p-6 bg-secondary/50">
+                                    <CardContent className="p-6 bg-secondary/50 border-t">
                                         <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 rounded-full bg-muted overflow-hidden">
                                                 {userAvatar && <Image src={userAvatar.imageUrl} alt={review.user.name} width={48} height={48} className="object-cover"/>}
@@ -491,44 +310,11 @@ export default function HomePage() {
             </div>
         </section>
 
-        {/* Jobs by Location Section */}
-        <section className="bg-secondary py-16 md:py-24">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="mb-10 text-center">
-              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Jobs by Location</h2>
-              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">Find your favourite jobs and get the benefits of yourself</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {LOCATIONS.map((loc) => {
-                const locationImage = PlaceHolderImages.find((img) => img.id === loc.imageId);
-                return (
-                  <Link href="/jobs" key={loc.name} className="block group relative rounded-lg overflow-hidden">
-                     {locationImage && (
-                        <Image
-                            src={locationImage.imageUrl}
-                            alt={loc.name}
-                            width={600}
-                            height={400}
-                            className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                        />
-                     )}
-                     <div className="absolute inset-0 bg-black/50"></div>
-                     <div className="absolute bottom-6 left-6 text-white">
-                        <h3 className="font-headline text-xl font-bold">{loc.name}</h3>
-                        <p className="text-sm">{loc.jobs} jobs</p>
-                      </div>
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
         {/* News and Blog Section */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="mb-10 text-center">
-              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">News and Blog</h2>
+        <section className="py-20 lg:py-24">
+          <div className="container mx-auto max-w-screen-xl px-6 lg:px-12">
+            <div className="mb-12 text-center">
+              <h2 className="font-headline text-3xl font-semibold tracking-tight sm:text-4xl">News and Blog</h2>
               <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                 Get the latest news, updates and tips
               </p>
@@ -549,8 +335,8 @@ export default function HomePage() {
         </section>
         
         {/* Newsletter CTA Section */}
-        <section className="py-16 md:py-24 bg-primary text-primary-foreground">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-20 lg:py-24 bg-primary text-primary-foreground">
+          <div className="container mx-auto px-6 lg:px-12">
             <div className="text-center max-w-2xl mx-auto">
               <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">
                 New Things Will Always Update Regularly
