@@ -41,6 +41,7 @@ import BlogPostCard from '@/components/blog-post-card';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import JobCard from '@/components/job-card';
+import { HeroSlider } from '@/components/hero-slider';
 
 export default function HomePage() {
   const topRecruiters = DUMMY_COMPANIES.slice(0, 12);
@@ -122,66 +123,70 @@ export default function HomePage() {
             </div>
 
             <div className="relative hidden items-center justify-center lg:flex">
-              <div className="w-full max-w-md space-y-4">
-                <div className="transform -rotate-3 transition-transform hover:rotate-0 hover:scale-105">
-                  <JobCard job={DUMMY_JOBS[0]} />
-                </div>
-                <div className="transform rotate-2 transition-transform hover:rotate-0 hover:scale-105 ml-12">
-                   <JobCard job={DUMMY_JOBS[1]} />
-                </div>
-              </div>
+                <HeroSlider />
             </div>
           </div>
         </section>
 
         {/* Categories Section */}
         <section className="py-20 lg:py-24 bg-secondary">
-          <div className="container mx-auto max-w-screen-xl px-6 lg:px-12">
-            <div className="mb-12 text-center">
-              <h2 className="font-headline text-3xl font-semibold tracking-tight sm:text-4xl">
-                Browse by Category
-              </h2>
-              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                Find the job that fits your skills. Over 800 new jobs posted daily.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8">
-              {JOB_CATEGORIES.map((category) => {
-                const IconComponent = iconMap[category.icon];
-                return (
-                  <Link href="/jobs" key={category.name} className="group block">
-                    <div className={cn(
-                        "h-full rounded-xl p-4 text-center transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg",
-                         category.bgColor
-                    )}>
-                       <div className={cn("flex h-12 w-12 items-center justify-center rounded-lg mb-2 mx-auto", category.iconBgColor)}>
-                          {IconComponent && <IconComponent className={cn("h-6 w-6", category.color)} />}
+            <div className="container mx-auto max-w-screen-xl px-6 lg:px-12">
+                <div className="mb-12 text-center">
+                <h2 className="font-headline text-3xl font-semibold tracking-tight sm:text-4xl">
+                    Browse by Category
+                </h2>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                    Find the job that fits your skills. Over 800 new jobs posted daily.
+                </p>
+                </div>
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8">
+                {JOB_CATEGORIES.map((category) => {
+                    const IconComponent = iconMap[category.icon];
+                    return (
+                    <Link href="/jobs" key={category.name} className="group block">
+                        <div
+                        className={cn(
+                            'h-full rounded-xl p-4 text-center transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg',
+                            category.bgColor
+                        )}
+                        >
+                        <div
+                            className={cn(
+                            'flex h-12 w-12 items-center justify-center rounded-lg mb-2 mx-auto',
+                            category.iconBgColor
+                            )}
+                        >
+                            {IconComponent && <IconComponent className={cn('h-6 w-6', category.color)} />}
                         </div>
-                        <h3 className={cn("font-semibold text-sm", category.color)}>
-                          {category.name}
-                        </h3>
-                    </div>
-                  </Link>
-                );
-              })}
+                        <h3 className={cn('font-semibold text-sm', category.color)}>{category.name}</h3>
+                        </div>
+                    </Link>
+                    );
+                })}
+                </div>
             </div>
-          </div>
         </section>
         
         {/* Jobs of the day Section */}
         <section className="py-20 lg:py-24 bg-background">
           <div className="container mx-auto max-w-screen-xl px-6 lg:px-12">
-            <div className="mb-12 text-center">
-              <h2 className="font-headline text-3xl font-semibold tracking-tight sm:text-4xl">Featured Jobs</h2>
-              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                Search and connect with the right candidates faster.
-              </p>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-headline">Jobs of the Day</h2>
+              <p className="mt-4 text-lg text-muted-foreground">Search and connect with the right candidates faster.</p>
+              <div className="mt-8 flex justify-center gap-2">
+                <Button variant="default" size="sm" className="rounded-full bg-primary/10 text-primary hover:bg-primary/20">All</Button>
+                <Button variant="outline" size="sm" className="rounded-full">Design</Button>
+                <Button variant="outline" size="sm" className="rounded-full">Development</Button>
+                <Button variant="outline" size="sm" className="rounded-full">Marketing</Button>
+              </div>
             </div>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {jobsOfTheDay.map((job) => (
                     <JobCard key={job.id} job={job}/>
                 ))}
             </div>
+
              <div className="mt-12 text-center">
                 <Button asChild size="lg" variant="outline">
                     <Link href="/jobs">
