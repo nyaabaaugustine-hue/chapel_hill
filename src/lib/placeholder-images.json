@@ -383,6 +383,36 @@
       "description": "A diverse group of professionals in a modern office, collaborating and smiling.",
       "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=500&h=600&auto=format&fit=crop",
       "imageHint": "team collaboration"
+    },
+    {
+      "id": "subscription-1",
+      "description": "Team collaboration meeting",
+      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=200&h=120&auto=format&fit=crop",
+      "imageHint": "team meeting"
+    },
+    {
+      "id": "subscription-2",
+      "description": "Person working at a desk",
+      "imageUrl": "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?q=80&w=150&h=150&auto=format&fit=crop",
+      "imageHint": "person working"
+    },
+    {
+      "id": "subscription-3",
+      "description": "Group of students learning",
+      "imageUrl": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=200&h=120&auto=format&fit=crop",
+      "imageHint": "students learning"
+    },
+    {
+      "id": "subscription-4",
+      "description": "Man with beard at a desk",
+      "imageUrl": "https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=150&h=180&auto=format&fit=crop",
+      "imageHint": "man desk"
+    },
+    {
+      "id": "subscription-5",
+      "description": "Two people in an office environment",
+      "imageUrl": "https://images.unsplash.com/photo-1572021335469-31706a17aaef?q=80&w=180&h=120&auto=format&fit=crop",
+      "imageHint": "office people"
     }
   ]
 }

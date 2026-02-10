@@ -15,6 +15,7 @@ import HiringSection from '@/components/hiring-section';
 import TopCompanies from '@/components/top-companies';
 import JobsByLocation from '@/components/jobs-by-location';
 import LatestNews from '@/components/latest-news';
+import SubscriptionSection from '@/components/subscription-section';
 
 export default function HomePage() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
@@ -107,6 +108,8 @@ export default function HomePage() {
         <JobsByLocation />
 
         <LatestNews />
+
+        <SubscriptionSection />
       </main>
       <Footer />
     </div>
