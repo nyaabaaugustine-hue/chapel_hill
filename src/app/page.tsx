@@ -10,6 +10,8 @@ import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
 import { Separator } from '@/components/ui/separator';
 import JobCategories from '@/components/job-categories';
+import FeaturedJobs from '@/components/featured-jobs';
+import HiringSection from '@/components/hiring-section';
 
 export default function HomePage() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
@@ -27,7 +29,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="w-full py-20 lg:py-24 bg-secondary bg-hero-glow">
           <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-2 lg:gap-16">
-            <div className="flex flex-col justify-center space-y-6">
+            <div className="flex flex-col justify-center space-y-6 lg:order-1 order-2">
               <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl !leading-tight font-headline">
                 Find Work That Moves Your Career Forward
               </h1>
@@ -75,7 +77,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative flex items-center justify-center">
+            <div className="relative flex items-center justify-center lg:order-2 order-1">
               {heroImage && (
                 <Image
                   src={heroImage.imageUrl}
@@ -92,6 +94,10 @@ export default function HomePage() {
         </section>
 
         <JobCategories />
+
+        <FeaturedJobs />
+
+        <HiringSection />
       </main>
       <Footer />
     </div>
