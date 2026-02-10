@@ -14,25 +14,25 @@ export default function JobCategories() {
             Find the job that’s perfect for you. Over 800+ new jobs posted every day.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {JOB_CATEGORIES.map((category) => (
             <Link
               href="#"
               key={category.name}
-              className="group rounded-xl border bg-card p-6 text-left transition-all duration-300 hover:bg-primary/5 hover:border-primary hover:-translate-y-1 hover:shadow-lg"
+              className="group rounded-xl border bg-card p-4 text-center transition-all duration-300 hover:bg-primary/10 hover:border-primary hover:-translate-y-1 hover:shadow-lg"
             >
               <div
                 className={cn(
-                  'mb-4 flex h-12 w-12 items-center justify-center rounded-lg',
+                  'mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg',
                   category.iconBgColor
                 )}
               >
-                <category.icon className={cn('h-6 w-6', category.color)} />
+                <category.icon className={cn('h-5 w-5', category.color)} />
               </div>
-              <h3 className="font-headline font-bold text-foreground text-lg group-hover:text-primary">
+              <h3 className="font-semibold text-foreground text-sm group-hover:text-primary">
                 {category.name}
               </h3>
-              <p className="text-sm text-muted-foreground mt-1">{category.jobCount} Jobs Available</p>
+              <p className="text-xs text-muted-foreground mt-1">{category.jobCount} Jobs Available</p>
             </Link>
           ))}
         </div>
