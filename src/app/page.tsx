@@ -17,7 +17,7 @@ import {
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
@@ -32,11 +32,10 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDistanceToNow } from 'date-fns';
 import BlogPostCard from '@/components/blog-post-card';
+import { HeroSlider } from '@/components/hero-slider';
 
 
 export default function HomePage() {
-  const heroBanner1 = PlaceHolderImages.find((img) => img.id === 'hero-banner-1');
-  const heroBanner2 = PlaceHolderImages.find((img) => img.id === 'hero-banner-2');
   const findJobImg1 = PlaceHolderImages.find((img) => img.id === 'find-job-1');
   const findJobImg2 = PlaceHolderImages.find((img) => img.id === 'find-job-2');
   const findJobImg3 = PlaceHolderImages.find((img) => img.id === 'find-job-3');
@@ -107,30 +106,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="relative hidden items-center justify-center md:flex">
-                 <div className="grid grid-cols-2 gap-4">
-                  {heroBanner1 && (
-                    <Image
-                      src={heroBanner1.imageUrl}
-                      alt={heroBanner1.description}
-                      width={400}
-                      height={400}
-                      className="rounded-xl object-cover shadow-lg w-full h-auto"
-                      data-ai-hint={heroBanner1.imageHint}
-                    />
-                  )}
-                  <div className="h-full w-full"></div>
-                  <div className="h-full w-full"></div>
-                  {heroBanner2 && (
-                    <Image
-                      src={heroBanner2.imageUrl}
-                      alt={heroBanner2.description}
-                      width={400}
-                      height={400}
-                      className="rounded-xl object-cover shadow-lg w-full h-auto"
-                      data-ai-hint={heroBanner2.imageHint}
-                    />
-                  )}
-                </div>
+                <HeroSlider />
               </div>
             </div>
           </div>
@@ -145,23 +121,46 @@ export default function HomePage() {
                 Find the job that’s perfect for you. about 800+ new jobs everyday
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
-                {jobCategories.map(category => (
-                    <Link href="/jobs" key={category.name} className="block">
-                        <Card className="group p-6 text-center flex flex-col items-center gap-4 transition-all hover:shadow-lg hover:border-primary hover:-translate-y-1">
-                            <div className='p-4 bg-primary/10 rounded-full'>
-                                <Briefcase className="h-8 w-8 text-primary" />
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">{category.name}</h3>
-                                <p className="text-sm text-muted-foreground">
-                                    {category.jobCount} Jobs Available
-                                </p>
-                            </div>
-                        </Card>
-                    </Link>
-                ))}
-            </div>
+             <Carousel className="w-full">
+              <CarouselContent className="-ml-4">
+                {jobCategories.map((category, index) => (
+                  <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/4">
+                    <div className="grid h-full grid-rows-2 gap-4">
+                      <Link href="/jobs" className="block">
+                          <Card className="group flex h-24 items-center gap-4 p-4 transition-all hover:shadow-lg hover:border-primary hover:-translate-y-1">
+                               <div className='p-2 bg-primary/10 rounded-lg'>
+                                  <Image src={category.icon} alt={category.name} width={32} height={32} className="h-8 w-8 text-primary" />
+                              </div>
+                              <div>
+                                  <h3 className="font-semibold text-md mb-1 group-hover:text-primary transition-colors">{category.name}</h3>
+                                  <p className="text-sm text-muted-foreground">
+                                      {category.jobCount} Jobs Available
+                                  </p>
+                              </div>
+                          </Card>
+                      </Link>
+                      {jobCategories[index + 8] && (
+                         <Link href="/jobs" className="block">
+                            <Card className="group flex h-24 items-center gap-4 p-4 transition-all hover:shadow-lg hover:border-primary hover:-translate-y-1">
+                                <div className='p-2 bg-primary/10 rounded-lg'>
+                                    <Image src={jobCategories[index + 8].icon} alt={jobCategories[index + 8].name} width={32} height={32} className="h-8 w-8 text-primary" />
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold text-md mb-1 group-hover:text-primary transition-colors">{jobCategories[index + 8].name}</h3>
+                                    <p className="text-sm text-muted-foreground">
+                                        {jobCategories[index + 8].jobCount} Jobs Available
+                                    </p>
+                                </div>
+                            </Card>
+                        </Link>
+                      )}
+                    </div>
+                  </CarouselItem>
+                )).slice(0, 8)}
+              </CarouselContent>
+              <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex"/>
+              <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex"/>
+            </Carousel>
           </div>
         </section>
 
@@ -200,46 +199,37 @@ export default function HomePage() {
                 {jobFilters.map(filter => <TabsTrigger value={filter} key={filter}>{filter}</TabsTrigger>)}
               </TabsList>
               <TabsContent value="All">
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
                   {jobsOfTheDay.map((job) => {
                       const companyLogo = PlaceHolderImages.find((img) => img.id === job.company.logo);
                       return (
                         <Card key={job.id} className="group flex h-full flex-col transition-all hover:shadow-lg hover:-translate-y-1">
-                          <CardHeader>
-                            {companyLogo && (
-                              <Image
-                                src={companyLogo.imageUrl}
-                                alt={`${job.company.name} logo`}
-                                width={50}
-                                height={50}
-                                className="rounded-md"
-                              />
-                            )}
-                          </CardHeader>
-                          <CardContent className="flex-grow space-y-2">
-                              <Link href={`/jobs/${job.id}`}>
-                                <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{job.title}</h3>
-                              </Link>
-                              <div className="flex items-center text-sm text-muted-foreground gap-4">
-                                <p className="flex items-center gap-1"><Briefcase size={14}/> {job.type}</p>
-                                <p className="flex items-center gap-1"><MapPin size={14}/> {job.company.location}</p>
+                          <CardContent className="pt-6">
+                            <div className="flex items-center gap-4 mb-4">
+                              {companyLogo && (
+                                <Image
+                                  src={companyLogo.imageUrl}
+                                  alt={`${job.company.name} logo`}
+                                  width={40}
+                                  height={40}
+                                  className="rounded-full"
+                                />
+                              )}
+                              <div>
+                                <p className="text-sm text-muted-foreground">{job.company.name}</p>
+                                <p className="text-xs text-muted-foreground">{job.location}</p>
                               </div>
-                              <p className="text-sm text-muted-foreground line-clamp-2 pt-2">{job.description}</p>
+                            </div>
+                            <Link href={`/jobs/${job.id}`}>
+                              <h3 className="font-bold text-lg group-hover:text-primary transition-colors mb-2 line-clamp-1">{job.title}</h3>
+                            </Link>
+                            <div className="flex items-center text-xs text-muted-foreground gap-4 mb-4">
+                              <span>{job.type}</span>
+                              <span>{formatDistanceToNow(new Date(job.postedDate), { addSuffix: true })}</span>
+                            </div>
+                            <p className="text-sm text-muted-foreground line-clamp-3 mb-4">{job.description}</p>
+                            <p className="font-semibold text-primary">{job.salaryRange}</p>
                           </CardContent>
-                          <CardFooter className="flex-col items-start gap-4">
-                            <div className="flex flex-wrap gap-2">
-                               {job.skills.slice(0,2).map(skill => <Badge variant="secondary" key={skill}>{skill}</Badge>)}
-                               {job.skills.length > 2 && <Badge variant="outline">+{job.skills.length - 2}</Badge>}
-                            </div>
-                            <div className="flex items-center justify-between w-full">
-                                <p className="font-semibold text-primary">{job.salaryRange}</p>
-                                <Button asChild size="sm">
-                                  <Link href={`/jobs/${job.id}`}>
-                                    Apply Now
-                                  </Link>
-                                </Button>
-                            </div>
-                          </CardFooter>
                         </Card>
                       )
                   })}
@@ -393,7 +383,7 @@ export default function HomePage() {
                                         </div>
                                         <p className="text-muted-foreground">"{review.comment}"</p>
                                     </CardContent>
-                                    <CardFooter className="p-6 bg-secondary/50">
+                                    <CardContent className="p-6 bg-secondary/50">
                                         <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 rounded-full bg-muted overflow-hidden">
                                                 <Image src={PlaceHolderImages.find(img => img.id === review.user.avatar)?.imageUrl || ''} alt={review.user.name} width={48} height={48} className="object-cover"/>
@@ -403,7 +393,7 @@ export default function HomePage() {
                                                 <p className="text-sm text-muted-foreground">{review.user.role}</p>
                                             </div>
                                         </div>
-                                    </CardFooter>
+                                    </CardContent>
                                 </Card>
                             </CarouselItem>
                         ))}
