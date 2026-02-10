@@ -1,5 +1,5 @@
 import type { Job, Company, Review, Application, Applicant, User, BlogPost } from './types';
-import { Briefcase, Code, Headset, Landmark, Megaphone, PenTool, Search, Users, BookOpen, Palette } from 'lucide-react';
+import { Briefcase, Code, Headset, Megaphone, PenTool, Search, Users, BookOpen, Palette, Wallet, BrainCircuit, GitMerge, KanbanSquare, Scale, Stethoscope, Clapperboard } from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import React from 'react';
 
@@ -116,7 +116,7 @@ export const DUMMY_JOBS: Job[] = [
     postedDate: '2024-05-17',
     isUrgent: false,
     skills: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
-    category: 'Software',
+    category: 'Healthcare',
   },
   {
     id: '7',
@@ -214,7 +214,7 @@ export const DUMMY_JOBS: Job[] = [
     postedDate: '2024-05-19',
     isUrgent: false,
     skills: ['AWS', 'Azure', 'GCP', 'Terraform'],
-    category: 'Software',
+    category: 'DevOps',
   },
   {
     id: '14',
@@ -270,6 +270,7 @@ export const DUMMY_JOBS: Job[] = [
     postedDate: '2024-05-15',
     isUrgent: false,
     skills: ['Agronomy', 'GPS', 'Drones', 'Data Analysis'],
+    category: 'Data Science',
   },
   {
     id: '18',
@@ -547,12 +548,18 @@ export const JOB_CATEGORIES = [
     { name: 'Market Research', jobCount: '7 Jobs', icon: Search, color: 'text-violet-800', iconBgColor: 'bg-violet-100' },
     { name: 'Marketing & Sale', jobCount: '9 Jobs', icon: Megaphone, color: 'text-amber-800', iconBgColor: 'bg-amber-100' },
     { name: 'Customer Help', jobCount: '4 Jobs', icon: Headset, color: 'text-rose-800', iconBgColor: 'bg-rose-100' },
-    { name: 'Finance', jobCount: '9 Jobs', icon: Landmark, color: 'text-emerald-800', iconBgColor: 'bg-emerald-100' },
+    { name: 'Finance', jobCount: '9 Jobs', icon: Wallet, color: 'text-emerald-800', iconBgColor: 'bg-emerald-100' },
     { name: 'Software', jobCount: '4 Jobs', icon: Code, color: 'text-cyan-800', iconBgColor: 'bg-cyan-100' },
     { name: 'Human Resource', jobCount: '10 Jobs', icon: Users, color: 'text-fuchsia-800', iconBgColor: 'bg-fuchsia-100' },
     { name: 'Management', jobCount: '6 Jobs', icon: Briefcase, color: 'text-indigo-800', iconBgColor: 'bg-indigo-100' },
     { name: 'Design', jobCount: '5 Jobs', icon: Palette, color: 'text-pink-800', iconBgColor: 'bg-pink-100' },
     { name: 'Education', jobCount: '12 Jobs', icon: BookOpen, color: 'text-orange-800', iconBgColor: 'bg-orange-100' },
+    { name: 'Data Science', jobCount: '8 Jobs', icon: BrainCircuit, color: 'text-blue-800', iconBgColor: 'bg-blue-100' },
+    { name: 'DevOps', jobCount: '5 Jobs', icon: GitMerge, color: 'text-teal-800', iconBgColor: 'bg-teal-100' },
+    { name: 'Product Management', jobCount: '7 Jobs', icon: KanbanSquare, color: 'text-purple-800', iconBgColor: 'bg-purple-100' },
+    { name: 'Legal', jobCount: '3 Jobs', icon: Scale, color: 'text-gray-800', iconBgColor: 'bg-gray-100' },
+    { name: 'Healthcare', jobCount: '11 Jobs', icon: Stethoscope, color: 'text-red-800', iconBgColor: 'bg-red-100' },
+    { name: 'Media', jobCount: '6 Jobs', icon: Clapperboard, color: 'text-yellow-800', iconBgColor: 'bg-yellow-100' },
   ];
 
 export const LOCATIONS = [

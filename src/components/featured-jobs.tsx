@@ -6,6 +6,7 @@ import JobCard from './job-card';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export default function FeaturedJobs() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -27,13 +28,18 @@ export default function FeaturedJobs() {
           </p>
         </div>
 
-        <div className="mb-8 flex justify-center flex-wrap gap-2">
+        <div className="mb-8 flex justify-center flex-wrap gap-3">
             {categories.map(category => (
-                <Button 
+                <Button
                     key={category}
-                    variant={selectedCategory === category ? "default" : "outline"}
+                    variant="ghost"
                     onClick={() => setSelectedCategory(category)}
-                    className="rounded-full"
+                    className={cn(
+                        "rounded-full border border-transparent px-4 py-2 text-sm font-medium transition-all duration-300",
+                        selectedCategory === category
+                            ? "bg-accent-gradient text-primary-foreground shadow-lg"
+                            : "bg-card text-foreground hover:bg-primary/10 hover:border-primary/20 hover:text-primary hover:shadow-md"
+                    )}
                 >
                     {category}
                 </Button>
