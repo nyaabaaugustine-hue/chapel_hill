@@ -48,22 +48,22 @@ export default function JobCategories() {
           >
             <CarouselContent className="-ml-4">
               {categoryGroups.map((group, index) => (
-                <CarouselItem key={index} className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem key={index} className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/3">
                   <div className="space-y-4">
                     {group.map((category) => (
                        <Link
                         href="#"
                         key={category.name}
-                        className="group rounded-lg border bg-card p-3 flex items-center gap-3 text-left transition-all duration-300 hover:bg-primary/10 hover:border-primary hover:-translate-y-1 hover:shadow-md"
+                        className="group rounded-lg border bg-card p-4 flex items-center gap-4 text-left transition-all duration-300 hover:bg-primary/10 hover:border-primary hover:-translate-y-1 hover:shadow-md"
                       >
-                        <div className={cn('h-8 w-8 flex items-center justify-center rounded-md shrink-0', category.iconBgColor)}>
-                          <category.icon className={cn('h-5 w-5', category.color)} />
+                        <div className={cn('h-10 w-10 flex items-center justify-center rounded-md shrink-0', category.iconBgColor)}>
+                          <category.icon className={cn('h-6 w-6', category.color)} />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-foreground text-sm group-hover:text-primary leading-tight truncate">
+                          <h3 className="font-semibold text-foreground text-base group-hover:text-primary leading-tight">
                             {category.name}
                           </h3>
-                          <p className="text-xs text-muted-foreground">{category.jobCount} Jobs</p>
+                          <p className="text-sm text-muted-foreground">{category.jobCount}</p>
                         </div>
                       </Link>
                     ))}

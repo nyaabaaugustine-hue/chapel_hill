@@ -543,16 +543,16 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
 ];
 
 export const JOB_CATEGORIES = [
-    { name: 'Content Writer', jobCount: 29, icon: PenTool, color: 'text-sky-800', iconBgColor: 'bg-sky-100' },
-    { name: 'Market Research', jobCount: 7, icon: Search, color: 'text-violet-800', iconBgColor: 'bg-violet-100' },
-    { name: 'Marketing & Sale', jobCount: 9, icon: Megaphone, color: 'text-amber-800', iconBgColor: 'bg-amber-100' },
-    { name: 'Customer Help', jobCount: 4, icon: Headset, color: 'text-rose-800', iconBgColor: 'bg-rose-100' },
-    { name: 'Finance', jobCount: 9, icon: Landmark, color: 'text-emerald-800', iconBgColor: 'bg-emerald-100' },
-    { name: 'Software', jobCount: 4, icon: Code, color: 'text-cyan-800', iconBgColor: 'bg-cyan-100' },
-    { name: 'Human Resource', jobCount: 10, icon: Users, color: 'text-fuchsia-800', iconBgColor: 'bg-fuchsia-100' },
-    { name: 'Management', jobCount: 6, icon: Briefcase, color: 'text-indigo-800', iconBgColor: 'bg-indigo-100' },
-    { name: 'Design', jobCount: 5, icon: Palette, color: 'text-pink-800', iconBgColor: 'bg-pink-100' },
-    { name: 'Education', jobCount: 12, icon: BookOpen, color: 'text-orange-800', iconBgColor: 'bg-orange-100' },
+    { name: 'Content Writer', jobCount: '29 Jobs', icon: PenTool, color: 'text-sky-800', iconBgColor: 'bg-sky-100' },
+    { name: 'Market Research', jobCount: '7 Jobs', icon: Search, color: 'text-violet-800', iconBgColor: 'bg-violet-100' },
+    { name: 'Marketing & Sale', jobCount: '9 Jobs', icon: Megaphone, color: 'text-amber-800', iconBgColor: 'bg-amber-100' },
+    { name: 'Customer Help', jobCount: '4 Jobs', icon: Headset, color: 'text-rose-800', iconBgColor: 'bg-rose-100' },
+    { name: 'Finance', jobCount: '9 Jobs', icon: Landmark, color: 'text-emerald-800', iconBgColor: 'bg-emerald-100' },
+    { name: 'Software', jobCount: '4 Jobs', icon: Code, color: 'text-cyan-800', iconBgColor: 'bg-cyan-100' },
+    { name: 'Human Resource', jobCount: '10 Jobs', icon: Users, color: 'text-fuchsia-800', iconBgColor: 'bg-fuchsia-100' },
+    { name: 'Management', jobCount: '6 Jobs', icon: Briefcase, color: 'text-indigo-800', iconBgColor: 'bg-indigo-100' },
+    { name: 'Design', jobCount: '5 Jobs', icon: Palette, color: 'text-pink-800', iconBgColor: 'bg-pink-100' },
+    { name: 'Education', jobCount: '12 Jobs', icon: BookOpen, color: 'text-orange-800', iconBgColor: 'bg-orange-100' },
   ];
 
 export const LOCATIONS = [
