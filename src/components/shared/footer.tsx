@@ -85,7 +85,7 @@ export default function Footer() {
         </div>
         <div className="mt-12 border-t border-foreground/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
           <p className="text-center md:text-left mb-4 md:mb-0">
-            &copy; 2024 Chapel Hill. All rights reserved. Developed By TGNE Solutions - Tema.
+            &copy; 2026 Chapel Hill. All rights reserved. Developed By TGNE Solutions - Tema.
           </p>
           <div className='flex gap-4'>
              <Link href="#" className="hover:text-primary">Terms & Conditions</Link>
