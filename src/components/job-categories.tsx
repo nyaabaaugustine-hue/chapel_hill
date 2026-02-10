@@ -19,12 +19,17 @@ export default function JobCategories() {
             <Link
               href="#"
               key={category.name}
-              className="group rounded-lg border bg-card p-3 flex items-center gap-2 text-left transition-all duration-300 hover:bg-primary/10 hover:border-primary hover:-translate-y-1 hover:shadow-md"
+              className="group rounded-lg border bg-card p-3 flex items-center gap-3 text-left transition-all duration-300 hover:bg-primary/10 hover:border-primary hover:-translate-y-1 hover:shadow-md"
             >
-              <category.icon className={cn('h-5 w-5 shrink-0', category.color)} />
-              <h3 className="font-semibold text-foreground text-sm group-hover:text-primary leading-tight truncate">
-                {category.name}
-              </h3>
+              <div className={cn('h-8 w-8 flex items-center justify-center rounded-md shrink-0', category.iconBgColor)}>
+                <category.icon className={cn('h-5 w-5', category.color)} />
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground text-sm group-hover:text-primary leading-tight truncate">
+                  {category.name}
+                </h3>
+                <p className="text-xs text-muted-foreground">{category.jobCount} Jobs</p>
+              </div>
             </Link>
           ))}
         </div>

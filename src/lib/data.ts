@@ -1,22 +1,7 @@
 import type { Job, Company, Review, Application, Applicant, User, BlogPost } from './types';
-import { Briefcase, Code, Headset, Landmark, Megaphone, PenTool, Search, Users, BookOpen } from 'lucide-react';
+import { Briefcase, Code, Headset, Landmark, Megaphone, PenTool, Search, Users, BookOpen, Palette } from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import React from 'react';
-
-const ContentWriterIcon = (props: LucideProps) => {
-  return React.createElement(
-    'svg',
-    {
-      xmlns: 'http://www.w3.org/2000/svg',
-      viewBox: '0 0 24 24',
-      fill: 'currentColor',
-      ...props,
-    },
-    React.createElement('path', {
-      d: 'M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6z',
-    })
-  );
-};
 
 export const DUMMY_COMPANIES: Company[] = [
   { id: '1', name: 'Innovate Inc.', logo: 'company-logo-1', industry: 'Tech', activeJobs: 5, rating: 5, location: 'New York, US' },
@@ -558,7 +543,7 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
 ];
 
 export const JOB_CATEGORIES = [
-    { name: 'Content Writer', jobCount: 29, icon: ContentWriterIcon, color: 'text-sky-800', iconBgColor: 'bg-sky-100' },
+    { name: 'Content Writer', jobCount: 29, icon: PenTool, color: 'text-sky-800', iconBgColor: 'bg-sky-100' },
     { name: 'Market Research', jobCount: 7, icon: Search, color: 'text-violet-800', iconBgColor: 'bg-violet-100' },
     { name: 'Marketing & Sale', jobCount: 9, icon: Megaphone, color: 'text-amber-800', iconBgColor: 'bg-amber-100' },
     { name: 'Customer Help', jobCount: 4, icon: Headset, color: 'text-rose-800', iconBgColor: 'bg-rose-100' },
@@ -566,7 +551,7 @@ export const JOB_CATEGORIES = [
     { name: 'Software', jobCount: 4, icon: Code, color: 'text-cyan-800', iconBgColor: 'bg-cyan-100' },
     { name: 'Human Resource', jobCount: 10, icon: Users, color: 'text-fuchsia-800', iconBgColor: 'bg-fuchsia-100' },
     { name: 'Management', jobCount: 6, icon: Briefcase, color: 'text-indigo-800', iconBgColor: 'bg-indigo-100' },
-    { name: 'Design', jobCount: 5, icon: PenTool, color: 'text-pink-800', iconBgColor: 'bg-pink-100' },
+    { name: 'Design', jobCount: 5, icon: Palette, color: 'text-pink-800', iconBgColor: 'bg-pink-100' },
     { name: 'Education', jobCount: 12, icon: BookOpen, color: 'text-orange-800', iconBgColor: 'bg-orange-100' },
   ];
 
