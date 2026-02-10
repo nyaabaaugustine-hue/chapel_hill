@@ -372,7 +372,9 @@ export default function HomePage() {
                     className="w-full"
                 >
                     <CarouselContent>
-                        {DUMMY_REVIEWS.map((review) => (
+                        {DUMMY_REVIEWS.map((review) => {
+                          const userAvatar = PlaceHolderImages.find(img => img.id === review.user.avatar);
+                          return (
                             <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/3">
                                 <Card className="h-full flex flex-col">
                                     <CardContent className="flex-grow p-6">
@@ -386,7 +388,7 @@ export default function HomePage() {
                                     <CardContent className="p-6 bg-secondary/50">
                                         <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 rounded-full bg-muted overflow-hidden">
-                                                <Image src={PlaceHolderImages.find(img => img.id === review.user.avatar)?.imageUrl || ''} alt={review.user.name} width={48} height={48} className="object-cover"/>
+                                                {userAvatar && <Image src={userAvatar.imageUrl} alt={review.user.name} width={48} height={48} className="object-cover"/>}
                                             </div>
                                             <div>
                                                 <p className="font-semibold">{review.user.name}</p>
@@ -396,7 +398,8 @@ export default function HomePage() {
                                     </CardContent>
                                 </Card>
                             </CarouselItem>
-                        ))}
+                          );
+                        })}
                     </CarouselContent>
                     <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex"/>
                     <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex"/>
