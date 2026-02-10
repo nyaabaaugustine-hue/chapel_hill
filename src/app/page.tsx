@@ -1,4 +1,6 @@
 
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -34,13 +36,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { formatDistanceToNow } from 'date-fns';
 import BlogPostCard from '@/components/blog-post-card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
+import { useState } from 'react';
+import { Separator } from '@/components/ui/separator';
 
 
 export default function HomePage() {
@@ -48,12 +50,13 @@ export default function HomePage() {
   const findJobImg2 = PlaceHolderImages.find((img) => img.id === 'find-job-2');
   const findJobImg3 = PlaceHolderImages.find((img) => img.id === 'find-job-3');
 
-  const jobsOfTheDay = DUMMY_JOBS.slice(0, 8);
+  const jobsOfTheDay = DUMMY_JOBS.slice(0, 9);
   const topRecruiters = DUMMY_COMPANIES.slice(0, 12);
   const blogPosts = DUMMY_BLOG_POSTS.slice(0, 3);
   const jobCategories = JOB_CATEGORIES;
 
   const jobFilters = ['All', 'Retail & Products', 'Content Writer', 'Marketing & Sale', 'Customer Help', 'Finance', 'Human Resource']
+  const [activeFilter, setActiveFilter] = useState('All');
 
   const howItWorks = [
     {
@@ -202,15 +205,15 @@ export default function HomePage() {
                   <Link href="/jobs" key={category.name} className="group block">
                     <Card className={cn(
                         "h-full rounded-xl p-6 text-left transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-lg",
-                        category.bgColor
+                        "text-center"
                     )}>
-                        <div className={cn("flex h-12 w-12 items-center justify-center rounded-lg mb-4", category.iconBgColor)}>
+                       <div className={cn("flex h-12 w-12 items-center justify-center rounded-lg mb-4 mx-auto", category.iconBgColor)}>
                           {IconComponent && <IconComponent className={cn("h-6 w-6", category.color)} />}
                         </div>
-                        <h3 className={cn("font-semibold", category.color)}>
+                        <h3 className={cn("font-semibold", 'text-foreground')}>
                           {category.name}
                         </h3>
-                        <p className={cn("text-sm opacity-75", category.color)}>
+                        <p className={cn("text-sm", 'text-muted-foreground')}>
                           {category.jobCount} Jobs Available
                         </p>
                     </Card>
@@ -243,7 +246,7 @@ export default function HomePage() {
         </section>
         
         {/* Jobs of the day Section */}
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4 md:px-6">
             <div className="mb-10 text-center">
               <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Jobs of the day</h2>
@@ -251,48 +254,72 @@ export default function HomePage() {
                 Search and connect with the right candidates faster.
               </p>
             </div>
-             <Tabs defaultValue="All" className="w-full">
-              <TabsList className="mb-8 justify-center flex-wrap h-auto">
-                {jobFilters.map(filter => <TabsTrigger value={filter} key={filter}>{filter}</TabsTrigger>)}
-              </TabsList>
-              <TabsContent value="All">
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
-                  {jobsOfTheDay.map((job) => {
-                      const companyLogo = PlaceHolderImages.find((img) => img.id === job.company.logo);
-                      return (
-                        <Card key={job.id} className="group flex h-full flex-col transition-all hover:shadow-lg hover:-translate-y-1">
-                          <CardContent className="pt-6">
-                            <div className="flex items-center gap-4 mb-4">
-                              {companyLogo && (
-                                <Image
-                                  src={companyLogo.imageUrl}
-                                  alt={`${job.company.name} logo`}
-                                  width={40}
-                                  height={40}
-                                  className="rounded-full"
-                                />
-                              )}
-                              <div>
-                                <p className="text-sm text-muted-foreground">{job.company.name}</p>
-                                <p className="text-xs text-muted-foreground">{job.location}</p>
-                              </div>
-                            </div>
-                            <Link href={`/jobs/${job.id}`}>
-                              <h3 className="font-bold text-lg group-hover:text-primary transition-colors mb-2 line-clamp-1">{job.title}</h3>
-                            </Link>
-                            <div className="flex items-center text-xs text-muted-foreground gap-4 mb-4">
-                              <span>{job.type}</span>
-                              <span>{formatDistanceToNow(new Date(job.postedDate), { addSuffix: true })}</span>
-                            </div>
-                            <p className="text-sm text-muted-foreground line-clamp-3 mb-4">{job.description}</p>
-                            <p className="font-semibold text-primary">{job.salaryRange}</p>
-                          </CardContent>
+            
+            <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+                {jobFilters.map((filter) => (
+                    <Button 
+                        key={filter}
+                        variant={activeFilter === filter ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => setActiveFilter(filter)}
+                        className={cn(
+                            'rounded-md',
+                            activeFilter === filter 
+                                ? 'bg-primary/10 text-primary hover:bg-primary/20' 
+                                : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                        )}
+                    >
+                        {filter}
+                    </Button>
+                ))}
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {jobsOfTheDay.map((job) => {
+                    const companyLogo = PlaceHolderImages.find((img) => img.id === job.company.logo);
+                    return (
+                        <Card key={job.id} className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg">
+                            <CardContent className="flex flex-1 flex-col p-6">
+                                <div className="flex items-start gap-4">
+                                    {companyLogo && (
+                                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-primary/10 p-1">
+                                            <Image
+                                                src={companyLogo.imageUrl}
+                                                alt={`${job.company.name} logo`}
+                                                width={40}
+                                                height={40}
+                                                className="h-full w-full object-contain"
+                                            />
+                                        </div>
+                                    )}
+                                    <div className="flex-1">
+                                        <p className="font-medium text-slate-900">{job.company.name}</p>
+                                        <p className="text-sm text-slate-500">{job.location}</p>
+                                    </div>
+                                </div>
+
+                                <div className="my-4 flex-1">
+                                    <Link href={`/jobs/${job.id}`} className="block">
+                                        <h3 className="font-semibold text-slate-900 hover:text-primary">{job.title}</h3>
+                                    </Link>
+                                    <p className="mt-1 text-sm text-slate-500 line-clamp-2">{job.description}</p>
+                                </div>
+                                
+                                <Separator className="my-4" />
+
+                                <div className="flex items-center justify-between">
+                                    <p className="font-bold text-primary">{job.salaryRange}</p>
+                                    <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                                        <Link href={`/jobs/${job.id}`}>
+                                        Apply Now
+                                        </Link>
+                                    </Button>
+                                </div>
+                            </CardContent>
                         </Card>
-                      )
-                  })}
-                </div>
-              </TabsContent>
-            </Tabs>
+                    )
+                })}
+            </div>
           </div>
         </section>
 
