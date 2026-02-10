@@ -38,17 +38,17 @@ export default function LoginPage() {
                 </div>
                 <Input id="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full rounded-lg">
                 Login
               </Button>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full rounded-lg">
                 Login with Google
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
               <Link href="/register" className="underline">
-                Sign up
+                Sign Up
               </Link>
             </div>
           </CardContent>

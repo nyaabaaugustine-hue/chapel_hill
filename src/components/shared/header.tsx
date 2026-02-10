@@ -11,31 +11,34 @@ export default function Header() {
     { href: '/companies', label: 'Companies' },
     { href: '/dashboard', label: 'Candidates' },
     { href: '/blog', label: 'Blog' },
+    { href: '#', label: 'Pages' },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2">
-          <Logo />
-        </Link>
-        <nav className="hidden items-center gap-6 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href + link.label}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="hidden items-center gap-4 md:flex">
+    <header className="sticky top-0 z-50 w-full border-b bg-background shadow-sm">
+      <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6">
+        <div className="flex items-center gap-6">
+          <Link href="/" className="flex items-center gap-2">
+            <Logo />
+          </Link>
+          <nav className="hidden items-center gap-6 md:flex">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href + link.label}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <div className="hidden items-center gap-2 md:flex">
           <Button variant="ghost" asChild>
             <Link href="/login">Login</Link>
           </Button>
-          <Button asChild>
-            <Link href="/register">Register</Link>
+          <Button asChild className="rounded-lg">
+            <Link href="/register">Sign Up</Link>
           </Button>
         </div>
         <Sheet>
@@ -61,12 +64,12 @@ export default function Header() {
                   </Link>
                 ))}
               </nav>
-              <div className="flex flex-col gap-4">
-                 <Button variant="outline" asChild>
+              <div className="mt-auto flex flex-col gap-2">
+                 <Button variant="ghost" asChild>
                     <Link href="/login">Login</Link>
                 </Button>
-                 <Button asChild>
-                    <Link href="/register">Register</Link>
+                 <Button asChild className="rounded-lg">
+                    <Link href="/register">Sign Up</Link>
                 </Button>
               </div>
             </div>
