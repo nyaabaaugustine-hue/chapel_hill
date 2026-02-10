@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-main",
-      "description": "A person works on a laptop showing the Chapel Hill website. [NOTE: To show the correct branded image, please provide a public URL for it.]",
-      "imageUrl": "https://placehold.co/550x550/F8FAFC/0F172A?text=Branded+Image+Needed",
-      "imageHint": "person laptop"
+      "description": "A diverse team of professionals collaborating and smiling in a modern office.",
+      "imageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=550&h=550&fit=crop&q=80",
+      "imageHint": "team working"
     },
     {
       "id": "company-logo-1",
