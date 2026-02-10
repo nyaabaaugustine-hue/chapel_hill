@@ -10,6 +10,14 @@ import {
   Book,
   PenTool,
   Target,
+  Code,
+  Palette,
+  Package,
+  Megaphone,
+  Landmark,
+  TrendingUp,
+  Users,
+  Headset,
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
@@ -62,14 +70,25 @@ export default function HomePage() {
       title: 'Apply for job',
       description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
     },
-  ]
+  ];
+
+  const iconMap: { [key: string]: React.ElementType } = {
+    Code: Code,
+    Palette: Palette,
+    Package: Package,
+    Megaphone: Megaphone,
+    Landmark: Landmark,
+    TrendingUp: TrendingUp,
+    Users: Users,
+    Headset: Headset,
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="w-full bg-gradient-to-b from-indigo-50 to-slate-50 py-16 md:py-24">
+        <section className="w-full bg-gradient-to-b from-blue-50 to-slate-50 py-16 md:py-24">
           <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 md:grid-cols-2 md:px-6 md:gap-16">
             <div className="flex flex-col justify-center space-y-6">
               <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
@@ -165,35 +184,31 @@ export default function HomePage() {
         </section>
 
         {/* Categories Section */}
-        <section className="bg-background py-24">
+        <section className="bg-secondary py-24">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="mb-10 text-center">
-              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Browse by Category</h2>
-              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                Find the job that’s perfect for you. about 800+ new jobs everyday
+            <div className="mb-12 text-center">
+              <h2 className="font-headline text-3xl font-semibold tracking-tight text-foreground sm:text-4xl mb-4">Browse by Category</h2>
+              <p className="max-w-2xl mx-auto text-base text-muted-foreground">
+                Find the job that fits your skills. Over 800 new jobs posted daily.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {jobCategories.map((category) => (
-                  <Link href="/jobs" key={category.name} className="block">
-                    <Card className="group p-6 text-center transition-all hover:shadow-lg hover:-translate-y-1 rounded-xl">
-                      <div className="mb-4 flex justify-center">
-                        <div className="rounded-lg bg-primary/10 p-3">
-                          <Image 
-                            src={category.icon} 
-                            alt={category.name} 
-                            width={32} 
-                            height={32} 
-                            className="h-8 w-8" 
-                            unoptimized
-                          />
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {jobCategories.map((category) => {
+                  const IconComponent = iconMap[category.icon];
+                  return(
+                    <Link href="/jobs" key={category.name} className="block group">
+                      <Card className="p-6 text-center h-full rounded-xl border transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:border-primary">
+                        <div className="mb-4 flex justify-center">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                            {IconComponent && <IconComponent className="h-8 w-8 text-primary" />}
+                          </div>
                         </div>
-                      </div>
-                      <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">{category.name}</h3>
-                      <p className="text-sm text-muted-foreground">{category.jobCount} Jobs Available</p>
-                    </Card>
-                  </Link>
-                ))}
+                        <h3 className="mt-4 mb-1 font-semibold text-lg group-hover:text-primary transition-colors">{category.name}</h3>
+                        <p className="text-sm text-muted-foreground">{category.jobCount} Jobs Available</p>
+                      </Card>
+                    </Link>
+                  )
+                })}
             </div>
           </div>
         </section>
