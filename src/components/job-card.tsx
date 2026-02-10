@@ -48,7 +48,7 @@ export default function JobCard({ job }: JobCardProps) {
             </Badge>
           )}
       </CardHeader>
-      <CardContent className="flex flex-1 flex-col p-0 mt-4">
+      <CardContent className="p-0 mt-4">
             <Link href={`/jobs/${job.id}`} className="group">
               <h3 className="font-semibold text-foreground group-hover:text-primary text-xl leading-tight">{job.title}</h3>
             </Link>
@@ -59,7 +59,7 @@ export default function JobCard({ job }: JobCardProps) {
                 {job.location.toLowerCase() === 'remote' && <Badge variant="secondary">Remote</Badge>}
             </div>
 
-            <p className="text-sm text-muted-foreground mt-3 line-clamp-2 flex-grow">{job.description}</p>
+            <p className="text-sm text-muted-foreground mt-3 line-clamp-2">{job.description}</p>
 
             <div className="mt-4 flex flex-wrap gap-1">
                 {job.skills.slice(0, 4).map(skill => (
@@ -67,6 +67,7 @@ export default function JobCard({ job }: JobCardProps) {
                 ))}
             </div>
       </CardContent>
+      <div className="flex-grow" />
        <CardFooter className="p-0 mt-4 flex items-center justify-between">
              <div className="flex flex-col text-left">
                  <div className="text-lg">
