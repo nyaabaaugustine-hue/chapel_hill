@@ -16,7 +16,7 @@ export default function FeaturedJobs() {
   const featuredJobs = DUMMY_JOBS.filter(job => {
     if (selectedCategory === 'All') return true;
     return job.category === selectedCategory;
-  }).slice(0, 6);
+  }).slice(0, 9);
 
   return (
     <section className="py-16 md:py-24 bg-background">
