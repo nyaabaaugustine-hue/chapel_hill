@@ -37,7 +37,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t bg-card text-card-foreground">
+    <footer className="border-t border-foreground/10 bg-secondary">
       <div className="container mx-auto px-4 py-16 md:px-6">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-12 lg:col-span-4">
@@ -66,7 +66,7 @@ export default function Footer() {
           <div className="grid gap-8 md:col-span-12 lg:col-span-8 md:grid-cols-3">
             {navSections.map((section) => (
               <div key={section.title}>
-                <h3 className="font-headline font-semibold text-foreground">{section.title}</h3>
+                <h3 className="font-headline font-semibold text-primary">{section.title}</h3>
                 <ul className="mt-4 space-y-2">
                   {section.links.map((link) => (
                     <li key={link.label}>
@@ -83,8 +83,10 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="mt-12 border-t pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; 2024 Chapel Hill. All rights reserved.</p>
+        <div className="mt-12 border-t border-foreground/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
+          <p className="text-center md:text-left mb-4 md:mb-0">
+            &copy; 2024 Chapel Hill. All rights reserved. Developed By TGNE Solutions - Tema.
+          </p>
           <div className='flex gap-4'>
              <Link href="#" className="hover:text-primary">Terms & Conditions</Link>
              <Link href="#" className="hover:text-primary">Privacy Policy</Link>
