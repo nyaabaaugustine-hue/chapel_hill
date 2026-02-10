@@ -1,17 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Facebook, Linkedin, Twitter } from 'lucide-react';
 import Logo from './logo';
 import { Button } from '../ui/button';
 
 export default function Footer() {
-  const [year, setYear] = useState(new Date().getFullYear());
-
-  useEffect(() => {
-    setYear(new Date().getFullYear());
-  }, []);
 
   const navSections = [
     {
@@ -93,7 +87,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-12 border-t pt-6 text-center text-sm text-muted-foreground">
-          &copy; {year} JobBox. All rights reserved.
+          &copy; 2024 JobBox. All rights reserved.
         </div>
       </div>
     </footer>

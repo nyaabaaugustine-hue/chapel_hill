@@ -33,7 +33,7 @@ export default function HomePage() {
   const heroBanner2 = PlaceHolderImages.find((img) => img.id === 'hero-banner-2');
   const chartImage = PlaceHolderImages.find((img) => img.id === 'chart-image');
 
-  const featuredJobs = DUMMY_JOBS.slice(0, 9);
+  const featuredJobs = DUMMY_JOBS.slice(0, 8);
 
   const jobCategories = [
     { name: 'Human Resource', imageId: 'category-human-resource', jobCount: 10 },
