@@ -1,4 +1,5 @@
 import type {Config} from 'tailwindcss';
+const colors = require('tailwindcss/colors');
 
 const {fontFamily} = require('tailwindcss/defaultTheme');
 
@@ -23,6 +24,7 @@ export default {
         headline: ['var(--font-space-grotesk)', ...fontFamily.sans],
       },
       colors: {
+        yellow: colors.yellow,
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

@@ -34,7 +34,7 @@ export default function HomePage() {
   const heroBanner2 = PlaceHolderImages.find((img) => img.id === 'hero-banner-2');
   const chartImage = PlaceHolderImages.find((img) => img.id === 'chart-image');
 
-  const featuredJobs = DUMMY_JOBS.slice(0, 8);
+  const featuredJobs = DUMMY_JOBS.slice(0, 9);
 
   const jobCategories = [
     { name: 'Human Resource', imageId: 'category-human-resource', jobCount: 10 },
@@ -61,7 +61,7 @@ export default function HomePage() {
       arr.slice(i * size, i * size + size)
     );
   
-  const categorySlides = chunk([...jobCategories, ...jobCategories], 8);
+  const categorySlides = chunk([...jobCategories, ...jobCategories, ...jobCategories], 8);
 
   const reviews = DUMMY_REVIEWS;
 
@@ -152,23 +152,20 @@ export default function HomePage() {
               <CarouselContent>
                 {categorySlides.map((slide, index) => (
                   <CarouselItem key={index}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-1">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
                       {slide.map((category, catIndex) => {
                          const categoryImage = PlaceHolderImages.find((img) => img.id === category.imageId);
                          return(
                           <Link href="/jobs" key={`${category.name}-${index}-${catIndex}`} className="block">
-                            <Card className="group p-4 flex items-center gap-4 transition-all hover:shadow-lg hover:border-primary">
+                            <Card className="group p-4 flex items-center gap-4 transition-all hover:shadow-lg hover:border-primary h-24">
                                 {categoryImage ? (
-                                <Image
-                                    src={categoryImage.imageUrl}
-                                    alt={category.name}
-                                    width={48}
-                                    height={48}
-                                    className="h-12 w-12 rounded-lg object-cover flex-shrink-0"
+                                  <div
+                                    className="h-12 w-12 rounded-lg bg-cover bg-center flex-shrink-0"
+                                    style={{ backgroundImage: `url(${categoryImage.imageUrl})` }}
                                     data-ai-hint={categoryImage.imageHint}
-                                />
+                                  />
                                 ) : (
-                                <div className="h-12 w-12 rounded-lg bg-muted flex-shrink-0" />
+                                  <div className="h-12 w-12 rounded-lg bg-muted flex-shrink-0" />
                                 )}
                                 <div>
                                 <h3 className="font-semibold text-base mb-1 group-hover:text-primary transition-colors">{category.name}</h3>
