@@ -69,8 +69,8 @@ export default function HomePage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="w-full bg-gradient-to-b from-indigo-50 to-slate-50 py-24">
-          <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 md:grid-cols-2">
+        <section className="w-full bg-gradient-to-b from-indigo-50 to-slate-50 py-16 md:py-24">
+          <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 md:grid-cols-2 md:px-6 md:gap-16">
             <div className="flex flex-col justify-center space-y-6">
               <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                 Find Work That Moves Your Career Forward
@@ -219,7 +219,7 @@ export default function HomePage() {
         {/* Hiring Banner Section */}
         <section className="py-16 md:py-24 bg-secondary">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="grid items-center gap-8 rounded-lg bg-primary/10 p-8 md:grid-cols-3">
+            <div className="grid items-center gap-4 rounded-lg bg-primary/10 p-6 md:p-8 md:grid-cols-3 md:gap-8">
               <div className="md:col-span-2">
                 <h2 className="font-headline text-3xl font-bold text-foreground">We are HIRING</h2>
                 <p className="mt-2 text-lg text-muted-foreground">
@@ -302,7 +302,7 @@ export default function HomePage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {howItWorks.map((step, index) => (
-                <Card key={index} className="p-8 text-center">
+                <Card key={index} className="p-6 md:p-8 text-center">
                   <div className="flex justify-center mb-4">{step.icon}</div>
                   <h3 className="font-headline text-xl font-bold mb-2">{step.title}</h3>
                   <p className="text-muted-foreground">{step.description}</p>
