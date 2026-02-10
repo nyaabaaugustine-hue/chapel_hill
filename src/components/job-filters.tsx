@@ -53,8 +53,8 @@ export default function JobFilters() {
         <Label>Salary Range</Label>
         <Slider defaultValue={[50000]} max={200000} step={1000} />
         <div className="flex justify-between text-sm text-muted-foreground">
-          <span>$50k</span>
-          <span>$200k+</span>
+          <span>GH₵50k</span>
+          <span>GH₵200k+</span>
         </div>
       </div>
       <div className="space-y-2">

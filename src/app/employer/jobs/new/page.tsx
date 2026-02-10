@@ -48,7 +48,7 @@ export default function NewJobPage() {
            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="salary-range">Salary Range</Label>
-              <Input id="salary-range" placeholder="e.g., $120k - $160k" />
+              <Input id="salary-range" placeholder="e.g., GH₵120k - GH₵160k" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="experience-level">Experience Level</Label>

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BarChart, Briefcase, DollarSign, Home, Shield, Users } from 'lucide-react';
+import { BarChart, Briefcase, Wallet, Home, Shield, Users } from 'lucide-react';
 import {
   SidebarProvider,
   Sidebar,
@@ -66,7 +66,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={pathname === '/admin/financials'}>
                   <Link href="/admin/financials">
-                    <DollarSign />
+                    <Wallet />
                     <span>Financials</span>
                   </Link>
                 </SidebarMenuButton>

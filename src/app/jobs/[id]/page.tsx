@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Briefcase, Clock, DollarSign, MapPin, Zap } from 'lucide-react';
+import { Briefcase, Clock, Wallet, MapPin, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import { formatDistanceToNow } from 'date-fns';
@@ -111,7 +111,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                             <span className="font-semibold">{job.experienceLevel}</span>
                         </div>
                         <div className="flex items-center justify-between">
-                            <span className="text-muted-foreground flex items-center gap-2"><DollarSign /> Salary</span>
+                            <span className="text-muted-foreground flex items-center gap-2"><Wallet /> Salary</span>
                             <span className="font-semibold text-primary">{job.salaryRange}</span>
                         </div>
                     </CardContent>
