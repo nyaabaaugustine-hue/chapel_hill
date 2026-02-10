@@ -108,8 +108,8 @@ export default function HomePage() {
                     <Image
                       src={heroBanner1.imageUrl}
                       alt={heroBanner1.description}
-                      width={250}
-                      height={250}
+                      width={363}
+                      height={363}
                       className="rounded-xl object-cover shadow-lg"
                       data-ai-hint={heroBanner1.imageHint}
                     />
@@ -120,8 +120,8 @@ export default function HomePage() {
                     <Image
                       src={heroBanner2.imageUrl}
                       alt={heroBanner2.description}
-                      width={250}
-                      height={250}
+                      width={363}
+                      height={363}
                       className="rounded-xl object-cover shadow-lg"
                       data-ai-hint={heroBanner2.imageHint}
                     />
