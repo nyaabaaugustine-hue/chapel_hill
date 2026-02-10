@@ -1,5 +1,4 @@
 
-
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -11,11 +10,11 @@ import {
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
-import { DUMMY_JOBS, DUMMY_COMPANIES, DUMMY_BLOG_POSTS } from '@/lib/data';
+import { DUMMY_JOBS, DUMMY_COMPANIES, DUMMY_BLOG_POSTS, DUMMY_REVIEWS } from '@/lib/data';
 import JobCard from '@/components/job-card';
 import {
   Carousel,
@@ -108,8 +107,8 @@ export default function HomePage() {
                     <Image
                       src={heroBanner1.imageUrl}
                       alt={heroBanner1.description}
-                      width={363}
-                      height={363}
+                      width={818}
+                      height={818}
                       className="rounded-xl object-cover shadow-lg"
                       data-ai-hint={heroBanner1.imageHint}
                     />
@@ -120,8 +119,8 @@ export default function HomePage() {
                     <Image
                       src={heroBanner2.imageUrl}
                       alt={heroBanner2.description}
-                      width={363}
-                      height={363}
+                      width={818}
+                      height={818}
                       className="rounded-xl object-cover shadow-lg"
                       data-ai-hint={heroBanner2.imageHint}
                     />
@@ -278,6 +277,55 @@ export default function HomePage() {
               <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
             </Carousel>
           </div>
+        </section>
+        
+        {/* Testimonials */}
+        <section className="py-16 md:py-24">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="mb-10 text-center">
+                    <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">What Our Customers Say</h2>
+                    <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                        Hear from satisfied job seekers and recruiters who found success with JobBox.
+                    </p>
+                </div>
+                <Carousel
+                    opts={{
+                        align: "start",
+                        loop: true,
+                    }}
+                    className="w-full"
+                >
+                    <CarouselContent>
+                        {DUMMY_REVIEWS.map((review) => (
+                            <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/3">
+                                <Card className="h-full flex flex-col">
+                                    <CardContent className="flex-grow p-6">
+                                        <div className="flex items-center mb-4">
+                                            {[...Array(5)].map((_, i) => (
+                                                <Star key={i} className={`h-5 w-5 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} />
+                                            ))}
+                                        </div>
+                                        <p className="text-muted-foreground">"{review.comment}"</p>
+                                    </CardContent>
+                                    <CardFooter className="p-6 bg-secondary/50">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 rounded-full bg-muted overflow-hidden">
+                                                <Image src={PlaceHolderImages.find(img => img.id === review.user.avatar)?.imageUrl || ''} alt={review.user.name} width={48} height={48} className="object-cover"/>
+                                            </div>
+                                            <div>
+                                                <p className="font-semibold">{review.user.name}</p>
+                                                <p className="text-sm text-muted-foreground">{review.user.role}</p>
+                                            </div>
+                                        </div>
+                                    </CardFooter>
+                                </Card>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex"/>
+                    <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex"/>
+                </Carousel>
+            </div>
         </section>
 
         {/* Jobs by Location Section */}
