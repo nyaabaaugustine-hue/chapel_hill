@@ -1,10 +1,10 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-1",
-      "description": "A developer working on a laptop with code on the screen.",
-      "imageUrl": "https://images.unsplash.com/photo-1638259116216-e7c65a918fd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxkZXZlbG9wZXIlMjBjb2RlfGVufDB8fHx8MTc3MDYyNzc0MXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "developer code"
+      "id": "hero-main",
+      "description": "A person holding a coffee cup, working on a laptop with a business presentation.",
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-b413da4b248d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBsYXB0b3AlMjBjb2ZmZWV8ZW58MHx8fHwxNzcxNzMzMDUyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person laptop"
     },
     {
       "id": "company-logo-1",
@@ -287,42 +287,6 @@
       "description": "Avatar for a twelfth user.",
       "imageUrl": "https://images.unsplash.com/flagged/photo-1595514191830-3e96a518989b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzcwNTg1MjMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "person portrait"
-    },
-    {
-      "id": "hero-banner-1",
-      "description": "A developer coding on a laptop in a clean workspace.",
-      "imageUrl": "https://images.unsplash.com/photo-1725800066480-7ccf189e9513?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkZXZlbG9wZXIlMjBjb2Rpbmd8ZW58MHx8fHwxNzcwNjIxNDA5fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "developer coding"
-    },
-    {
-      "id": "hero-banner-2",
-      "description": "A diverse team collaborating around a table with laptops.",
-      "imageUrl": "https://images.unsplash.com/photo-1620325867502-221cfb5faa5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dGVhbXdvcmslMjBvZmZpY2V8ZW58MHx8fHwxNzcwNjU1NzU0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "teamwork office"
-    },
-    {
-      "id": "hero-banner-3",
-      "description": "Portrait of a smiling person.",
-      "imageUrl": "https://images.unsplash.com/photo-1662850886700-4ec19bd30d11?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwZXJzb24lMjBzbWlsaW5nfGVufDB8fHx8MTc3MDY4MjIzOXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person smiling"
-    },
-    {
-      "id": "hero-banner-4",
-      "description": "A person looking at a job board on a laptop.",
-      "imageUrl": "https://images.unsplash.com/photo-1653038417332-6db0ff9d4bfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxqb2IlMjBzZWFyY2h8ZW58MHx8fHwxNzcwNjU2Mjg0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "job search"
-    },
-    {
-      "id": "hero-banner-5",
-      "description": "A meeting with laptops on a table.",
-      "imageUrl": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxidXNpbmVzcyUyMG1lZXRpbmd8ZW58MHx8fHwxNzcwNjE3MzIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "business meeting"
-    },
-    {
-      "id": "chart-image",
-      "description": "A chart showing upward trends.",
-      "imageUrl": "https://images.unsplash.com/photo-1762427354251-f008b64dbc32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjaGFydCUyMGRhdGF8ZW58MHx8fHwxNzcwNjg3NjY5fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "chart data"
     },
     {
       "id": "blog-post-1",
