@@ -28,10 +28,6 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
                     className="w-full object-cover aspect-[3/2] transition-transform duration-300 group-hover:scale-105"
                     data-ai-hint={postImage.imageHint}
                 />
-                 <div className="absolute top-4 left-4 flex gap-2">
-                    <Badge variant="secondary">It happened</Badge>
-                    <Badge variant="secondary">new</Badge>
-                 </div>
               </div>
           )}
         </Link>
