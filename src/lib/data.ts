@@ -1,5 +1,5 @@
 import type { Job, Company, Review, Application, Applicant, User, BlogPost } from './types';
-import { Briefcase, Code, FilePenLine, Headset, Landmark, Megaphone, Search, Users } from 'lucide-react';
+import { Briefcase, Code, FileText, Headset, Landmark, Megaphone, Search, Users } from 'lucide-react';
 
 export const DUMMY_COMPANIES: Company[] = [
   { id: '1', name: 'Innovate Inc.', logo: 'company-logo-1', industry: 'Tech', activeJobs: 5, rating: 5, location: 'New York, US' },
@@ -518,7 +518,7 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
 ];
 
 export const JOB_CATEGORIES = [
-    { name: 'Content Writer', jobCount: 29, icon: FilePenLine, color: 'text-sky-800', iconBgColor: 'bg-sky-100' },
+    { name: 'Content Writer', jobCount: 29, icon: FileText, color: 'text-sky-800', iconBgColor: 'bg-sky-100' },
     { name: 'Market Research', jobCount: 7, icon: Search, color: 'text-violet-800', iconBgColor: 'bg-violet-100' },
     { name: 'Marketing & Sale', jobCount: 9, icon: Megaphone, color: 'text-amber-800', iconBgColor: 'bg-amber-100' },
     { name: 'Customer Help', jobCount: 4, icon: Headset, color: 'text-rose-800', iconBgColor: 'bg-rose-100' },
