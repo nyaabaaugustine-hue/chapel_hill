@@ -12,6 +12,7 @@ import { Separator } from '@/components/ui/separator';
 import JobCategories from '@/components/job-categories';
 import FeaturedJobs from '@/components/featured-jobs';
 import HiringSection from '@/components/hiring-section';
+import TopCompanies from '@/components/top-companies';
 
 export default function HomePage() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
@@ -98,6 +99,8 @@ export default function HomePage() {
         <FeaturedJobs />
 
         <HiringSection />
+
+        <TopCompanies />
       </main>
       <Footer />
     </div>
