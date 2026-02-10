@@ -14,25 +14,17 @@ export default function JobCategories() {
             Find the job that’s perfect for you. Over 800+ new jobs posted every day.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {JOB_CATEGORIES.map((category) => (
             <Link
               href="#"
               key={category.name}
-              className="group rounded-xl border bg-card p-3 text-center transition-all duration-300 hover:bg-primary/10 hover:border-primary hover:-translate-y-1 hover:shadow-lg"
+              className="group rounded-lg border bg-card p-3 flex items-center gap-2 text-left transition-all duration-300 hover:bg-primary/10 hover:border-primary hover:-translate-y-1 hover:shadow-md"
             >
-              <div
-                className={cn(
-                  'mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-lg',
-                  category.iconBgColor
-                )}
-              >
-                <category.icon className={cn('h-4 w-4', category.color)} />
-              </div>
-              <h3 className="font-semibold text-foreground text-sm group-hover:text-primary">
+              <category.icon className={cn('h-5 w-5 shrink-0', category.color)} />
+              <h3 className="font-semibold text-foreground text-sm group-hover:text-primary leading-tight truncate">
                 {category.name}
               </h3>
-              <p className="text-xs text-muted-foreground mt-1">{category.jobCount} Jobs Available</p>
             </Link>
           ))}
         </div>
