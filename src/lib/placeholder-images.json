@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-main",
-      "description": "A diverse team of professionals collaborating and smiling in a modern office.",
-      "imageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=550&h=550&fit=crop&q=80",
-      "imageHint": "team working"
+      "description": "A professional reviewing a market research strategy on a laptop while enjoying a coffee.",
+      "imageUrl": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=550&h=550&fit=crop&q=80",
+      "imageHint": "market research"
     },
     {
       "id": "company-logo-1",
