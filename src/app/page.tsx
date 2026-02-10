@@ -1,4 +1,5 @@
 
+
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -6,18 +7,15 @@ import {
   Search,
   Users,
   Star,
-  UserPlus,
-  FileText,
-  Send,
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
-import { DUMMY_JOBS, DUMMY_REVIEWS } from '@/lib/data';
+import { DUMMY_JOBS, DUMMY_COMPANIES, DUMMY_BLOG_POSTS } from '@/lib/data';
 import JobCard from '@/components/job-card';
 import {
   Carousel,
@@ -26,15 +24,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import BlogPostCard from '@/components/blog-post-card';
 
 
 export default function HomePage() {
   const heroBanner1 = PlaceHolderImages.find((img) => img.id === 'hero-banner-1');
   const heroBanner2 = PlaceHolderImages.find((img) => img.id === 'hero-banner-2');
-  const chartImage = PlaceHolderImages.find((img) => img.id === 'chart-image');
+  const jobsByLocationImage = PlaceHolderImages.find((img) => img.id === 'chart-image');
 
-  const featuredJobs = DUMMY_JOBS.slice(0, 9);
+  const jobsOfTheDay = DUMMY_JOBS.slice(0, 8);
 
   const jobCategories = [
     { name: 'Human Resource', imageId: 'category-human-resource', jobCount: 10 },
@@ -46,7 +44,10 @@ export default function HomePage() {
     { name: 'Customer Help', imageId: 'category-customer-help', jobCount: 4 },
     { name: 'Software', imageId: 'category-software', jobCount: 4 },
   ];
-
+  
+  const topRecruiters = DUMMY_COMPANIES.slice(0, 12);
+  const blogPosts = DUMMY_BLOG_POSTS.slice(0, 3);
+  
   const locations = [
     { name: 'Paris, France', companies: 3, jobs: 5 },
     { name: 'London, England', companies: 4, jobs: 3 },
@@ -55,15 +56,12 @@ export default function HomePage() {
     { name: 'Copenhagen, Denmark', companies: 4, jobs: 9 },
     { name: 'Berlin, Germany', companies: 3, jobs: 3 },
   ];
-  
-  const chunk = (arr: any[], size: number) =>
-    Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
-      arr.slice(i * size, i * size + size)
-    );
-  
-  const categorySlides = chunk([...jobCategories, ...jobCategories, ...jobCategories], 8);
 
-  const reviews = DUMMY_REVIEWS;
+  const categoryPairs = [];
+  for (let i = 0; i < jobCategories.length; i += 2) {
+      categoryPairs.push(jobCategories.slice(i, i + 2));
+  }
+
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -143,42 +141,45 @@ export default function HomePage() {
                 Find the job that’s perfect for you. about 800+ new jobs everyday
               </p>
             </div>
-            <Carousel
+             <Carousel
               opts={{
                 align: 'start',
               }}
               className="w-full"
             >
               <CarouselContent>
-                {categorySlides.map((slide, index) => (
-                  <CarouselItem key={index}>
-                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                      {slide.map((category, catIndex) => {
-                         const categoryImage = PlaceHolderImages.find((img) => img.id === category.imageId);
-                         return(
-                          <Link href="/jobs" key={`${category.name}-${index}-${catIndex}`} className="block">
-                            <Card className="group p-4 flex items-center gap-4 transition-all hover:shadow-lg hover:border-primary h-24">
-                                {categoryImage ? (
-                                  <div
-                                    className="h-12 w-12 rounded-lg bg-cover bg-center flex-shrink-0"
-                                    style={{ backgroundImage: `url(${categoryImage.imageUrl})` }}
-                                    data-ai-hint={categoryImage.imageHint}
-                                  />
-                                ) : (
-                                  <div className="h-12 w-12 rounded-lg bg-muted flex-shrink-0" />
-                                )}
-                                <div>
-                                <h3 className="font-semibold text-base mb-1 group-hover:text-primary transition-colors">{category.name}</h3>
-                                <p className="text-sm text-muted-foreground">
-                                    {category.jobCount} Jobs Available
-                                </p>
-                                </div>
-                            </Card>
-                          </Link>
-                         )
-                        })}
-                    </div>
-                  </CarouselItem>
+                {categoryPairs.map((pair, index) => (
+                    <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/4">
+                        <div className="flex flex-col gap-4">
+                            {pair.map(category => {
+                                const categoryImage = PlaceHolderImages.find((img) => img.id === category.imageId);
+                                return (
+                                    <Link href="/jobs" key={category.name} className="block">
+                                        <Card className="group p-4 flex items-center gap-4 transition-all hover:shadow-lg hover:border-primary">
+                                            {categoryImage ? (
+                                              <Image
+                                                src={categoryImage.imageUrl}
+                                                alt={category.name}
+                                                width={48}
+                                                height={48}
+                                                className="rounded-lg object-cover h-12 w-12"
+                                                data-ai-hint={categoryImage.imageHint}
+                                              />
+                                            ) : (
+                                              <div className="h-12 w-12 rounded-lg bg-muted flex-shrink-0" />
+                                            )}
+                                            <div>
+                                            <h3 className="font-semibold text-base mb-1 group-hover:text-primary transition-colors">{category.name}</h3>
+                                            <p className="text-sm text-muted-foreground">
+                                                {category.jobCount} Jobs Available
+                                            </p>
+                                            </div>
+                                        </Card>
+                                    </Link>
+                                )
+                            })}
+                        </div>
+                    </CarouselItem>
                 ))}
               </CarouselContent>
               <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
@@ -187,177 +188,130 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* How It Works Section */}
-        <section className="bg-secondary py-16 md:py-24">
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="mb-10 text-center">
-                    <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">How It Works</h2>
-                    <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">A simple process to find your next career opportunity.</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <Card className="text-center p-6">
-                        <div className="mb-4 inline-block rounded-full bg-primary/10 p-4">
-                            <UserPlus className="h-8 w-8 text-primary" />
-                        </div>
-                        <h3 className="font-headline text-xl font-bold mb-2">1. Create an Account</h3>
-                        <p className="text-muted-foreground">Sign up for free and create your profile to showcase your skills and experience.</p>
-                    </Card>
-                    <Card className="text-center p-6">
-                        <div className="mb-4 inline-block rounded-full bg-primary/10 p-4">
-                            <FileText className="h-8 w-8 text-primary" />
-                        </div>
-                        <h3 className="font-headline text-xl font-bold mb-2">2. Complete Your Profile</h3>
-                        <p className="text-muted-foreground">Add your resume, work history, and skills to attract top employers.</p>
-                    </Card>
-                    <Card className="text-center p-6">
-                        <div className="mb-4 inline-block rounded-full bg-primary/10 p-4">
-                            <Send className="h-8 w-8 text-primary" />
-                        </div>
-                        <h3 className="font-headline text-xl font-bold mb-2">3. Apply for Jobs</h3>
-                        <p className="text-muted-foreground">Search and apply for jobs that match your career goals with a single click.</p>
-                    </Card>
-                </div>
+        {/* Hiring Banner Section */}
+        <section className="py-16 md:py-24 bg-secondary">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="grid items-center gap-8 rounded-lg bg-primary/10 p-8 md:grid-cols-3">
+              <div className="md:col-span-2">
+                <h2 className="font-headline text-3xl font-bold text-foreground">We are HIRING</h2>
+                <p className="mt-2 text-lg text-muted-foreground">
+                  Let’s Work Together & Explore Opportunities
+                </p>
+              </div>
+              <div className="text-left md:text-right">
+                <Button size="lg" asChild>
+                  <Link href="/employer/jobs/new">
+                    Post a Job <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
             </div>
+          </div>
         </section>
-
-        {/* Featured Jobs Section */}
+        
+        {/* Jobs of the day Section */}
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <div className="mb-10 text-center">
-              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Featured Jobs</h2>
+              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Jobs of the day</h2>
               <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                Hand-picked opportunities from the best companies in the industry.
+                Search and connect with the right candidates faster.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {featuredJobs.map((job) => (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {jobsOfTheDay.map((job) => (
                 <JobCard key={job.id} job={job} />
               ))}
             </div>
             <div className="mt-12 text-center">
               <Button asChild size="lg">
                 <Link href="/jobs">
-                  Explore All Jobs <ArrowRight className="ml-2 h-4 w-4" />
+                  Browse All Jobs <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
           </div>
         </section>
 
-        {/* For Job Seekers/Employers Section */}
+        {/* Top Recruiters Section */}
         <section className="bg-secondary py-16 md:py-24">
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    <div className="rounded-lg bg-card p-8">
-                        <h3 className="font-headline text-2xl font-bold mb-4">For Job Seekers</h3>
-                        <p className="text-muted-foreground mb-6">Find your dream job from thousands of openings. We have jobs from the best companies in the world.</p>
-                        <ul className="space-y-3 text-muted-foreground mb-8">
-                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Access to exclusive job openings.</li>
-                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Create a professional resume with our builder.</li>
-                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Get AI-powered job recommendations.</li>
-                        </ul>
-                        <Button asChild>
-                        <Link href="/jobs">Browse All Jobs <ArrowRight className="ml-2 h-4 w-4" /></Link>
-                        </Button>
-                    </div>
-                    <div className="rounded-lg bg-card p-8">
-                        <h3 className="font-headline text-2xl font-bold mb-4">For Employers</h3>
-                        <p className="text-muted-foreground mb-6">Post your job and find the perfect candidate for your company. We have a large pool of talented developers.</p>
-                        <ul className="space-y-3 text-muted-foreground mb-8">
-                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Post a job in minutes.</li>
-                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Access to a large pool of qualified candidates.</li>
-                        <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> AI-powered candidate matching.</li>
-                        </ul>
-                        <Button asChild>
-                        <Link href="/employer/jobs/new">Post a Job <ArrowRight className="ml-2 h-4 w-4" /></Link>
-                        </Button>
-                    </div>
-                </div>
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="mb-10 text-center">
+              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Top Recruiters</h2>
+              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                Discover your next career move, freelance gig, or internship
+              </p>
             </div>
+            <Carousel opts={{ align: 'start', loop: true }} className="w-full">
+              <CarouselContent className="-ml-4">
+                {topRecruiters.map((company) => {
+                  const companyLogo = PlaceHolderImages.find((img) => img.id === company.logo);
+                  return (
+                    <CarouselItem key={company.id} className="pl-4 md:basis-1/3 lg:basis-1/4">
+                      <Card className="text-center p-4 h-full flex flex-col items-center justify-center">
+                        {companyLogo &&
+                          <Image
+                            src={companyLogo.imageUrl}
+                            alt={`${company.name} logo`}
+                            width={64}
+                            height={64}
+                            className="mb-4 rounded-full"
+                          />
+                        }
+                        <Link href={`/companies/${company.id}`}>
+                          <h3 className="font-semibold hover:text-primary">{company.name}</h3>
+                        </Link>
+                       <div className="flex justify-center items-center my-2">
+                          {[...Array(5)].map((_, i) => (
+                              <Star key={i} className={`h-4 w-4 ${i < company.rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} />
+                          ))}
+                       </div>
+                      <p className="text-sm text-muted-foreground">{company.location}</p>
+                      <Button variant="outline" size="sm" asChild className="mt-2">
+                          <Link href={`/companies/${company.id}`}>{company.activeJobs} Jobs</Link>
+                      </Button>
+                    </Card>
+                  </CarouselItem>
+                )})}
+              </CarouselContent>
+              <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
+              <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
+            </Carousel>
+          </div>
         </section>
 
-        {/* Testimonials Section */}
+        {/* Jobs by Location Section */}
         <section className="py-16 md:py-24">
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="mb-10 text-center">
-                    <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">What Our Customers Say</h2>
-                    <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                        Listen to the stories of our satisfied users who found their dream jobs through JobBox.
-                    </p>
-                </div>
-                <Carousel
-                    opts={{ align: "start", loop: true }}
-                    className="w-full"
-                >
-                    <CarouselContent>
-                        {reviews.map((review) => {
-                            const authorAvatar = PlaceHolderImages.find((img) => img.id === review.user.avatar);
-                            return (
-                                <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/3">
-                                    <div className="p-1 h-full">
-                                        <Card className="flex flex-col h-full">
-                                            <CardContent className="p-6 flex-grow">
-                                                <div className="flex mb-4">
-                                                    {[...Array(5)].map((_, i) => (
-                                                        <Star key={i} className={`h-5 w-5 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} />
-                                                    ))}
-                                                </div>
-                                                <p className="text-muted-foreground italic">"{review.comment}"</p>
-                                            </CardContent>
-                                            <CardFooter className="p-6 pt-0">
-                                                <div className="flex items-center gap-4">
-                                                    <Avatar>
-                                                        {authorAvatar && <AvatarImage src={authorAvatar.imageUrl} alt={review.user.name} />}
-                                                        <AvatarFallback>{review.user.name.charAt(0)}</AvatarFallback>
-                                                    </Avatar>
-                                                    <div>
-                                                        <p className="font-semibold">{review.user.name}</p>
-                                                        <p className="text-sm text-muted-foreground">{review.user.role}</p>
-                                                    </div>
-                                                </div>
-                                            </CardFooter>
-                                        </Card>
-                                    </div>
-                                </CarouselItem>
-                            );
-                        })}
-                    </CarouselContent>
-                    <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
-                    <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 hidden h-10 w-10 rounded-full bg-card shadow-md md:flex" />
-                </Carousel>
-            </div>
-        </section>
-
-        {/* Locations Section */}
-        <section className="bg-secondary py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                {chartImage && (
+                {jobsByLocationImage && (
                   <Image
-                    src={chartImage.imageUrl}
-                    alt={chartImage.description}
+                    src={jobsByLocationImage.imageUrl}
+                    alt={jobsByLocationImage.description}
                     width={600}
                     height={400}
                     className="rounded-lg object-cover"
-                    data-ai-hint={chartImage.imageHint}
+                    data-ai-hint={jobsByLocationImage.imageHint}
                   />
                 )}
               </div>
               <div>
-                <h2 className="font-headline text-3xl font-bold">Millions Of Jobs.</h2>
+                <h2 className="font-headline text-3xl font-bold">Jobs by Location</h2>
+                <p className="text-muted-foreground mt-2">Find your favourite jobs and get the benefits of yourself</p>
                 <div className="mt-8 grid grid-cols-2 gap-6">
                   {locations.map((loc) => (
-                    <div
-                      key={loc.name}
-                      className="rounded-lg border bg-card p-4 hover:shadow-md transition-shadow"
-                    >
-                      <h3 className="font-semibold">{loc.name}</h3>
-                      <div className="flex gap-4 text-sm text-muted-foreground">
-                        <span>{loc.companies} companies</span>
-                        <span>{loc.jobs} jobs</span>
+                    <Link href="/jobs" key={loc.name}>
+                      <div
+                        className="rounded-lg border bg-card p-4 hover:shadow-md hover:border-primary transition-all"
+                      >
+                        <h3 className="font-semibold">{loc.name}</h3>
+                        <div className="flex gap-4 text-sm text-muted-foreground">
+                          <span>{loc.companies} companies</span>
+                          <span>{loc.jobs} jobs</span>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -365,6 +319,23 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* News and Blog Section */}
+        <section className="bg-secondary py-16 md:py-24">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="mb-10 text-center">
+              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">News and Blog</h2>
+              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                Get the latest news, updates and tips
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {blogPosts.map(post => (
+                    <BlogPostCard key={post.id} post={post} />
+                ))}
+            </div>
+          </div>
+        </section>
+        
         {/* Newsletter CTA Section */}
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">

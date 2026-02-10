@@ -4,10 +4,12 @@ export type Company = {
   logo: string;
   industry: string;
   activeJobs: number;
+  rating: number;
+  location: string;
 };
 
 export type Job = {
-  id: string;
+  id:string;
   title: string;
   company: Company;
   description: string;
