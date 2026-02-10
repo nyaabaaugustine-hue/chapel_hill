@@ -16,6 +16,7 @@ export default function CompanyDetailPage({ params }: { params: { id: string } }
 
   const companyJobs = DUMMY_JOBS.filter((job) => job.company.id === company.id);
   const companyLogo = PlaceHolderImages.find((img) => img.id === company.logo);
+  const companyBanner = PlaceHolderImages.find((img) => img.id === 'hiring-main');
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -23,7 +24,17 @@ export default function CompanyDetailPage({ params }: { params: { id: string } }
       <main className="flex-1 bg-secondary py-12 md:py-16">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-8 overflow-hidden rounded-lg bg-card shadow-sm">
-            <div className="h-48 bg-muted"></div>
+            <div className="relative h-48 bg-muted">
+              {companyBanner && (
+                  <Image
+                      src={companyBanner.imageUrl}
+                      alt="Company banner"
+                      fill
+                      className="object-cover"
+                      data-ai-hint={companyBanner.imageHint}
+                  />
+              )}
+            </div>
             <div className="p-6 sm:p-8">
               <div className="relative -mt-20 flex items-end gap-6">
                 {companyLogo && (

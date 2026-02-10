@@ -5,13 +5,27 @@ import { Label } from "@/components/ui/label"
 import Header from "@/components/shared/header"
 import Footer from "@/components/shared/footer"
 import Link from "next/link"
+import Image from "next/image"
+import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 export default function LoginPage() {
+  const bgImage = PlaceHolderImages.find((p) => p.id === 'find-job-1');
+
   return (
      <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 flex items-center justify-center bg-secondary">
-        <Card className="mx-auto max-w-sm">
+      <main className="flex-1 flex items-center justify-center relative">
+        {bgImage && (
+            <Image
+              src={bgImage.imageUrl}
+              alt={bgImage.description}
+              fill
+              className="object-cover z-0"
+              data-ai-hint={bgImage.imageHint}
+            />
+        )}
+        <div className="absolute inset-0 bg-black/50 z-10" />
+        <Card className="mx-auto max-w-sm z-20">
           <CardHeader>
             <CardTitle className="text-2xl">Login</CardTitle>
             <CardDescription>
