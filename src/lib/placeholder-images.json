@@ -151,147 +151,153 @@
       "imageHint": "company logo"
     },
     {
+      "id": "avatar-1",
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1628191140039-a6858a74e5a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
+    },
+    {
       "id": "avatar-2",
-      "description": "Avatar for another user.",
-      "imageUrl": "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1610482006992-8051b9487199?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-3",
-      "description": "Avatar for a third user.",
-      "imageUrl": "https://images.unsplash.com/photo-1521119989659-a83eee488004?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1596009312489-c89345c85a22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-4",
-      "description": "Avatar for a fourth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1619881180423-a83a1b38f8a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-5",
-      "description": "Avatar for a fifth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1590745970919-87b645b1e9b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-6",
-      "description": "Avatar for a sixth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1628191140039-a6858a74e5a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-7",
-      "description": "Avatar for a seventh user.",
-      "imageUrl": "https://images.unsplash.com/photo-1521119989659-a83eee488004?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1583341793444-129a4f91e485?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-8",
-      "description": "Avatar for an eighth user.",
-      "imageUrl": "https://images.unsplash.com/flagged/photo-1595514191830-3e96a518989b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzcwNTg1MjMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1619183533475-010530d9a71a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-9",
-      "description": "Avatar for a ninth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-10",
-      "description": "Avatar for a tenth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1628014289484-a15d3b9e4a3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-11",
-      "description": "Avatar for an eleventh user.",
-      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1603282280289-3837424564b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-12",
-      "description": "Avatar for a twelfth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1610482006992-8051b9487199?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-13",
-      "description": "Avatar for a user.",
-      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1596009312489-c89345c85a22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-14",
-      "description": "Avatar for another user.",
-      "imageUrl": "https://images.unsplash.com/flagged/photo-1595514191830-3e96a518989b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzcwNTg1MjMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1619881180423-a83a1b38f8a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-15",
-      "description": "Avatar for a third user.",
-      "imageUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1590745970919-87b645b1e9b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-16",
-      "description": "Avatar for a fourth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1628191140039-a6858a74e5a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-17",
-      "description": "Avatar for a fifth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1521119989659-a83eee488004?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1583341793444-129a4f91e485?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-18",
-      "description": "Avatar for a sixth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1619183533475-010530d9a71a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-19",
-      "description": "Avatar for a seventh user.",
-      "imageUrl": "https://images.unsplash.com/photo-1590086782792-42dd2350140d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-20",
-      "description": "Avatar for an eighth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1628014289484-a15d3b9e4a3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-21",
-      "description": "Avatar for a ninth user.",
-      "imageUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA1ODUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1603282280289-3837424564b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-22",
-      "description": "Avatar for a tenth user.",
-      "imageUrl": "https://images.unsplash.com/flagged/photo-1595514191830-3e96a518989b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzcwNTg1MjMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1610482006992-8051b9487199?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-23",
-      "description": "Avatar for an eleventh user.",
-      "imageUrl": "https://images.unsplash.com/flagged/photo-1595514191830-3e96a518989b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzcwNTg1MjMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian man.",
+      "imageUrl": "https://images.unsplash.com/photo-1596009312489-c89345c85a22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "avatar-24",
-      "description": "Avatar for a twelfth user.",
-      "imageUrl": "https://images.unsplash.com/flagged/photo-1595514191830-3e96a518989b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzcwNTg1MjMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person portrait"
+      "description": "Portrait of a Ghanaian woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1619881180423-a83a1b38f8a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian portrait"
     },
     {
       "id": "blog-post-1",
-      "description": "Person being interviewed",
-      "imageUrl": "https://images.unsplash.com/photo-1459499362902-55a20553e082?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8aW50ZXJ2aWV3JTIwam9ifGVufDB8fHx8MTc3MDY2NTk0MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Two Black people in an interview setting.",
+      "imageUrl": "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       "imageHint": "interview job"
     },
     {
@@ -302,9 +308,9 @@
     },
     {
       "id": "blog-post-3",
-      "description": "Person writing on a resume",
-      "imageUrl": "https://images.unsplash.com/photo-1571573633106-72a5838d5023?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxyZXN1bWUlMjB3cml0aW5nfGVufDB8fHx8MTc3MDY2NTk0MHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "resume writing"
+      "description": "Diverse team collaborating around a whiteboard.",
+      "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "team collaboration"
     },
     {
       "id": "blog-post-4",
@@ -320,15 +326,15 @@
     },
     {
       "id": "blog-post-6",
-      "description": "Person working remotely at a cozy desk",
-      "imageUrl": "https://images.unsplash.com/photo-1612831455359-970e23a1e4e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxyZW1vdGUlMjB3b3JrfGVufDB8fHx8MTc3MDYwMDY2MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Black person working remotely at a desk.",
+      "imageUrl": "https://images.unsplash.com/photo-1600880292210-f79a4a25c60e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       "imageHint": "remote work"
     },
     {
       "id": "find-job-1",
-      "description": "People collaborating at a table",
-      "imageUrl": "https://images.unsplash.com/photo-1617153817979-283ffdcd52f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwZW9wbGUlMjBjb2xsYWJvcmF0aW5nfGVufDB8fHx8MTc3MDYxMDgxNXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "people collaborating"
+      "description": "Ghanaian people working and collaborating.",
+      "imageUrl": "https://images.unsplash.com/photo-1590650516494-9199a80348a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghanaian people working"
     },
     {
       "id": "find-job-2",
@@ -380,38 +386,38 @@
     },
     {
       "id": "hiring-main",
-      "description": "A diverse group of professionals in a modern office, collaborating and smiling.",
-      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=500&h=600&auto=format&fit=crop",
+      "description": "A diverse group of Black professionals in a modern office, collaborating and smiling.",
+      "imageUrl": "https://images.unsplash.com/photo-1552960562-b942d919813c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=500&h=600&auto=format&fit=crop",
       "imageHint": "team collaboration"
     },
     {
       "id": "subscription-1",
       "description": "Team collaboration meeting",
-      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=200&h=120&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1590650516494-9199a80348a2?q=80&w=200&h=120&auto=format&fit=crop",
       "imageHint": "team meeting"
     },
     {
       "id": "subscription-2",
       "description": "Person working at a desk",
-      "imageUrl": "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?q=80&w=150&h=150&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1573496773905-f5b17e76b254?q=80&w=150&h=150&auto=format&fit=crop",
       "imageHint": "person working"
     },
     {
       "id": "subscription-3",
       "description": "Group of students learning",
-      "imageUrl": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=200&h=120&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=200&h=120&auto=format&fit=crop",
       "imageHint": "students learning"
     },
     {
       "id": "subscription-4",
       "description": "Man with beard at a desk",
-      "imageUrl": "https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=150&h=180&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1590650249826-b49d5a7d9758?q=80&w=150&h=180&auto=format&fit=crop",
       "imageHint": "man desk"
     },
     {
       "id": "subscription-5",
       "description": "Two people in an office environment",
-      "imageUrl": "https://images.unsplash.com/photo-1572021335469-31706a17aaef?q=80&w=180&h=120&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1552960562-b942d919813c?q=80&w=180&h=120&auto=format&fit=crop",
       "imageHint": "office people"
     },
     {
@@ -422,14 +428,14 @@
     },
     {
       "id": "top-companies-bg",
-      "description": "A man in a suit presenting on a whiteboard in a professional meeting.",
-      "imageUrl": "https://storage.googleapis.com/project-spark-b9748.appspot.com/static/59b15132-720c-4d57-8178-9844876b6b7a",
-      "imageHint": "man presenting"
+      "description": "A vibrant market scene in Ghana.",
+      "imageUrl": "https://images.unsplash.com/photo-1618347313491-e0e9a03b3d9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "imageHint": "Ghana market"
     },
     {
       "id": "latest-news-bg",
-      "description": "A person reading news on a digital tablet with a cup of coffee.",
-      "imageUrl": "https://images.unsplash.com/photo-1526485663820-252d799f0653?q=80&w=1470&auto=format&fit=crop",
+      "description": "A person of color reading news on a digital tablet.",
+      "imageUrl": "https://images.unsplash.com/photo-1600880292210-f79a4a25c60e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1470&auto=format&fit=crop",
       "imageHint": "news reading"
     }
   ]
