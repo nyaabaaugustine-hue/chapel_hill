@@ -18,15 +18,30 @@ import SubscriptionSection from '@/components/subscription-section';
 import LiveActivityBar from '@/components/live-activity-bar';
 import WhyChooseUs from '@/components/why-choose-us';
 import Testimonials from '@/components/testimonials';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import VolunteerSection from '@/components/volunteer-section';
 
 export default function HomePage() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [jobTitle, setJobTitle] = useState(searchParams.get('q') || '');
+  const [location, setLocation] = useState(searchParams.get('loc') || '');
 
   const trustIndicators = [
     { text: '12,430+ jobs available' },
     { text: '4,500+ companies verified' },
     { text: '98% candidate satisfaction' },
   ];
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const query = new URLSearchParams();
+    if (jobTitle) query.set('q', jobTitle);
+    if (location) query.set('loc', location);
+    router.push(`/jobs?${query.toString()}`);
+  };
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -52,10 +67,10 @@ export default function HomePage() {
                 Find Your Next Job, Faster.
               </h1>
               <p className="max-w-3xl mx-auto text-lg text-gray-200 animate-in fade-in-30 slide-in-from-bottom-10 duration-700 delay-200">
-                Discover thousands of opportunities with top Ghanaian companies. Your career advancement starts here.
+                Leverage AI-powered matching, verified employers, and transparent salaries to accelerate your career.
               </p>
               <div className="rounded-2xl bg-white/10 backdrop-blur-sm p-4 shadow-lg border border-white/20 animate-in fade-in-30 slide-in-from-bottom-12 duration-700 delay-400">
-                <form className="flex items-center flex-col sm:flex-row gap-4">
+                <form onSubmit={handleSearch} className="flex items-center flex-col sm:flex-row gap-4">
                   <div className="flex w-full items-center">
                     <Briefcase className="h-5 w-5 text-gray-300 mx-3" />
                     <Input
@@ -63,6 +78,8 @@ export default function HomePage() {
                       type="search"
                       placeholder="Job title, keyword"
                       className="border-none focus-visible:ring-0 text-base h-12 bg-transparent text-white placeholder:text-gray-300"
+                      value={jobTitle}
+                      onChange={(e) => setJobTitle(e.target.value)}
                     />
                   </div>
                   <Separator orientation="vertical" className="h-8 hidden sm:block bg-white/20" />
@@ -73,6 +90,8 @@ export default function HomePage() {
                       type="search"
                       placeholder="City or zip code"
                       className="border-none focus-visible:ring-0 text-base h-12 bg-transparent text-white placeholder:text-gray-300"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
                     />
                   </div>
                   <Button
@@ -101,6 +120,8 @@ export default function HomePage() {
         <FeaturedJobs />
 
         <WhyChooseUs />
+
+        <VolunteerSection />
 
         <JobCategories />
 
