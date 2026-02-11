@@ -6,95 +6,111 @@ import Header from "@/components/shared/header"
 import Footer from "@/components/shared/footer"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
+import Image from "next/image"
+import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 export default function LoginPage() {
+    const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
+
   return (
-     <div className="flex flex-col min-h-screen bg-background bg-hero-glow">
+     <div className="flex flex-col min-h-screen bg-background">
       <Header />
-      <main className="flex-1 flex items-center justify-center p-4">
-        <Card className="w-full max-w-sm shadow-lg">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Welcome Back</CardTitle>
-            <CardDescription>
-              Sign in to access your account
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <Link href="#" className="ml-auto inline-block text-sm text-primary hover:underline">
-                    Forgot your password?
-                  </Link>
+      <main className="flex-1 flex items-center justify-center p-4 relative">
+        {heroImage && (
+            <Image
+              src={heroImage.imageUrl}
+              alt={heroImage.description}
+              fill
+              className="object-cover z-0"
+              data-ai-hint={heroImage.imageHint}
+            />
+          )}
+        <div className="absolute inset-0 bg-black/60 z-10" />
+        <div className="relative z-20 w-full">
+            <Card className="w-full max-w-md mx-auto shadow-lg">
+            <CardHeader className="text-center">
+                <CardTitle className="text-2xl">Welcome Back</CardTitle>
+                <CardDescription>
+                Sign in to access your account
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <div className="grid gap-4">
+                <div className="grid gap-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                    id="email"
+                    type="email"
+                    placeholder="m@example.com"
+                    required
+                    />
                 </div>
-                <Input id="password" type="password" required />
-              </div>
-              <Button type="submit" className="w-full bg-accent-gradient">
-                Login
-              </Button>
-              <div className="relative my-2">
-                <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t" />
+                <div className="grid gap-2">
+                    <div className="flex items-center">
+                    <Label htmlFor="password">Password</Label>
+                    <Link href="#" className="ml-auto inline-block text-sm text-primary hover:underline">
+                        Forgot your password?
+                    </Link>
+                    </div>
+                    <Input id="password" type="password" required />
                 </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+                <Button type="submit" className="w-full bg-accent-gradient">
+                    Login
+                </Button>
+                <div className="relative my-2">
+                    <div className="absolute inset-0 flex items-center">
+                        <span className="w-full border-t" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                        <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+                    </div>
                 </div>
-              </div>
-              <Button variant="outline" className="w-full">
-                Login with Google
-              </Button>
-            </div>
-            
-            <Separator className="my-6" />
+                <Button variant="outline" className="w-full">
+                    Login with Google
+                </Button>
+                </div>
+                
+                <Separator className="my-6" />
 
-            <Card className="border-dashed bg-secondary/50">
-              <CardHeader>
-                <CardTitle className="text-lg text-center">Demo Accounts</CardTitle>
-                <CardDescription className="text-center">Click a button to log in.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-sm">
-                  <p className="font-bold text-center">Job Seeker</p>
-                  <p className="text-muted-foreground text-xs text-center">Email: seeker@chapelhill.ltd | Pass: password</p>
-                  <Button asChild variant="secondary" className="w-full mt-2">
-                    <Link href="/dashboard">Login as Job Seeker</Link>
-                  </Button>
+                <Card className="border-dashed bg-secondary/50">
+                <CardHeader>
+                    <CardTitle className="text-lg text-center">Demo Accounts</CardTitle>
+                    <CardDescription className="text-center">Click a button to log in.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    <div className="text-sm">
+                    <p className="font-bold text-center">Job Seeker</p>
+                    <p className="text-muted-foreground text-xs text-center">Email: seeker@chapelhill.ltd | Pass: password</p>
+                    <Button asChild variant="secondary" className="w-full mt-2">
+                        <Link href="/dashboard">Login as Job Seeker</Link>
+                    </Button>
+                    </div>
+                    <div className="text-sm">
+                    <p className="font-bold text-center">Employer</p>
+                    <p className="text-muted-foreground text-xs text-center">Email: employer@chapelhill.ltd | Pass: password</p>
+                    <Button asChild variant="secondary" className="w-full mt-2">
+                        <Link href="/employer">Login as Employer</Link>
+                    </Button>
+                    </div>
+                    <div className="text-sm">
+                    <p className="font-bold text-center">Admin</p>
+                    <p className="text-muted-foreground text-xs text-center">Email: admin@chapelhill.ltd | Pass: password</p>
+                    <Button asChild variant="secondary" className="w-full mt-2">
+                        <Link href="/admin">Login as Admin</Link>
+                    </Button>
+                    </div>
+                </CardContent>
+                </Card>
+
+                <div className="mt-6 text-center text-sm">
+                Don&apos;t have an account?{" "}
+                <Link href="/register" className="font-semibold text-primary hover:underline">
+                    Sign Up
+                </Link>
                 </div>
-                <div className="text-sm">
-                  <p className="font-bold text-center">Employer</p>
-                  <p className="text-muted-foreground text-xs text-center">Email: employer@chapelhill.ltd | Pass: password</p>
-                  <Button asChild variant="secondary" className="w-full mt-2">
-                    <Link href="/employer">Login as Employer</Link>
-                  </Button>
-                </div>
-                <div className="text-sm">
-                  <p className="font-bold text-center">Admin</p>
-                  <p className="text-muted-foreground text-xs text-center">Email: admin@chapelhill.ltd | Pass: password</p>
-                   <Button asChild variant="secondary" className="w-full mt-2">
-                    <Link href="/admin">Login as Admin</Link>
-                  </Button>
-                </div>
-              </CardContent>
+            </CardContent>
             </Card>
-
-            <div className="mt-6 text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <Link href="/register" className="font-semibold text-primary hover:underline">
-                Sign Up
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
+        </div>
       </main>
       <Footer />
     </div>
