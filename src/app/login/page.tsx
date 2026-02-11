@@ -30,12 +30,18 @@ export default function LoginPage() {
 
         // Demo logic: redirect based on email
         let destination = '/dashboard'; // Default to job seeker
+        let roleName = 'Job Seeker';
         if (email.toLowerCase().includes('employer')) {
             destination = '/employer';
+            roleName = 'Employer';
+        } else if (email.toLowerCase().includes('admin')) {
+            destination = '/admin';
+            roleName = 'Admin';
         }
 
+
         toast({
-            title: 'Login Successful',
+            title: `Logged in as ${roleName}`,
             description: 'Redirecting to your dashboard...',
             variant: 'vibrant',
         });
