@@ -108,9 +108,9 @@ export default function PricingGrid() {
                 <CardContent className="flex-grow">
                     <div className="text-center mb-8">
                     <span className="font-headline text-5xl font-bold text-white">
-                        {typeof tier.price.monthly === 'number'
-                            ? `GH₵${isYearly ? Math.round(tier.price.yearly / 12) : tier.price.monthly}`
-                            : 'Custom'}
+                      {typeof tier.price.monthly === 'number' && typeof tier.price.yearly === 'number'
+                        ? `GH₵${isYearly ? Math.round(tier.price.yearly / 12) : tier.price.monthly}`
+                        : 'Custom'}
                     </span>
                     <span className="text-gray-200">
                         {typeof tier.price.monthly === 'number' ? '/month' : ''}
