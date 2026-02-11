@@ -9,8 +9,8 @@ import { notFound } from 'next/navigation';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
-export default function CompanyDetailPage({ params }: { params: { id: string } }) {
-  const company = DUMMY_COMPANIES.find((c) => c.id === params.id);
+export default function CompanyDetailPage({ params: { id } }: { params: { id: string } }) {
+  const company = DUMMY_COMPANIES.find((c) => c.id === id);
 
   if (!company) {
     notFound();

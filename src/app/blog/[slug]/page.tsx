@@ -9,8 +9,8 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { CalendarDays, UserCircle } from 'lucide-react';
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = DUMMY_BLOG_POSTS.find((p) => p.slug === params.slug);
+export default function BlogPostPage({ params: { slug } }: { params: { slug: string } }) {
+  const post = DUMMY_BLOG_POSTS.find((p) => p.slug === slug);
 
   if (!post) {
     notFound();

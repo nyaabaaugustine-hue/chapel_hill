@@ -18,12 +18,12 @@ import { useToast } from '@/hooks/use-toast';
 import type { Application, Applicant, User } from '@/lib/types';
 
 
-export default function JobDetailPage({ params }: { params: { id: string } }) {
+export default function JobDetailPage({ params: { id } }: { params: { id: string } }) {
   const { toast } = useToast();
   const [isApplied, setIsApplied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const job = DUMMY_JOBS.find((j) => j.id === params.id);
+  const job = DUMMY_JOBS.find((j) => j.id === id);
 
   const currentUser: User = { 
     id: 'user-john-doe',
