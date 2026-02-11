@@ -1,4 +1,8 @@
+'use client';
+
+import { useState } from 'react';
 import { DUMMY_APPLICANTS, DUMMY_JOBS } from '@/lib/data';
+import type { Applicant } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -15,7 +19,29 @@ import { MoreHorizontal } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+type ApplicantStatus = 'New' | 'Reviewed' | 'Shortlisted' | 'Interview' | 'Offer' | 'Hired' | 'Rejected';
+
 export default function ApplicantsPage() {
+  const [applicants, setApplicants] = useState<Applicant[]>(DUMMY_APPLICANTS);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [jobFilter, setJobFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
+
+  const handleStatusChange = (applicantId: string, newStatus: ApplicantStatus) => {
+    setApplicants(applicants.map(app => 
+      app.id === applicantId ? { ...app, status: newStatus } : app
+    ));
+  };
+
+  const filteredApplicants = applicants
+    .filter(applicant => 
+      applicant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      applicant.email.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter(applicant => jobFilter === 'all' || applicant.jobId === jobFilter)
+    .filter(applicant => statusFilter === 'all' || applicant.status.toLowerCase() === statusFilter);
+
+
   return (
     <div className="space-y-8">
       <div>
@@ -26,9 +52,14 @@ export default function ApplicantsPage() {
       <Card>
         <CardHeader>
           <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-             <Input placeholder="Search applicants..." className="max-w-sm" />
+             <Input 
+                placeholder="Search applicants..." 
+                className="max-w-sm" 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
              <div className="flex gap-4">
-                 <Select>
+                 <Select value={jobFilter} onValueChange={setJobFilter}>
                     <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Filter by job" />
                     </SelectTrigger>
@@ -39,7 +70,7 @@ export default function ApplicantsPage() {
                         ))}
                     </SelectContent>
                 </Select>
-                 <Select>
+                 <Select value={statusFilter} onValueChange={setStatusFilter}>
                     <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Filter by status" />
                     </SelectTrigger>
@@ -66,7 +97,7 @@ export default function ApplicantsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {DUMMY_APPLICANTS.map((applicant) => {
+              {filteredApplicants.map((applicant) => {
                 const job = DUMMY_JOBS.find((j) => j.id === applicant.jobId);
                 const avatar = PlaceHolderImages.find((p) => p.id === applicant.avatar);
                 return (
@@ -91,7 +122,10 @@ export default function ApplicantsPage() {
                       </Badge>
                     </TableCell>
                     <TableCell>
-                       <Select defaultValue={applicant.status}>
+                       <Select 
+                          value={applicant.status}
+                          onValueChange={(newStatus) => handleStatusChange(applicant.id, newStatus as ApplicantStatus)}
+                        >
                         <SelectTrigger className="w-[120px] text-xs h-8">
                             <SelectValue />
                         </SelectTrigger>

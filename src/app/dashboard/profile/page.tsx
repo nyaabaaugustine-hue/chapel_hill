@@ -1,14 +1,57 @@
 'use client';
 
+import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Upload, PlusCircle, Linkedin, Trash2, Save } from "lucide-react"
+import { Upload, PlusCircle, Linkedin, Trash2, Save, X } from "lucide-react"
+
+// Mock data types for state
+type Experience = { id: number; title: string; company: string; period: string; description: string; };
+type Education = { id: number; institution: string; degree: string; period: string; };
 
 export default function ProfilePage() {
+  const [fullName, setFullName] = useState('John Doe');
+  const [headline, setHeadline] = useState('Senior React Developer at Innovate Inc.');
+  const [summary, setSummary] = useState('Experienced React developer with 5 years in frontend development, specializing in TypeScript, Next.js, and state management with Redux. Proven ability to lead small teams and deliver high-quality web applications.');
+  
+  const [skills, setSkills] = useState(['React', 'TypeScript', 'Next.js', 'Node.js', 'GraphQL', 'JavaScript', 'Redux']);
+  const [skillInput, setSkillInput] = useState('');
+
+  const [experiences, setExperiences] = useState<Experience[]>([
+    { id: 1, title: 'Senior React Developer', company: 'Innovate Inc. · Full-time', period: 'Jan 2021 - Present · 3 yrs 5 mos', description: 'Led the development of a new client-facing dashboard using Next.js and TypeScript.' }
+  ]);
+  
+  const [educations, setEducations] = useState<Education[]>([
+    { id: 1, institution: 'University of Technology', degree: 'Bachelor of Science, Computer Science', period: '2014 - 2018' }
+  ]);
+
+  const handleAddSkill = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && skillInput.trim() !== '' && !skills.includes(skillInput.trim())) {
+      setSkills([...skills, skillInput.trim()]);
+      setSkillInput('');
+    }
+  };
+
+  const handleRemoveSkill = (skillToRemove: string) => {
+    setSkills(skills.filter(skill => skill !== skillToRemove));
+  };
+  
+  const handleSaveProfile = () => {
+    console.log('Saving profile:', {
+      fullName,
+      headline,
+      summary,
+      skills,
+      experiences,
+      educations,
+    });
+    // Here you would typically call an API to save the data
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -27,7 +70,7 @@ export default function ProfilePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="fullName">Full Name</Label>
-                  <Input id="fullName" defaultValue="John Doe" />
+                  <Input id="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address</Label>
@@ -36,11 +79,11 @@ export default function ProfilePage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="headline">Headline</Label>
-                <Input id="headline" placeholder="e.g., Senior React Developer at Innovate Inc." defaultValue="Senior React Developer at Innovate Inc."/>
+                <Input id="headline" placeholder="e.g., Senior React Developer at Innovate Inc." value={headline} onChange={(e) => setHeadline(e.target.value)} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="summary">Professional Summary</Label>
-                <Textarea id="summary" placeholder="Write a brief summary about yourself..." rows={5} defaultValue="Experienced React developer with 5 years in frontend development, specializing in TypeScript, Next.js, and state management with Redux. Proven ability to lead small teams and deliver high-quality web applications."/>
+                <Textarea id="summary" placeholder="Write a brief summary about yourself..." rows={5} value={summary} onChange={(e) => setSummary(e.target.value)} />
               </div>
             </CardContent>
           </Card>
@@ -54,15 +97,17 @@ export default function ProfilePage() {
               <Button variant="outline" size="sm"><PlusCircle className="mr-2 h-4 w-4" /> Add Experience</Button>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-4 rounded-md border p-4 relative group">
-                  <div className="flex-1 space-y-1">
-                      <h4 className="font-semibold">Senior React Developer</h4>
-                      <p className="text-sm">Innovate Inc. · Full-time</p>
-                      <p className="text-xs text-muted-foreground">Jan 2021 - Present · 3 yrs 5 mos</p>
-                      <p className="text-sm text-muted-foreground mt-2">Led the development of a new client-facing dashboard using Next.js and TypeScript.</p>
-                  </div>
-                   <Button variant="ghost" size="icon" className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 className="h-4 w-4 text-destructive" /></Button>
-              </div>
+              {experiences.map(exp => (
+                <div key={exp.id} className="flex gap-4 rounded-md border p-4 relative group">
+                    <div className="flex-1 space-y-1">
+                        <h4 className="font-semibold">{exp.title}</h4>
+                        <p className="text-sm">{exp.company}</p>
+                        <p className="text-xs text-muted-foreground">{exp.period}</p>
+                        <p className="text-sm text-muted-foreground mt-2">{exp.description}</p>
+                    </div>
+                     <Button variant="ghost" size="icon" className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                </div>
+              ))}
             </CardContent>
           </Card>
 
@@ -75,14 +120,16 @@ export default function ProfilePage() {
               <Button variant="outline" size="sm"><PlusCircle className="mr-2 h-4 w-4" /> Add Education</Button>
             </CardHeader>
             <CardContent className="space-y-4">
-               <div className="flex gap-4 rounded-md border p-4 relative group">
-                  <div className="flex-1 space-y-1">
-                      <h4 className="font-semibold">University of Technology</h4>
-                      <p className="text-sm">Bachelor of Science, Computer Science</p>
-                      <p className="text-xs text-muted-foreground">2014 - 2018</p>
-                  </div>
-                   <Button variant="ghost" size="icon" className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 className="h-4 w-4 text-destructive" /></Button>
-              </div>
+              {educations.map(edu => (
+                <div key={edu.id} className="flex gap-4 rounded-md border p-4 relative group">
+                    <div className="flex-1 space-y-1">
+                        <h4 className="font-semibold">{edu.institution}</h4>
+                        <p className="text-sm">{edu.degree}</p>
+                        <p className="text-xs text-muted-foreground">{edu.period}</p>
+                    </div>
+                    <Button variant="ghost" size="icon" className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                </div>
+              ))}
             </CardContent>
           </Card>
 
@@ -92,12 +139,20 @@ export default function ProfilePage() {
               <CardDescription>Highlight your key skills to stand out.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-                <Input placeholder="Add a skill (e.g., TypeScript) and press Enter" />
+                <Input 
+                  placeholder="Add a skill (e.g., TypeScript) and press Enter" 
+                  value={skillInput}
+                  onChange={(e) => setSkillInput(e.target.value)}
+                  onKeyDown={handleAddSkill}
+                />
                 <div className="flex flex-wrap gap-2">
-                    {['React', 'TypeScript', 'Next.js', 'Node.js', 'GraphQL', 'JavaScript', 'Redux'].map(skill => (
+                    {skills.map(skill => (
                       <Badge key={skill} variant="secondary" className="group relative pr-7">
                         {skill} 
-                        <button className="absolute right-1 top-1/2 -translate-y-1/2 rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity bg-muted-foreground/20 hover:bg-muted-foreground/40">
+                        <button 
+                          onClick={() => handleRemoveSkill(skill)}
+                          className="absolute right-1 top-1/2 -translate-y-1/2 rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity bg-muted-foreground/20 hover:bg-muted-foreground/40"
+                        >
                           <X className="h-3 w-3 text-muted-foreground"/>
                         </button>
                       </Badge>
@@ -130,7 +185,7 @@ export default function ProfilePage() {
                 </CardContent>
             </Card>
              <div className="lg:col-span-3">
-                <Button size="lg" className="w-full bg-accent-gradient">
+                <Button size="lg" className="w-full bg-accent-gradient" onClick={handleSaveProfile}>
                   <Save className="mr-2 h-4 w-4" /> Save Profile
                 </Button>
             </div>
