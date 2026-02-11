@@ -72,7 +72,7 @@ export default function ContactsPage() {
                             <Mail className="h-6 w-6 text-primary mt-1" />
                             <div>
                                 <h4 className="font-semibold">Email Us</h4>
-                                <p className="text-muted-foreground">support@chapelhill.com</p>
+                                <p className="text-muted-foreground">support@chapelhill.ltd</p>
                             </div>
                         </div>
                     </CardContent>

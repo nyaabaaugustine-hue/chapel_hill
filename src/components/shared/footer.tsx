@@ -43,7 +43,7 @@ export default function Footer() {
           <div className="md:col-span-12 lg:col-span-4">
             <Logo />
             <p className="mt-4 text-sm text-muted-foreground">
-              Chapel Hill is the heart of the professional community and the best resource to discover and connect with talent and jobs worldwide.
+              Chapel Hill Ltd is the heart of the professional community and the best resource to discover and connect with talent and jobs worldwide.
             </p>
             <div className="mt-6 flex space-x-2">
               <Button variant="ghost" size="icon" asChild>
@@ -85,7 +85,7 @@ export default function Footer() {
         </div>
         <div className="mt-12 border-t border-foreground/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
           <p className="text-center md:text-left mb-4 md:mb-0">
-            &copy; 2026 Chapel Hill. All rights reserved. Developed By TGNE Solutions - Tema.
+            &copy; 2026 Chapel Hill Ltd. All rights reserved. Developed By TGNE Solutions - Tema.
           </p>
           <div className='flex gap-4'>
              <Link href="#" className="hover:text-primary">Terms & Conditions</Link>

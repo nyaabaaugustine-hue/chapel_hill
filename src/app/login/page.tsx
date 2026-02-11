@@ -65,21 +65,21 @@ export default function LoginPage() {
               <CardContent className="space-y-4">
                 <div className="text-sm">
                   <p className="font-bold text-center">Job Seeker</p>
-                  <p className="text-muted-foreground text-xs text-center">Email: seeker@reacthire.com | Pass: password</p>
+                  <p className="text-muted-foreground text-xs text-center">Email: seeker@chapelhill.ltd | Pass: password</p>
                   <Button asChild variant="secondary" className="w-full mt-2">
                     <Link href="/dashboard">Login as Job Seeker</Link>
                   </Button>
                 </div>
                 <div className="text-sm">
                   <p className="font-bold text-center">Employer</p>
-                  <p className="text-muted-foreground text-xs text-center">Email: employer@reacthire.com | Pass: password</p>
+                  <p className="text-muted-foreground text-xs text-center">Email: employer@chapelhill.ltd | Pass: password</p>
                   <Button asChild variant="secondary" className="w-full mt-2">
                     <Link href="/employer">Login as Employer</Link>
                   </Button>
                 </div>
                 <div className="text-sm">
                   <p className="font-bold text-center">Admin</p>
-                  <p className="text-muted-foreground text-xs text-center">Email: admin@reacthire.com | Pass: password</p>
+                  <p className="text-muted-foreground text-xs text-center">Email: admin@chapelhill.ltd | Pass: password</p>
                    <Button asChild variant="secondary" className="w-full mt-2">
                     <Link href="/admin">Login as Admin</Link>
                   </Button>

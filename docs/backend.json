@@ -4,7 +4,7 @@
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "User",
       "type": "object",
-      "description": "Represents a user of the ReactHire platform.",
+      "description": "Represents a user of the Chapel Hill Ltd platform.",
       "properties": {
         "id": {
           "type": "string",
@@ -123,6 +123,6 @@
         }
       }
     ],
-    "reasoning": "The Firestore structure is designed to provide a secure, scalable, and debuggable solution for the ReactHire application, adhering to the principles of Authorization Independence, Clarity of Intent, DBAC, and QAPs. Authorization Independence is achieved through denormalization, where relevant authorization data (e.g., admin status) is copied into documents requiring access control. Structural Segregation is applied by separating user data and admin roles into distinct collections with homogeneous security postures. Access Modeling relies on path-based ownership for user-related data and existence checks for global admin roles. The structure is designed to ensure data clarity and predictability, using explicit state modeling and consistent naming conventions.\n\nSpecifically, the `users` collection stores user profiles. The `roles_admin` collection determines admin status based on document existence.  This design supports QAPs by enabling secure list operations. Admin status is determined by the existence of a document in `/roles_admin/{userId}`, enabling secure listing of all users.\n\nThis structure avoids hierarchical authorization dependencies (`get()` calls in rules), ensuring atomic operations and simplifying debugging. All authorization relies solely on `request.auth.uid` and database existence checks."
+    "reasoning": "The Firestore structure is designed to provide a secure, scalable, and debuggable solution for the Chapel Hill Ltd application, adhering to the principles of Authorization Independence, Clarity of Intent, DBAC, and QAPs. Authorization Independence is achieved through denormalization, where relevant authorization data (e.g., admin status) is copied into documents requiring access control. Structural Segregation is applied by separating user data and admin roles into distinct collections with homogeneous security postures. Access Modeling relies on path-based ownership for user-related data and existence checks for global admin roles. The structure is designed to ensure data clarity and predictability, using explicit state modeling and consistent naming conventions.\n\nSpecifically, the `users` collection stores user profiles. The `roles_admin` collection determines admin status based on document existence.  This design supports QAPs by enabling secure list operations. Admin status is determined by the existence of a document in `/roles_admin/{userId}`, enabling secure listing of all users.\n\nThis structure avoids hierarchical authorization dependencies (`get()` calls in rules), ensuring atomic operations and simplifying debugging. All authorization relies solely on `request.auth.uid` and database existence checks."
   }
 }
