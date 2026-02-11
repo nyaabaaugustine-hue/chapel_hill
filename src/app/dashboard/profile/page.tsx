@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Upload, PlusCircle, Linkedin, Trash2, Save, X } from "lucide-react"
+import { Upload, PlusCircle, Linkedin, Trash2, Save, X, UserCircle, Briefcase, GraduationCap, Wand2, FileText } from "lucide-react"
 
 // Mock data types for state
 type Experience = { id: number; title: string; company: string; period: string; description: string; };
@@ -63,7 +63,7 @@ export default function ProfilePage() {
         <div className="lg:col-span-2 space-y-8">
           <Card>
             <CardHeader>
-              <CardTitle>Personal Information</CardTitle>
+              <CardTitle className="flex items-center gap-2"><UserCircle /> Personal Information</CardTitle>
               <CardDescription>This information will be visible to employers.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -91,7 +91,7 @@ export default function ProfilePage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
-                <CardTitle>Work Experience</CardTitle>
+                <CardTitle className="flex items-center gap-2"><Briefcase /> Work Experience</CardTitle>
                 <CardDescription>Detail your professional journey.</CardDescription>
               </div>
               <Button variant="outline" size="sm"><PlusCircle className="mr-2 h-4 w-4" /> Add Experience</Button>
@@ -114,7 +114,7 @@ export default function ProfilePage() {
            <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
-                <CardTitle>Education</CardTitle>
+                <CardTitle className="flex items-center gap-2"><GraduationCap /> Education</CardTitle>
                 <CardDescription>Your educational background.</CardDescription>
               </div>
               <Button variant="outline" size="sm"><PlusCircle className="mr-2 h-4 w-4" /> Add Education</Button>
@@ -135,7 +135,7 @@ export default function ProfilePage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Skills</CardTitle>
+              <CardTitle className="flex items-center gap-2"><Wand2 /> Skills</CardTitle>
               <CardDescription>Highlight your key skills to stand out.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -165,7 +165,7 @@ export default function ProfilePage() {
         <div className="space-y-8 lg:sticky lg:top-24 self-start">
             <Card>
                 <CardHeader>
-                    <CardTitle>Resume</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><FileText /> Resume</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-lg">
@@ -178,10 +178,10 @@ export default function ProfilePage() {
             </Card>
             <Card>
                 <CardHeader>
-                    <CardTitle>Import Profile</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><Linkedin /> Import Profile</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <Button variant="outline" className="w-full"><Linkedin className="mr-2 h-4 w-4"/> Import from LinkedIn</Button>
+                    <Button variant="outline" className="w-full">Import from LinkedIn</Button>
                 </CardContent>
             </Card>
              <div className="lg:col-span-3">

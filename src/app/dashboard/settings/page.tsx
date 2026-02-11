@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
-import { Save, Bell, EyeOff, Lock, Trash2 } from "lucide-react";
+import { Save, Bell, EyeOff, Lock, Trash2, UserCircle } from "lucide-react";
 
 export default function CandidateSettingsPage() {
   return (
@@ -20,7 +20,7 @@ export default function CandidateSettingsPage() {
         <div className="md:col-span-2 space-y-8">
           <Card>
             <CardHeader>
-              <CardTitle>Account Information</CardTitle>
+              <CardTitle className="flex items-center gap-2"><UserCircle /> Account Information</CardTitle>
               <CardDescription>Update your personal details.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -119,7 +119,7 @@ export default function CandidateSettingsPage() {
                 </CardContent>
             </Card>
 
-             <Button size="lg" className="w-full">
+             <Button size="lg" className="w-full bg-accent-gradient">
               <Save className="mr-2 h-4 w-4" /> Save All Changes
             </Button>
         </div>
