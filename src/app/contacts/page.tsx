@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin } from "lucide-react"
 import PageHero from '@/components/shared/page-hero';
+import ContactMap from './components/contact-map';
 
 export default function ContactsPage() {
   return (
@@ -17,7 +18,8 @@ export default function ContactsPage() {
         subtitle="We'd love to hear from you. Fill out the form below or use our contact details."
       />
       <main className="flex-1 py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6 space-y-12">
+          <ContactMap />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <Card className="shadow-lg">
               <CardHeader>
@@ -95,3 +97,5 @@ export default function ContactsPage() {
     </div>
   );
 }
+
+    

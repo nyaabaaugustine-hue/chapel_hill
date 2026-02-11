@@ -497,6 +497,12 @@
       "description": "Modern office interior with plants.",
       "imageUrl": "https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxvZmZpY2UlMjBsaWZlfGVufDB8fHx8MTc3MTI2MTM0NHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "office life"
+    },
+    {
+      "id": "contact-map",
+      "description": "A vibrant, stylized map of a city showing streets and locations.",
+      "imageUrl": "https://images.unsplash.com/photo-1717700299581-c2fc3fad4ee8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaXR5JTIwbWFwfGVufDB8fHx8MTc3MDgxNDA5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "city map"
     }
   ]
 }
