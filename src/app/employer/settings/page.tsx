@@ -3,30 +3,40 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building, Users, CreditCard, Bell, UserPlus } from 'lucide-react';
+import { Building, Users, CreditCard, Bell, UserPlus, Download, PlusCircle } from 'lucide-react';
 import { DUMMY_USERS } from '@/lib/data';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 
 const teamMembers = DUMMY_USERS.slice(1, 4).map(u => ({ ...u, role: 'Hiring Manager' }));
 
+const transactions = [
+    { id: 'inv_1', amount: 'GH₵500', date: 'May 15, 2024', status: 'Paid', description: 'Pro Plan Subscription' },
+    { id: 'inv_2', amount: 'GH₵500', date: 'April 15, 2024', status: 'Paid', description: 'Pro Plan Subscription' },
+    { id: 'inv_3', amount: 'GH₵150', date: 'April 10, 2024', status: 'Paid', description: 'Featured Job Post' },
+    { id: 'inv_4', amount: 'GH₵500', date: 'March 15, 2024', status: 'Paid', description: 'Pro Plan Subscription' },
+];
+
+
 export default function EmployerSettingsPage() {
   const searchParams = useSearchParams();
-  const tab = searchParams.get('tab') || 'profile';
+  const tab = searchParams.get('tab') || 'billing';
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="font-headline text-3xl font-bold">Settings</CardTitle>
-        <CardDescription>Manage your employer account and notification preferences.</CardDescription>
-      </CardHeader>
-      <CardContent>
-       <Tabs value={tab} defaultValue={tab} className="space-y-6">
-        <TabsList>
+    <div className="space-y-8">
+       <div>
+        <h1 className="font-headline text-3xl font-bold">Settings</h1>
+        <p className="text-muted-foreground">Manage your employer account and notification preferences.</p>
+      </div>
+
+       <Tabs value={tab} defaultValue={tab} className="w-full">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
             <TabsTrigger value="profile"><Building className="mr-2"/> Company Profile</TabsTrigger>
             <TabsTrigger value="team"><Users className="mr-2"/> Team</TabsTrigger>
             <TabsTrigger value="billing"><CreditCard className="mr-2"/> Billing</TabsTrigger>
@@ -87,33 +97,86 @@ export default function EmployerSettingsPage() {
         <TabsContent value="billing">
             <Card>
                 <CardHeader>
-                    <CardTitle>Billing</CardTitle>
-                    <CardDescription>Manage your subscription and payment methods.</CardDescription>
+                    <CardTitle>Billing & Subscription</CardTitle>
+                    <CardDescription>Manage your plan, payment methods, and view your billing history.</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                    <Card className="bg-secondary/50">
-                        <CardHeader className="flex flex-row items-center justify-between">
+                <CardContent className="space-y-8">
+                    {/* Current Plan Card */}
+                    <Card className="bg-primary/10 border-primary/20">
+                        <CardHeader className="flex flex-row items-start justify-between">
                             <div>
-                                <CardTitle className="text-lg">Pro Plan</CardTitle>
-                                <CardDescription>Billed at GH₵500/month</CardDescription>
+                                <CardTitle className="flex items-center gap-2 text-primary">
+                                    <Badge variant="outline" className="text-primary border-primary bg-background">Pro Plan</Badge>
+                                </CardTitle>
+                                <CardDescription className="text-primary/80 mt-1">Your current subscription</CardDescription>
                             </div>
-                            <Button variant="outline">Change Plan</Button>
-                        </CardHeader>
-                         <CardContent>
-                            <p className="text-sm text-muted-foreground">Your plan renews on June 15, 2024.</p>
-                        </CardContent>
-                    </Card>
-                     <Card>
-                        <CardHeader>
-                            <CardTitle>Payment Method</CardTitle>
+                            <Button asChild variant="outline" className="bg-background">
+                                <Link href="/pricing">Change Plan</Link>
+                            </Button>
                         </CardHeader>
                         <CardContent>
-                             <div className="flex items-center justify-between p-4 border rounded-lg">
-                                <p>Visa ending in 4242</p>
-                                <Button variant="outline" size="sm">Update</Button>
+                            <div className="flex items-baseline gap-2">
+                                <p className="text-4xl font-bold">GH₵500</p>
+                                <p className="text-muted-foreground">/ month</p>
                             </div>
+                            <p className="text-sm text-muted-foreground mt-2">Your plan renews on June 15, 2024.</p>
                         </CardContent>
                     </Card>
+
+                    {/* Payment Method & History */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* Payment Method */}
+                        <div className="space-y-4">
+                            <h3 className="font-semibold">Payment Method</h3>
+                            <Card>
+                                <CardContent className="p-4 flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <CreditCard className="h-8 w-8 text-muted-foreground" />
+                                        <div>
+                                            <p className="font-semibold">Visa ending in 4242</p>
+                                            <p className="text-sm text-muted-foreground">Expires 12/2026</p>
+                                        </div>
+                                    </div>
+                                    <Button variant="ghost" size="sm">Update</Button>
+                                </CardContent>
+                            </Card>
+                            <Button variant="outline" className="w-full">
+                                <PlusCircle className="mr-2"/> Add New Payment Method
+                            </Button>
+                        </div>
+                        {/* Billing History */}
+                        <div className="space-y-4">
+                            <h3 className="font-semibold">Billing History</h3>
+                            <Card>
+                                <CardContent className="p-0">
+                                    <Table>
+                                        <TableHeader>
+                                            <TableRow>
+                                                <TableHead>Description</TableHead>
+                                                <TableHead>Amount</TableHead>
+                                                <TableHead className="text-right">Date</TableHead>
+                                                <TableHead><span className="sr-only">Download</span></TableHead>
+                                            </TableRow>
+                                        </TableHeader>
+                                        <TableBody>
+                                            {transactions.map(txn => (
+                                                <TableRow key={txn.id}>
+                                                    <TableCell className="font-medium">{txn.description}</TableCell>
+                                                    <TableCell>{txn.amount}</TableCell>
+                                                    <TableCell className="text-right">{txn.date}</TableCell>
+                                                    <TableCell className="text-right">
+                                                        <Button variant="ghost" size="icon">
+                                                            <Download className="h-4 w-4" />
+                                                        </Button>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    </div>
                 </CardContent>
             </Card>
         </TabsContent>
@@ -151,7 +214,6 @@ export default function EmployerSettingsPage() {
         </TabsContent>
 
       </Tabs>
-      </CardContent>
-    </Card>
+    </div>
   );
 }
