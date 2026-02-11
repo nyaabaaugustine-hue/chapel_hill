@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,12 +19,12 @@ export default function EmployerSettingsPage() {
   const tab = searchParams.get('tab') || 'profile';
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="font-headline text-3xl font-bold">Settings</h1>
-        <p className="text-muted-foreground">Manage your employer account and notification preferences.</p>
-      </div>
-
+    <Card>
+      <CardHeader>
+        <CardTitle className="font-headline text-3xl font-bold">Settings</CardTitle>
+        <CardDescription>Manage your employer account and notification preferences.</CardDescription>
+      </CardHeader>
+      <CardContent>
        <Tabs value={tab} defaultValue={tab} className="space-y-6">
         <TabsList>
             <TabsTrigger value="profile"><Building className="mr-2"/> Company Profile</TabsTrigger>
@@ -152,6 +151,7 @@ export default function EmployerSettingsPage() {
         </TabsContent>
 
       </Tabs>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

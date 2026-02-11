@@ -97,35 +97,28 @@ export default function EmployerJobsPage() {
 
   return (
     <div className="space-y-8">
-       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="font-headline text-3xl font-bold">My Job Listings</h1>
-          <p className="text-muted-foreground">Manage all jobs you have posted.</p>
-        </div>
-        <Button asChild className="bg-accent-gradient">
-            <Link href="/employer/jobs/new">
-                <PlusCircle className="mr-2 h-4 w-4" />
-                Post a New Job
-            </Link>
-        </Button>
-      </div>
-      
       <Card>
-        <CardHeader>
-           <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-            <div>
-              <CardTitle>All Jobs</CardTitle>
-              <CardDescription>A list of all your company's active and expired job listings.</CardDescription>
+        <CardHeader className="flex flex-row items-center justify-between">
+           <div>
+              <CardTitle className="font-headline text-3xl font-bold">My Job Listings</CardTitle>
+              <CardDescription className="mt-2">Manage all jobs you have posted.</CardDescription>
             </div>
-             <Input 
-                placeholder="Search by job title..." 
-                className="max-w-sm" 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-          </div>
+            <Button asChild className="bg-accent-gradient">
+                <Link href="/employer/jobs/new">
+                    <PlusCircle className="mr-2 h-4 w-4" />
+                    Post a New Job
+                </Link>
+            </Button>
         </CardHeader>
          <CardContent>
+             <div className="mb-4">
+                <Input 
+                    placeholder="Search by job title..." 
+                    className="max-w-sm" 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
           <Table>
             <TableHeader>
               <TableRow>
