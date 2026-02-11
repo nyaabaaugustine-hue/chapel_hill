@@ -22,7 +22,7 @@ const mockEducation = [
 
 const mockSkills = ['React', 'TypeScript', 'Next.js', 'Node.js', 'GraphQL', 'JavaScript', 'Redux', 'Tailwind CSS', 'Figma', 'CI/CD'];
 
-export default function CandidateProfilePage({ params }: { params: { id: string } }) {
+export default async function CandidateProfilePage({ params }: { params: { id: string } }) {
   const user = DUMMY_USERS.find((u) => u.id === params.id);
 
   if (!user) {
