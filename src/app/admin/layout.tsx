@@ -15,6 +15,7 @@ import {
   Shield,
   Users,
   Wallet,
+  PenSquare,
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -54,6 +55,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { href: '/admin/users', label: 'Users', icon: <Users /> },
         { href: '/admin/jobs', label: 'Jobs', icon: <Briefcase /> },
         { href: '/admin/companies', label: 'Companies', icon: <Building /> },
+        { href: '/admin/blog', label: 'Blog', icon: <PenSquare /> },
         { href: '/admin/financials', label: 'Financials', icon: <Wallet /> },
       ],
     },
@@ -114,7 +116,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </SidebarFooter>
         </Sidebar>
         <SidebarInset>
-             <main className="flex-1 p-4 sm:p-6 lg:p-8">
+             <main className="flex-1 p-4 sm:p-6 lg:p-8 bg-secondary/50">
                 {children}
             </main>
         </SidebarInset>
