@@ -9,10 +9,12 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building, Users, CreditCard, Bell, UserPlus, Download, PlusCircle } from 'lucide-react';
+import { Building, Users, CreditCard, Bell, UserPlus, Download, PlusCircle, Save, ScrollArea, FileText, Clock, MessageSquare, Wallet as WalletIcon } from 'lucide-react';
 import { DUMMY_USERS } from '@/lib/data';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+import React from 'react';
+import { cn } from '@/lib/utils';
+
 
 const teamMembers = DUMMY_USERS.slice(1, 4).map(u => ({ ...u, role: 'Hiring Manager' }));
 
@@ -22,6 +24,30 @@ const transactions = [
     { id: 'inv_3', amount: 'GH₵150', date: 'April 10, 2024', status: 'Paid', description: 'Featured Job Post' },
     { id: 'inv_4', amount: 'GH₵500', date: 'March 15, 2024', status: 'Paid', description: 'Pro Plan Subscription' },
 ];
+
+const notificationSettings = [
+  { id: 'new-applicant', icon: FileText, title: 'New Applicant Alert', description: 'Receive an email for every new application.', defaultChecked: true, color: 'blue' },
+  { id: 'weekly-summary', icon: Bell, title: 'Weekly Applicant Summary', description: 'Get a weekly digest of all new applicants.', defaultChecked: false, color: 'purple' },
+  { id: 'message-alert', icon: MessageSquare, title: 'New Message Alert', description: 'Get notified when a candidate sends you a message.', defaultChecked: true, color: 'green' },
+  { id: 'expiration-warning', icon: Clock, title: 'Job Expiration Warning', description: 'Get a warning 3 days before a job post expires.', defaultChecked: true, color: 'yellow' },
+  { id: 'billing-reminder', icon: WalletIcon, title: 'Billing Reminders', description: 'Receive reminders for upcoming subscription payments.', defaultChecked: false, color: 'orange' },
+];
+
+const recentNotifications = [
+    { id: '1', icon: FileText, text: "New application for 'Senior React Developer'", time: '15 minutes ago', color: 'blue' },
+    { id: '2', icon: MessageSquare, text: "New message from candidate Ama Serwaa", time: '1 hour ago', color: 'green' },
+    { id: '3', icon: Clock, text: "Your job 'UI/UX Designer' will expire in 3 days.", time: '4 hours ago', color: 'yellow' },
+    { id: '4', icon: FileText, text: "New application for 'Full-stack Engineer'", time: '8 hours ago', color: 'blue' },
+    { id: '5', icon: WalletIcon, text: "Your Pro Plan subscription has been renewed.", time: '1 day ago', color: 'orange' },
+];
+
+const colorClasses = {
+    blue: { bg: 'bg-blue-500/10', text: 'text-blue-500' },
+    purple: { bg: 'bg-purple-500/10', text: 'text-purple-500' },
+    green: { bg: 'bg-green-500/10', text: 'text-green-500' },
+    yellow: { bg: 'bg-yellow-500/10', text: 'text-yellow-600' },
+    orange: { bg: 'bg-orange-500/10', text: 'text-orange-500' },
+};
 
 
 export default function EmployerSettingsPage() {
@@ -182,35 +208,70 @@ export default function EmployerSettingsPage() {
         </TabsContent>
 
         <TabsContent value="notifications">
-            <Card>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <div className="lg:col-span-2">
+              <Card>
                 <CardHeader>
-                    <CardTitle>Notification Settings</CardTitle>
-                    <CardDescription>Control how you receive notifications from the platform.</CardDescription>
+                  <CardTitle>Notification Preferences</CardTitle>
+                  <CardDescription>Select which email notifications you should receive.</CardDescription>
                 </CardHeader>
-                 <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between rounded-lg border p-4">
-                        <div>
-                        <Label htmlFor="new-applicant">New Applicant Alert</Label>
-                        <p className="text-xs text-muted-foreground">Receive an email for every new application to your jobs.</p>
+                <CardContent className="divide-y divide-border">
+                  {notificationSettings.map((setting) => {
+                    const colors = colorClasses[setting.color as keyof typeof colorClasses] || colorClasses.blue;
+                    return (
+                      <div key={setting.id} className="py-4 flex items-center gap-4">
+                        <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-lg", colors.bg)}>
+                          <setting.icon className={cn("h-5 w-5", colors.text)} />
                         </div>
-                        <Switch id="new-applicant" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between rounded-lg border p-4">
-                        <div>
-                        <Label htmlFor="weekly-summary">Weekly Applicant Summary</Label>
-                        <p className="text-xs text-muted-foreground">Get a weekly digest of all new applicants.</p>
+                        <div className="flex-1">
+                          <Label htmlFor={setting.id} className="font-semibold">{setting.title}</Label>
+                          <p className="text-sm text-muted-foreground">{setting.description}</p>
                         </div>
-                        <Switch id="weekly-summary" />
-                    </div>
-                    <div className="flex items-center justify-between rounded-lg border p-4">
-                        <div>
-                        <Label htmlFor="message-alert">New Message Alert</Label>
-                        <p className="text-xs text-muted-foreground">Get notified when a candidate sends you a message.</p>
+                        <Switch id={setting.id} defaultChecked={setting.defaultChecked} />
+                      </div>
+                    )
+                  })}
+                </CardContent>
+                <CardFooter className="border-t pt-6 justify-end">
+                  <Button><Save className="mr-2 h-4 w-4" /> Save Preferences</Button>
+                </CardFooter>
+              </Card>
+            </div>
+            
+            <div>
+              <Card className="h-full flex flex-col">
+                <CardHeader>
+                  <CardTitle>Recent Notification Log</CardTitle>
+                  <CardDescription>A stream of your latest notifications.</CardDescription>
+                </CardHeader>
+                <CardContent className="flex-1 p-0">
+                  <ScrollArea className="h-[450px]">
+                    <div className="p-6">
+                      <div className="relative">
+                        <div className="absolute left-4 top-1 h-full w-px bg-border -z-10"></div>
+                        <div className="space-y-8">
+                          {recentNotifications.map((notification) => {
+                            const colors = colorClasses[notification.color as keyof typeof colorClasses] || colorClasses.blue;
+                            return (
+                              <div key={notification.id} className="flex items-start gap-4 relative">
+                                <div className={cn("flex h-8 w-8 items-center justify-center rounded-full z-10 ring-4 ring-background", colors.bg)}>
+                                  {React.createElement(notification.icon, { className: cn("h-4 w-4", colors.text) })}
+                                </div>
+                                <div className="flex-1 pt-1">
+                                  <p className="text-sm font-medium">{notification.text}</p>
+                                  <p className="text-xs text-muted-foreground">{notification.time}</p>
+                                </div>
+                              </div>
+                            )
+                          })}
                         </div>
-                        <Switch id="message-alert" defaultChecked />
+                      </div>
                     </div>
-                 </CardContent>
-            </Card>
+                  </ScrollArea>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </TabsContent>
 
       </Tabs>
