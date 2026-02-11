@@ -20,6 +20,17 @@ import { MoreHorizontal, PlusCircle, User as UserIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 
 export default function AdminUsersPage() {
   const [users, setUsers] = useState<User[]>(DUMMY_USERS);
@@ -63,10 +74,61 @@ export default function AdminUsersPage() {
           <h1 className="font-headline text-3xl font-bold">User Management</h1>
           <p className="text-muted-foreground">Manage all users on the platform.</p>
         </div>
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Add New User
-        </Button>
+         <Dialog>
+          <DialogTrigger asChild>
+            <Button>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Add New User
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-lg">
+            <DialogHeader>
+              <DialogTitle>Add New User</DialogTitle>
+              <DialogDescription>
+                Fill in the details below to create a new user account.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="firstName">First Name</Label>
+                  <Input id="firstName" placeholder="John" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input id="lastName" placeholder="Doe" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" type="email" placeholder="john.doe@example.com" />
+              </div>
+               <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input id="password" type="password" placeholder="Create a strong password" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="role">Role</Label>
+                <Select>
+                  <SelectTrigger id="role">
+                    <SelectValue placeholder="Select a role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="jobSeeker">Job Seeker</SelectItem>
+                    <SelectItem value="employer">Employer</SelectItem>
+                    <SelectItem value="admin">Admin</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button type="button" variant="outline">Cancel</Button>
+              </DialogClose>
+              <Button type="submit">Create User</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <Card>
@@ -114,12 +176,12 @@ export default function AdminUsersPage() {
                 <div className="mt-6 w-full flex-1 flex flex-col justify-end">
                     <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
                         <span>Joined: {new Date('2023-01-15').toLocaleDateString()}</span>
-                        <div className="flex items-center gap-1.5 text-emerald-500">
+                        <div className="flex items-center gap-1.5 text-emerald-600 font-semibold">
                             <span className="relative flex h-2 w-2">
-                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600"></span>
                             </span>
-                            <span className="font-semibold">Active</span>
+                            Active
                         </div>
                     </div>
                     <DropdownMenu>
@@ -152,4 +214,3 @@ export default function AdminUsersPage() {
     </div>
   );
 }
-
