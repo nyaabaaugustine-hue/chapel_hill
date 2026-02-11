@@ -11,13 +11,7 @@ import { CalendarDays, Clock } from 'lucide-react';
 import RelatedPosts from '@/components/related-posts';
 import SocialShareButtons from '@/components/shared/social-share-buttons';
 
-// Define the expected props for the page, including params and searchParams.
-interface PageProps {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
-export default function BlogPostPage({ params, searchParams }: PageProps) {
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const postData = DUMMY_BLOG_POSTS.find((p) => p.slug === params.slug);
 
   if (!postData) {
