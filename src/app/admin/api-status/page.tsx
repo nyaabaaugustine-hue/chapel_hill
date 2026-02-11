@@ -1,8 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, AlertTriangle, XCircle } from 'lucide-react';
+import { CheckCircle, AlertTriangle, XCircle, Server, Cloud } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import React from 'react';
 
 type ApiStatus = 'Operational' | 'Degraded Performance' | 'Outage';
 
@@ -49,7 +50,7 @@ const StatusBadge = ({ status }: { status: ApiStatus }) => {
   const config = statusConfig[status];
 
   return (
-    <Badge variant="outline" className={cn('gap-2', config.color)}>
+    <Badge variant="outline" className={cn('gap-2 font-medium', config.color)}>
       {config.icon}
       <span>{config.text}</span>
     </Badge>
@@ -63,8 +64,8 @@ const ApiStatusTable = ({ apis }: { apis: ApiMetric[] }) => (
             <TableRow>
                 <TableHead>Service</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>90-Day Uptime</TableHead>
-                <TableHead>Avg. Response (ms)</TableHead>
+                <TableHead className="text-right">Uptime</TableHead>
+                <TableHead className="text-right">Response</TableHead>
             </TableRow>
         </TableHeader>
         <TableBody>
@@ -74,8 +75,8 @@ const ApiStatusTable = ({ apis }: { apis: ApiMetric[] }) => (
                     <TableCell>
                         <StatusBadge status={api.status} />
                     </TableCell>
-                    <TableCell>{api.uptime}</TableCell>
-                    <TableCell>{api.responseTime}</TableCell>
+                    <TableCell className="text-right font-mono text-muted-foreground">{api.uptime}</TableCell>
+                    <TableCell className="text-right font-mono text-muted-foreground">{api.responseTime}</TableCell>
                 </TableRow>
             ))}
         </TableBody>
@@ -84,47 +85,84 @@ const ApiStatusTable = ({ apis }: { apis: ApiMetric[] }) => (
 
 
 export default function AdminApiStatusPage() {
+  const allApis = [...internalApis, ...externalApis];
+  const hasOutage = allApis.some(api => api.status === 'Outage');
+  const hasDegraded = allApis.some(api => api.status === 'Degraded Performance');
+
+  const overallStatus: {
+    title: string;
+    description: string;
+    icon: React.ReactNode;
+    color: string;
+  } = (() => {
+    if (hasOutage) {
+      return {
+        title: 'Major Outage Detected',
+        description: `At least one system is currently experiencing an outage.`,
+        icon: <XCircle className="h-8 w-8" />,
+        color: 'bg-destructive/10 text-destructive',
+      };
+    }
+    if (hasDegraded) {
+      return {
+        title: 'Degraded Performance',
+        description: 'Some systems are experiencing slower than normal response times.',
+        icon: <AlertTriangle className="h-8 w-8" />,
+        color: 'bg-yellow-500/10 text-yellow-600',
+      };
+    }
+    return {
+      title: 'All Systems Operational',
+      description: 'All internal and external services are running smoothly.',
+      icon: <CheckCircle className="h-8 w-8" />,
+      color: 'bg-emerald-500/10 text-emerald-600',
+    };
+  })();
+
   return (
     <div className="space-y-8">
       <div>
         <h1 className="font-headline text-3xl font-bold">API Status</h1>
-        <p className="text-muted-foreground">Monitor the health of external and internal APIs.</p>
+        <p className="text-muted-foreground">Monitor the health of internal systems and external services.</p>
       </div>
 
        <Card>
-        <CardHeader>
-            <CardTitle>Overall Status</CardTitle>
-        </CardHeader>
-        <CardContent>
-            <div className="p-6 bg-emerald-500/10 text-emerald-600 rounded-lg flex items-center gap-4">
-                <CheckCircle className="h-8 w-8" />
+        <CardContent className="p-6">
+            <div className={cn("p-6 rounded-lg flex items-center gap-4", overallStatus.color)}>
+                {overallStatus.icon}
                 <div>
-                    <h3 className="font-bold text-lg">All Systems Operational</h3>
-                    <p className="text-sm">With the exception of minor external API issues.</p>
+                    <h3 className="font-bold text-lg">{overallStatus.title}</h3>
+                    <p className="text-sm">{overallStatus.description}</p>
                 </div>
             </div>
         </CardContent>
        </Card>
 
-      <Card>
-        <CardHeader>
-            <CardTitle>Internal Systems</CardTitle>
-            <CardDescription>Health of your platform's core microservices.</CardDescription>
-        </CardHeader>
-        <CardContent>
-            <ApiStatusTable apis={internalApis} />
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Server /> Internal Systems
+                </CardTitle>
+                <CardDescription>Health of your platform's core microservices.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <ApiStatusTable apis={internalApis} />
+            </CardContent>
+        </Card>
 
-      <Card>
-        <CardHeader>
-            <CardTitle>External Services</CardTitle>
-            <CardDescription>Status of third-party APIs your platform relies on.</CardDescription>
-        </CardHeader>
-        <CardContent>
-            <ApiStatusTable apis={externalApis} />
-        </CardContent>
-      </Card>
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Cloud /> External Services
+                </CardTitle>
+                <CardDescription>Status of third-party APIs your platform relies on.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <ApiStatusTable apis={externalApis} />
+            </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
