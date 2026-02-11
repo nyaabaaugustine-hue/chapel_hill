@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
+import HiredNotification from '@/components/hired-notification';
 
 const inter = Inter({ 
   subsets: ['latin'], 
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${poppins.variable} font-body antialiased`} suppressHydrationWarning>
         {children}
         <Toaster />
+        <HiredNotification />
       </body>
     </html>
   );
