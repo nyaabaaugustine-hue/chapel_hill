@@ -7,9 +7,9 @@ import { cn } from '@/lib/utils';
 import React from 'react';
 
 const moderationItems = [
-    { title: "Jobs pending approval", count: 5, icon: <FileWarning/>, href: "/admin/moderation", color: 'yellow' },
-    { title: "Companies pending verification", count: 2, icon: <Building/>, href: "/admin/users", color: 'blue' },
-    { title: "Reported listings", count: 1, icon: <UserX/>, href: "/admin/moderation", color: 'red' },
+    { title: "Jobs pending approval", count: 5, icon: FileWarning, href: "/admin/moderation", color: 'yellow' },
+    { title: "Companies pending verification", count: 2, icon: Building, href: "/admin/users", color: 'blue' },
+    { title: "Reported listings", count: 1, icon: UserX, href: "/admin/moderation", color: 'red' },
 ];
 
 const colorClasses = {
@@ -28,11 +28,12 @@ export default function ModerationCenter() {
       <CardContent className="space-y-4">
         {moderationItems.map(item => {
             const colors = colorClasses[item.color as keyof typeof colorClasses] || colorClasses.yellow;
+            const Icon = item.icon;
             return (
                 <div key={item.title} className="flex items-center justify-between p-3 bg-secondary rounded-lg">
                     <div className="flex items-center gap-3">
                         <div className={colors.text}>
-                            {React.cloneElement(item.icon, { className: "h-5 w-5" })}
+                            <Icon className="h-5 w-5" />
                         </div>
                         <div>
                             <p className="font-semibold">{item.title}</p>

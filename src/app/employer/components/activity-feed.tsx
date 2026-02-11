@@ -8,11 +8,11 @@ import { cn } from '@/lib/utils';
 import { DUMMY_USERS, DUMMY_JOBS } from '@/lib/data';
 
 const activities = [
-  { icon: <FileText />, text: `${DUMMY_USERS[0].name} applied for "${DUMMY_JOBS[0].title}"`, time: '2 minutes ago', color: 'blue' },
-  { icon: <UserCheck />, text: `You moved ${DUMMY_USERS[1].name} to the Interview stage`, time: '15 minutes ago', color: 'green' },
-  { icon: <MessageSquare />, text: `New message from ${DUMMY_USERS[2].name}`, time: '1 hour ago', color: 'purple' },
-  { icon: <Clock />, text: `Job expiring soon: "${DUMMY_JOBS[3].title}"`, time: '3 hours ago', color: 'yellow' },
-  { icon: <FileText />, text: `${DUMMY_USERS[4].name} applied for "${DUMMY_JOBS[1].title}"`, time: '5 hours ago', color: 'blue' },
+  { icon: FileText, text: `${DUMMY_USERS[0].name} applied for "${DUMMY_JOBS[0].title}"`, time: '2 minutes ago', color: 'blue' },
+  { icon: UserCheck, text: `You moved ${DUMMY_USERS[1].name} to the Interview stage`, time: '15 minutes ago', color: 'green' },
+  { icon: MessageSquare, text: `New message from ${DUMMY_USERS[2].name}`, time: '1 hour ago', color: 'purple' },
+  { icon: Clock, text: `Job expiring soon: "${DUMMY_JOBS[3].title}"`, time: '3 hours ago', color: 'yellow' },
+  { icon: FileText, text: `${DUMMY_USERS[4].name} applied for "${DUMMY_JOBS[1].title}"`, time: '5 hours ago', color: 'blue' },
 ];
 
 const colorClasses = {
@@ -37,10 +37,11 @@ export default function ActivityFeed() {
               <div className="space-y-8">
                 {activities.map((activity, index) => {
                   const colors = colorClasses[activity.color as keyof typeof colorClasses] || colorClasses.blue;
+                  const Icon = activity.icon;
                   return (
                     <div key={index} className="flex items-start gap-4 relative">
                       <div className={cn("flex h-8 w-8 items-center justify-center rounded-full z-10 ring-4 ring-background", colors.bg)}>
-                        {React.cloneElement(activity.icon, { className: cn("h-4 w-4", colors.text) })}
+                        <Icon className={cn("h-4 w-4", colors.text)} />
                       </div>
                       <div className="flex-1 pt-1">
                         <p className="text-sm">{activity.text}</p>

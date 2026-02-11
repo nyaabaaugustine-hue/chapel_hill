@@ -8,10 +8,10 @@ import { cn } from '@/lib/utils';
 import React from 'react';
 
 const insights = [
-    { icon: <FileText/>, title: 'Most Applied Job', value: 'Senior React Developer', meta: '342 Applications', color: 'blue' },
-    { icon: <Eye/>, title: 'Most Viewed Job', value: 'Full-stack Engineer', meta: '2.1k Views', color: 'purple' },
-    { icon: <Briefcase/>, title: 'Top Category', value: 'Software Development', meta: '450 Listings', color: 'green' },
-    { icon: <Wallet/>, title: 'Average Salary', value: 'GH₵115k/year', meta: 'Across all jobs', color: 'orange' },
+    { icon: FileText, title: 'Most Applied Job', value: 'Senior React Developer', meta: '342 Applications', color: 'blue' },
+    { icon: Eye, title: 'Most Viewed Job', value: 'Full-stack Engineer', meta: '2.1k Views', color: 'purple' },
+    { icon: Briefcase, title: 'Top Category', value: 'Software Development', meta: '450 Listings', color: 'green' },
+    { icon: Wallet, title: 'Average Salary', value: 'GH₵115k/year', meta: 'Across all jobs', color: 'orange' },
 ]
 
 const colorClasses = {
@@ -38,10 +38,11 @@ export default function JobInsights() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {insights.map(insight => {
                 const colors = colorClasses[insight.color as keyof typeof colorClasses] || colorClasses.blue;
+                const Icon = insight.icon;
                 return (
                     <div key={insight.title} className={cn("p-4 rounded-lg", colors.bg)}>
                         <div className={cn("flex items-center gap-3 mb-1", colors.text)}>
-                            {React.cloneElement(insight.icon, { className: "h-5 w-5" })}
+                            <Icon className="h-5 w-5" />
                             <p className="text-sm font-medium text-foreground/80">{insight.title}</p>
                         </div>
                         <p className="text-lg font-bold text-foreground">{insight.value}</p>
