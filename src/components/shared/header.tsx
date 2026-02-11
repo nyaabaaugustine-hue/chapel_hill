@@ -14,9 +14,15 @@ import {
   SheetFooter,
 } from '@/components/ui/sheet';
 import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 export default function Header() {
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // For demo purposes, we will assume the user is always logged out on public pages.
   // The dashboard layouts will handle their own "logged in" state.
@@ -86,37 +92,39 @@ export default function Header() {
           </nav>
         </div>
         {renderAuthButtons()}
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="md:hidden">
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="flex flex-col bg-card p-0">
-            <SheetHeader className="p-6 pb-4">
-              <SheetTitle className="sr-only">Menu</SheetTitle>
-              <SheetDescription className="sr-only">Main navigation links</SheetDescription>
-              <Link href="/">
-                <Logo />
-              </Link>
-            </SheetHeader>
-            <nav className="flex-1 space-y-2 p-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href + link.label}
-                  href={link.href}
-                  className="block rounded-lg px-4 py-3 text-lg font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
-                >
-                  {link.label}
+        {isMounted && (
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="md:hidden">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="flex flex-col bg-card p-0">
+              <SheetHeader className="p-6 pb-4">
+                <SheetTitle className="sr-only">Menu</SheetTitle>
+                <SheetDescription className="sr-only">Main navigation links</SheetDescription>
+                <Link href="/">
+                  <Logo />
                 </Link>
-              ))}
-            </nav>
-            <SheetFooter className="mt-auto border-t bg-background/30 p-4">
-              {renderMobileAuthButtons()}
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
+              </SheetHeader>
+              <nav className="flex-1 space-y-2 p-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href + link.label}
+                    href={link.href}
+                    className="block rounded-lg px-4 py-3 text-lg font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+              <SheetFooter className="mt-auto border-t bg-background/30 p-4">
+                {renderMobileAuthButtons()}
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+        )}
       </div>
     </header>
   );
