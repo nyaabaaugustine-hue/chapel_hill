@@ -76,16 +76,19 @@ export default function SubscriptionSection() {
              <p className="mt-4 max-w-2xl mx-auto text-lg text-accent-foreground/80">
               Subscribe to our newsletter to receive the latest job postings.
             </p>
-            <form className="mt-8 max-w-xl mx-auto flex items-center gap-2 bg-card p-2 rounded-xl">
-                <Button type="submit" size="lg" className="rounded-lg bg-primary text-primary-foreground font-semibold px-6">
-                    Subscribe
-                </Button>
-                <Input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="flex-1 bg-transparent border-none focus-visible:ring-0 text-card-foreground placeholder:text-muted-foreground"
-                />
-                <Mail className="h-5 w-5 text-muted-foreground mr-2 shrink-0" />
+            <form className="mt-8 max-w-xl mx-auto">
+                <div className="flex items-center gap-2 bg-card p-2 rounded-xl">
+                    <Button type="submit" size="lg" className="rounded-lg bg-primary text-primary-foreground font-semibold px-6">
+                        Subscribe
+                    </Button>
+                    <Input
+                      type="email"
+                      placeholder="Enter your email address"
+                      className="flex-1 bg-transparent border-none focus-visible:ring-0 text-card-foreground placeholder:text-muted-foreground"
+                    />
+                    <Mail className="h-5 w-5 text-muted-foreground mr-2 shrink-0" />
+                </div>
+                 <p className="mt-2 text-xs text-accent-foreground/60">No spam. Unsubscribe anytime.</p>
             </form>
           </div>
         </div>

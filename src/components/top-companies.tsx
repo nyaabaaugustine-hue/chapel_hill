@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card } from '@/components/ui/card';
 import StarRating from './shared/star-rating';
-import { MapPin } from 'lucide-react';
+import { MapPin, Briefcase } from 'lucide-react';
+import { Badge } from './ui/badge';
 
 export default function TopCompanies() {
   const topCompanies = DUMMY_COMPANIES.slice(0, 10);
@@ -28,7 +29,7 @@ export default function TopCompanies() {
         <div className="mb-12 text-center">
           <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-white">Top Companies Hiring</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
-            Discover your next career step: freelancing or training
+            Discover your next career step with industry-leading firms.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
@@ -36,16 +37,18 @@ export default function TopCompanies() {
             const companyLogo = PlaceHolderImages.find((img) => img.id === company.logo);
             return (
               <Link key={company.id} href={`/companies/${company.id}`} className="block group">
-                <Card className="h-full p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-background/80 backdrop-blur-sm">
+                <Card className="h-full p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-background/80 backdrop-blur-sm flex flex-col items-center justify-center">
                   {companyLogo && (
-                    <div className="flex justify-center mb-3">
-                        <Image
-                          src={companyLogo.imageUrl}
-                          alt={`${company.name} logo`}
-                          width={40}
-                          height={40}
-                          className="rounded-lg"
-                        />
+                    <div className="relative mb-3">
+                        <div className="bg-white rounded-full p-1.5 flex items-center justify-center">
+                            <Image
+                              src={companyLogo.imageUrl}
+                              alt={`${company.name} logo`}
+                              width={40}
+                              height={40}
+                              className="rounded-full"
+                            />
+                        </div>
                     </div>
                   )}
                   <h3 className="font-semibold text-base leading-tight truncate transition-colors group-hover:text-primary">{company.name}</h3>
@@ -56,9 +59,10 @@ export default function TopCompanies() {
                     <MapPin className="h-3 w-3 shrink-0" />
                     <span>{company.location}</span>
                   </div>
-                  <p className="mt-3 text-sm text-muted-foreground">
-                    {company.activeJobs > 0 ? `${company.activeJobs} Opening Job${company.activeJobs !== 1 ? 's' : ''}` : 'No opening job'}
-                  </p>
+                   <Badge variant="outline" className="mt-3 bg-primary/10 border-primary/20 text-primary font-semibold flex items-center gap-1.5">
+                     <Briefcase className="h-3 w-3"/>
+                     {company.activeJobs} Openings
+                   </Badge>
                 </Card>
               </Link>
             );

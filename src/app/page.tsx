@@ -23,8 +23,8 @@ export default function HomePage() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
 
   const trustIndicators = [
-    { text: '12,430 jobs available' },
-    { text: '4,500 companies hiring' },
+    { text: '12,430+ jobs available' },
+    { text: '4,500+ companies verified' },
     { text: '98% candidate satisfaction' },
   ];
 
@@ -49,11 +49,10 @@ export default function HomePage() {
           <div className="relative z-20 container mx-auto px-6 max-w-4xl">
             <div className="flex flex-col justify-center space-y-6">
               <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl !leading-tight font-headline">
-                Find Work That Moves Your Career Forward
+                Ghana’s AI-Powered Hiring Platform
               </h1>
-              <p className="max-w-2xl mx-auto text-lg text-gray-200">
-                The Easiest Way to Get Your New Job. Each month, more than 3 million job seekers turn
-                to our website in their search for work.
+              <p className="max-w-3xl mx-auto text-lg text-gray-200">
+                Leverage AI-powered matching, verified employers, and transparent salaries to accelerate your career.
               </p>
               <div className="rounded-2xl bg-white/10 backdrop-blur-sm p-4 shadow-lg border border-white/20">
                 <form className="flex items-center flex-col sm:flex-row gap-4">

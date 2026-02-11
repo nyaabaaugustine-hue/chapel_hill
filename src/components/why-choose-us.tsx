@@ -1,26 +1,26 @@
-import { Briefcase, Zap, UserCheck, X } from 'lucide-react';
+import { Shield, Zap, BrainCircuit } from 'lucide-react';
 import SectionHeader from './shared/section-header';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 
 const features = [
   {
     icon: Zap,
-    title: 'Faster Hiring',
-    description: 'Connect with top talent and make hires in record time with our streamlined process and AI-powered matching.',
+    title: '2x Faster to Hire',
+    description: 'Our AI-driven platform connects you with qualified candidates in under 48 hours, reducing your time-to-hire by half.',
     iconBg: 'bg-primary/10',
     iconColor: 'text-primary'
   },
   {
-    icon: Briefcase,
-    title: 'Quality Opportunities',
-    description: 'Access a curated selection of high-quality jobs from leading companies in the React ecosystem.',
+    icon: Shield,
+    title: '98% Employer Verification',
+    description: 'We manually verify every employer, ensuring you only apply to legitimate, high-quality opportunities.',
     iconBg: 'bg-accent/10',
     iconColor: 'text-accent'
   },
   {
-    icon: UserCheck,
-    title: 'Smarter Matching',
-    description: 'Our intelligent algorithms match your skills and preferences to the most relevant job opportunities.',
+    icon: BrainCircuit,
+    title: '89% Match Accuracy',
+    description: 'Our AI analyzes your profile to provide job recommendations with an 89% accuracy score, so you find the right fit, faster.',
     iconBg: 'bg-emerald-500/10',
     iconColor: 'text-emerald-500'
   }

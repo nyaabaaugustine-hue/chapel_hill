@@ -13,8 +13,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
+import React from 'react';
 
 export default function Testimonials() {
+
+  const plugin = React.useRef(
+    Autoplay({ delay: 5000, stopOnInteraction: true })
+  )
+
   return (
     <section className="bg-secondary py-16 md:py-24">
       <div className="container mx-auto max-w-7xl px-6 lg:px-12">
@@ -24,11 +31,14 @@ export default function Testimonials() {
         />
 
         <Carousel
+          plugins={[plugin.current]}
           opts={{
             align: 'start',
             loop: true,
           }}
           className="relative px-4"
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
         >
           <CarouselContent className="-ml-4">
             {DUMMY_REVIEWS.map((review) => {
