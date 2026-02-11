@@ -5,11 +5,17 @@ import { DUMMY_JOBS } from '@/lib/data';
 import { SlidersHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import PageHero from '@/components/shared/page-hero';
+import Footer from '@/components/shared/footer';
 
 export default function JobSearchPage() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       <Header />
+      <PageHero
+        title="Find Your Next Opportunity"
+        subtitle={`Browse through ${DUMMY_JOBS.length} open positions to find your perfect match.`}
+      />
       <main className="flex flex-1">
         <aside className="hidden w-80 border-r bg-background p-4 lg:block">
           <JobFilters />
@@ -49,6 +55,7 @@ export default function JobSearchPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
