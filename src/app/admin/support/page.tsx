@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,11 +23,6 @@ type SupportTicket = {
     status: 'Open' | 'In Progress' | 'Resolved';
     priority: 'Low' | 'Medium' | 'High';
     messages: { from: 'user' | 'admin', text: string, date: string }[];
-};
-
-type SupportTicketWithFormattedDates = SupportTicket & {
-    formattedDate: string;
-    messages: (SupportTicket['messages'][0] & { formattedDate: string; })[];
 };
 
 const DUMMY_TICKETS: SupportTicket[] = [
@@ -93,23 +88,8 @@ const DUMMY_TICKETS: SupportTicket[] = [
 ];
 
 export default function AdminSupportPage() {
-    const [tickets, setTickets] = useState<SupportTicketWithFormattedDates[]>([]);
-    const [selectedTicket, setSelectedTicket] = useState<SupportTicketWithFormattedDates | null>(null);
-
-    useEffect(() => {
-        const formattedTickets = DUMMY_TICKETS.map(ticket => ({
-            ...ticket,
-            formattedDate: formatDistanceToNow(new Date(ticket.date), { addSuffix: true }),
-            messages: ticket.messages.map(msg => ({
-                ...msg,
-                formattedDate: formatDistanceToNow(new Date(msg.date), { addSuffix: true }),
-            }))
-        }));
-        setTickets(formattedTickets);
-        if (formattedTickets.length > 0) {
-            setSelectedTicket(formattedTickets[0]);
-        }
-    }, []);
+    const [tickets, setTickets] = useState<SupportTicket[]>(DUMMY_TICKETS);
+    const [selectedTicket, setSelectedTicket] = useState<SupportTicket | null>(tickets.length > 0 ? tickets[0] : null);
 
     const getPriorityBadgeClass = (priority: SupportTicket['priority']) => {
         switch (priority) {
@@ -161,7 +141,7 @@ export default function AdminSupportPage() {
                             >
                                 <div className="flex justify-between items-start">
                                     <p className="font-semibold truncate flex-1 pr-4">{ticket.subject}</p>
-                                    <p className="text-xs text-muted-foreground shrink-0">{ticket.formattedDate}</p>
+                                    <p className="text-xs text-muted-foreground shrink-0">{formatDistanceToNow(new Date(ticket.date), { addSuffix: true })}</p>
                                 </div>
                                 <p className="text-sm text-muted-foreground truncate">{ticket.user.name}</p>
                                 <div className="flex gap-2 mt-1">
@@ -216,7 +196,7 @@ export default function AdminSupportPage() {
                                             <div className={cn("flex-1 rounded-lg border p-4 max-w-lg", isAdmin ? "bg-primary text-primary-foreground" : "bg-card")}>
                                                 <div className="flex justify-between items-center mb-2">
                                                     <p className="font-semibold">{isAdmin ? 'Admin Support' : selectedTicket.user.name}</p>
-                                                    <p className="text-xs opacity-70">{msg.formattedDate}</p>
+                                                    <p className="text-xs opacity-70">{new Date(msg.date).toLocaleString()}</p>
                                                 </div>
                                                 <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
                                             </div>
