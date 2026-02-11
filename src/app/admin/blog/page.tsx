@@ -3,10 +3,9 @@
 import { useState } from 'react';
 import { DUMMY_BLOG_POSTS } from '@/lib/data';
 import type { BlogPost } from '@/lib/types';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardFooter, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,6 +21,8 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
+import Image from 'next/image';
+import { Separator } from '@/components/ui/separator';
 
 export default function AdminBlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>(DUMMY_BLOG_POSTS);
@@ -82,68 +83,70 @@ export default function AdminBlogPage() {
              </div>
           </div>
         </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Title</TableHead>
-                <TableHead>Author</TableHead>
-                <TableHead>Date Published</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead><span className="sr-only">Actions</span></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredPosts.map((post) => {
-                const authorAvatar = PlaceHolderImages.find((img) => img.id === post.author.avatar);
-                return (
-                  <TableRow key={post.id}>
-                    <TableCell className="font-medium">{post.title}</TableCell>
-                    <TableCell>
-                       <div className="flex items-center gap-2">
-                        <Avatar className="h-8 w-8">
-                            {authorAvatar && <AvatarImage src={authorAvatar.imageUrl} alt={post.author.name} />}
-                            <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
-                        </Avatar>
-                        <span>{post.author.name}</span>
-                       </div>
-                    </TableCell>
-                    <TableCell>{format(new Date(post.date), 'MMMM dd, yyyy')}</TableCell>
-                    <TableCell><Badge variant="outline" className={cn("font-medium", getStatusBadgeClass(post.status))}>{post.status}</Badge></TableCell>
-                    <TableCell className="text-right">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem asChild><Link href={`/blog/${post.slug}`}>View Post</Link></DropdownMenuItem>
-                          <DropdownMenuItem>Edit Post</DropdownMenuItem>
-                           {post.status === 'Published' ? (
-                            <DropdownMenuItem>Unpublish</DropdownMenuItem>
-                           ) : (
-                            <DropdownMenuItem>Publish</DropdownMenuItem>
-                           )}
-                           <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-destructive">Delete Post</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                )})}
-               {filteredPosts.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={5} className="h-24 text-center">
-                    No posts found.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
       </Card>
+      
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredPosts.map((post) => {
+          const postImage = PlaceHolderImages.find((img) => img.id === post.image);
+          return (
+            <Card key={post.id} className="flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              {postImage && (
+                <Link href={`/blog/${post.slug}`}>
+                  <Image
+                    src={postImage.imageUrl}
+                    alt={post.title}
+                    width={400}
+                    height={250}
+                    className="w-full object-cover aspect-video rounded-t-lg"
+                    data-ai-hint={postImage.imageHint}
+                  />
+                </Link>
+              )}
+              <CardHeader>
+                  <CardTitle className="text-lg leading-tight hover:text-primary transition-colors">
+                    <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                  </CardTitle>
+                  <CardDescription className="text-xs pt-1">
+                    by {post.author.name} on {format(new Date(post.date), 'MMMM dd, yyyy')}
+                  </CardDescription>
+              </CardHeader>
+              <CardContent className="flex-grow space-y-3 pt-0">
+                <p className="text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
+              </CardContent>
+              <Separator />
+              <CardFooter className="p-4 flex justify-between items-center">
+                  <Badge variant="outline" className={cn("font-medium", getStatusBadgeClass(post.status))}>{post.status}</Badge>
+                   <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" className="h-8 w-8 p-0">
+                        <span className="sr-only">Open menu</span>
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem asChild><Link href={`/blog/${post.slug}`}>View Post</Link></DropdownMenuItem>
+                      <DropdownMenuItem>Edit Post</DropdownMenuItem>
+                       {post.status === 'Published' ? (
+                        <DropdownMenuItem>Unpublish</DropdownMenuItem>
+                       ) : (
+                        <DropdownMenuItem>Publish</DropdownMenuItem>
+                       )}
+                       <DropdownMenuSeparator />
+                      <DropdownMenuItem className="text-destructive">Delete Post</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+              </CardFooter>
+            </Card>
+          )})}
+        </div>
+
+        {filteredPosts.length === 0 && (
+            <Card>
+                <CardContent className="h-48 flex items-center justify-center">
+                    <p className="text-muted-foreground">No posts found.</p>
+                </CardContent>
+            </Card>
+        )}
     </div>
   );
 }
