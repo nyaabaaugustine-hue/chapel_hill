@@ -55,23 +55,39 @@ export default function LoginPage() {
               </Button>
             </div>
             
-            <Separator className="my-4" />
-            <div className="space-y-2 text-center">
-                <p className="text-sm font-medium text-muted-foreground">For demo purposes</p>
-                <div className="flex flex-col gap-2">
-                    <Button asChild variant="secondary">
-                        <Link href="/dashboard">Login as Job Seeker</Link>
-                    </Button>
-                     <Button asChild variant="secondary">
-                        <Link href="/employer">Login as Employer</Link>
-                    </Button>
-                     <Button asChild variant="secondary">
-                        <Link href="/admin">Login as Admin</Link>
-                    </Button>
-                </div>
-            </div>
+            <Separator className="my-6" />
 
-            <div className="mt-4 text-center text-sm">
+            <Card className="border-dashed bg-secondary/50">
+              <CardHeader>
+                <CardTitle className="text-lg text-center">Demo Accounts</CardTitle>
+                <CardDescription className="text-center">Click a button to log in.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="text-sm">
+                  <p className="font-bold text-center">Job Seeker</p>
+                  <p className="text-muted-foreground text-xs text-center">Email: seeker@reacthire.com | Pass: password</p>
+                  <Button asChild variant="secondary" className="w-full mt-2">
+                    <Link href="/dashboard">Login as Job Seeker</Link>
+                  </Button>
+                </div>
+                <div className="text-sm">
+                  <p className="font-bold text-center">Employer</p>
+                  <p className="text-muted-foreground text-xs text-center">Email: employer@reacthire.com | Pass: password</p>
+                  <Button asChild variant="secondary" className="w-full mt-2">
+                    <Link href="/employer">Login as Employer</Link>
+                  </Button>
+                </div>
+                <div className="text-sm">
+                  <p className="font-bold text-center">Admin</p>
+                  <p className="text-muted-foreground text-xs text-center">Email: admin@reacthire.com | Pass: password</p>
+                   <Button asChild variant="secondary" className="w-full mt-2">
+                    <Link href="/admin">Login as Admin</Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="mt-6 text-center text-sm">
               Don&apos;t have an account?{" "}
               <Link href="/register" className="font-semibold text-primary hover:underline">
                 Sign Up
