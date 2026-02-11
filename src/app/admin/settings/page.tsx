@@ -12,7 +12,7 @@ import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export default function AdminSettingsPage() {
-  const artImage = PlaceHolderImages.find((img) => img.id === 'hiring-main');
+  const artImage = PlaceHolderImages.find((img) => img.id === 'find-job-1');
   
   return (
     <div className="space-y-8">
