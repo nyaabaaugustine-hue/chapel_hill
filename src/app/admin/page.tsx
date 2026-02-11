@@ -1,62 +1,105 @@
-import { DUMMY_JOBS, DUMMY_COMPANIES, DUMMY_USERS } from '@/lib/data';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Briefcase, Building, Users, Shield } from 'lucide-react';
-import Link from 'next/link';
+import {
+  DollarSign,
+  Users,
+  Briefcase,
+  Shield,
+  FileBarChart,
+  Building,
+  UserPlus,
+  Download,
+} from 'lucide-react';
+import KpiCard from './components/kpi-card';
+import RevenueChart from './components/revenue-chart';
+import UserDistributionChart from './components/user-distribution-chart';
+import ActivityFeed from './components/activity-feed';
+import JobInsights from './components/job-insights';
+import ModerationCenter from './components/moderation-center';
+import LocationBreakdown from './components/location-breakdown';
+import SystemHealth from './components/system-health';
+import { Button } from '@/components/ui/button';
+import SectionHeader from '@/components/shared/section-header';
 
 export default function AdminDashboard() {
-  const pendingModerationCount = 5;
-
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="font-headline text-3xl font-bold">Admin Overview</h1>
-        <p className="text-muted-foreground">A high-level view of the platform's activity.</p>
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <h1 className="font-headline text-3xl font-bold">Executive Dashboard</h1>
+            <p className="text-muted-foreground">Welcome back, Admin. Here is the platform's performance overview.</p>
+        </div>
+        <div className="flex items-center gap-2">
+            <Button variant="outline"><UserPlus /> Invite Employer</Button>
+            <Button><Download /> Export Reports</Button>
+        </div>
       </div>
 
+      {/* KPI Cards */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Jobs</CardTitle>
-            <Briefcase className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{DUMMY_JOBS.length}</div>
-            <p className="text-xs text-muted-foreground">active job listings</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Companies</CardTitle>
-            <Building className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{DUMMY_COMPANIES.length}</div>
-            <p className="text-xs text-muted-foreground">registered companies</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{DUMMY_USERS.length}</div>
-            <p className="text-xs text-muted-foreground">job seekers and employers</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pending Moderation</CardTitle>
-            <Shield className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{pendingModerationCount}</div>
-            <Link href="/admin/moderation" className="text-xs text-muted-foreground hover:underline">
-              Review job posts
-            </Link>
-          </CardContent>
-        </Card>
+        <KpiCard
+          title="Total Revenue"
+          value="GH₵12,450"
+          trend="+15.2% from last month"
+          icon={<DollarSign />}
+        />
+        <KpiCard
+          title="Active Users"
+          value="2,834"
+          trend="+5.8% from last month"
+          icon={<Users />}
+        />
+        <KpiCard
+          title="Active Jobs"
+          value="842"
+          trend="-2.1% from last month"
+          trendDirection="down"
+          icon={<Briefcase />}
+        />
+        <KpiCard
+          title="Pending Moderation"
+          value="8"
+          trend="3 new today"
+          icon={<Shield />}
+        />
       </div>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        {/* Main Chart */}
+        <div className="lg:col-span-8">
+          <RevenueChart />
+        </div>
+
+        {/* Activity Feed */}
+        <div className="lg:col-span-4">
+          <ActivityFeed />
+        </div>
+      </div>
+
+       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        {/* User Distribution */}
+        <div className="lg:col-span-5">
+            <UserDistributionChart />
+        </div>
+
+        {/* Job Insights */}
+        <div className="lg:col-span-7">
+            <JobInsights />
+        </div>
+      </div>
+      
+       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        {/* Moderation Center */}
+        <div className="lg:col-span-7">
+            <ModerationCenter />
+        </div>
+        
+        {/* Location Breakdown */}
+        <div className="lg:col-span-5">
+            <LocationBreakdown />
+        </div>
+      </div>
+
+      <SystemHealth />
+
     </div>
   );
 }
