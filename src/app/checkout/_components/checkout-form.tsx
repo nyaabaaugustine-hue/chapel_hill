@@ -40,7 +40,7 @@ export default function CheckoutForm() {
     const tier = tiers.find(t => t.id === planId);
 
     if (!tier || !billing) {
-      router.push('/pricing');
+      // router.push('/pricing'); // This can cause issues with Suspense, better to handle inside return
       return;
     }
     
@@ -88,29 +88,24 @@ export default function CheckoutForm() {
   }
 
   if (!selectedTier || !billingCycle) {
-    return (
-        <Card>
-            <CardContent className="p-10 text-center">
-                <p>Loading your plan...</p>
-            </CardContent>
-        </Card>
-    );
+    // This state is handled by Suspense on the parent page
+    return null;
   }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        <Card>
+        <Card className="bg-card/80 backdrop-blur-sm border-white/20">
             <CardHeader>
-                <CardTitle>Order Summary</CardTitle>
-                <CardDescription>Review your subscription details before payment.</CardDescription>
+                <CardTitle className="text-white">Order Summary</CardTitle>
+                <CardDescription className="text-gray-300">Review your subscription details before payment.</CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="space-y-6">
-                    <div className="p-6 rounded-lg border-2 border-primary bg-primary/10">
+                    <div className="p-6 rounded-lg border-2 border-primary bg-primary/20">
                         <h3 className="font-headline text-2xl font-bold text-primary">{selectedTier.name} Plan</h3>
-                        <p className="text-4xl font-bold mt-2">
+                        <p className="text-4xl font-bold mt-2 text-white">
                            GH₵{price}
-                           <span className="text-lg font-normal text-muted-foreground">/{billingCycle === 'yearly' ? 'year' : 'month'}</span>
+                           <span className="text-lg font-normal text-gray-300">/{billingCycle === 'yearly' ? 'year' : 'month'}</span>
                         </p>
                          {billingCycle === 'yearly' && (
                              <p className="text-sm text-primary font-medium">Billed annually</p>
@@ -120,22 +115,22 @@ export default function CheckoutForm() {
                         {selectedTier.features.map((feature) => (
                             <li key={feature} className="flex items-center gap-3">
                             <CheckCircle className="h-5 w-5 text-green-500" />
-                            <span className="text-muted-foreground">{feature}</span>
+                            <span className="text-gray-300">{feature}</span>
                             </li>
                         ))}
                     </ul>
-                    <Separator />
+                    <Separator className="bg-white/20" />
                     <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
-                            <span className="text-muted-foreground">Subtotal</span>
-                            <span className="font-medium">GH₵{price.toFixed(2)}</span>
+                            <span className="text-gray-300">Subtotal</span>
+                            <span className="font-medium text-white">GH₵{price.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-muted-foreground">Taxes (10%)</span>
-                            <span className="font-medium">GH₵{tax.toFixed(2)}</span>
+                            <span className="text-gray-300">Taxes (10%)</span>
+                            <span className="font-medium text-white">GH₵{tax.toFixed(2)}</span>
                         </div>
-                         <Separator />
-                        <div className="flex justify-between text-base font-bold">
+                         <Separator className="bg-white/20"/>
+                        <div className="flex justify-between text-base font-bold text-white">
                             <span>Total</span>
                             <span>GH₵{total.toFixed(2)}</span>
                         </div>
@@ -143,42 +138,42 @@ export default function CheckoutForm() {
                 </div>
             </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-card/80 backdrop-blur-sm border-white/20">
             <CardHeader>
-                <CardTitle className="flex items-center gap-2"><CreditCard /> Payment Details</CardTitle>
-                <CardDescription>Securely complete your purchase with Paystack.</CardDescription>
+                <CardTitle className="flex items-center gap-2 text-white"><CreditCard /> Payment Details</CardTitle>
+                <CardDescription className="text-gray-300">Securely complete your purchase with Paystack.</CardDescription>
             </CardHeader>
             <CardContent>
                 <form onSubmit={handlePayment} className="space-y-6">
                     <div className="space-y-2">
-                        <Label htmlFor="fullName">Full Name</Label>
-                        <Input id="fullName" placeholder="Enter your full name" required value={fullName} onChange={(e) => setFullName(e.target.value)} />
+                        <Label htmlFor="fullName" className="text-gray-300">Full Name</Label>
+                        <Input id="fullName" placeholder="Enter your full name" required value={fullName} onChange={(e) => setFullName(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus-visible:ring-primary" />
                     </div>
                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address</Label>
-                        <Input id="email" type="email" placeholder="you@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <Label htmlFor="email" className="text-gray-300">Email Address</Label>
+                        <Input id="email" type="email" placeholder="you@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus-visible:ring-primary" />
                     </div>
 
                     {price > 0 && (
                       <div className="space-y-2">
-                        <Label>Card Details</Label>
-                         <div className="border rounded-md p-4 space-y-3">
+                        <Label className="text-gray-300">Card Details</Label>
+                         <div className="border border-white/20 rounded-md p-4 space-y-3 bg-black/20">
                            <div className="relative">
-                               <Input placeholder="Card Number" className="pr-20"/>
+                               <Input placeholder="Card Number" className="pr-20 bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus-visible:ring-primary"/>
                                <div className="absolute inset-y-0 right-2 flex items-center gap-1">
                                    {visaLogo && <Image src={visaLogo.imageUrl} alt="Visa" width={32} height={20} />}
                                    {mastercardLogo && <Image src={mastercardLogo.imageUrl} alt="Mastercard" width={32} height={20} />}
                                </div>
                            </div>
                             <div className="grid grid-cols-2 gap-4">
-                              <Input placeholder="MM / YY" />
-                              <Input placeholder="CVC" />
+                              <Input placeholder="MM / YY" className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus-visible:ring-primary" />
+                              <Input placeholder="CVC" className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus-visible:ring-primary" />
                             </div>
                          </div>
                       </div>
                     )}
                     
-                    <div className="text-xs text-muted-foreground text-center pt-2 flex items-center justify-center gap-2">
+                    <div className="text-xs text-gray-300 text-center pt-2 flex items-center justify-center gap-2">
                          {paystackLogo && <Image src={paystackLogo.imageUrl} alt="Paystack" width={80} height={20} />}
                         <span>| This is a simulated payment for demo purposes.</span>
                     </div>
@@ -188,8 +183,8 @@ export default function CheckoutForm() {
                 </form>
             </CardContent>
             <CardFooter className="flex-col gap-4 text-center">
-                <Separator />
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Separator className="bg-white/20" />
+                <div className="flex items-center gap-2 text-sm text-gray-300">
                     <Lock className="h-4 w-4 text-green-500"/>
                     <span>SSL Secure Payment</span>
                 </div>
