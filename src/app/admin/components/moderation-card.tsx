@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { CheckCircle, Lightbulb, Loader, Shield, XCircle } from 'lucide-react';
-import { runJobModeration, ModerateJobPostOutput } from '@/lib/actions';
+import { runJobModeration } from '@/lib/actions';
+import type { ModerateJobPostOutput } from '@/ai/flows/admin-job-moderation';
 
 type ModerationCardProps = {
   job: Job;

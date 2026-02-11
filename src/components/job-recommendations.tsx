@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { Lightbulb, Loader, ServerCrash } from 'lucide-react';
-import { fetchAiJobRecommendations, AiJobRecommendationsOutput } from '@/lib/actions';
+import { fetchAiJobRecommendations } from '@/lib/actions';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
+import type { AiJobRecommendationsOutput } from '@/ai/flows/ai-job-recommendations';
 
 const mockUserProfile = {
   profileSummary: 'Experienced React developer with 5 years in frontend development, specializing in TypeScript, Next.js, and state management with Redux. Proven ability to lead small teams and deliver high-quality web applications.',
