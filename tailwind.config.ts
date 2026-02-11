@@ -96,7 +96,7 @@ export default {
             height: '0',
           },
         },
-        marquee: {
+        'marquee-rtl': {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-50%)' },
         },
@@ -104,7 +104,7 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        marquee: 'marquee 60s linear infinite',
+        'marquee-rtl': 'marquee-rtl 40s linear infinite',
       },
     },
   },

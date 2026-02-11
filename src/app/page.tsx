@@ -16,7 +16,7 @@ import TopCompanies from '@/components/top-companies';
 import JobsByLocation from '@/components/jobs-by-location';
 import LatestNews from '@/components/latest-news';
 import SubscriptionSection from '@/components/subscription-section';
-import HiringTicker from '@/components/hiring-ticker';
+import LiveActivityBar from '@/components/live-activity-bar';
 
 export default function HomePage() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
@@ -30,6 +30,7 @@ export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
+      <LiveActivityBar />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative w-full py-20 lg:py-32 flex items-center justify-center text-center bg-hero-glow">
@@ -94,8 +95,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-        <HiringTicker />
 
         <JobCategories />
 
