@@ -14,7 +14,7 @@ export type Job = {
   company: Company;
   description: string;
   location: string;
-  type: 'Full-time' | 'Part-time' | 'Contract';
+  type: 'Full-time' | 'Part-time' | 'Contract' | 'Internship' | 'Volunteer';
   experienceLevel: 'Entry' | 'Mid-level' | 'Senior';
   salaryRange: string;
   postedDate: string;

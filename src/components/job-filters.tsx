@@ -43,6 +43,14 @@ export default function JobFilters() {
             <Checkbox id="contract" />
             <Label htmlFor="contract">Contract</Label>
           </div>
+           <div className="flex items-center space-x-2">
+            <Checkbox id="internship" />
+            <Label htmlFor="internship">Internship</Label>
+          </div>
+           <div className="flex items-center space-x-2">
+            <Checkbox id="volunteer" />
+            <Label htmlFor="volunteer">Volunteer</Label>
+          </div>
           <div className="flex items-center space-x-2">
             <Checkbox id="remote" />
             <Label htmlFor="remote">Remote</Label>

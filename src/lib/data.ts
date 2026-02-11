@@ -1,5 +1,5 @@
 import type { Job, Company, Review, Application, Applicant, User, BlogPost } from './types';
-import { Briefcase, Code, Headset, Megaphone, PenTool, Search, Users, BookOpen, Palette, Wallet, BrainCircuit, GitMerge, KanbanSquare, Scale, Stethoscope, Clapperboard } from 'lucide-react';
+import { Briefcase, Code, Headset, Megaphone, PenTool, Search, Users, BookOpen, Palette, Wallet, BrainCircuit, GitMerge, KanbanSquare, Scale, Stethoscope, Clapperboard, GraduationCap, Handshake, Lightbulb } from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import React from 'react';
 
@@ -370,6 +370,62 @@ export const DUMMY_JOBS: Job[] = [
     skills: ['Luxury Travel', 'Sales', 'GDS', 'Customer Service'],
     category: 'Customer Help',
   },
+  {
+    id: '25',
+    title: 'Frontend Development Intern',
+    company: DUMMY_COMPANIES[0],
+    description: 'Exciting internship opportunity for aspiring frontend developers. Work with our senior team on real projects.',
+    location: 'Accra, Ghana',
+    type: 'Internship',
+    experienceLevel: 'Entry',
+    salaryRange: 'GH₵1,500 /month',
+    postedDate: '2024-05-20',
+    isUrgent: false,
+    skills: ['HTML', 'CSS', 'JavaScript', 'React'],
+    category: 'Software',
+  },
+  {
+    id: '26',
+    title: 'Community Outreach Volunteer',
+    company: DUMMY_COMPANIES[5], // HealthFirst
+    description: 'Volunteer to help organize health screening events and community outreach programs.',
+    location: 'Takoradi, Ghana',
+    type: 'Volunteer',
+    experienceLevel: 'Entry',
+    salaryRange: 'Unpaid',
+    postedDate: '2024-05-19',
+    isUrgent: false,
+    skills: ['Communication', 'Community Engagement', 'Event Planning'],
+    category: 'Healthcare',
+  },
+  {
+    id: '27',
+    title: 'Graphic Design Intern',
+    company: DUMMY_COMPANIES[3], // PixelPerfect
+    description: 'Internship for a creative graphic designer to assist our design team on various projects.',
+    location: 'Remote',
+    type: 'Internship',
+    experienceLevel: 'Entry',
+    salaryRange: 'GH₵1,200 /month',
+    postedDate: '2024-05-18',
+    isUrgent: false,
+    skills: ['Figma', 'Adobe Illustrator', 'Photoshop'],
+    category: 'Design',
+  },
+  {
+    id: '28',
+    title: 'Tech Education Volunteer',
+    company: DUMMY_COMPANIES[1], // QuantumLeap
+    description: 'Volunteer to teach basic coding skills to underprivileged youth in our community tech program.',
+    location: 'Accra, Ghana',
+    type: 'Volunteer',
+    experienceLevel: 'Mid-level',
+    salaryRange: 'Unpaid',
+    postedDate: '2024-05-17',
+    isUrgent: true,
+    skills: ['Teaching', 'JavaScript', 'Python', 'Communication'],
+    category: 'Education',
+  },
 ];
 
 export const DUMMY_USERS: User[] = [
@@ -570,3 +626,30 @@ export const DUMMY_LOCATIONS = [
     { name: 'Tamale, Ghana', jobs: 4, companies: 3, imageId: 'location-tamale' },
     { name: 'Tema, Ghana', jobs: 6, companies: 4, imageId: 'location-tema' },
   ];
+
+export const DUMMY_OPPORTUNITIES = [
+  {
+    icon: GraduationCap,
+    title: 'Student Attachments',
+    description: 'Gain real-world experience with leading companies in your field of study. Bridge the gap between theory and practice.',
+    iconBg: 'bg-blue-500/10',
+    iconColor: 'text-blue-500',
+    link: '/jobs?type=Internship'
+  },
+  {
+    icon: Handshake,
+    title: 'Volunteer Programs',
+    description: 'Make an impact by contributing your skills to NGOs and community projects. Build your network and character.',
+    iconBg: 'bg-green-500/10',
+    iconColor: 'text-green-500',
+    link: '/jobs?type=Volunteer'
+  },
+  {
+    icon: Lightbulb,
+    title: 'Innovation Challenges',
+    description: 'Participate in student-focused innovation challenges and hackathons sponsored by top tech firms.',
+    iconBg: 'bg-yellow-500/10',
+    iconColor: 'text-yellow-500',
+    link: '#'
+  }
+];

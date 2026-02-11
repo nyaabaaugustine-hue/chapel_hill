@@ -53,7 +53,7 @@ export default function VolunteerSection() {
         </div>
         <div className="mt-12 text-center">
           <Button asChild size="lg" variant="outline">
-            <Link href="/jobs?type=volunteer">Explore Opportunities</Link>
+            <Link href="/opportunities">Explore Opportunities</Link>
           </Button>
         </div>
       </div>

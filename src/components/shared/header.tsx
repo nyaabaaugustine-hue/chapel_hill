@@ -2,12 +2,13 @@ import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import Logo from './logo';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
 
 export default function Header() {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/jobs', label: 'Find a Job' },
+    { href: '/opportunities', label: 'Opportunities' },
     { href: '/companies', label: 'Companies' },
     { href: '/dashboard', label: 'For Candidates' },
     { href: '/employer', label: 'For Employers' },
@@ -50,9 +51,9 @@ export default function Header() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="flex flex-col gap-6">
-            <SheetHeader className="sr-only">
-              <SheetTitle>Menu</SheetTitle>
-              <SheetDescription>Main navigation links</SheetDescription>
+            <SheetHeader>
+              <SheetTitle className="sr-only">Menu</SheetTitle>
+              <SheetDescription className="sr-only">Main navigation links</SheetDescription>
             </SheetHeader>
             <Link href="/">
               <Logo />

@@ -41,6 +41,7 @@ export default function NewJobPage() {
                   <SelectItem value="part-time">Part-time</SelectItem>
                   <SelectItem value="contract">Contract</SelectItem>
                   <SelectItem value="internship">Internship</SelectItem>
+                  <SelectItem value="volunteer">Volunteer</SelectItem>
                 </SelectContent>
               </Select>
             </div>
