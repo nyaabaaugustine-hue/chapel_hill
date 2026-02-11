@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -87,7 +86,7 @@ export default function CheckoutForm() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        <Card className="bg-secondary/30">
+        <Card>
             <CardHeader>
                 <CardTitle>Order Summary</CardTitle>
                 <CardDescription>Review your subscription details before payment.</CardDescription>
@@ -137,14 +136,6 @@ export default function CheckoutForm() {
                 <CardDescription>Securely complete your purchase with Paystack.</CardDescription>
             </CardHeader>
             <CardContent>
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-secondary/50 mb-6">
-                    <span className="text-sm text-muted-foreground">Powered by</span>
-                    {paystackLogo && <Image src={paystackLogo.imageUrl} alt="Paystack" width={100} height={25} />}
-                    <div className="flex-1 text-right flex justify-end gap-2">
-                         {visaLogo && <Image src={visaLogo.imageUrl} alt="Visa" width={40} height={25} />}
-                         {mastercardLogo && <Image src={mastercardLogo.imageUrl} alt="Mastercard" width={40} height={25} />}
-                    </div>
-                </div>
                 <form onSubmit={handlePayment} className="space-y-6">
                     <div className="space-y-2">
                         <Label htmlFor="fullName">Full Name</Label>
@@ -158,8 +149,14 @@ export default function CheckoutForm() {
                     {price > 0 && (
                       <div className="space-y-2">
                         <Label>Card Details</Label>
-                         <div className="p-3 border rounded-md bg-secondary/50 space-y-4">
-                           <Input placeholder="Card Number" />
+                         <div className="border rounded-md p-4 space-y-3">
+                           <div className="relative">
+                               <Input placeholder="Card Number" className="pr-20"/>
+                               <div className="absolute inset-y-0 right-2 flex items-center gap-1">
+                                   {visaLogo && <Image src={visaLogo.imageUrl} alt="Visa" width={32} height={20} />}
+                                   {mastercardLogo && <Image src={mastercardLogo.imageUrl} alt="Mastercard" width={32} height={20} />}
+                               </div>
+                           </div>
                             <div className="grid grid-cols-2 gap-4">
                               <Input placeholder="MM / YY" />
                               <Input placeholder="CVC" />
@@ -168,8 +165,9 @@ export default function CheckoutForm() {
                       </div>
                     )}
                     
-                    <div className="text-xs text-muted-foreground text-center pt-2">
-                        This is a simulated payment for demo purposes.
+                    <div className="text-xs text-muted-foreground text-center pt-2 flex items-center justify-center gap-2">
+                         {paystackLogo && <Image src={paystackLogo.imageUrl} alt="Paystack" width={80} height={20} />}
+                        <span>| This is a simulated payment for demo purposes.</span>
                     </div>
                     <Button type="submit" size="lg" className="w-full bg-accent-gradient" disabled={isLoading}>
                         {isLoading ? <Loader2 className="mr-2 animate-spin" /> : (price > 0 ? `Pay GH₵${total.toFixed(2)} Now` : 'Complete Setup')}
