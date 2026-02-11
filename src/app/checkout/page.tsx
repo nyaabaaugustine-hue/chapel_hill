@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
-import CheckoutForm from './_components/checkout-form';
+import CheckoutForm, { CheckoutFormSkeleton } from './_components/checkout-form';
+
 
 export default function CheckoutPage() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
@@ -29,11 +30,7 @@ export default function CheckoutPage() {
                 <h1 className="font-headline text-4xl sm:text-5xl font-bold text-white">Complete Your Purchase</h1>
                 <p className="mt-2 text-lg text-gray-200">You're just one step away from unlocking powerful hiring tools.</p>
             </div>
-            <Suspense fallback={
-                <div className="text-center text-white">
-                    <p>Loading checkout...</p>
-                </div>
-            }>
+            <Suspense fallback={<CheckoutFormSkeleton />}>
                 <CheckoutForm />
             </Suspense>
         </div>
