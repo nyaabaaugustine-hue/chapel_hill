@@ -7,17 +7,16 @@ import { Label } from "@/components/ui/label"
 import Header from "@/components/shared/header"
 import Footer from "@/components/shared/footer"
 import Link from "next/link"
-import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 
-export default function LoginPage() {
+export default function AdminLoginPage() {
     const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
 
-    const [email, setEmail] = useState('jobseeker@example.com');
+    const [email, setEmail] = useState('admin@example.com');
     const [password, setPassword] = useState('password');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -28,14 +27,11 @@ export default function LoginPage() {
         e.preventDefault();
         setIsLoading(true);
 
-        // Demo logic: redirect based on email
-        let destination = '/dashboard'; // Default to job seeker
-        if (email.toLowerCase().includes('employer')) {
-            destination = '/employer';
-        }
+        // For this admin-specific login page, always redirect to the admin dashboard.
+        const destination = '/admin';
 
         toast({
-            title: 'Login Successful',
+            title: 'Admin Login Successful',
             description: 'Redirecting to your dashboard...',
             variant: 'vibrant',
         });
@@ -64,11 +60,9 @@ export default function LoginPage() {
         <div className="relative z-20 w-full">
             <Card className="w-full max-w-lg mx-auto shadow-lg">
             <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Welcome Back</CardTitle>
+                <CardTitle className="text-2xl">Admin Portal</CardTitle>
                 <CardDescription>
-                  Sign in to access your dashboard. For demo purposes, you can use: 
-                  <br/>
-                  <code className="font-mono text-xs bg-muted p-1 rounded">jobseeker@example.com</code> or <code className="font-mono text-xs bg-muted p-1 rounded">employer@example.com</code>
+                  Enter your credentials to access the Executive Dashboard.
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -79,7 +73,7 @@ export default function LoginPage() {
                         <Input
                         id="email"
                         type="email"
-                        placeholder="m@example.com"
+                        placeholder="admin@example.com"
                         required
                         value={email}
                         onChange={e => setEmail(e.target.value)}
@@ -97,26 +91,8 @@ export default function LoginPage() {
                     <Button type="submit" className="w-full bg-accent-gradient" disabled={isLoading}>
                         {isLoading ? 'Logging in...' : 'Login'}
                     </Button>
-                    <div className="relative my-2">
-                        <div className="absolute inset-0 flex items-center">
-                            <span className="w-full border-t" />
-                        </div>
-                        <div className="relative flex justify-center text-xs uppercase">
-                            <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
-                        </div>
-                    </div>
-                    <Button variant="outline" className="w-full">
-                        Login with Google
-                    </Button>
                     </div>
                 </form>
-
-                <div className="mt-6 text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <Link href="/register" className="font-semibold text-primary hover:underline">
-                    Sign Up
-                </Link>
-                </div>
             </CardContent>
             </Card>
         </div>
