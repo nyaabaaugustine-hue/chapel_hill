@@ -5,6 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 import { DUMMY_USERS, DUMMY_JOBS } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { PartyPopper } from 'lucide-react';
 
 export default function HiredNotification() {
   const { toast } = useToast();
@@ -25,15 +26,19 @@ export default function HiredNotification() {
       const userAvatar = PlaceHolderImages.find((img) => img.id === user.avatar);
 
       toast({
+        variant: 'vibrant',
         description: (
-          <div className="flex items-center gap-3">
-            <Avatar className="h-10 w-10">
-              {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt={user.name} />}
-              <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="font-semibold">{`${user.name.split(' ')[0]} was hired!`} 🇬🇭</p>
-              <p className="text-xs text-muted-foreground">{`For the ${job.title} role.`}</p>
+          <div className="flex items-center gap-4">
+            <PartyPopper className="h-8 w-8 shrink-0 text-yellow-300" />
+            <div className="flex items-center gap-3">
+              <Avatar className="h-10 w-10 border-2 border-white/50">
+                {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt={user.name} />}
+                <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+              </Avatar>
+              <div>
+                <p className="font-bold">{`${user.name.split(' ')[0]} was hired!`} 🇬🇭</p>
+                <p>{`For the ${job.title} role.`}</p>
+              </div>
             </div>
           </div>
         ),
