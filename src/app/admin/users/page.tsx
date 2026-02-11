@@ -114,12 +114,12 @@ export default function AdminUsersPage() {
                 <div className="mt-6 w-full flex-1 flex flex-col justify-end">
                     <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
                         <span>Joined: {new Date('2023-01-15').toLocaleDateString()}</span>
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-1.5 text-emerald-500">
                             <span className="relative flex h-2 w-2">
-                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/75 opacity-75"></span>
-                                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
                             </span>
-                            Active
+                            <span className="font-semibold">Active</span>
                         </div>
                     </div>
                     <DropdownMenu>
