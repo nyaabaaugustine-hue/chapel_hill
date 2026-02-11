@@ -81,7 +81,7 @@ const DUMMY_TICKETS: SupportTicket[] = [
     status: 'Resolved',
     priority: 'Low',
     messages: [
-      { from: 'user', text: 'I can\'\'\'t find the option to delete my account.', date: '2024-07-27T18:00:00Z' },
+      { from: 'user', text: 'I can\'t find the option to delete my account.', date: '2024-07-27T18:00:00Z' },
       { from: 'admin', text: 'Hi Esi, you can find the option to delete your account in your dashboard under Settings > Danger Zone. Let us know if you need further assistance.', date: '2024-07-27T18:10:00Z' },
     ]
   }
@@ -92,6 +92,7 @@ const TicketTimestamp = ({ date }: { date: string }) => {
     useEffect(() => {
         setTimestamp(formatDistanceToNow(new Date(date), { addSuffix: true }));
     }, [date]);
+
     if (!timestamp) return <p className="text-xs text-muted-foreground shrink-0">&nbsp;</p>;
     return <p className="text-xs text-muted-foreground shrink-0">{timestamp}</p>;
 };
