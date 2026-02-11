@@ -92,7 +92,7 @@ export default function JobCard({ job }: JobCardProps) {
             <span>{formatDistanceToNow(new Date(job.postedDate), { addSuffix: true })}</span>
           </div>
         </div>
-        <Button asChild className="rounded-lg">
+        <Button asChild className="rounded-lg bg-accent-gradient text-primary-foreground font-semibold shadow-lg transform transition-transform hover:scale-105">
           <Link href={`/jobs/${job.id}`}>
             Apply Now
           </Link>
