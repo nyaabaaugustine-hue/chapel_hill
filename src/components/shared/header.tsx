@@ -2,7 +2,15 @@ import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import Logo from './logo';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetTrigger,
+  SheetFooter,
+} from '@/components/ui/sheet';
 
 export default function Header() {
   const navLinks = [
@@ -12,6 +20,7 @@ export default function Header() {
     { href: '/companies', label: 'Companies' },
     { href: '/blog', label: 'Blog' },
     { href: '/contacts', label: 'Contacts' },
+    { href: '/admin', label: 'Admin' },
   ];
 
   return (
@@ -37,7 +46,10 @@ export default function Header() {
           <Button variant="ghost" asChild>
             <Link href="/login">Login</Link>
           </Button>
-          <Button asChild className="rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground shadow-sm transition-transform hover:scale-105 hover:bg-primary/90">
+          <Button
+            asChild
+            className="rounded-xl bg-accent-gradient px-5 py-2.5 font-semibold text-primary-foreground shadow-sm transition-transform hover:scale-105"
+          >
             <Link href="/register">Register</Link>
           </Button>
         </div>
@@ -48,33 +60,39 @@ export default function Header() {
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="flex flex-col gap-6">
-            <SheetHeader>
+          <SheetContent side="left" className="flex flex-col bg-card p-0">
+            <SheetHeader className="p-6 pb-4">
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <SheetDescription className="sr-only">Main navigation links</SheetDescription>
+              <Link href="/">
+                <Logo />
+              </Link>
             </SheetHeader>
-            <Link href="/">
-              <Logo />
-            </Link>
-            <nav className="flex flex-1 flex-col gap-4">
+            <nav className="flex-1 space-y-2 p-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href + link.label}
                   href={link.href}
-                  className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="block rounded-lg px-4 py-3 text-lg font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
-            <div className="flex flex-col gap-2">
-               <Button variant="ghost" asChild>
+            <SheetFooter className="mt-auto border-t bg-background/30 p-4">
+              <div className="grid w-full grid-cols-2 gap-4">
+                <Button variant="outline" asChild size="lg">
                   <Link href="/login">Login</Link>
-              </Button>
-               <Button asChild className="rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground shadow-sm">
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-accent-gradient font-semibold text-primary-foreground shadow-lg transition-transform hover:scale-105"
+                >
                   <Link href="/register">Register</Link>
-              </Button>
-            </div>
+                </Button>
+              </div>
+            </SheetFooter>
           </SheetContent>
         </Sheet>
       </div>
