@@ -1,6 +1,8 @@
 import { Shield, Zap, BrainCircuit } from 'lucide-react';
 import SectionHeader from './shared/section-header';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const features = [
   {
@@ -27,23 +29,38 @@ const features = [
 ];
 
 export default function WhyChooseUs() {
+    const bgImage = PlaceHolderImages.find((p) => p.id === 'category-bg');
   return (
-    <section className="bg-background py-16 md:py-24">
-      <div className="container mx-auto max-w-7xl px-6 lg:px-12">
-        <SectionHeader
-          title="Why Chapel Hill?"
-          subtitle="We're more than just a job board. We're your career partner."
-        />
+    <section className="relative py-16 md:py-24">
+       {bgImage && (
+        <>
+          <Image
+            src={bgImage.imageUrl}
+            alt={bgImage.description}
+            fill
+            className="object-cover z-0"
+            data-ai-hint={bgImage.imageHint}
+          />
+          <div className="absolute inset-0 bg-black/70 z-10" />
+        </>
+      )}
+      <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mb-10 text-center">
+            <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-white">Why Chapel Hill?</h2>
+            <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
+                We're more than just a job board. We're your career partner.
+            </p>
+        </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {features.map((feature, index) => (
-            <Card key={index} className="text-center">
+            <Card key={index} className="text-center bg-card/80 backdrop-blur-sm border-white/20">
               <CardHeader className="items-center">
                 <div className={`flex h-16 w-16 items-center justify-center rounded-full ${feature.iconBg}`}>
                   <feature.icon className={`h-8 w-8 ${feature.iconColor}`} />
                 </div>
               </CardHeader>
               <CardContent>
-                <CardTitle className="mb-2 text-xl">{feature.title}</CardTitle>
+                <CardTitle className="mb-2 text-xl text-card-foreground">{feature.title}</CardTitle>
                 <p className="text-muted-foreground">{feature.description}</p>
               </CardContent>
             </Card>
