@@ -7,9 +7,11 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
-const tiers = [
+export const tiers = [
   {
+    id: 'basic',
     name: 'Basic',
     price: { monthly: 0, yearly: 0 },
     description: 'For small teams getting started.',
@@ -23,6 +25,7 @@ const tiers = [
     isPopular: false,
   },
   {
+    id: 'pro',
     name: 'Pro',
     price: { monthly: 99, yearly: 990 },
     description: 'For growing teams that need more power.',
@@ -38,6 +41,7 @@ const tiers = [
     isPopular: true,
   },
   {
+    id: 'enterprise',
     name: 'Enterprise',
     price: { monthly: 'Custom', yearly: 'Custom' },
     description: 'For large organizations with custom needs.',
@@ -56,6 +60,14 @@ const tiers = [
 
 export default function PricingGrid() {
   const [isYearly, setIsYearly] = useState(false);
+
+  const getCtaLink = (tier: typeof tiers[0]) => {
+    if (tier.id === 'enterprise') {
+      return '/contacts';
+    }
+    const billingCycle = isYearly ? 'yearly' : 'monthly';
+    return `/checkout?plan=${tier.id}&billing=${billingCycle}`;
+  };
 
   return (
     <div className="container mx-auto max-w-7xl px-4 md:px-6">
@@ -90,7 +102,7 @@ export default function PricingGrid() {
                 <div className="text-center mb-8">
                 <span className="font-headline text-5xl font-bold">
                     {typeof tier.price.monthly === 'number'
-                        ? `GH₵${isYearly ? tier.price.yearly / 12 : tier.price.monthly}`
+                        ? `GH₵${isYearly ? Math.round(tier.price.yearly / 12) : tier.price.monthly}`
                         : 'Custom'}
                 </span>
                 <span className="text-muted-foreground">
@@ -111,10 +123,11 @@ export default function PricingGrid() {
             </CardContent>
             <CardFooter className="p-6">
                 <Button
+                asChild
                 size="lg"
                 className={cn('w-full font-bold text-lg', tier.isPopular ? 'bg-accent-gradient' : 'bg-primary')}
                 >
-                {tier.cta}
+                <Link href={getCtaLink(tier)}>{tier.cta}</Link>
                 </Button>
             </CardFooter>
             </Card>
