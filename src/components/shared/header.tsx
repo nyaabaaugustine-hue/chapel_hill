@@ -10,8 +10,8 @@ export default function Header() {
     { href: '/jobs', label: 'Find a Job' },
     { href: '/opportunities', label: 'Opportunities' },
     { href: '/companies', label: 'Companies' },
-    { href: '/dashboard', label: 'For Candidates' },
     { href: '/employer', label: 'For Employers' },
+    { href: '/admin', label: 'Admin' },
     { href: '/blog', label: 'Blog' },
     { href: '/contacts', label: 'Contacts' },
   ];
