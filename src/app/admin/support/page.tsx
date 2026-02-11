@@ -97,15 +97,6 @@ const TicketTimestamp = ({ date }: { date: string }) => {
     return <p className="text-xs text-muted-foreground shrink-0">{timestamp}</p>;
 };
 
-const MessageTimestamp = ({ date }: { date: string }) => {
-    const [timestamp, setTimestamp] = useState('');
-    useEffect(() => {
-        setTimestamp(new Date(date).toLocaleString());
-    }, [date]);
-    if (!timestamp) return <p className="text-xs opacity-70">&nbsp;</p>;
-    return <p className="text-xs opacity-70">{timestamp}</p>;
-};
-
 
 export default function AdminSupportPage() {
     const [tickets, setTickets] = useState<SupportTicket[]>(DUMMY_TICKETS);
@@ -216,7 +207,7 @@ export default function AdminSupportPage() {
                                             <div className={cn("flex-1 rounded-lg border p-4 max-w-lg", isAdmin ? "bg-primary text-primary-foreground" : "bg-card")}>
                                                 <div className="flex justify-between items-center mb-2">
                                                     <p className="font-semibold">{isAdmin ? 'Admin Support' : selectedTicket.user.name}</p>
-                                                    <MessageTimestamp date={msg.date} />
+                                                    <p className="text-xs opacity-70">{new Date(msg.date).toLocaleString()}</p>
                                                 </div>
                                                 <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
                                             </div>
