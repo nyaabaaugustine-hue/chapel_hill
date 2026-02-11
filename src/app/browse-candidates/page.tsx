@@ -11,26 +11,6 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-const getRoleBadgeClass = (role: string) => {
-    const lowerRole = role.toLowerCase();
-    if (['developer', 'engineer', 'scientist', 'devops'].some(term => lowerRole.includes(term))) {
-      return 'bg-chart-1/10 text-chart-1 border-chart-1/20';
-    }
-    if (['manager', 'lead', 'ceo', 'director'].some(term => lowerRole.includes(term))) {
-      return 'bg-chart-4/10 text-chart-4 border-chart-4/20';
-    }
-    if (['design', 'architect', 'actress'].some(term => lowerRole.includes(term))) {
-      return 'bg-chart-5/10 text-chart-5 border-chart-5/20';
-    }
-    if (['market', 'sale'].some(term => lowerRole.includes(term))) {
-      return 'bg-chart-3/10 text-chart-3 border-chart-3/20';
-    }
-     if (['analyst', 'research', 'qa', 'accountant', 'student', 'intern', 'lecturer'].some(term => lowerRole.includes(term))) {
-        return 'bg-accent/10 text-accent border-accent/20';
-    }
-    return 'bg-secondary text-secondary-foreground';
-};
-
 const CandidateCard = ({ user }: { user: User }) => {
     const avatar = PlaceHolderImages.find((p) => p.id === user.avatar);
     return (
@@ -49,7 +29,9 @@ const CandidateCard = ({ user }: { user: User }) => {
             </div>
             
             <div className="mt-auto w-full">
-                <Button variant="outline" className="w-full">View Profile</Button>
+                <Button asChild variant="outline" className="w-full">
+                    <Link href={`/candidate-profile/${user.id}`}>View Profile</Link>
+                </Button>
             </div>
         </Card>
     );
