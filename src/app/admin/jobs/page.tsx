@@ -3,10 +3,9 @@
 import { useState, useEffect } from 'react';
 import { DUMMY_JOBS, DUMMY_APPLICANTS } from '@/lib/data';
 import type { Job } from '@/lib/types';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardFooter, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,13 +13,43 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu';
-import { MoreHorizontal, PlusCircle } from 'lucide-react';
+import { MoreHorizontal, PlusCircle, Users, MapPin, Clock } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
 
-const JobTableRow = ({ job }: { job: Job }) => {
+
+const CardSkeleton = () => (
+    <Card>
+      <CardHeader>
+        <Skeleton className="h-5 w-3/4" />
+        <Skeleton className="h-4 w-1/2" />
+      </CardHeader>
+      <CardContent className="space-y-4 pt-6">
+        <Separator />
+        <div className="flex justify-between items-center pt-4">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-4 w-8" />
+        </div>
+         <div className="flex justify-between items-center">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-4 w-16" />
+        </div>
+         <div className="flex justify-between items-center">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-4 w-20" />
+        </div>
+      </CardContent>
+      <CardFooter className="border-t pt-4">
+        <Skeleton className="h-10 w-full" />
+      </CardFooter>
+    </Card>
+);
+
+const AdminJobCard = ({ job }: { job: Job }) => {
   const [status, setStatus] = useState<string | null>(null);
   const [postedAt, setPostedAt] = useState<string | null>(null);
   const applicantCount = DUMMY_APPLICANTS.filter(app => app.jobId === job.id).length;
@@ -36,60 +65,56 @@ const JobTableRow = ({ job }: { job: Job }) => {
   }, [job.postedDate]);
 
   if (status === null || postedAt === null) {
-    return (
-      <TableRow>
-        <TableCell>
-          <Skeleton className="h-4 w-48" />
-          <Skeleton className="h-3 w-32 mt-2" />
-        </TableCell>
-        <TableCell>
-          <Skeleton className="h-4 w-20" />
-        </TableCell>
-        <TableCell>
-          <Skeleton className="h-6 w-16 rounded-full" />
-        </TableCell>
-        <TableCell>
-          <Skeleton className="h-4 w-24" />
-        </TableCell>
-        <TableCell className="text-right">
-          <div className="flex justify-end">
-            <Skeleton className="h-8 w-8" />
-          </div>
-        </TableCell>
-      </TableRow>
-    );
+    return <CardSkeleton />;
   }
 
+  const statusBadgeClass = status === 'Active' 
+    ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20' 
+    : 'bg-destructive/10 text-destructive border-destructive/20';
+
   return (
-    <TableRow>
-      <TableCell>
-        <div className="font-medium">{job.title}</div>
-        <div className="text-sm text-muted-foreground">{job.company.name} • {job.location}</div>
-      </TableCell>
-      <TableCell>
-        {applicantCount} applicant(s)
-      </TableCell>
-      <TableCell>
-        <Badge variant={status === 'Active' ? 'default' : 'secondary'}>{status}</Badge>
-      </TableCell>
-      <TableCell>{postedAt}</TableCell>
-      <TableCell className="text-right">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem asChild><Link href={`/jobs/${job.id}`}>View Job</Link></DropdownMenuItem>
-            <DropdownMenuItem>Edit Job</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">Delete Job</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </TableCell>
-    </TableRow>
+    <Card className="flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+      <CardHeader>
+        <div className="flex justify-between items-start">
+            <div>
+                <CardTitle className="text-lg leading-tight hover:text-primary"><Link href={`/jobs/${job.id}`}>{job.title}</Link></CardTitle>
+                <CardDescription className="pt-1">{job.company.name}</CardDescription>
+            </div>
+            <Badge variant="outline" className={cn('font-semibold', statusBadgeClass)}>{status}</Badge>
+        </div>
+      </CardHeader>
+      <CardContent className="flex-grow space-y-3 pt-0">
+        <Separator />
+        <div className="flex justify-between items-center text-sm">
+            <span className="text-muted-foreground flex items-center gap-2"><Users className="h-4 w-4" /> Applicants</span>
+            <span className="font-semibold">{applicantCount}</span>
+        </div>
+        <div className="flex justify-between items-center text-sm">
+            <span className="text-muted-foreground flex items-center gap-2"><MapPin className="h-4 w-4" /> Location</span>
+            <span className="font-semibold">{job.location}</span>
+        </div>
+        <div className="flex justify-between items-center text-sm">
+            <span className="text-muted-foreground flex items-center gap-2"><Clock className="h-4 w-4" /> Posted</span>
+            <span className="font-semibold">{postedAt}</span>
+        </div>
+      </CardContent>
+      <CardFooter className="border-t pt-4">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="w-full">
+                <MoreHorizontal className="mr-2 h-4 w-4" />
+                Actions
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem asChild><Link href={`/jobs/${job.id}`}>View Job</Link></DropdownMenuItem>
+              <DropdownMenuItem>Edit Job</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-destructive">Delete Job</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+      </CardFooter>
+    </Card>
   );
 };
 
@@ -129,32 +154,20 @@ export default function AdminJobsPage() {
               />
           </div>
         </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Job</TableHead>
-                <TableHead>Applicants</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Date Posted</TableHead>
-                <TableHead><span className="sr-only">Actions</span></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredJobs.map((job) => (
-                <JobTableRow key={job.id} job={job} />
-              ))}
-               {filteredJobs.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={5} className="h-24 text-center">
-                    No jobs found.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
       </Card>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredJobs.map((job) => (
+          <AdminJobCard key={job.id} job={job} />
+        ))}
+        {filteredJobs.length === 0 && (
+          <Card className="md:col-span-2 lg:col-span-3">
+              <CardContent className="h-48 flex items-center justify-center">
+                  <p className="text-muted-foreground">No jobs found.</p>
+              </CardContent>
+          </Card>
+        )}
+      </div>
     </div>
   );
 }
