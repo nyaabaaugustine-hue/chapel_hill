@@ -6,7 +6,7 @@ import Footer from '@/components/shared/footer';
 import { DUMMY_JOBS, DUMMY_USERS } from '@/lib/data';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,10 +18,14 @@ import { useToast } from '@/hooks/use-toast';
 import type { Application, Applicant, User } from '@/lib/types';
 
 
-export default function JobDetailPage({ params: { id } }: { params: { id: string } }) {
+export default function JobDetailPage() {
+  const params = useParams();
+  const id = params.id as string;
+
   const { toast } = useToast();
   const [isApplied, setIsApplied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [postedAt, setPostedAt] = useState('');
 
   const job = DUMMY_JOBS.find((j) => j.id === id);
 
@@ -35,6 +39,9 @@ export default function JobDetailPage({ params: { id } }: { params: { id: string
 
   useEffect(() => {
     if (!job) return;
+    
+    setPostedAt(formatDistanceToNow(new Date(job.postedDate), { addSuffix: true }));
+
     try {
       const applications: Application[] = JSON.parse(localStorage.getItem('job-applications') || '[]');
       const hasApplied = applications.some(app => app.job.id === job.id && app.user.id === currentUser.id);
@@ -139,7 +146,7 @@ export default function JobDetailPage({ params: { id } }: { params: { id: string
                         </div>
                         <div className="flex items-center gap-2">
                             <Clock className="h-4 w-4" />
-                            <span>Posted {formatDistanceToNow(new Date(job.postedDate), { addSuffix: true })}</span>
+                            {postedAt && <span>Posted {postedAt}</span>}
                         </div>
                       </div>
                     </div>
