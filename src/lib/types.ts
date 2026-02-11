@@ -68,4 +68,5 @@ export type BlogPost = {
   image: string; // image id from placeholder-images
   excerpt: string;
   content: string;
+  status: 'Published' | 'Draft';
 };

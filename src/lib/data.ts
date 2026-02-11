@@ -546,6 +546,7 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
     image: 'blog-post-1',
     excerpt: 'Our comprehensive guide to help you prepare for and ace your next React developer interview. From core concepts to advanced topics, we have got you covered.',
     content: '<p>Lorem ipsum...</p>',
+    status: 'Published',
   },
   {
     id: '2',
@@ -556,6 +557,7 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
     image: 'blog-post-2',
     excerpt: 'Stay ahead of the curve. We explore the top 5 trends shaping the future of web development, from AI integration to serverless architectures.',
     content: '<p>Lorem ipsum...</p>',
+    status: 'Published',
   },
   {
     id: '3',
@@ -566,6 +568,7 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
     image: 'blog-post-3',
     excerpt: 'Your resume is your first impression. Learn how to craft a compelling developer resume that stands out to recruiters and hiring managers.',
     content: '<p>Lorem ipsum...</p>',
+    status: 'Draft',
   },
   {
     id: '4',
@@ -576,6 +579,7 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
     image: 'blog-post-4',
     excerpt: 'Explore how serverless architectures are changing the game for React developers, enabling scalable and cost-effective applications.',
     content: '<p>Lorem ipsum...</p>',
+    status: 'Published',
   },
   {
     id: '5',
@@ -586,6 +590,7 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
     image: 'blog-post-5',
     excerpt: 'From simple useState to complex solutions like Redux and Zustand, we cover the best ways to manage state in your Next.js applications.',
     content: '<p>Lorem ipsum...</p>',
+    status: 'Draft',
   },
   {
     id: '6',
@@ -596,6 +601,7 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
     image: 'blog-post-6',
     excerpt: 'Maximize your productivity and maintain a healthy work-life balance with these essential tips for remote software developers.',
     content: '<p>Lorem ipsum...</p>',
+    status: 'Published',
   },
 ];
 

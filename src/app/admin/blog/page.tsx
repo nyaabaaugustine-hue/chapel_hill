@@ -19,17 +19,32 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
 
 export default function AdminBlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>(DUMMY_BLOG_POSTS);
   const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
 
   const filteredPosts = posts
     .filter(post => 
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.author.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    )
+    .filter(post => statusFilter === 'all' || post.status.toLowerCase() === statusFilter);
+
+  const getStatusBadgeClass = (status: 'Published' | 'Draft') => {
+    switch (status) {
+      case 'Published':
+        return 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20';
+      case 'Draft':
+        return 'bg-amber-500/10 text-amber-600 border-amber-500/20';
+      default:
+        return 'bg-secondary text-secondary-foreground';
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -53,6 +68,18 @@ export default function AdminBlogPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
+              <div className="flex gap-4">
+                 <Select value={statusFilter} onValueChange={setStatusFilter}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Filter by status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="all">All Statuses</SelectItem>
+                        <SelectItem value="published">Published</SelectItem>
+                        <SelectItem value="draft">Draft</SelectItem>
+                    </SelectContent>
+                </Select>
+             </div>
           </div>
         </CardHeader>
         <CardContent>
@@ -74,15 +101,15 @@ export default function AdminBlogPage() {
                     <TableCell className="font-medium">{post.title}</TableCell>
                     <TableCell>
                        <div className="flex items-center gap-2">
-                        <Avatar className="h-6 w-6">
+                        <Avatar className="h-8 w-8">
                             {authorAvatar && <AvatarImage src={authorAvatar.imageUrl} alt={post.author.name} />}
                             <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
                         </Avatar>
                         <span>{post.author.name}</span>
                        </div>
                     </TableCell>
-                    <TableCell>{new Date(post.date).toLocaleDateString()}</TableCell>
-                    <TableCell><Badge>Published</Badge></TableCell>
+                    <TableCell>{format(new Date(post.date), 'MMMM dd, yyyy')}</TableCell>
+                    <TableCell><Badge variant="outline" className={cn("font-medium", getStatusBadgeClass(post.status))}>{post.status}</Badge></TableCell>
                     <TableCell className="text-right">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -94,7 +121,11 @@ export default function AdminBlogPage() {
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem asChild><Link href={`/blog/${post.slug}`}>View Post</Link></DropdownMenuItem>
                           <DropdownMenuItem>Edit Post</DropdownMenuItem>
-                           <DropdownMenuItem>Unpublish</DropdownMenuItem>
+                           {post.status === 'Published' ? (
+                            <DropdownMenuItem>Unpublish</DropdownMenuItem>
+                           ) : (
+                            <DropdownMenuItem>Publish</DropdownMenuItem>
+                           )}
                            <DropdownMenuSeparator />
                           <DropdownMenuItem className="text-destructive">Delete Post</DropdownMenuItem>
                         </DropdownMenuContent>
