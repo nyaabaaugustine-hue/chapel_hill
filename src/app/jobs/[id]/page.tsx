@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import SocialShareButtons from '@/components/shared/social-share-buttons';
 
 
 export default function JobDetailPage() {
@@ -262,6 +263,11 @@ export default function JobDetailPage() {
                             </DialogContent>
                         </Dialog>
                         <p className="text-xs text-center text-muted-foreground mt-2">Your profile will be shared with {job.company.name}.</p>
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardContent className="p-6">
+                        <SocialShareButtons title={job.title} />
                     </CardContent>
                 </Card>
             </div>
