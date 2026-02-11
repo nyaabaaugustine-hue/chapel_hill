@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
-import { DUMMY_JOBS, DUMMY_USERS } from '@/lib/data';
+import { DUMMY_USERS } from '@/lib/data';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { notFound, useParams } from 'next/navigation';
@@ -15,7 +15,7 @@ import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import { formatDistanceToNow } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
-import type { Application, Applicant, User } from '@/lib/types';
+import type { Application, Applicant, User, Job } from '@/lib/types';
 import {
   Dialog,
   DialogContent,
@@ -30,21 +30,115 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import SocialShareButtons from '@/components/shared/social-share-buttons';
 
+// New imports for Firebase
+import { doc } from 'firebase/firestore';
+import { useFirestore, useDoc, useMemoFirebase } from '@/firebase';
+import { Skeleton } from '@/components/ui/skeleton';
+
+// Define the shape of the document coming from Firestore
+type JobDocument = Omit<Job, 'company' | 'id'> & {
+  companyId: string;
+  companyName: string;
+  companyLogo: string;
+};
+
+// Create a Skeleton component for the loading state
+const JobDetailSkeleton = () => (
+  <div className="container mx-auto px-4 md:px-6">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className="lg:col-span-2">
+        <Card>
+          <CardHeader>
+            <div className="flex items-start gap-4">
+              <Skeleton className="h-20 w-20 shrink-0 rounded-lg" />
+              <div className="flex-1 space-y-2">
+                <Skeleton className="h-8 w-3/4" />
+                <Skeleton className="h-6 w-1/2" />
+                <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                  <Skeleton className="h-5 w-24" />
+                  <Skeleton className="h-5 w-32" />
+                </div>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <Separator className="my-6" />
+            <Skeleton className="h-6 w-1/4 mb-4" />
+            <div className="space-y-3">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-5/6" />
+            </div>
+            <Separator className="my-6" />
+            <Skeleton className="h-6 w-1/4 mb-4" />
+            <div className="flex flex-wrap gap-2">
+              <Skeleton className="h-6 w-20 rounded-full" />
+              <Skeleton className="h-6 w-24 rounded-full" />
+              <Skeleton className="h-6 w-28 rounded-full" />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+      <div className="space-y-6">
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-6 w-32" />
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Skeleton className="h-5 w-full" />
+            <Skeleton className="h-5 w-full" />
+            <Skeleton className="h-5 w-full" />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-6 w-24" />
+          </CardHeader>
+          <CardContent>
+            <Skeleton className="h-12 w-full rounded-lg" />
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </div>
+);
+
 
 export default function JobDetailPage() {
   const params = useParams();
   const id = params.id as string;
+  const firestore = useFirestore();
 
   const { toast } = useToast();
   const [isApplied, setIsApplied] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [postedAt, setPostedAt] = useState('');
   const [coverLetter, setCoverLetter] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const job = DUMMY_JOBS.find((j) => j.id === id);
+  // Firestore data fetching
+  const jobRef = useMemoFirebase(() => doc(firestore, 'jobs', id), [firestore, id]);
+  const { data: jobDoc, isLoading: isDocLoading, error } = useDoc<JobDocument>(jobRef);
 
-  const currentUser: User = { 
+  // Transform Firestore doc into the Job type expected by components
+  const job: Job | null = useMemo(() => {
+    if (!jobDoc) return null;
+    return {
+      ...jobDoc,
+      id: jobDoc.id, // useDoc already adds the id
+      company: {
+        id: jobDoc.companyId,
+        name: jobDoc.companyName,
+        logo: jobDoc.companyLogo,
+        industry: '',
+        location: jobDoc.location,
+        description: '',
+        website: '',
+        employerId: jobDoc.employerId || ''
+      }
+    };
+  }, [jobDoc]);
+
+  const currentUser: User = {
     id: 'user-john-doe',
     name: 'John Doe',
     email: 'john.doe@email.com',
@@ -64,7 +158,6 @@ export default function JobDetailPage() {
     } catch (error) {
       console.error("Failed to parse applications from localStorage", error);
     }
-    setIsLoading(false);
   }, [job, currentUser.id]);
 
   const handleApply = () => {
@@ -119,8 +212,21 @@ export default function JobDetailPage() {
     });
   };
 
-  if (!job) {
+  // After loading, if job is still null, it means not found.
+  if (!isDocLoading && !job) {
     notFound();
+  }
+  
+  if (isDocLoading || !job) {
+     return (
+      <div className="flex min-h-screen flex-col bg-background bg-hero-glow">
+        <Header />
+        <main className="flex-1 py-12 md:py-16">
+          <JobDetailSkeleton />
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
   const companyLogo = PlaceHolderImages.find((img) => img.id === job.company.logo);
@@ -229,8 +335,8 @@ export default function JobDetailPage() {
                     <CardContent>
                         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                             <DialogTrigger asChild>
-                                <Button disabled={isApplied || isLoading} className="w-full bg-accent-gradient" size="lg">
-                                    {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : isApplied ? 'Applied' : 'Apply Now'}
+                                <Button disabled={isApplied || isDocLoading} className="w-full bg-accent-gradient" size="lg">
+                                    {isDocLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : isApplied ? 'Applied' : 'Apply Now'}
                                 </Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-lg">
