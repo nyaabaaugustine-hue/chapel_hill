@@ -1,17 +1,66 @@
-import { Card, CardContent } from '@/components/ui/card';
+import { DollarSign, Users, Briefcase, Shield } from 'lucide-react';
+import KpiCard from '@/app/admin/components/kpi-card';
+import RevenueChart from '@/app/admin/components/revenue-chart';
+import UserDistributionChart from '@/app/admin/components/user-distribution-chart';
+import JobInsights from '@/app/admin/components/job-insights';
+import LocationBreakdown from '@/app/admin/components/location-breakdown';
 
 export default function AdminAnalyticsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-headline text-3xl font-bold">Analytics</h1>
-        <p className="text-muted-foreground">Detailed platform analytics.</p>
+        <h1 className="font-headline text-3xl font-bold">Platform Analytics</h1>
+        <p className="text-muted-foreground">A deep dive into your platform's performance metrics.</p>
       </div>
-      <Card>
-        <CardContent className="pt-6 text-center text-muted-foreground">
-          Analytics page content will be here.
-        </CardContent>
-      </Card>
+
+      {/* KPI Cards */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <KpiCard
+          title="Total Revenue"
+          value="GH₵12,450"
+          trend="+15.2% from last month"
+          icon={<DollarSign />}
+        />
+        <KpiCard
+          title="Active Users"
+          value="2,834"
+          trend="+5.8% from last month"
+          icon={<Users />}
+        />
+        <KpiCard
+          title="Active Jobs"
+          value="842"
+          trend="-2.1% from last month"
+          trendDirection="down"
+          icon={<Briefcase />}
+        />
+        <KpiCard
+          title="Pending Moderation"
+          value="8"
+          trend="3 new today"
+          icon={<Shield />}
+        />
+      </div>
+
+      {/* Charts */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <div className="lg:col-span-8">
+          <RevenueChart />
+        </div>
+        <div className="lg:col-span-4">
+          <UserDistributionChart />
+        </div>
+      </div>
+
+      {/* Insights and Breakdowns */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <div className="lg:col-span-7">
+          <JobInsights />
+        </div>
+        <div className="lg:col-span-5">
+          <LocationBreakdown />
+        </div>
+      </div>
     </div>
   );
 }
