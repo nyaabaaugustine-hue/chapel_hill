@@ -97,11 +97,10 @@ export default function EmployerJobsPage() {
 
   return (
     <div className="space-y-8">
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center justify-between">
            <div>
-              <CardTitle className="font-headline text-3xl font-bold">My Job Listings</CardTitle>
-              <CardDescription className="mt-2">Manage all jobs you have posted.</CardDescription>
+              <h1 className="font-headline text-3xl font-bold">My Job Listings</h1>
+              <p className="text-muted-foreground mt-1">Manage all jobs you have posted.</p>
             </div>
             <Button asChild className="bg-accent-gradient">
                 <Link href="/employer/jobs/new">
@@ -109,41 +108,43 @@ export default function EmployerJobsPage() {
                     Post a New Job
                 </Link>
             </Button>
-        </CardHeader>
-         <CardContent>
-             <div className="mb-4">
-                <Input 
+        </div>
+
+        <Card>
+            <CardHeader>
+                 <Input 
                     placeholder="Search by job title..." 
                     className="max-w-sm" 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-            </div>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[40%]">Job Title</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-center">Applicants</TableHead>
-                <TableHead>Posted</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredJobs.map((job) => (
-                <JobTableRow key={job.id} job={job} />
-              ))}
-              {filteredJobs.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={5} className="h-24 text-center">
-                    No jobs found.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+            </CardHeader>
+            <CardContent>
+                <Table>
+                    <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-[40%]">Job Title</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead className="text-center">Applicants</TableHead>
+                        <TableHead>Posted</TableHead>
+                        <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                    {filteredJobs.map((job) => (
+                        <JobTableRow key={job.id} job={job} />
+                    ))}
+                    {filteredJobs.length === 0 && (
+                        <TableRow>
+                        <TableCell colSpan={5} className="h-24 text-center">
+                            No jobs found.
+                        </TableCell>
+                        </TableRow>
+                    )}
+                    </TableBody>
+                </Table>
+            </CardContent>
+        </Card>
     </div>
   );
 }
