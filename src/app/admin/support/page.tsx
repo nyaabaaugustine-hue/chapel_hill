@@ -87,6 +87,7 @@ const DUMMY_TICKETS: SupportTicket[] = [
   }
 ];
 
+// Client-side component to prevent hydration errors for relative time.
 const TicketTimestamp = ({ date }: { date: string }) => {
     const [timestamp, setTimestamp] = useState('');
     useEffect(() => {
@@ -95,6 +96,17 @@ const TicketTimestamp = ({ date }: { date: string }) => {
 
     if (!timestamp) return <p className="text-xs text-muted-foreground shrink-0">&nbsp;</p>;
     return <p className="text-xs text-muted-foreground shrink-0">{timestamp}</p>;
+};
+
+// Client-side component to prevent hydration errors for absolute time.
+const MessageTimestamp = ({ date }: { date: string }) => {
+    const [timestamp, setTimestamp] = useState('');
+    useEffect(() => {
+        setTimestamp(new Date(date).toLocaleString());
+    }, [date]);
+
+    if (!timestamp) return <p className="text-xs opacity-70">&nbsp;</p>;
+    return <p className="text-xs opacity-70">{timestamp}</p>;
 };
 
 
@@ -207,7 +219,7 @@ export default function AdminSupportPage() {
                                             <div className={cn("flex-1 rounded-lg border p-4 max-w-lg", isAdmin ? "bg-primary text-primary-foreground" : "bg-card")}>
                                                 <div className="flex justify-between items-center mb-2">
                                                     <p className="font-semibold">{isAdmin ? 'Admin Support' : selectedTicket.user.name}</p>
-                                                    <p className="text-xs opacity-70">{new Date(msg.date).toLocaleString()}</p>
+                                                    <MessageTimestamp date={msg.date} />
                                                 </div>
                                                 <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
                                             </div>
