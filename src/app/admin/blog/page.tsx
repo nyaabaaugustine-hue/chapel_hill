@@ -13,10 +13,9 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu';
-import { MoreHorizontal, PlusCircle, Upload, Loader2 } from 'lucide-react';
+import { MoreHorizontal, PlusCircle, Upload, Loader2, Check, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
@@ -35,8 +34,10 @@ import {
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
 
 export default function AdminBlogPage() {
+  const { toast } = useToast();
   const [posts, setPosts] = useState<BlogPost[]>(DUMMY_BLOG_POSTS);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -54,20 +55,32 @@ export default function AdminBlogPage() {
       }, 1500);
   };
 
+  const handleStatusChange = (postId: string, newStatus: BlogPost['status']) => {
+    setPosts(posts.map(p => p.id === postId ? { ...p, status: newStatus } : p));
+    toast({
+      title: 'Post Updated',
+      description: `The post has been set to "${newStatus}".`,
+      variant: 'vibrant'
+    });
+  };
 
   const filteredPosts = posts
     .filter(post => 
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.author.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .filter(post => statusFilter === 'all' || post.status.toLowerCase() === statusFilter);
+    .filter(post => statusFilter === 'all' || post.status.toLowerCase().replace(' ', '-') === statusFilter);
 
-  const getStatusBadgeClass = (status: 'Published' | 'Draft') => {
+  const getStatusBadgeClass = (status: BlogPost['status']) => {
     switch (status) {
       case 'Published':
         return 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20';
+      case 'Pending Review':
+        return 'bg-blue-500/10 text-blue-600 border-blue-500/20';
       case 'Draft':
         return 'bg-amber-500/10 text-amber-600 border-amber-500/20';
+      case 'Rejected':
+        return 'bg-destructive/10 text-destructive border-destructive/20';
       default:
         return 'bg-secondary text-secondary-foreground';
     }
@@ -167,7 +180,9 @@ export default function AdminBlogPage() {
                     <SelectContent>
                         <SelectItem value="all">All Statuses</SelectItem>
                         <SelectItem value="published">Published</SelectItem>
+                        <SelectItem value="pending-review">Pending Review</SelectItem>
                         <SelectItem value="draft">Draft</SelectItem>
+                        <SelectItem value="rejected">Rejected</SelectItem>
                     </SelectContent>
                 </Select>
              </div>
@@ -216,11 +231,15 @@ export default function AdminBlogPage() {
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem asChild><Link href={`/blog/${post.slug}`}>View Post</Link></DropdownMenuItem>
                       <DropdownMenuItem>Edit Post</DropdownMenuItem>
-                       {post.status === 'Published' ? (
-                        <DropdownMenuItem>Unpublish</DropdownMenuItem>
-                       ) : (
-                        <DropdownMenuItem>Publish</DropdownMenuItem>
+                       <DropdownMenuSeparator />
+                       {post.status === 'Pending Review' && (
+                        <>
+                          <DropdownMenuItem onClick={() => handleStatusChange(post.id, 'Published')} className="text-emerald-600 focus:bg-emerald-500/10 focus:text-emerald-700"><Check className="mr-2 h-4 w-4" /> Approve</DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleStatusChange(post.id, 'Rejected')} className="text-destructive focus:bg-destructive/10 focus:text-destructive"><X className="mr-2 h-4 w-4" /> Reject</DropdownMenuItem>
+                        </>
                        )}
+                       {post.status === 'Published' && <DropdownMenuItem onClick={() => handleStatusChange(post.id, 'Draft')}>Unpublish (Set to Draft)</DropdownMenuItem>}
+                       {(post.status === 'Draft' || post.status === 'Rejected') && <DropdownMenuItem onClick={() => handleStatusChange(post.id, 'Published')}>Publish</DropdownMenuItem>}
                        <DropdownMenuSeparator />
                       <DropdownMenuItem className="text-destructive">Delete Post</DropdownMenuItem>
                     </DropdownMenuContent>

@@ -192,8 +192,8 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
         content: 'Full blog post content goes here...',
         image: 'blog-post-5',
         date: '2024-06-20T12:00:00Z',
-        author: DUMMY_USERS[4],
-        status: 'Draft',
+        author: DUMMY_USERS[0],
+        status: 'Pending Review',
     },
     {
         id: '6',
@@ -204,7 +204,18 @@ export const DUMMY_BLOG_POSTS: BlogPost[] = [
         image: 'blog-post-6',
         date: '2024-06-12T12:00:00Z',
         author: DUMMY_USERS[5],
-        status: 'Published',
+        status: 'Draft',
+    },
+    {
+        id: '7',
+        slug: 'why-i-love-tailwind-css',
+        title: 'Why I Fell in Love with Tailwind CSS',
+        excerpt: 'A personal journey into the world of utility-first CSS and how it transformed my development workflow.',
+        content: 'Full blog post content goes here...',
+        image: 'blog-post-7',
+        date: '2024-05-30T12:00:00Z',
+        author: DUMMY_USERS[6],
+        status: 'Rejected',
     }
 ];
 

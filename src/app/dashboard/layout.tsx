@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Briefcase, Building, FileText, Home, UserCircle, Settings, LogOut } from 'lucide-react';
+import { Briefcase, Building, FileText, Home, UserCircle, Settings, LogOut, PenSquare } from 'lucide-react';
 import {
   SidebarProvider,
   Sidebar,
@@ -37,6 +37,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       items: [
         { href: '/jobs', label: 'Find Jobs', icon: <Briefcase /> },
         { href: '/companies', label: 'Companies', icon: <Building /> },
+      ]
+    },
+    {
+      group: 'Community',
+      items: [
+        { href: '/dashboard/posts', label: 'My Blog Posts', icon: <PenSquare /> },
       ]
     },
   ];

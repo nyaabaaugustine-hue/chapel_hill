@@ -74,9 +74,9 @@
             "authorName": { "type": "string" },
             "authorId": { "type": "string" },
             "publishedDate": { "type": "string", "format": "date-time" },
-            "isPublished": { "type": "boolean" }
+            "status": { "type": "string", "enum": ["Draft", "Pending Review", "Published", "Rejected"] }
         },
-        "required": ["slug", "title", "content", "authorId", "authorName", "publishedDate", "isPublished"]
+        "required": ["slug", "title", "content", "authorId", "authorName", "publishedDate", "status"]
     },
     "Application": {
         "title": "Application",

@@ -76,7 +76,7 @@ export type BlogPost = {
   image: string;
   date: string;
   author: User;
-  status: 'Published' | 'Draft';
+  status: 'Published' | 'Draft' | 'Pending Review' | 'Rejected';
   
   // Fields for firestore that we are not using with demo data
   imageUrl?: string;
