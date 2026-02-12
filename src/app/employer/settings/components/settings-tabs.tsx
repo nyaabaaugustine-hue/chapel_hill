@@ -65,6 +65,14 @@ export default function SettingsTabs() {
       toast({ title, description, variant });
   };
 
+  const handleSwitchChange = (feature: string, enabled: boolean) => {
+    handleAction(
+        `${feature} ${enabled ? 'Enabled' : 'Disabled'}`,
+        `You will ${enabled ? 'now' : 'no longer'} receive these notifications.`,
+        'vibrant'
+    );
+  };
+
   return (
     <Tabs value={tab} defaultValue={tab} className="w-full">
         <TabsList className="grid w-full grid-cols-3">
@@ -244,7 +252,11 @@ export default function SettingsTabs() {
                           <Label htmlFor={setting.id} className="font-semibold">{setting.title}</Label>
                           <p className="text-sm text-muted-foreground">{setting.description}</p>
                         </div>
-                        <Switch id={setting.id} defaultChecked={setting.defaultChecked} />
+                        <Switch 
+                          id={setting.id} 
+                          defaultChecked={setting.defaultChecked}
+                          onCheckedChange={(checked) => handleSwitchChange(setting.title, checked)}
+                        />
                       </div>
                     )
                   })}
