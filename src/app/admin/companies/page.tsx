@@ -31,11 +31,13 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
 
 
 type CompanyWithStatus = Company & { status: 'Verified' | 'Pending' };
 
 export default function AdminCompaniesPage() {
+  const { toast } = useToast();
   const companiesWithStatus: CompanyWithStatus[] = DUMMY_COMPANIES.map((company, index) => ({
     ...company,
     status: index % 4 === 0 ? 'Pending' : 'Verified',
@@ -43,6 +45,11 @@ export default function AdminCompaniesPage() {
 
   const [companies, setCompanies] = useState<CompanyWithStatus[]>(companiesWithStatus);
   const [searchTerm, setSearchTerm] = useState('');
+  
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [newCompanyName, setNewCompanyName] = useState('');
+  const [newCompanyIndustry, setNewCompanyIndustry] = useState('');
+  const [newCompanyLocation, setNewCompanyLocation] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
 
@@ -55,6 +62,48 @@ export default function AdminCompaniesPage() {
           }
           setIsUploading(false);
       }, 1500);
+  };
+  
+  const resetCreateForm = () => {
+    setNewCompanyName('');
+    setNewCompanyIndustry('');
+    setNewCompanyLocation('');
+    setUploadedImageUrl(null);
+  };
+  
+  const handleCreateCompany = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newCompany: CompanyWithStatus = {
+      id: `company-${Date.now()}`,
+      name: newCompanyName,
+      industry: newCompanyIndustry,
+      location: newCompanyLocation,
+      logo: uploadedImageUrl ? (PlaceHolderImages.find(p => p.imageUrl === uploadedImageUrl)?.id || 'company-logo-1') : 'company-logo-1',
+      description: 'A newly added company.',
+      website: `${newCompanyName.toLowerCase().replace(/\s+/g, '')}.com`,
+      employerId: `employer-${Date.now()}`,
+      activeJobs: 0,
+      rating: 0,
+      status: 'Pending',
+    };
+    setCompanies(prev => [newCompany, ...prev]);
+    toast({
+      title: 'Company Added',
+      description: `${newCompany.name} has been added and is pending verification.`,
+      variant: 'vibrant'
+    });
+    setIsCreateDialogOpen(false);
+    resetCreateForm();
+  };
+
+  const handleVerifyCompany = (companyId: string) => {
+    setCompanies(prev => prev.map(c => c.id === companyId ? { ...c, status: 'Verified' } : c));
+    toast({ title: "Company Verified!", variant: "vibrant" });
+  };
+
+  const handleDeleteCompany = (companyId: string) => {
+    setCompanies(prev => prev.filter(c => c.id !== companyId));
+    toast({ title: "Company Deleted", variant: "destructive" });
   };
 
   const filteredCompanies = companies
@@ -78,68 +127,70 @@ export default function AdminCompaniesPage() {
           <h1 className="font-headline text-3xl font-bold">Company Management</h1>
           <p className="text-muted-foreground">Manage all companies on the platform.</p>
         </div>
-        <Dialog>
+        <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-accent-gradient">
+            <Button className="bg-accent-gradient" onClick={() => setIsCreateDialogOpen(true)}>
               <PlusCircle className="mr-2 h-4 w-4" />
               Add New Company
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-lg">
-            <DialogHeader>
-              <DialogTitle>
-                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <PlusCircle className="h-5 w-5 text-primary" />
+            <form onSubmit={handleCreateCompany}>
+              <DialogHeader>
+                <DialogTitle>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <PlusCircle className="h-5 w-5 text-primary" />
+                    </div>
+                    <span>Add New Company</span>
                   </div>
-                  <span>Add New Company</span>
+                </DialogTitle>
+                <DialogDescription>
+                  Fill in the details below to add a new company to the platform.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Company Name</Label>
+                  <Input id="name" placeholder="Innovate Inc." value={newCompanyName} onChange={e => setNewCompanyName(e.target.value)} required />
                 </div>
-              </DialogTitle>
-              <DialogDescription>
-                Fill in the details below to add a new company to the platform.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Company Name</Label>
-                <Input id="name" placeholder="Innovate Inc." />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="logo">Company Logo</Label>
-                 <div className="flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-lg">
-                    {isUploading ? (
-                        <Loader2 className="w-8 h-8 text-muted-foreground animate-spin" />
-                    ) : uploadedImageUrl ? (
-                        <Image src={uploadedImageUrl} alt="Uploaded preview" width={60} height={60} className="rounded-md object-cover" />
-                    ) : (
-                        <Upload className="w-8 h-8 text-muted-foreground" />
-                    )}
-                    <p className="mt-2 text-sm text-muted-foreground">
-                        {isUploading ? 'Uploading...' : uploadedImageUrl ? 'Logo selected. ' : 'Drag & drop or '}
-                        {!uploadedImageUrl && !isUploading && (
-                            <Button variant="link" className="p-0 h-auto" onClick={handleImageUpload}>click to upload</Button>
-                        )}
-                        {uploadedImageUrl && !isUploading && (
-                            <Button variant="link" className="p-0 h-auto text-destructive" onClick={() => setUploadedImageUrl(null)}>Remove</Button>
-                        )}
-                    </p>
+                <div className="space-y-2">
+                  <Label htmlFor="logo">Company Logo</Label>
+                  <div className="flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-lg">
+                      {isUploading ? (
+                          <Loader2 className="w-8 h-8 text-muted-foreground animate-spin" />
+                      ) : uploadedImageUrl ? (
+                          <Image src={uploadedImageUrl} alt="Uploaded preview" width={60} height={60} className="rounded-md object-cover" />
+                      ) : (
+                          <Upload className="w-8 h-8 text-muted-foreground" />
+                      )}
+                      <p className="mt-2 text-sm text-muted-foreground">
+                          {isUploading ? 'Uploading...' : uploadedImageUrl ? 'Logo selected. ' : 'Drag & drop or '}
+                          {!uploadedImageUrl && !isUploading && (
+                              <Button variant="link" className="p-0 h-auto" type="button" onClick={handleImageUpload}>click to upload</Button>
+                          )}
+                          {uploadedImageUrl && !isUploading && (
+                              <Button variant="link" className="p-0 h-auto text-destructive" type="button" onClick={() => setUploadedImageUrl(null)}>Remove</Button>
+                          )}
+                      </p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="industry">Industry</Label>
+                  <Input id="industry" placeholder="e.g., Tech, Finance" value={newCompanyIndustry} onChange={e => setNewCompanyIndustry(e.target.value)} required />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="location">Location</Label>
+                  <Input id="location" placeholder="e.g., Accra, Ghana" value={newCompanyLocation} onChange={e => setNewCompanyLocation(e.target.value)} required />
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="industry">Industry</Label>
-                <Input id="industry" placeholder="e.g., Tech, Finance" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="location">Location</Label>
-                <Input id="location" placeholder="e.g., Accra, Ghana" />
-              </div>
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button type="submit" className="bg-accent-gradient">Add Company</Button>
-            </DialogFooter>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button type="button" variant="outline">Cancel</Button>
+                </DialogClose>
+                <Button type="submit" className="bg-accent-gradient">Add Company</Button>
+              </DialogFooter>
+            </form>
           </DialogContent>
         </Dialog>
       </div>
@@ -205,9 +256,9 @@ export default function AdminCompaniesPage() {
                     <DropdownMenuContent align="end" className="w-48">
                       <DropdownMenuItem asChild><Link href={`/companies/${company.id}`}>View Profile</Link></DropdownMenuItem>
                       <DropdownMenuItem>Edit Company</DropdownMenuItem>
-                       {company.status === 'Pending' && <DropdownMenuItem>Verify Company</DropdownMenuItem>}
+                       {company.status === 'Pending' && <DropdownMenuItem onClick={() => handleVerifyCompany(company.id)}>Verify Company</DropdownMenuItem>}
                        <DropdownMenuSeparator />
-                      <DropdownMenuItem className="text-destructive">Delete Company</DropdownMenuItem>
+                      <DropdownMenuItem className="text-destructive" onClick={() => handleDeleteCompany(company.id)}>Delete Company</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
               </CardFooter>

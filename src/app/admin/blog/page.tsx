@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { DUMMY_BLOG_POSTS } from '@/lib/data';
+import { DUMMY_BLOG_POSTS, DUMMY_USERS } from '@/lib/data';
 import type { BlogPost } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardFooter, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -41,8 +41,14 @@ export default function AdminBlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>(DUMMY_BLOG_POSTS);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  
+  // State for new post dialog
   const [isUploading, setIsUploading] = useState(false);
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [newPostTitle, setNewPostTitle] = useState('');
+  const [newPostExcerpt, setNewPostExcerpt] = useState('');
+  const [newPostContent, setNewPostContent] = useState('');
 
   const handleImageUpload = () => {
       setIsUploading(true);
@@ -55,6 +61,36 @@ export default function AdminBlogPage() {
       }, 1500);
   };
 
+  const resetCreateForm = () => {
+    setNewPostTitle('');
+    setNewPostExcerpt('');
+    setNewPostContent('');
+    setUploadedImageUrl(null);
+  };
+
+  const handleCreatePost = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newPost: BlogPost = {
+      id: `post-${Date.now()}`,
+      title: newPostTitle,
+      excerpt: newPostExcerpt,
+      content: newPostContent,
+      slug: newPostTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      author: DUMMY_USERS[2], // Assume admin is user 3
+      date: new Date().toISOString(),
+      image: uploadedImageUrl ? (PlaceHolderImages.find(p => p.imageUrl === uploadedImageUrl)?.id || 'blog-post-1') : 'blog-post-1',
+      status: 'Draft'
+    };
+    setPosts(prev => [newPost, ...prev]);
+    toast({
+      title: 'Draft Created',
+      description: `The post "${newPost.title}" has been saved as a draft.`,
+      variant: 'vibrant'
+    });
+    setIsCreateDialogOpen(false);
+    resetCreateForm();
+  };
+
   const handleStatusChange = (postId: string, newStatus: BlogPost['status']) => {
     setPosts(posts.map(p => p.id === postId ? { ...p, status: newStatus } : p));
     toast({
@@ -63,6 +99,14 @@ export default function AdminBlogPage() {
       variant: 'vibrant'
     });
   };
+
+  const handleDeletePost = (postId: string) => {
+    setPosts(posts.filter(p => p.id !== postId));
+     toast({
+      title: 'Post Deleted',
+      variant: 'destructive'
+    });
+  }
 
   const filteredPosts = posts
     .filter(post => 
@@ -93,72 +137,70 @@ export default function AdminBlogPage() {
           <h1 className="font-headline text-3xl font-bold">Blog Management</h1>
           <p className="text-muted-foreground">Manage all blog posts on the platform.</p>
         </div>
-        <Dialog>
+        <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
           <DialogTrigger asChild>
-             <Button className="bg-accent-gradient">
+             <Button className="bg-accent-gradient" onClick={() => setIsCreateDialogOpen(true)}>
               <PlusCircle className="mr-2 h-4 w-4" />
               Create New Post
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-2xl">
-            <DialogHeader>
-              <DialogTitle>
-                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <PlusCircle className="h-5 w-5 text-primary" />
+            <form onSubmit={handleCreatePost}>
+              <DialogHeader>
+                <DialogTitle>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <PlusCircle className="h-5 w-5 text-primary" />
+                    </div>
+                    <span>Create New Blog Post</span>
                   </div>
-                  <span>Create New Blog Post</span>
+                </DialogTitle>
+                <DialogDescription>
+                  Fill in the details below to create a new draft.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="space-y-2">
+                  <Label htmlFor="title">Post Title</Label>
+                  <Input id="title" placeholder="How to Ace Your Next Interview" value={newPostTitle} onChange={e => setNewPostTitle(e.target.value)} required/>
                 </div>
-              </DialogTitle>
-              <DialogDescription>
-                Fill in the details below to create a new draft.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="space-y-2">
-                <Label htmlFor="title">Post Title</Label>
-                <Input id="title" placeholder="How to Ace Your Next Interview" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="excerpt">Excerpt</Label>
-                <Textarea id="excerpt" placeholder="A short summary of the post..." rows={3} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="feature-image">Feature Image</Label>
-                 <div className="flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-lg">
-                    {isUploading ? (
-                        <Loader2 className="w-8 h-8 text-muted-foreground animate-spin" />
-                    ) : uploadedImageUrl ? (
-                        <Image src={uploadedImageUrl} alt="Uploaded preview" width={100} height={60} className="rounded-md object-cover" />
-                    ) : (
-                        <Upload className="w-8 h-8 text-muted-foreground" />
-                    )}
-                    <p className="mt-2 text-sm text-muted-foreground">
-                        {isUploading ? 'Uploading...' : uploadedImageUrl ? 'Image selected. ' : 'Drag & drop or '}
-                        {!uploadedImageUrl && !isUploading && (
-                            <Button variant="link" className="p-0 h-auto" onClick={handleImageUpload}>click to upload</Button>
-                        )}
-                        {uploadedImageUrl && !isUploading && (
-                            <Button variant="link" className="p-0 h-auto text-destructive" onClick={() => setUploadedImageUrl(null)}>Remove</Button>
-                        )}
-                    </p>
+                <div className="space-y-2">
+                  <Label htmlFor="excerpt">Excerpt</Label>
+                  <Textarea id="excerpt" placeholder="A short summary of the post..." rows={3} value={newPostExcerpt} onChange={e => setNewPostExcerpt(e.target.value)} required />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="feature-image">Feature Image</Label>
+                  <div className="flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-lg">
+                      {isUploading ? (
+                          <Loader2 className="w-8 h-8 text-muted-foreground animate-spin" />
+                      ) : uploadedImageUrl ? (
+                          <Image src={uploadedImageUrl} alt="Uploaded preview" width={100} height={60} className="rounded-md object-cover" />
+                      ) : (
+                          <Upload className="w-8 h-8 text-muted-foreground" />
+                      )}
+                      <p className="mt-2 text-sm text-muted-foreground">
+                          {isUploading ? 'Uploading...' : uploadedImageUrl ? 'Image selected. ' : 'Drag & drop or '}
+                          {!uploadedImageUrl && !isUploading && (
+                              <Button variant="link" className="p-0 h-auto" onClick={handleImageUpload} type="button">click to upload</Button>
+                          )}
+                          {uploadedImageUrl && !isUploading && (
+                              <Button variant="link" className="p-0 h-auto text-destructive" onClick={() => setUploadedImageUrl(null)} type="button">Remove</Button>
+                          )}
+                      </p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="content">Content (Markdown supported)</Label>
+                  <Textarea id="content" placeholder="Write your blog post here..." rows={10} value={newPostContent} onChange={e => setNewPostContent(e.target.value)} required />
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="tags">Tags</Label>
-                <Input id="tags" placeholder="e.g., React, Career, Interview (comma-separated)" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="content">Content</Label>
-                <Textarea id="content" placeholder="Write your blog post here..." rows={10} />
-              </div>
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button type="submit" className="bg-accent-gradient">Save Draft</Button>
-            </DialogFooter>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button type="button" variant="outline">Cancel</Button>
+                </DialogClose>
+                <Button type="submit" className="bg-accent-gradient">Save Draft</Button>
+              </DialogFooter>
+            </form>
           </DialogContent>
         </Dialog>
       </div>
@@ -241,7 +283,7 @@ export default function AdminBlogPage() {
                        {post.status === 'Published' && <DropdownMenuItem onClick={() => handleStatusChange(post.id, 'Draft')}>Unpublish (Set to Draft)</DropdownMenuItem>}
                        {(post.status === 'Draft' || post.status === 'Rejected') && <DropdownMenuItem onClick={() => handleStatusChange(post.id, 'Published')}>Publish</DropdownMenuItem>}
                        <DropdownMenuSeparator />
-                      <DropdownMenuItem className="text-destructive">Delete Post</DropdownMenuItem>
+                      <DropdownMenuItem className="text-destructive" onClick={() => handleDeletePost(post.id)}>Delete Post</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
               </CardFooter>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { DUMMY_JOBS } from '@/lib/data';
 import type { Job } from '@/lib/types';
 import ModerationCard from '@/app/admin/components/moderation-card';
@@ -9,6 +9,10 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileSearch, ShieldCheck, ShieldX, ShieldQuestion, Building } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
+
+type ModerationStatus = 'pending' | 'flagged' | 'approved' | 'rejected';
+type JobWithModStatus = Job & { moderationStatus: ModerationStatus };
 
 type JobListProps = {
   jobs: Job[];
@@ -49,16 +53,39 @@ const JobList = ({ jobs, selectedJob, onSelectJob, title }: JobListProps) => (
 );
 
 export default function ModerationPage() {
-    const pendingJobs = DUMMY_JOBS.slice(0, 5);
-    const flaggedJobs = DUMMY_JOBS.slice(5, 7);
-    const approvedJobs = DUMMY_JOBS.slice(7, 10);
-    const rejectedJobs = DUMMY_JOBS.slice(10, 12);
+    const { toast } = useToast();
+    const [jobs, setJobs] = useState<JobWithModStatus[]>(() => 
+        DUMMY_JOBS.map((job, i) => {
+            if (i < 5) return { ...job, moderationStatus: 'pending' };
+            if (i >= 5 && i < 7) return { ...job, moderationStatus: 'flagged' };
+            if (i >= 7 && i < 10) return { ...job, moderationStatus: 'approved' };
+            return { ...job, moderationStatus: 'rejected' };
+        })
+    );
+
+    const pendingJobs = useMemo(() => jobs.filter(j => j.moderationStatus === 'pending'), [jobs]);
+    const flaggedJobs = useMemo(() => jobs.filter(j => j.moderationStatus === 'flagged'), [jobs]);
+    const approvedJobs = useMemo(() => jobs.filter(j => j.moderationStatus === 'approved'), [jobs]);
+    const rejectedJobs = useMemo(() => jobs.filter(j => j.moderationStatus === 'rejected'), [jobs]);
     
     const [selectedPendingJob, setSelectedPendingJob] = useState<Job | null>(pendingJobs[0] || null);
     const [selectedFlaggedJob, setSelectedFlaggedJob] = useState<Job | null>(flaggedJobs[0] || null);
     const [selectedApprovedJob, setSelectedApprovedJob] = useState<Job | null>(approvedJobs[0] || null);
     const [selectedRejectedJob, setSelectedRejectedJob] = useState<Job | null>(rejectedJobs[0] || null);
+    
+    const handleStatusChange = (jobId: string, status: ModerationStatus) => {
+        setJobs(prevJobs => prevJobs.map(j => j.id === jobId ? { ...j, moderationStatus: status } : j));
+    };
 
+    const handleApprove = (jobId: string) => {
+        handleStatusChange(jobId, 'approved');
+        toast({ title: "Job Approved", description: "The job is now public.", variant: 'vibrant' });
+    };
+
+    const handleReject = (jobId: string) => {
+        handleStatusChange(jobId, 'rejected');
+        toast({ title: "Job Rejected", description: "The job has been moved to the rejected queue.", variant: 'destructive' });
+    };
 
   return (
     <div className="space-y-8">
@@ -82,7 +109,7 @@ export default function ModerationPage() {
                 </div>
                 <div className="lg:col-span-2">
                     {selectedPendingJob ? (
-                         <ModerationCard key={selectedPendingJob.id} job={selectedPendingJob} />
+                         <ModerationCard key={selectedPendingJob.id} job={selectedPendingJob} onApprove={handleApprove} onReject={handleReject} />
                     ) : (
                         <Card className="h-full flex items-center justify-center min-h-[676px]">
                             <p className="text-muted-foreground">Select a job to review.</p>
@@ -98,7 +125,7 @@ export default function ModerationPage() {
                 </div>
                 <div className="lg:col-span-2">
                     {selectedFlaggedJob ? (
-                        <ModerationCard key={selectedFlaggedJob.id} job={selectedFlaggedJob} aiFlagged />
+                        <ModerationCard key={selectedFlaggedJob.id} job={selectedFlaggedJob} aiFlagged onApprove={handleApprove} onReject={handleReject} />
                     ) : (
                          <Card className="h-full flex items-center justify-center min-h-[676px]">
                             <p className="text-muted-foreground">No flagged jobs to review.</p>
@@ -114,7 +141,7 @@ export default function ModerationPage() {
                 </div>
                 <div className="lg:col-span-2">
                     {selectedApprovedJob ? (
-                        <ModerationCard key={selectedApprovedJob.id} job={selectedApprovedJob} />
+                        <ModerationCard key={selectedApprovedJob.id} job={selectedApprovedJob} onApprove={handleApprove} onReject={handleReject} />
                     ) : (
                          <Card className="h-full flex items-center justify-center min-h-[676px]">
                             <p className="text-muted-foreground">No approved jobs to display.</p>
@@ -130,7 +157,7 @@ export default function ModerationPage() {
                 </div>
                 <div className="lg:col-span-2">
                      {selectedRejectedJob ? (
-                        <ModerationCard key={selectedRejectedJob.id} job={selectedRejectedJob} />
+                        <ModerationCard key={selectedRejectedJob.id} job={selectedRejectedJob} onApprove={handleApprove} onReject={handleReject}/>
                     ) : (
                          <Card className="h-full flex items-center justify-center min-h-[676px]">
                             <p className="text-muted-foreground">No rejected jobs to display.</p>

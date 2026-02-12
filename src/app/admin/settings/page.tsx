@@ -10,10 +10,20 @@ import { Globe, Briefcase, Users, Shield, KeyRound, Bell, Save } from 'lucide-re
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { useToast } from "@/hooks/use-toast";
 
 export default function AdminSettingsPage() {
+  const { toast } = useToast();
   const artImage = PlaceHolderImages.find((img) => img.id === 'find-job-1');
   
+  const handleSave = () => {
+    toast({
+      title: "Settings Saved",
+      description: "Your platform settings have been updated.",
+      variant: "vibrant"
+    });
+  }
+
   return (
     <div className="space-y-8">
       <div>
@@ -175,7 +185,7 @@ export default function AdminSettingsPage() {
               </TabsContent>
             </Tabs>
             <div className="flex justify-end mt-8">
-              <Button size="lg"><Save className="mr-2" /> Save All Settings</Button>
+              <Button size="lg" onClick={handleSave}><Save className="mr-2" /> Save All Settings</Button>
             </div>
         </div>
         <div className="hidden lg:block">

@@ -32,11 +32,20 @@ import {
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import Image from 'next/image';
+import { useToast } from '@/hooks/use-toast';
 
 export default function AdminUsersPage() {
+  const { toast } = useToast();
   const [users, setUsers] = useState<User[]>(DUMMY_USERS);
   const [searchTerm, setSearchTerm] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
+  
+  // State for create user dialog
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [newFirstName, setNewFirstName] = useState('');
+  const [newLastName, setNewLastName] = useState('');
+  const [newEmail, setNewEmail] = useState('');
+  const [newRole, setNewRole] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
 
@@ -50,7 +59,41 @@ export default function AdminUsersPage() {
           setIsUploading(false);
       }, 1500);
   };
-
+  
+  const resetCreateForm = () => {
+    setNewFirstName('');
+    setNewLastName('');
+    setNewEmail('');
+    setNewRole('');
+    setUploadedImageUrl(null);
+  };
+  
+  const handleCreateUser = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newUser: User = {
+      id: `user-${Date.now()}`,
+      name: `${newFirstName} ${newLastName}`,
+      email: newEmail,
+      role: newRole,
+      avatar: uploadedImageUrl ? (PlaceHolderImages.find(p => p.imageUrl === uploadedImageUrl)?.id || 'avatar-1') : 'avatar-1',
+    };
+    setUsers(prev => [newUser, ...prev]);
+    toast({
+      title: 'User Created',
+      description: `${newUser.name} has been added to the platform.`,
+      variant: 'vibrant'
+    });
+    setIsCreateDialogOpen(false);
+    resetCreateForm();
+  };
+  
+  const handleBanUser = (userName: string) => {
+    toast({
+      title: 'User Banned',
+      description: `${userName} has been banned from the platform.`,
+      variant: 'destructive'
+    });
+  };
 
   const filteredUsers = users
     .filter(user => 
@@ -89,87 +132,89 @@ export default function AdminUsersPage() {
           <h1 className="font-headline text-3xl font-bold">User Management</h1>
           <p className="text-muted-foreground">Manage all users on the platform.</p>
         </div>
-         <Dialog>
+         <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-accent-gradient">
+            <Button className="bg-accent-gradient" onClick={() => setIsCreateDialogOpen(true)}>
               <PlusCircle className="mr-2 h-4 w-4" />
               Add New User
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-lg">
-            <DialogHeader>
-              <DialogTitle>
-                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <PlusCircle className="h-5 w-5 text-primary" />
+            <form onSubmit={handleCreateUser}>
+              <DialogHeader>
+                <DialogTitle>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <PlusCircle className="h-5 w-5 text-primary" />
+                    </div>
+                    <span>Add New User</span>
                   </div>
-                  <span>Add New User</span>
+                </DialogTitle>
+                <DialogDescription>
+                  Fill in the details below to create a new user account.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input id="firstName" placeholder="John" value={newFirstName} onChange={e => setNewFirstName(e.target.value)} required />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input id="lastName" placeholder="Doe" value={newLastName} onChange={e => setNewLastName(e.target.value)} required />
+                  </div>
                 </div>
-              </DialogTitle>
-              <DialogDescription>
-                Fill in the details below to create a new user account.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input id="firstName" placeholder="John" />
+                  <Label htmlFor="avatar">Profile Picture</Label>
+                  <div className="flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-lg">
+                      {isUploading ? (
+                          <Loader2 className="w-8 h-8 text-muted-foreground animate-spin" />
+                      ) : uploadedImageUrl ? (
+                          <Image src={uploadedImageUrl} alt="Uploaded preview" width={60} height={60} className="rounded-full object-cover" />
+                      ) : (
+                          <Upload className="w-8 h-8 text-muted-foreground" />
+                      )}
+                      <p className="mt-2 text-sm text-muted-foreground">
+                          {isUploading ? 'Uploading...' : uploadedImageUrl ? 'Avatar selected. ' : 'Drag & drop or '}
+                          {!uploadedImageUrl && !isUploading && (
+                              <Button variant="link" className="p-0 h-auto" type="button" onClick={handleImageUpload}>click to upload</Button>
+                          )}
+                          {uploadedImageUrl && !isUploading && (
+                              <Button variant="link" className="p-0 h-auto text-destructive" type="button" onClick={() => setUploadedImageUrl(null)}>Remove</Button>
+                          )}
+                      </p>
+                  </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input id="lastName" placeholder="Doe" />
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" placeholder="john.doe@example.com" value={newEmail} onChange={e => setNewEmail(e.target.value)} required />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input id="password" type="password" placeholder="Create a strong password" required />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="role">Role</Label>
+                  <Select onValueChange={setNewRole} required>
+                    <SelectTrigger id="role">
+                      <SelectValue placeholder="Select a role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {uniqueRoles.map(role => (
+                        <SelectItem key={role} value={role}>{role}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
-               <div className="space-y-2">
-                <Label htmlFor="avatar">Profile Picture</Label>
-                <div className="flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-lg">
-                    {isUploading ? (
-                        <Loader2 className="w-8 h-8 text-muted-foreground animate-spin" />
-                    ) : uploadedImageUrl ? (
-                        <Image src={uploadedImageUrl} alt="Uploaded preview" width={60} height={60} className="rounded-full object-cover" />
-                    ) : (
-                        <Upload className="w-8 h-8 text-muted-foreground" />
-                    )}
-                    <p className="mt-2 text-sm text-muted-foreground">
-                        {isUploading ? 'Uploading...' : uploadedImageUrl ? 'Avatar selected. ' : 'Drag & drop or '}
-                        {!uploadedImageUrl && !isUploading && (
-                            <Button variant="link" className="p-0 h-auto" onClick={handleImageUpload}>click to upload</Button>
-                        )}
-                        {uploadedImageUrl && !isUploading && (
-                            <Button variant="link" className="p-0 h-auto text-destructive" onClick={() => setUploadedImageUrl(null)}>Remove</Button>
-                        )}
-                    </p>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="john.doe@example.com" />
-              </div>
-               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" placeholder="Create a strong password" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="role">Role</Label>
-                <Select>
-                  <SelectTrigger id="role">
-                    <SelectValue placeholder="Select a role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="jobSeeker">Job Seeker</SelectItem>
-                    <SelectItem value="employer">Employer</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button type="submit" className="bg-accent-gradient">Create User</Button>
-            </DialogFooter>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button type="button" variant="outline">Cancel</Button>
+                </DialogClose>
+                <Button type="submit" className="bg-accent-gradient">Create User</Button>
+              </DialogFooter>
+            </form>
           </DialogContent>
         </Dialog>
       </div>
@@ -238,7 +283,7 @@ export default function AdminUsersPage() {
                             <DropdownMenuItem><UserIcon className="mr-2"/>View Profile</DropdownMenuItem>
                             <DropdownMenuItem>Edit User</DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem className="text-destructive">Ban User</DropdownMenuItem>
+                            <DropdownMenuItem className="text-destructive" onClick={() => handleBanUser(user.name)}>Ban User</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>

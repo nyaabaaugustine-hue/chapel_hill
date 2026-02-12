@@ -15,9 +15,11 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 type ModerationCardProps = {
   job: Job;
   aiFlagged?: boolean;
+  onApprove: (jobId: string) => void;
+  onReject: (jobId: string) => void;
 };
 
-export default function ModerationCard({ job, aiFlagged = false }: ModerationCardProps) {
+export default function ModerationCard({ job, aiFlagged = false, onApprove, onReject }: ModerationCardProps) {
   const [moderationResult, setModerationResult] = useState<ModerateJobPostOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -97,10 +99,10 @@ export default function ModerationCard({ job, aiFlagged = false }: ModerationCar
                 Moderate with AI
               </Button>
               <div className="flex gap-2">
-                  <Button variant="destructive" className="w-full">
+                  <Button variant="destructive" className="w-full" onClick={() => onReject(job.id)}>
                       <XCircle className="mr-2 h-4 w-4" /> Reject
                   </Button>
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700" onClick={() => onApprove(job.id)}>
                       <CheckCircle className="mr-2 h-4 w-4" /> Approve
                   </Button>
               </div>
