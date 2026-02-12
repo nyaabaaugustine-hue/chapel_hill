@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -82,6 +83,7 @@ export default function JobDetailPage() {
     // Create new applicant record for employer dashboard
     const newApplicant: Applicant = {
         id: `applicant-${Date.now()}`,
+        userId: currentUser.id,
         name: currentUser.name,
         email: currentUser.email,
         avatar: currentUser.avatar,
