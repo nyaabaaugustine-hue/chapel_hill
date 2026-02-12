@@ -1,7 +1,6 @@
-
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { Job } from '@/lib/types';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
@@ -11,49 +10,19 @@ import { DUMMY_OPPORTUNITIES, DUMMY_JOBS } from '@/lib/data';
 import JobCard from '@/components/job-card';
 import PageHero from '@/components/shared/page-hero';
 import { cn } from '@/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
-
-const OpportunityCardSkeleton = () => (
-    <Card className="text-center h-full">
-        <CardHeader className="items-center">
-            <Skeleton className="h-16 w-16 rounded-full" />
-        </CardHeader>
-        <CardContent>
-            <Skeleton className="h-6 w-3/4 mx-auto mb-2" />
-            <Skeleton className="h-4 w-full mx-auto" />
-            <Skeleton className="h-4 w-5/6 mx-auto mt-1" />
-        </CardContent>
-    </Card>
-);
 
 export default function OpportunitiesPage() {
   const [filter, setFilter] = useState<'all' | 'internship' | 'volunteer'>('all');
-  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setIsLoading(true);
-    const allOpportunityJobs = DUMMY_JOBS.filter(
-      (job) => job.type === 'Internship' || job.type === 'Volunteer'
-    );
+  const allOpportunityJobs = DUMMY_JOBS.filter(
+    (job) => job.type === 'Internship' || job.type === 'Volunteer'
+  );
 
-    let jobsToDisplay: Job[];
+  const filteredJobs =
+    filter === 'all'
+      ? allOpportunityJobs
+      : allOpportunityJobs.filter((job) => job.type.toLowerCase() === filter);
 
-    if (filter === 'internship') {
-      jobsToDisplay = allOpportunityJobs.filter(job => job.type === 'Internship');
-    } else if (filter === 'volunteer') {
-      jobsToDisplay = allOpportunityJobs.filter(job => job.type === 'Volunteer');
-    } else {
-      jobsToDisplay = allOpportunityJobs;
-    }
-    
-    // Simulate network delay
-    setTimeout(() => {
-        setFilteredJobs(jobsToDisplay);
-        setIsLoading(false);
-    }, 300);
-
-  }, [filter]);
 
   const getSectionTitle = () => {
     switch (filter) {
@@ -95,7 +64,8 @@ export default function OpportunitiesPage() {
                     "text-center h-full transition-all duration-300 cursor-pointer group",
                     filter === opportunity.filterValue 
                         ? 'ring-2 ring-primary shadow-xl -translate-y-1' 
-                        : 'hover:shadow-xl hover:-translate-y-1'
+                        : 'hover:shadow-xl hover:-translate-y-1',
+                    filter !== 'all' && filter !== opportunity.filterValue && 'opacity-60 scale-95'
                 )}
               >
                 <CardHeader className="items-center">
@@ -117,11 +87,11 @@ export default function OpportunitiesPage() {
               subtitle={getSectionSubtitle()}
             />
              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {isLoading ? (
-                Array.from({ length: 3 }).map((_, i) => <JobCard key={i} job={DUMMY_JOBS[0]} />)
-              ) : filteredJobs.length > 0 ? (
+              {filteredJobs.length > 0 ? (
                 filteredJobs.map((job) => (
-                  <JobCard key={job.id} job={job} />
+                  <div key={job.id} className="animate-in fade-in-50 duration-500">
+                    <JobCard job={job} />
+                  </div>
                 ))
               ) : (
                 <div className="md:col-span-3 text-center text-muted-foreground p-8 bg-secondary rounded-lg">

@@ -64,14 +64,24 @@ export const DUMMY_JOBS: Job[] = Array.from({ length: 20 }, (_, i) => {
     const category = JOB_CATEGORIES[i % JOB_CATEGORIES.length].name;
     const types: Job['type'][] = ['Full-time', 'Part-time', 'Contract', 'Internship', 'Volunteer'];
     const experienceLevels: Job['experienceLevel'][] = ['Entry', 'Mid-level', 'Senior'];
+
+    const jobType = types[i % types.length];
+    let experienceLevel: Job['experienceLevel'];
+
+    if (jobType === 'Internship' || jobType === 'Volunteer') {
+        experienceLevel = 'Entry';
+    } else {
+        experienceLevel = experienceLevels[i % experienceLevels.length];
+    }
+
     return {
         id: `job-${i + 1}`,
-        title: `${experienceLevels[i%3]} ${category}`,
+        title: `${experienceLevel} ${category}`,
         description: 'We are looking for a talented individual to join our team. This role involves developing and maintaining our core products, collaborating with cross-functional teams to deliver high-quality solutions.',
         company: company,
         location: ['Accra', 'Kumasi', 'Remote'][i % 3],
-        type: types[i % types.length],
-        experienceLevel: experienceLevels[i % experienceLevels.length],
+        type: jobType,
+        experienceLevel: experienceLevel,
         salaryRange: `GH₵${(i+1) * 2}k - GH₵${(i+1) * 3}k`,
         skills: ['React', 'TypeScript', 'Node.js', 'Next.js', 'GraphQL', 'Figma', 'Project Management'].slice(i % 4, (i % 4) + 3),
         isUrgent: i % 5 === 0,
