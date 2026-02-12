@@ -27,38 +27,88 @@ const mockEducation = [
 
 const mockSkills = ['React', 'TypeScript', 'Next.js', 'Node.js', 'GraphQL', 'JavaScript', 'Redux', 'Tailwind CSS', 'Figma', 'CI/CD'];
 
+const CandidateProfileSkeleton = () => (
+    <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="flex-1 bg-background bg-hero-glow py-16 md:py-24">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                    <aside className="space-y-6 lg:order-last lg:sticky lg:top-24 self-start">
+                        <Card className="text-center">
+                            <CardContent className="p-6">
+                                <Skeleton className="h-32 w-32 rounded-full mx-auto mb-4" />
+                                <Skeleton className="h-7 w-48 mx-auto" />
+                                <Skeleton className="h-4 w-56 mx-auto mt-2" />
+                                <Skeleton className="h-4 w-32 mx-auto mt-2" />
+                            </CardContent>
+                            <CardContent className="border-t p-6 space-y-3">
+                                <Skeleton className="h-10 w-full" />
+                                <Skeleton className="h-10 w-full" />
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardHeader><Skeleton className="h-6 w-32" /></CardHeader>
+                            <CardContent className="space-y-6">
+                                <Skeleton className="h-5 w-full" />
+                                <Skeleton className="h-5 w-full" />
+                                <Skeleton className="h-5 w-full" />
+                                <Skeleton className="h-5 w-full" />
+                            </CardContent>
+                        </Card>
+                    </aside>
+                    <div className="lg:col-span-2 space-y-8">
+                        <Card>
+                            <CardHeader><Skeleton className="h-7 w-32" /></CardHeader>
+                            <CardContent className="space-y-2">
+                                <Skeleton className="h-4 w-full" />
+                                <Skeleton className="h-4 w-full" />
+                                <Skeleton className="h-4 w-5/6" />
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardHeader><Skeleton className="h-7 w-48" /></CardHeader>
+                            <CardContent className="space-y-6">
+                                <div className="flex gap-4">
+                                    <Skeleton className="h-12 w-12 rounded-lg" />
+                                    <div className="flex-1 space-y-2">
+                                        <Skeleton className="h-4 w-3/4" />
+                                        <Skeleton className="h-4 w-1/2" />
+                                        <Skeleton className="h-4 w-1/3" />
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <Skeleton className="h-12 w-12 rounded-lg" />
+                                    <div className="flex-1 space-y-2">
+                                        <Skeleton className="h-4 w-3/4" />
+                                        <Skeleton className="h-4 w-1/2" />
+                                        <Skeleton className="h-4 w-1/3" />
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <Footer />
+    </div>
+);
+
 
 export default function CandidateProfilePage() {
   const params = useParams();
   const id = params.id as string;
   const { toast } = useToast();
 
-  const [user, setUser] = useState<(typeof DUMMY_USERS)[0] | null>(null);
+  const [user, setUser] = useState<(typeof DUMMY_USERS)[0] | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     const foundUser = DUMMY_USERS.find((u) => u.id === id);
-    if (foundUser) {
-      setUser(foundUser);
-    } else {
-      // In a real app, you might redirect or show a not found component
-      // For this demo, we'll just log it.
-      console.error("User not found");
-    }
+    setUser(foundUser);
+    setIsLoading(false);
   }, [id]);
-
-  if (!user) {
-    return (
-       <div className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-1 bg-background bg-hero-glow py-16 md:py-24">
-            <div className="container mx-auto px-4 md:px-6">
-                <Skeleton className="h-screen w-full" />
-            </div>
-        </main>
-        <Footer />
-       </div>
-    );
-  }
 
   const handleAction = (title: string) => {
     toast({
@@ -67,6 +117,14 @@ export default function CandidateProfilePage() {
         variant: 'vibrant'
     });
   };
+
+  if (isLoading) {
+    return <CandidateProfileSkeleton />;
+  }
+
+  if (!user) {
+    notFound();
+  }
 
   const userAvatar = PlaceHolderImages.find((img) => img.id === user.avatar);
 
