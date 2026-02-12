@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
 import { DUMMY_USERS, DUMMY_APPLICANTS } from '@/lib/data';
@@ -96,8 +96,8 @@ const CandidateProfileSkeleton = () => (
 );
 
 
-export default function CandidateProfilePage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default function CandidateProfilePage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const { id } = React.use(paramsPromise);
   const { toast } = useToast();
 
   const [user, setUser] = useState<(typeof DUMMY_USERS)[0] | undefined>(undefined);
