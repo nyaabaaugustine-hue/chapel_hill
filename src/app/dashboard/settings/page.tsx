@@ -7,8 +7,35 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Save, Bell, EyeOff, Lock, Trash2, UserCircle } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function CandidateSettingsPage() {
+  const { toast } = useToast();
+
+  const handleSave = () => {
+    toast({
+      title: "Settings Saved",
+      description: "Your changes have been successfully saved.",
+      variant: 'vibrant'
+    });
+  };
+
+  const handleUpdatePassword = () => {
+    toast({
+      title: "Password Updated",
+      description: "Your password has been changed.",
+      variant: 'vibrant'
+    });
+  };
+
+  const handleDeleteAccount = () => {
+    toast({
+      title: "Account Deletion Initiated",
+      description: "This is a demo. Your account has not been deleted.",
+      variant: 'destructive'
+    });
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -58,7 +85,7 @@ export default function CandidateSettingsPage() {
                 <Label htmlFor="confirm-password">Confirm New Password</Label>
                 <Input id="confirm-password" type="password" />
               </div>
-              <Button variant="outline">Update Password</Button>
+              <Button variant="outline" onClick={handleUpdatePassword}>Update Password</Button>
             </CardContent>
           </Card>
 
@@ -115,11 +142,11 @@ export default function CandidateSettingsPage() {
                 </CardHeader>
                 <CardContent>
                     <p className="text-sm text-muted-foreground mb-4">Once you delete your account, there is no going back. Please be certain.</p>
-                    <Button variant="destructive" className="w-full">Delete My Account</Button>
+                    <Button variant="destructive" className="w-full" onClick={handleDeleteAccount}>Delete My Account</Button>
                 </CardContent>
             </Card>
 
-             <Button size="lg" className="w-full bg-accent-gradient">
+             <Button size="lg" className="w-full bg-accent-gradient" onClick={handleSave}>
               <Save className="mr-2 h-4 w-4" /> Save All Changes
             </Button>
         </div>

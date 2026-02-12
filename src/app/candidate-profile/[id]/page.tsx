@@ -1,15 +1,20 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
 import { DUMMY_USERS } from '@/lib/data';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Briefcase, Building, Calendar, GraduationCap, Globe, Mail, MapPin, Phone, Star, Wand2, FileText, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { useToast } from '@/hooks/use-toast';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const mockExperience = [
     { id: 1, title: 'Senior React Developer', company: 'Innovate Inc.', period: 'Jan 2021 - Present', description: 'Led the development of a new client-facing dashboard using Next.js and TypeScript, improving performance by 30%.' },
@@ -22,21 +27,48 @@ const mockEducation = [
 
 const mockSkills = ['React', 'TypeScript', 'Next.js', 'Node.js', 'GraphQL', 'JavaScript', 'Redux', 'Tailwind CSS', 'Figma', 'CI/CD'];
 
-type Props = {
-  params: Promise<{ id: string; }>;
-};
 
-export default async function CandidateProfilePage({ params }: Props) {
-  const { id } = await params;
-  const user = DUMMY_USERS.find((u) => u.id === id);
+export default function CandidateProfilePage() {
+  const params = useParams();
+  const id = params.id as string;
+  const { toast } = useToast();
+
+  const [user, setUser] = useState<(typeof DUMMY_USERS)[0] | null>(null);
+
+  useEffect(() => {
+    const foundUser = DUMMY_USERS.find((u) => u.id === id);
+    if (foundUser) {
+      setUser(foundUser);
+    } else {
+      // In a real app, you might redirect or show a not found component
+      // For this demo, we'll just log it.
+      console.error("User not found");
+    }
+  }, [id]);
 
   if (!user) {
-    notFound();
+    return (
+       <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="flex-1 bg-background bg-hero-glow py-16 md:py-24">
+            <div className="container mx-auto px-4 md:px-6">
+                <Skeleton className="h-screen w-full" />
+            </div>
+        </main>
+        <Footer />
+       </div>
+    );
   }
 
-  const userAvatar = PlaceHolderImages.find((img) => img.id === user.avatar);
-  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
+  const handleAction = (title: string) => {
+    toast({
+        title: title,
+        description: "This feature is for demonstration purposes.",
+        variant: 'vibrant'
+    });
+  };
 
+  const userAvatar = PlaceHolderImages.find((img) => img.id === user.avatar);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -61,8 +93,8 @@ export default async function CandidateProfilePage({ params }: Props) {
                         </div>
                     </CardContent>
                     <CardContent className="border-t p-6 space-y-3">
-                        <Button className="w-full bg-accent-gradient"><Send className="mr-2" /> Invite to Apply</Button>
-                        <Button variant="outline" className="w-full">
+                        <Button className="w-full bg-accent-gradient" onClick={() => handleAction('Invitation Sent!')}><Send className="mr-2" /> Invite to Apply</Button>
+                        <Button variant="outline" className="w-full" onClick={() => handleAction('Message Sent!')}>
                             <Mail className="mr-2" /> Message
                         </Button>
                     </CardContent>
@@ -98,7 +130,7 @@ export default async function CandidateProfilePage({ params }: Props) {
                         <CardTitle>Resume</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <Button variant="outline" className="w-full">
+                        <Button variant="outline" className="w-full" onClick={() => handleAction('Downloading CV...')}>
                             <FileText className="mr-2" /> Download CV
                         </Button>
                     </CardContent>

@@ -1,16 +1,35 @@
+'use client';
+
 import Image from 'next/image';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Mail } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 export default function SubscriptionSection() {
+    const { toast } = useToast();
+    const [email, setEmail] = useState('');
+
     const images = {
         img1: PlaceHolderImages.find((p) => p.id === 'subscription-1'),
         img2: PlaceHolderImages.find((p) => p.id === 'subscription-2'),
         img3: PlaceHolderImages.find((p) => p.id === 'subscription-3'),
         img4: PlaceHolderImages.find((p) => p.id === 'subscription-4'),
         img5: PlaceHolderImages.find((p) => p.id === 'subscription-5'),
+    };
+    
+    const handleSubscribe = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
+
+        toast({
+            title: 'Subscription Successful!',
+            description: `Thank you for subscribing to job alerts at ${email}.`,
+            variant: 'vibrant',
+        });
+        setEmail('');
     };
 
   return (
@@ -76,7 +95,7 @@ export default function SubscriptionSection() {
              <p className="mt-4 max-w-2xl mx-auto text-lg text-accent-foreground/80">
               Subscribe to our newsletter to receive the latest job postings.
             </p>
-            <form className="mt-8 max-w-xl mx-auto">
+            <form onSubmit={handleSubscribe} className="mt-8 max-w-xl mx-auto">
                 <div className="flex items-center gap-2 bg-card p-2 rounded-xl">
                     <Button type="submit" size="lg" className="rounded-lg bg-primary text-primary-foreground font-semibold px-6">
                         Subscribe
@@ -85,6 +104,9 @@ export default function SubscriptionSection() {
                       type="email"
                       placeholder="Enter your email address"
                       className="flex-1 bg-transparent border-none focus-visible:ring-0 text-card-foreground placeholder:text-muted-foreground"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
                     />
                     <Mail className="h-5 w-5 text-muted-foreground mr-2 shrink-0" />
                 </div>

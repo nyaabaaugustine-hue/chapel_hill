@@ -19,6 +19,8 @@ import { MoreHorizontal, User, Download, Send } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
 
 type ApplicantStatus = 'New' | 'Reviewed' | 'Shortlisted' | 'Interview' | 'Offer' | 'Hired' | 'Rejected';
 
@@ -43,6 +45,7 @@ const getSkillMatchBadgeClass = (score: number) => {
 
 
 export default function ApplicantsPage() {
+  const { toast } = useToast();
   const [allApplicants, setAllApplicants] = useState<Applicant[]>(DUMMY_APPLICANTS);
   const [searchTerm, setSearchTerm] = useState('');
   const [jobFilter, setJobFilter] = useState('all');
@@ -74,7 +77,15 @@ export default function ApplicantsPage() {
     setAllApplicants(allApplicants.map(app => 
       app.id === applicantId ? { ...app, status: newStatus } : app
     ));
-    // In a real app, you'd also save this change to your backend/localStorage
+    toast({
+        title: "Status Updated",
+        description: `Applicant status changed to "${newStatus}".`,
+        variant: 'vibrant'
+    });
+  };
+
+  const handleAction = (title: string, description: string) => {
+    toast({ title, description, variant: 'vibrant' });
   };
 
   const filteredApplicants = allApplicants
@@ -192,9 +203,15 @@ export default function ApplicantsPage() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                          <DropdownMenuItem><User className="mr-2" /> View Profile</DropdownMenuItem>
-                          <DropdownMenuItem><Download className="mr-2" /> Download CV</DropdownMenuItem>
-                          <DropdownMenuItem><Send className="mr-2" /> Message Candidate</DropdownMenuItem>
+                          <DropdownMenuItem asChild>
+                            <Link href={`/candidate-profile/${applicant.id}`}><User className="mr-2" /> View Profile</Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleAction("Downloading CV...", `Downloading CV for ${applicant.name}`)}>
+                            <Download className="mr-2" /> Download CV
+                          </DropdownMenuItem>
+                           <DropdownMenuItem asChild>
+                            <Link href={`/employer/messages`}><Send className="mr-2" /> Message Candidate</Link>
+                          </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>

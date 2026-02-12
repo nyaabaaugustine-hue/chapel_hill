@@ -255,7 +255,7 @@ export default function AdminCompaniesPage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-48">
                       <DropdownMenuItem asChild><Link href={`/companies/${company.id}`}>View Profile</Link></DropdownMenuItem>
-                      <DropdownMenuItem>Edit Company</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => toast({ title: "Feature not implemented" })}>Edit Company</DropdownMenuItem>
                        {company.status === 'Pending' && <DropdownMenuItem onClick={() => handleVerifyCompany(company.id)}>Verify Company</DropdownMenuItem>}
                        <DropdownMenuSeparator />
                       <DropdownMenuItem className="text-destructive" onClick={() => handleDeleteCompany(company.id)}>Delete Company</DropdownMenuItem>

@@ -59,6 +59,11 @@ const colorClasses = {
 export default function SettingsTabs() {
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab') || 'team';
+  const { toast } = useToast();
+
+  const handleAction = (title: string, description?: string, variant: 'default' | 'destructive' | 'vibrant' = 'vibrant') => {
+      toast({ title, description, variant });
+  };
 
   return (
     <Tabs value={tab} defaultValue={tab} className="w-full">
@@ -75,7 +80,7 @@ export default function SettingsTabs() {
                         <CardTitle>Team Members</CardTitle>
                         <CardDescription>Manage who has access to this employer account.</CardDescription>
                     </div>
-                    <Button><UserPlus className="mr-2"/> Invite Member</Button>
+                    <Button onClick={() => handleAction("Invite Member", "This would open a dialog to invite a new team member.")}><UserPlus className="mr-2"/> Invite Member</Button>
                 </CardHeader>
                 <CardContent>
                     <Table>
@@ -115,10 +120,10 @@ export default function SettingsTabs() {
                                                     </Button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end">
-                                                    <DropdownMenuItem>Edit Role</DropdownMenuItem>
-                                                    <DropdownMenuItem>Resend Invite</DropdownMenuItem>
+                                                    <DropdownMenuItem onClick={() => handleAction("Edit Role")}>Edit Role</DropdownMenuItem>
+                                                    <DropdownMenuItem onClick={() => handleAction("Resending Invite...")}>Resend Invite</DropdownMenuItem>
                                                     <DropdownMenuSeparator />
-                                                    <DropdownMenuItem className="text-destructive">Remove from Team</DropdownMenuItem>
+                                                    <DropdownMenuItem className="text-destructive" onClick={() => handleAction("Removing Member...", `This will remove ${member.name} from the team.`, 'destructive')}>Remove from Team</DropdownMenuItem>
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
                                         </TableCell>
@@ -174,10 +179,10 @@ export default function SettingsTabs() {
                                             <p className="text-sm text-muted-foreground">Expires 12/2026</p>
                                         </div>
                                     </div>
-                                    <Button variant="ghost" size="sm">Update</Button>
+                                    <Button variant="ghost" size="sm" onClick={() => handleAction("Update Payment Method")}>Update</Button>
                                 </CardContent>
                             </Card>
-                            <Button variant="outline" className="w-full">
+                            <Button variant="outline" className="w-full" onClick={() => handleAction("Add Payment Method")}>
                                 <PlusCircle className="mr-2"/> Add New Payment Method
                             </Button>
                         </div>
@@ -202,7 +207,7 @@ export default function SettingsTabs() {
                                                     <TableCell>{txn.amount}</TableCell>
                                                     <TableCell className="text-right">{txn.date}</TableCell>
                                                     <TableCell className="text-right">
-                                                        <Button variant="ghost" size="icon">
+                                                        <Button variant="ghost" size="icon" onClick={() => handleAction("Downloading Invoice...", `Downloading invoice ${txn.id}.`)}>
                                                             <Download className="h-4 w-4" />
                                                         </Button>
                                                     </TableCell>
@@ -245,7 +250,7 @@ export default function SettingsTabs() {
                   })}
                 </CardContent>
                 <CardFooter className="border-t pt-6 justify-end">
-                  <Button><Save className="mr-2 h-4 w-4" /> Save Preferences</Button>
+                  <Button onClick={() => handleAction("Preferences Saved", "Your notification settings have been updated.")}><Save className="mr-2 h-4 w-4" /> Save Preferences</Button>
                 </CardFooter>
               </Card>
             </div>

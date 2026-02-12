@@ -20,7 +20,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
-
+import { useToast } from '@/hooks/use-toast';
 
 const CardSkeleton = () => (
     <Card>
@@ -49,7 +49,8 @@ const CardSkeleton = () => (
     </Card>
 );
 
-const AdminJobCard = ({ job }: { job: Job }) => {
+const AdminJobCard = ({ job, onDelete }: { job: Job; onDelete: (jobId: string) => void }) => {
+  const { toast } = useToast();
   const [status, setStatus] = useState<string | null>(null);
   const [postedAt, setPostedAt] = useState<string | null>(null);
   const applicantCount = DUMMY_APPLICANTS.filter(app => app.jobId === job.id).length;
@@ -108,9 +109,9 @@ const AdminJobCard = ({ job }: { job: Job }) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem asChild><Link href={`/jobs/${job.id}`}>View Job</Link></DropdownMenuItem>
-              <DropdownMenuItem>Edit Job</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => toast({ title: 'Feature not implemented', description: 'This would open an editor for the job.' })}>Edit Job</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive">Delete Job</DropdownMenuItem>
+              <DropdownMenuItem className="text-destructive" onClick={() => onDelete(job.id)}>Delete Job</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
       </CardFooter>
@@ -119,8 +120,18 @@ const AdminJobCard = ({ job }: { job: Job }) => {
 };
 
 export default function AdminJobsPage() {
-  const [jobs] = useState<Job[]>(DUMMY_JOBS);
+  const { toast } = useToast();
+  const [jobs, setJobs] = useState<Job[]>(DUMMY_JOBS);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const handleDeleteJob = (jobId: string) => {
+    setJobs(prevJobs => prevJobs.filter(j => j.id !== jobId));
+    toast({
+      title: 'Job Deleted',
+      description: 'The job has been removed from the platform.',
+      variant: 'destructive',
+    });
+  };
 
   const filteredJobs = jobs
     .filter(job => 
@@ -158,7 +169,7 @@ export default function AdminJobsPage() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredJobs.map((job) => (
-          <AdminJobCard key={job.id} job={job} />
+          <AdminJobCard key={job.id} job={job} onDelete={handleDeleteJob} />
         ))}
         {filteredJobs.length === 0 && (
           <Card className="md:col-span-2 lg:col-span-3">

@@ -272,7 +272,7 @@ export default function AdminBlogPage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem asChild><Link href={`/blog/${post.slug}`}>View Post</Link></DropdownMenuItem>
-                      <DropdownMenuItem>Edit Post</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => toast({ title: "Feature not implemented", description: "This would open an editor for the post." })}>Edit Post</DropdownMenuItem>
                        <DropdownMenuSeparator />
                        {post.status === 'Pending Review' && (
                         <>

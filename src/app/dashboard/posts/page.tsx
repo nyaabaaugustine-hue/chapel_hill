@@ -20,13 +20,32 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
+import { useToast } from '@/hooks/use-toast';
 
 export default function UserPostsPage() {
+  const { toast } = useToast();
   // For demo, assuming current user is the first user in DUMMY_USERS
   const currentUser = DUMMY_USERS[0];
   const [posts, setPosts] = useState<BlogPost[]>(
     DUMMY_BLOG_POSTS.filter(post => post.author.id === currentUser.id)
   );
+
+  const handleDelete = (postId: string) => {
+    setPosts(prev => prev.filter(p => p.id !== postId));
+    toast({
+        title: "Post Deleted",
+        description: "Your blog post has been deleted.",
+        variant: 'destructive'
+    });
+  };
+
+  const handleSubmitForReview = (title: string) => {
+    toast({
+        title: "Post Submitted",
+        description: `"${title}" has been submitted for admin review.`,
+        variant: 'vibrant'
+    });
+  };
 
   const getStatusBadgeClass = (status: BlogPost['status']) => {
     switch (status) {
@@ -98,10 +117,10 @@ export default function UserPostsPage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem asChild><Link href={`/blog/${post.slug}`}>View Post</Link></DropdownMenuItem>
-                      <DropdownMenuItem>Edit Post</DropdownMenuItem>
-                       {post.status === 'Draft' && <DropdownMenuItem>Submit for Review</DropdownMenuItem>}
+                      <DropdownMenuItem onClick={() => toast({ title: "Feature not implemented" })}>Edit Post</DropdownMenuItem>
+                       {post.status === 'Draft' && <DropdownMenuItem onClick={() => handleSubmitForReview(post.title)}>Submit for Review</DropdownMenuItem>}
                        <DropdownMenuSeparator />
-                      <DropdownMenuItem className="text-destructive">Delete Post</DropdownMenuItem>
+                      <DropdownMenuItem className="text-destructive" onClick={() => handleDelete(post.id)}>Delete Post</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
               </CardFooter>

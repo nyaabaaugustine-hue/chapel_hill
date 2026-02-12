@@ -51,6 +51,13 @@ export default function NewPostPage() {
     }, 2000);
   };
 
+  const handlePreview = () => {
+    toast({
+      title: "Generating Preview...",
+      description: "This would open a new tab with a preview of the post.",
+    });
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       <div className="flex items-center gap-4">
@@ -127,7 +134,7 @@ export default function NewPostPage() {
               <CardTitle>Actions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <Button variant="outline" type="button" className="w-full">
+              <Button variant="outline" type="button" className="w-full" onClick={handlePreview}>
                 <Eye className="mr-2 h-4 w-4" /> Preview
               </Button>
               <Button type="submit" disabled={isSubmitting} className="w-full">

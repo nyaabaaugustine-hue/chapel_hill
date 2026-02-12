@@ -1,3 +1,5 @@
+'use client';
+
 import { DollarSign, CreditCard, Users, Download, Receipt } from 'lucide-react';
 import KpiCard from '@/app/admin/components/kpi-card';
 import RevenueChart from '@/app/admin/components/revenue-chart';
@@ -5,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 
 const transactions = [
     { id: 'txn_1', company: 'Innovate Inc.', amount: 'GH₵500', date: '2024-05-28', status: 'Paid', type: 'Subscription' },
@@ -16,6 +19,16 @@ const transactions = [
 ];
 
 export default function AdminFinancialsPage() {
+  const { toast } = useToast();
+
+  const handleExport = () => {
+    toast({
+      title: "Exporting Report...",
+      description: "Your financial report is being generated and will be downloaded shortly.",
+      variant: 'vibrant'
+    });
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -23,7 +36,7 @@ export default function AdminFinancialsPage() {
             <h1 className="font-headline text-3xl font-bold">Financials</h1>
             <p className="text-muted-foreground">Track revenue, subscriptions, and transactions.</p>
         </div>
-        <Button><Download className="mr-2" /> Export Financial Report</Button>
+        <Button onClick={handleExport}><Download className="mr-2" /> Export Financial Report</Button>
       </div>
 
        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">

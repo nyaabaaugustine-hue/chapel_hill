@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -280,8 +279,8 @@ export default function AdminUsersPage() {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-48">
-                            <DropdownMenuItem><UserIcon className="mr-2"/>View Profile</DropdownMenuItem>
-                            <DropdownMenuItem>Edit User</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => toast({ title: "Feature not implemented" })}><UserIcon className="mr-2"/>View Profile</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => toast({ title: "Feature not implemented" })}>Edit User</DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem className="text-destructive" onClick={() => handleBanUser(user.name)}>Ban User</DropdownMenuItem>
                         </DropdownMenuContent>

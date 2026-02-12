@@ -1,3 +1,5 @@
+'use client';
+
 import {
   DollarSign,
   Users,
@@ -18,8 +20,19 @@ import LocationBreakdown from './components/location-breakdown';
 import SystemHealth from './components/system-health';
 import { Button } from '@/components/ui/button';
 import SectionHeader from '@/components/shared/section-header';
+import { useToast } from '@/hooks/use-toast';
 
 export default function AdminDashboard() {
+  const { toast } = useToast();
+
+  const handleAction = (title: string, description: string) => {
+    toast({
+      title,
+      description,
+      variant: 'vibrant',
+    });
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -28,8 +41,12 @@ export default function AdminDashboard() {
             <p className="text-muted-foreground">Welcome back, Admin. Here is the platform's performance overview.</p>
         </div>
         <div className="flex items-center gap-2">
-            <Button variant="outline"><UserPlus /> Invite Employer</Button>
-            <Button><Download /> Export Reports</Button>
+            <Button variant="outline" onClick={() => handleAction('Invite Sent', 'An invitation has been sent to the employer.')}>
+              <UserPlus /> Invite Employer
+            </Button>
+            <Button onClick={() => handleAction('Exporting Reports', 'Your reports are being generated.')}>
+              <Download /> Export Reports
+            </Button>
         </div>
       </div>
 

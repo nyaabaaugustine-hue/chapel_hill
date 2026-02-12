@@ -64,18 +64,29 @@ export default function ProfilePage() {
   };
   
   const handleSaveProfile = () => {
-    console.log('Saving profile:', {
-      fullName,
-      headline,
-      summary,
-      skills,
-      experiences,
-      educations,
-    });
     toast({
         title: "Profile Saved!",
         description: "Your changes have been successfully saved.",
         variant: "vibrant"
+    });
+  };
+
+  const handleNotImplemented = (feature: string) => {
+    toast({
+        title: "Coming Soon!",
+        description: `The "${feature}" feature is not yet implemented.`,
+    });
+  };
+
+  const handleRemoveItem = (id: number, type: 'experience' | 'education') => {
+    if (type === 'experience') {
+        setExperiences(prev => prev.filter(item => item.id !== id));
+    } else {
+        setEducations(prev => prev.filter(item => item.id !== id));
+    }
+    toast({
+        title: "Item Removed",
+        variant: 'destructive',
     });
   };
 
@@ -121,7 +132,7 @@ export default function ProfilePage() {
                 <CardTitle className="flex items-center gap-2"><Briefcase /> Work Experience</CardTitle>
                 <CardDescription>Detail your professional journey.</CardDescription>
               </div>
-              <Button variant="outline" size="sm"><PlusCircle className="mr-2 h-4 w-4" /> Add Experience</Button>
+              <Button variant="outline" size="sm" onClick={() => handleNotImplemented('Add Experience')}><PlusCircle className="mr-2 h-4 w-4" /> Add Experience</Button>
             </CardHeader>
             <CardContent className="space-y-4">
               {experiences.map(exp => (
@@ -132,7 +143,7 @@ export default function ProfilePage() {
                         <p className="text-xs text-muted-foreground">{exp.period}</p>
                         <p className="text-sm text-muted-foreground mt-2">{exp.description}</p>
                     </div>
-                     <Button variant="ghost" size="icon" className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                     <Button variant="ghost" size="icon" className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => handleRemoveItem(exp.id, 'experience')}><Trash2 className="h-4 w-4 text-destructive" /></Button>
                 </div>
               ))}
             </CardContent>
@@ -144,7 +155,7 @@ export default function ProfilePage() {
                 <CardTitle className="flex items-center gap-2"><GraduationCap /> Education</CardTitle>
                 <CardDescription>Your educational background.</CardDescription>
               </div>
-              <Button variant="outline" size="sm"><PlusCircle className="mr-2 h-4 w-4" /> Add Education</Button>
+              <Button variant="outline" size="sm" onClick={() => handleNotImplemented('Add Education')}><PlusCircle className="mr-2 h-4 w-4" /> Add Education</Button>
             </CardHeader>
             <CardContent className="space-y-4">
               {educations.map(edu => (
@@ -154,7 +165,7 @@ export default function ProfilePage() {
                         <p className="text-sm">{edu.degree}</p>
                         <p className="text-xs text-muted-foreground">{edu.period}</p>
                     </div>
-                    <Button variant="ghost" size="icon" className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                    <Button variant="ghost" size="icon" className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => handleRemoveItem(edu.id, 'education')}><Trash2 className="h-4 w-4 text-destructive" /></Button>
                 </div>
               ))}
             </CardContent>
@@ -217,7 +228,7 @@ export default function ProfilePage() {
                     <CardTitle className="flex items-center gap-2"><Linkedin /> Import Profile</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <Button variant="outline" className="w-full">Import from LinkedIn</Button>
+                    <Button variant="outline" className="w-full" onClick={() => handleNotImplemented('Import from LinkedIn')}>Import from LinkedIn</Button>
                 </CardContent>
             </Card>
              <div className="lg:col-span-3">

@@ -6,8 +6,13 @@ import Logo from './logo';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Separator } from '../ui/separator';
+import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 export default function Footer() {
+  const { toast } = useToast();
+  const [email, setEmail] = useState('');
+
   const navSections = [
     {
       title: 'For Candidates',
@@ -43,6 +48,18 @@ export default function Footer() {
       ],
     },
   ];
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    toast({
+      title: 'Subscription Successful!',
+      description: `Thank you for subscribing, ${email}.`,
+      variant: 'vibrant',
+    });
+    setEmail('');
+  };
 
   return (
     <footer className="bg-card border-t border-border/5">
@@ -100,13 +117,16 @@ export default function Footer() {
             <p className="mt-2 text-sm text-muted-foreground">
               Subscribe to our newsletter to get the latest job postings and career tips.
             </p>
-            <form className="mt-4 space-y-2">
+            <form onSubmit={handleSubscribe} className="mt-4 space-y-2">
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
                   type="email"
                   placeholder="Enter your email"
                   className="pl-10"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
               <Button type="submit" className="w-full bg-accent-gradient">

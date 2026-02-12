@@ -5,10 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Building, UserX, FileWarning } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import React from 'react';
+import Link from 'next/link';
 
 const moderationItems = [
     { title: "Jobs pending approval", count: 5, icon: FileWarning, href: "/admin/moderation", color: 'yellow' },
-    { title: "Companies pending verification", count: 2, icon: Building, href: "/admin/users", color: 'blue' },
+    { title: "Companies pending verification", count: 2, icon: Building, href: "/admin/companies", color: 'blue' },
     { title: "Reported listings", count: 1, icon: UserX, href: "/admin/moderation", color: 'red' },
 ];
 
@@ -41,7 +42,9 @@ export default function ModerationCenter() {
                         </div>
                     </div>
                     <div className="flex gap-2">
-                        <Button variant="outline" size="sm">View</Button>
+                        <Button variant="outline" size="sm" asChild>
+                           <Link href={item.href}>View</Link>
+                        </Button>
                     </div>
                 </div>
             )

@@ -10,8 +10,20 @@ import { DUMMY_APPLICANTS } from "@/lib/data";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { SendHorizonal, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
-const conversations = DUMMY_APPLICANTS.slice(0, 8).map(applicant => ({
+type Message = { from: 'me' | 'them'; text: string; };
+
+type Conversation = {
+    id: string;
+    name: string;
+    avatar: string;
+    lastMessage: string;
+    lastMessageTime: string;
+    messages: Message[];
+};
+
+const conversationsData: Conversation[] = DUMMY_APPLICANTS.slice(0, 8).map(applicant => ({
     id: applicant.id,
     name: applicant.name,
     avatar: applicant.avatar,
@@ -27,7 +39,30 @@ const conversations = DUMMY_APPLICANTS.slice(0, 8).map(applicant => ({
 }));
 
 export default function EmployerMessagesPage() {
+  const { toast } = useToast();
+  const [conversations, setConversations] = useState<Conversation[]>(conversationsData);
   const [selectedConversation, setSelectedConversation] = useState(conversations[0]);
+  const [messageText, setMessageText] = useState('');
+
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!messageText.trim()) return;
+
+    const newMessage: Message = { from: 'me', text: messageText };
+
+    const updatedConversations = conversations.map(convo => {
+        if (convo.id === selectedConversation.id) {
+            const updatedMessages = [...convo.messages, newMessage];
+            return { ...convo, messages: updatedMessages, lastMessage: messageText };
+        }
+        return convo;
+    });
+
+    setConversations(updatedConversations);
+    setSelectedConversation(prev => prev ? { ...prev, messages: [...prev.messages, newMessage] } : null);
+    setMessageText('');
+    toast({ title: "Message Sent", variant: 'vibrant' });
+  };
 
   return (
     <div className="space-y-8 h-full flex flex-col">
@@ -96,8 +131,13 @@ export default function EmployerMessagesPage() {
                     </div>
                 </ScrollArea>
                 <div className="p-4 border-t">
-                    <form className="flex items-center gap-4">
-                        <Input placeholder="Type a message..." className="flex-1" />
+                    <form onSubmit={handleSendMessage} className="flex items-center gap-4">
+                        <Input 
+                            placeholder="Type a message..." 
+                            className="flex-1" 
+                            value={messageText}
+                            onChange={(e) => setMessageText(e.target.value)}
+                        />
                         <Button type="submit">
                             <SendHorizonal className="mr-2" /> Send
                         </Button>

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -15,6 +14,7 @@ import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { formatDistanceToNow } from 'date-fns';
+import { useToast } from '@/hooks/use-toast';
 
 type SupportTicket = {
     id: string;
@@ -112,8 +112,10 @@ const MessageTimestamp = ({ date }: { date: string }) => {
 
 
 export default function AdminSupportPage() {
+    const { toast } = useToast();
     const [tickets, setTickets] = useState<SupportTicket[]>(DUMMY_TICKETS);
     const [selectedTicket, setSelectedTicket] = useState<SupportTicket | null>(tickets.length > 0 ? tickets[0] : null);
+    const [replyText, setReplyText] = useState('');
 
     const getPriorityBadgeClass = (priority: SupportTicket['priority']) => {
         switch (priority) {
@@ -131,6 +133,29 @@ export default function AdminSupportPage() {
             case 'Resolved': return 'bg-gray-500/10 text-gray-600 border-gray-500/20';
             default: return 'bg-secondary';
         }
+    };
+
+    const handleStatusChange = (newStatus: SupportTicket['status']) => {
+        if (!selectedTicket) return;
+        const updatedTickets = tickets.map(t => t.id === selectedTicket.id ? { ...t, status: newStatus } : t);
+        setTickets(updatedTickets);
+        setSelectedTicket(prev => prev ? { ...prev, status: newStatus } : null);
+        toast({ title: `Ticket status set to "${newStatus}"`, variant: 'vibrant' });
+    };
+
+    const handleSendReply = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!replyText.trim() || !selectedTicket) return;
+        const newMessage = { from: 'admin' as const, text: replyText, date: new Date().toISOString() };
+        const updatedTickets = tickets.map(t => 
+            t.id === selectedTicket.id 
+            ? { ...t, messages: [...t.messages, newMessage] } 
+            : t
+        );
+        setTickets(updatedTickets);
+        setSelectedTicket(prev => prev ? { ...prev, messages: [...prev.messages, newMessage] } : null);
+        setReplyText('');
+        toast({ title: 'Reply Sent', variant: 'vibrant' });
     };
 
     const adminAvatar = PlaceHolderImages.find(p => p.id === 'avatar-2');
@@ -195,7 +220,7 @@ export default function AdminSupportPage() {
                                     <Badge variant="outline" className={cn("text-xs", getPriorityBadgeClass(selectedTicket.priority))}>{selectedTicket.priority}</Badge>
                                 </div>
                             </div>
-                            <Button variant="ghost">View User Profile</Button>
+                            <Button variant="ghost" onClick={() => toast({ title: "Feature not implemented" })}>View User Profile</Button>
                         </div>
                         <ScrollArea className="flex-1 p-6 bg-secondary/30">
                             <div className="space-y-6">
@@ -229,18 +254,26 @@ export default function AdminSupportPage() {
                                 })}
                             </div>
                         </ScrollArea>
-                        <div className="p-4 border-t bg-background space-y-4">
-                             <Textarea placeholder="Type your reply here..." className="flex-1" rows={4} />
-                             <div className="flex justify-between items-center">
-                                 <div className="flex gap-2">
-                                     <Button variant="outline"> <ChevronsRight className="mr-2 h-4 w-4"/> Set as In Progress</Button>
-                                     <Button variant="outline" className="text-green-600 border-green-600/20 hover:bg-green-500/10 hover:text-green-700"> <Archive className="mr-2 h-4 w-4"/> Mark as Resolved</Button>
-                                 </div>
-                                <Button className="bg-accent-gradient">
-                                    <SendHorizonal className="mr-2 h-4 w-4" /> Send Reply
-                                </Button>
-                             </div>
-                        </div>
+                        <form onSubmit={handleSendReply}>
+                            <div className="p-4 border-t bg-background space-y-4">
+                                <Textarea 
+                                    placeholder="Type your reply here..." 
+                                    className="flex-1" 
+                                    rows={4}
+                                    value={replyText}
+                                    onChange={(e) => setReplyText(e.target.value)}
+                                />
+                                <div className="flex justify-between items-center">
+                                    <div className="flex gap-2">
+                                        <Button type="button" variant="outline" onClick={() => handleStatusChange('In Progress')}> <ChevronsRight className="mr-2 h-4 w-4"/> Set as In Progress</Button>
+                                        <Button type="button" variant="outline" onClick={() => handleStatusChange('Resolved')} className="text-green-600 border-green-600/20 hover:bg-green-500/10 hover:text-green-700"> <Archive className="mr-2 h-4 w-4"/> Mark as Resolved</Button>
+                                    </div>
+                                    <Button type="submit" className="bg-accent-gradient">
+                                        <SendHorizonal className="mr-2 h-4 w-4" /> Send Reply
+                                    </Button>
+                                </div>
+                            </div>
+                        </form>
                         </>
                     ) : (
                         <div className="flex flex-1 items-center justify-center text-muted-foreground bg-secondary/30">
@@ -256,4 +289,3 @@ export default function AdminSupportPage() {
         </div>
     );
 }
-    

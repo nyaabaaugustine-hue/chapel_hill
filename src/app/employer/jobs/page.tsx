@@ -20,8 +20,10 @@ import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '@/hooks/use-toast';
 
-const JobTableRow = ({ job }: { job: Job }) => {
+const JobTableRow = ({ job, onDelete }: { job: Job; onDelete: (jobId: string) => void; }) => {
+  const { toast } = useToast();
   const [status, setStatus] = useState<string | null>(null);
   const [postedAt, setPostedAt] = useState<string | null>(null);
   const applicantCount = DUMMY_APPLICANTS.filter(app => app.jobId === job.id).length;
@@ -74,9 +76,9 @@ const JobTableRow = ({ job }: { job: Job }) => {
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem asChild><Link href={`/jobs/${job.id}`}>View Listing</Link></DropdownMenuItem>
                   <DropdownMenuItem asChild><Link href="/employer/applicants">View Applicants</Link></DropdownMenuItem>
-                  <DropdownMenuItem>Edit Job</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => toast({ title: "Feature not implemented" })}>Edit Job</DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="text-destructive">Archive Job</DropdownMenuItem>
+                  <DropdownMenuItem className="text-destructive" onClick={() => onDelete(job.id)}>Archive Job</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </TableCell>
@@ -85,11 +87,21 @@ const JobTableRow = ({ job }: { job: Job }) => {
 };
 
 export default function EmployerJobsPage() {
+  const { toast } = useToast();
   // Demo employer is "Innovate Inc." which has id '1'
   const employerJobs = DUMMY_JOBS.filter(job => job.company.id === '1');
   
-  const [jobs] = useState<Job[]>(employerJobs);
+  const [jobs, setJobs] = useState<Job[]>(employerJobs);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const handleDelete = (jobId: string) => {
+    setJobs(prev => prev.filter(j => j.id !== jobId));
+    toast({
+        title: "Job Archived",
+        description: "The job has been moved to your archives.",
+        variant: "destructive"
+    });
+  };
 
   const filteredJobs = jobs.filter(job => 
     job.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -131,7 +143,7 @@ export default function EmployerJobsPage() {
                 </TableHeader>
                 <TableBody>
                     {filteredJobs.map((job) => (
-                    <JobTableRow key={job.id} job={job} />
+                    <JobTableRow key={job.id} job={job} onDelete={handleDelete} />
                     ))}
                     {filteredJobs.length === 0 && (
                     <TableRow>
