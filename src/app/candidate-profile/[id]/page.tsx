@@ -17,10 +17,6 @@ import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 
-interface PageProps {
-  params: { id: string };
-}
-
 const mockExperience = [
     { id: 1, title: 'Senior React Developer', company: 'Innovate Inc.', period: 'Jan 2021 - Present', description: 'Led the development of a new client-facing dashboard using Next.js and TypeScript, improving performance by 30%.' },
     { id: 2, title: 'Frontend Developer', company: 'Synergy Corp', period: 'Jun 2018 - Dec 2020', description: 'Developed and maintained UI components for a large-scale e-commerce platform using React and Redux.' }
@@ -100,7 +96,7 @@ const CandidateProfileSkeleton = () => (
 );
 
 
-export default function CandidateProfilePage({ params }: PageProps) {
+export default function CandidateProfilePage({ params }: { params: { id: string } }) {
   const { id } = params;
   const { toast } = useToast();
 

@@ -11,13 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default function CompanyDetailPage({ params }: PageProps) {
+export default function CompanyDetailPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const company = DUMMY_COMPANIES.find((c) => c.id === id);
 

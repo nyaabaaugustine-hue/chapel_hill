@@ -31,11 +31,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import SocialShareButtons from '@/components/shared/social-share-buttons';
 
-interface PageProps {
-  params: { id: string };
-}
-
-export default function JobDetailPage({ params }: PageProps) {
+export default function JobDetailPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const job = DUMMY_JOBS.find((j) => j.id === id);
 
