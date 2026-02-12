@@ -35,6 +35,7 @@ import Logo from '@/components/shared/logo';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Button } from '@/components/ui/button';
+import DashboardHeader from '@/components/shared/dashboard-header';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -116,6 +117,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </SidebarFooter>
         </Sidebar>
         <SidebarInset>
+             <DashboardHeader />
              <main className="flex-1 p-4 sm:p-6 lg:p-8 bg-secondary/50">
                 {children}
             </main>
