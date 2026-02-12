@@ -57,7 +57,7 @@ export default function HomePage() {
                 Find Your Next Job, Faster.
               </h1>
               <p className="max-w-3xl mx-auto text-lg text-gray-200 animate-in fade-in-30 slide-in-from-bottom-10 duration-700 delay-200">
-                Leverage AI-powered matching, verified employers, and transparent salaries to accelerate your career.
+                Discover your next career move with verified employers and salary transparency.
               </p>
               <Suspense>
                 <HeroSearchForm />
