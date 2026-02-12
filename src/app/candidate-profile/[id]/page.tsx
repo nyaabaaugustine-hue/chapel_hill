@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -6,7 +7,7 @@ import Footer from '@/components/shared/footer';
 import { DUMMY_USERS, DUMMY_APPLICANTS } from '@/lib/data';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { notFound, useParams } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,6 +16,10 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
+
+interface PageProps {
+  params: { id: string };
+}
 
 const mockExperience = [
     { id: 1, title: 'Senior React Developer', company: 'Innovate Inc.', period: 'Jan 2021 - Present', description: 'Led the development of a new client-facing dashboard using Next.js and TypeScript, improving performance by 30%.' },
@@ -95,9 +100,8 @@ const CandidateProfileSkeleton = () => (
 );
 
 
-export default function CandidateProfilePage() {
-  const params = useParams();
-  const id = params.id as string;
+export default function CandidateProfilePage({ params }: PageProps) {
+  const { id } = params;
   const { toast } = useToast();
 
   const [user, setUser] = useState<(typeof DUMMY_USERS)[0] | undefined>(undefined);

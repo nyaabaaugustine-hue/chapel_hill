@@ -7,7 +7,7 @@ import Footer from '@/components/shared/footer';
 import { DUMMY_JOBS, DUMMY_USERS } from '@/lib/data';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { notFound, useParams } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -31,10 +31,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import SocialShareButtons from '@/components/shared/social-share-buttons';
 
+interface PageProps {
+  params: { id: string };
+}
 
-export default function JobDetailPage() {
-  const params = useParams();
-  const id = params.id as string;
+export default function JobDetailPage({ params }: PageProps) {
+  const { id } = params;
   const job = DUMMY_JOBS.find((j) => j.id === id);
 
   const { toast } = useToast();
