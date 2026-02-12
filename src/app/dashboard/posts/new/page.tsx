@@ -75,20 +75,14 @@ export default function NewPostPage() {
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><FileText /> Content</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><FileText /> Article Content</CardTitle>
+                    <CardDescription>Write your full article using markdown for formatting.</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="title">Post Title</Label>
-                        <Input id="title" placeholder="How to Ace Your Next Interview" required />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="content">Full Article Content</Label>
-                        <Textarea id="content" placeholder="Write your full article here. You can use markdown..." rows={15} required />
-                    </div>
+                <CardContent>
+                    <Textarea id="content" placeholder="Write your full article here..." rows={25} required />
                 </CardContent>
             </Card>
         </div>
@@ -99,6 +93,10 @@ export default function NewPostPage() {
                     <CardTitle>Post Details</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="title">Post Title</Label>
+                        <Input id="title" placeholder="How to Ace Your Next Interview" required />
+                    </div>
                     <div className="space-y-2">
                         <Label htmlFor="excerpt">Excerpt</Label>
                         <Textarea id="excerpt" placeholder="A short summary of the post..." rows={4} required />
