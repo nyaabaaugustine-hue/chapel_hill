@@ -10,7 +10,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building, Users, CreditCard, Bell, UserPlus, Download, PlusCircle, Save, FileText, Clock, MessageSquare, Wallet as WalletIcon, MoreHorizontal } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -21,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 const teamMembers = DUMMY_USERS.slice(1, 4).map(u => ({ ...u, role: 'Hiring Manager' }));
 
@@ -81,67 +81,52 @@ export default function SettingsTabs() {
             <TabsTrigger value="notifications"><Bell className="mr-2"/> Notifications</TabsTrigger>
         </TabsList>
         
-        <TabsContent value="team">
-            <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                    <div>
-                        <CardTitle>Team Members</CardTitle>
-                        <CardDescription>Manage who has access to this employer account.</CardDescription>
-                    </div>
-                    <Button onClick={() => handleAction("Invite Member", "This would open a dialog to invite a new team member.")}><UserPlus className="mr-2"/> Invite Member</Button>
-                </CardHeader>
-                <CardContent>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className="w-[50%]">Team Member</TableHead>
-                                <TableHead>Role</TableHead>
-                                <TableHead className="text-right">Actions</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {teamMembers.map(member => {
-                                const avatar = PlaceHolderImages.find((p) => p.id === member.avatar);
-                                return (
-                                    <TableRow key={member.id}>
-                                        <TableCell>
-                                            <div className="flex items-center gap-3">
-                                                <Avatar className="h-10 w-10">
-                                                    {avatar && <AvatarImage src={avatar.imageUrl} alt={member.name} />}
-                                                    <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                                                </Avatar>
-                                                <div>
-                                                    <p className="font-semibold">{member.name}</p>
-                                                    <p className="text-sm text-muted-foreground">{member.email}</p>
-                                                </div>
-                                            </div>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Badge variant="outline">{member.role}</Badge>
-                                        </TableCell>
-                                        <TableCell className="text-right">
-                                            <DropdownMenu>
-                                                <DropdownMenuTrigger asChild>
-                                                    <Button variant="ghost" className="h-8 w-8 p-0">
-                                                        <span className="sr-only">Open menu</span>
-                                                        <MoreHorizontal className="h-4 w-4" />
-                                                    </Button>
-                                                </DropdownMenuTrigger>
-                                                <DropdownMenuContent align="end">
-                                                    <DropdownMenuItem onClick={() => handleAction("Edit Role")}>Edit Role</DropdownMenuItem>
-                                                    <DropdownMenuItem onClick={() => handleAction("Resending Invite...")}>Resend Invite</DropdownMenuItem>
-                                                    <DropdownMenuSeparator />
-                                                    <DropdownMenuItem className="text-destructive" onClick={() => handleAction("Removing Member...", `This will remove ${member.name} from the team.`, 'destructive')}>Remove from Team</DropdownMenuItem>
-                                                </DropdownMenuContent>
-                                            </DropdownMenu>
-                                        </TableCell>
-                                    </TableRow>
-                                )
-                            })}
-                        </TableBody>
-                    </Table>
-                </CardContent>
-            </Card>
+        <TabsContent value="team" className="space-y-8">
+            <div className="flex items-center justify-between">
+                <div>
+                    <h3 className="text-2xl font-bold tracking-tight">Team Members</h3>
+                    <p className="text-muted-foreground">Manage who has access to this employer account.</p>
+                </div>
+                <Button onClick={() => handleAction("Invite Member", "This would open a dialog to invite a new team member.")}><UserPlus className="mr-2"/> Invite Member</Button>
+            </div>
+            <div className="space-y-4">
+                {teamMembers.map(member => {
+                    const avatar = PlaceHolderImages.find((p) => p.id === member.avatar);
+                    return (
+                        <Card key={member.id} className="transition-all hover:shadow-md hover:bg-secondary/50">
+                            <CardContent className="p-4 flex items-center justify-between">
+                                <div className="flex items-center gap-4">
+                                    <Avatar className="h-12 w-12">
+                                        {avatar && <AvatarImage src={avatar.imageUrl} alt={member.name} />}
+                                        <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                                    </Avatar>
+                                    <div>
+                                        <p className="font-semibold text-base">{member.name}</p>
+                                        <p className="text-sm text-muted-foreground">{member.email}</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <Badge variant="outline" className="py-1 px-3 text-sm">{member.role}</Badge>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button variant="ghost" className="h-8 w-8 p-0">
+                                                <span className="sr-only">Open menu</span>
+                                                <MoreHorizontal className="h-4 w-4" />
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                            <DropdownMenuItem onClick={() => handleAction("Edit Role")}>Edit Role</DropdownMenuItem>
+                                            <DropdownMenuItem onClick={() => handleAction("Resending Invite...")}>Resend Invite</DropdownMenuItem>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem className="text-destructive" onClick={() => handleAction("Removing Member...", `This will remove ${member.name} from the team.`, 'destructive')}>Remove from Team</DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )
+                })}
+            </div>
         </TabsContent>
 
         <TabsContent value="billing">
