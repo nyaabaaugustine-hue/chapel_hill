@@ -21,11 +21,17 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import DashboardHeader from '@/components/shared/dashboard-header';
+import { useState, useEffect } from 'react';
 
 export default function EmployerLayout({ children }: { children: React.ReactNode }) {
+  const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
   const companyLogo = PlaceHolderImages.find((img) => img.id === 'company-logo-1');
   
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const menuItems = [
     {
       group: 'Hiring',
@@ -53,6 +59,10 @@ export default function EmployerLayout({ children }: { children: React.ReactNode
       ]
     },
   ];
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <SidebarProvider>
