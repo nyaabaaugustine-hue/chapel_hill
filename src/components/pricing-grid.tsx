@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
 import { CheckCircle, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
@@ -72,15 +71,15 @@ export default function PricingGrid() {
   return (
     <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex justify-center items-center gap-4 mb-12">
-        <Label htmlFor="billing-cycle" className={cn("font-semibold", !isYearly ? 'text-yellow-400' : 'text-gray-300')}>Monthly</Label>
-        <Switch
-            id="billing-cycle"
-            checked={isYearly}
-            onCheckedChange={setIsYearly}
-        />
-        <Label htmlFor="billing-cycle" className={cn("font-semibold", isYearly ? 'text-yellow-400' : 'text-gray-300')}>
-            Annual <span className="text-green-400 font-normal">(Save 20%)</span>
-        </Label>
+            <span className={cn("font-semibold text-lg", !isYearly ? 'text-yellow-400' : 'text-gray-200')}>Monthly</span>
+            <Switch
+                id="billing-cycle"
+                checked={isYearly}
+                onCheckedChange={setIsYearly}
+            />
+            <span className={cn("font-semibold text-lg", isYearly ? 'text-yellow-400' : 'text-gray-200')}>
+                Annual <span className="text-green-400 font-normal text-base">(Save 20%)</span>
+            </span>
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
@@ -88,8 +87,7 @@ export default function PricingGrid() {
             return (
             <Card key={tier.name} className={cn(
                 'relative flex flex-col h-full rounded-2xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 overflow-hidden',
-                'bg-card/80 backdrop-blur-sm text-white',
-                tier.isPopular ? 'border-2 border-yellow-400 shadow-xl' : 'border border-white/20'
+                tier.isPopular ? 'border-2 border-yellow-400 shadow-xl bg-black/50' : 'border border-white/20 bg-card/80 backdrop-blur-sm'
             )}>
                 {tier.isPopular && (
                     <div className="absolute top-0 right-6 -mt-4 bg-black text-yellow-400 px-4 py-1.5 text-sm font-semibold rounded-full shadow-lg z-10 flex items-center gap-1.5">
@@ -98,7 +96,7 @@ export default function PricingGrid() {
                 )}
                 <CardHeader className="text-center pt-10">
                     <CardTitle className="font-headline text-3xl text-white">{tier.name}</CardTitle>
-                    <CardDescription className="pt-1 text-gray-300">{tier.description}</CardDescription>
+                    <CardDescription className="pt-1 text-gray-200">{tier.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">
                     <div className="text-center mb-8">
@@ -118,7 +116,7 @@ export default function PricingGrid() {
                     {tier.features.map((feature) => (
                         <li key={feature} className="flex items-center gap-3">
                         <CheckCircle className="h-5 w-5 text-yellow-400" />
-                        <span className="text-gray-300">{feature}</span>
+                        <span className="text-gray-200">{feature}</span>
                         </li>
                     ))}
                     </ul>
