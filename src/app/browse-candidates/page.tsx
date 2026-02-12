@@ -15,13 +15,14 @@ import Link from 'next/link';
 import { Mail, Briefcase, Calendar, Zap } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const CandidateCard = ({ user }: { user: User }) => {
     const { toast } = useToast();
     const avatar = PlaceHolderImages.find((p) => p.id === user.avatar);
     
-    const [matchScore, setMatchScore] = useState(0);
-    const [experience, setExperience] = useState(0);
+    const [matchScore, setMatchScore] = useState<number | null>(null);
+    const [experience, setExperience] = useState<number | null>(null);
 
     useEffect(() => {
         // Generate random data on mount to avoid hydration mismatch
@@ -45,10 +46,14 @@ const CandidateCard = ({ user }: { user: User }) => {
 
     return (
         <Card className="group relative flex flex-col overflow-hidden text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-t-4 border-transparent hover:border-primary">
-             <div className="absolute top-4 right-4 z-10">
-                <Badge variant="outline" className={cn('font-semibold', getMatchScoreBadgeClass(matchScore))}>
-                    <Zap className="mr-1.5 h-3 w-3" /> {matchScore}% Match
-                </Badge>
+             <div className="absolute top-4 right-4 z-10 h-6">
+                {matchScore !== null ? (
+                    <Badge variant="outline" className={cn('font-semibold', getMatchScoreBadgeClass(matchScore))}>
+                        <Zap className="mr-1.5 h-3 w-3" /> {matchScore}% Match
+                    </Badge>
+                ) : (
+                    <Skeleton className="h-full w-24" />
+                )}
              </div>
             <CardContent className="p-6 pb-2 flex flex-col items-center flex-grow">
                 <Avatar className="w-24 h-24 mb-4 border-4 border-background shadow-md ring-2 ring-primary/20">
@@ -61,7 +66,11 @@ const CandidateCard = ({ user }: { user: User }) => {
                 <div className="flex w-full justify-around text-xs text-muted-foreground mb-4 border-y py-3">
                     <div className="flex flex-col items-center gap-1">
                         <Briefcase className="h-4 w-4" />
-                        <span>{experience} Yrs Exp.</span>
+                        {experience !== null ? (
+                            <span>{experience} Yrs Exp.</span>
+                        ) : (
+                            <Skeleton className="h-4 w-16 mt-1" />
+                        )}
                     </div>
                      <div className="flex flex-col items-center gap-1">
                         <Calendar className="h-4 w-4 text-emerald-500" />
