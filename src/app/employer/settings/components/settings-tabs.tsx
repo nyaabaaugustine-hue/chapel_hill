@@ -37,8 +37,9 @@ const pendingInvitesData = [
 const transactions = [
     { id: 'inv_1', amount: 'GH₵500', date: 'May 15, 2024', status: 'Paid', description: 'Pro Plan Subscription' },
     { id: 'inv_2', amount: 'GH₵500', date: 'April 15, 2024', status: 'Paid', description: 'Pro Plan Subscription' },
-    { id: 'inv_3', amount: 'GH₵150', date: 'April 10, 2024', status: 'Paid', description: 'Featured Job Post' },
+    { id: 'inv_3', amount: 'GH₵150', date: 'April 10, 2024', status: 'Due', description: 'Featured Job Post' },
     { id: 'inv_4', amount: 'GH₵500', date: 'March 15, 2024', status: 'Paid', description: 'Pro Plan Subscription' },
+    { id: 'inv_5', amount: 'GH₵50', date: 'March 12, 2024', status: 'Refunded', description: 'Job Boost Credit' },
 ];
 
 const notificationSettings = [
@@ -309,7 +310,7 @@ export default function SettingsTabs() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         {/* Payment Method */}
                         <div className="space-y-4">
-                            <h3 className="font-semibold">Payment Method</h3>
+                            <CardTitle className="flex items-center gap-2"><CreditCard /> Payment Method</CardTitle>
                             <Card>
                                 <CardContent className="p-4 flex items-center justify-between">
                                     <div className="flex items-center gap-3">
@@ -328,7 +329,7 @@ export default function SettingsTabs() {
                         </div>
                         {/* Billing History */}
                         <div className="space-y-4">
-                            <h3 className="font-semibold">Billing History</h3>
+                            <CardTitle className="flex items-center gap-2"><WalletIcon /> Billing History</CardTitle>
                             <Card>
                                 <CardContent className="p-0">
                                     <Table>
@@ -336,8 +337,9 @@ export default function SettingsTabs() {
                                             <TableRow>
                                                 <TableHead>Description</TableHead>
                                                 <TableHead>Amount</TableHead>
-                                                <TableHead className="text-right">Date</TableHead>
-                                                <TableHead><span className="sr-only">Download</span></TableHead>
+                                                <TableHead>Date</TableHead>
+                                                <TableHead>Status</TableHead>
+                                                <TableHead className="text-right"><span className="sr-only">Download</span></TableHead>
                                             </TableRow>
                                         </TableHeader>
                                         <TableBody>
@@ -345,7 +347,19 @@ export default function SettingsTabs() {
                                                 <TableRow key={txn.id}>
                                                     <TableCell className="font-medium">{txn.description}</TableCell>
                                                     <TableCell>{txn.amount}</TableCell>
-                                                    <TableCell className="text-right">{txn.date}</TableCell>
+                                                    <TableCell>{txn.date}</TableCell>
+                                                    <TableCell>
+                                                        <Badge variant={
+                                                            txn.status === 'Paid' ? 'default' 
+                                                            : txn.status === 'Due' ? 'secondary' 
+                                                            : 'destructive'
+                                                        } className={cn(
+                                                            txn.status === 'Paid' && 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
+                                                            txn.status === 'Due' && 'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                                                        )}>
+                                                            {txn.status}
+                                                        </Badge>
+                                                    </TableCell>
                                                     <TableCell className="text-right">
                                                         <Button variant="ghost" size="icon" onClick={() => handleAction("Downloading Invoice...", `Downloading invoice ${txn.id}.`)}>
                                                             <Download className="h-4 w-4" />
@@ -439,5 +453,3 @@ export default function SettingsTabs() {
       </Tabs>
   );
 }
-
-  
