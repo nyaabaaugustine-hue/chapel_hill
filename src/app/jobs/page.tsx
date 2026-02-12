@@ -10,7 +10,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import PageHero from '@/components/shared/page-hero';
 import Footer from '@/components/shared/footer';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import type { Job } from '@/lib/types';
 import { DUMMY_JOBS } from '@/lib/data';
