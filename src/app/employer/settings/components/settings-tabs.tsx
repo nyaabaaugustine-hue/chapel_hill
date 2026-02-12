@@ -2,16 +2,14 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
-import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building, Users, CreditCard, Bell, UserPlus, Download, PlusCircle, Save, FileText, Clock, MessageSquare, Wallet as WalletIcon, MoreHorizontal } from 'lucide-react';
+import { Users, CreditCard, Bell, UserPlus, Download, PlusCircle, Save, FileText, Clock, MessageSquare, Wallet as WalletIcon, MoreHorizontal } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DUMMY_USERS } from '@/lib/data';
 import { Badge } from '@/components/ui/badge';
@@ -21,8 +19,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const teamMembers = DUMMY_USERS.slice(1, 4).map(u => ({ ...u, role: 'Hiring Manager' }));
+
+const pendingInvites = [
+    { email: 'new.hire@example.com', role: 'Hiring Manager', invitedAt: '2 days ago' },
+    { email: 'recruiter@external.com', role: 'Recruiter', invitedAt: '5 days ago' },
+];
 
 const transactions = [
     { id: 'inv_1', amount: 'GH₵500', date: 'May 15, 2024', status: 'Paid', description: 'Pro Plan Subscription' },
@@ -81,14 +85,77 @@ export default function SettingsTabs() {
             <TabsTrigger value="notifications"><Bell className="mr-2"/> Notifications</TabsTrigger>
         </TabsList>
         
-        <TabsContent value="team">
+        <TabsContent value="team" className="space-y-8">
             <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                    <div>
-                        <CardTitle>Team Members</CardTitle>
-                        <CardDescription>Manage who has access to this employer account.</CardDescription>
+                <CardHeader>
+                    <CardTitle>Invite New Team Member</CardTitle>
+                    <CardDescription>Enter the email address of the person you want to add to your team.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <Input type="email" placeholder="new.member@example.com" className="flex-1" />
+                        <Select>
+                            <SelectTrigger className="sm:w-[200px]">
+                                <SelectValue placeholder="Select a role" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="manager">Hiring Manager</SelectItem>
+                                <SelectItem value="recruiter">Recruiter</SelectItem>
+                                <SelectItem value="viewer">Viewer</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <Button onClick={() => handleAction("Invite Sent", "An invitation has been sent to the email address.")}><UserPlus className="mr-2" /> Send Invite</Button>
                     </div>
-                    <Button onClick={() => handleAction("Invite Member", "This would open a dialog to invite a new team member.")}><UserPlus className="mr-2"/> Invite Member</Button>
+                </CardContent>
+            </Card>
+
+             <Card>
+                <CardHeader>
+                    <CardTitle>Pending Invitations</CardTitle>
+                    <CardDescription>These people have been invited but have not yet joined.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className="w-[50%]">Email</TableHead>
+                                <TableHead>Role</TableHead>
+                                <TableHead>Invited</TableHead>
+                                <TableHead className="text-right">Actions</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {pendingInvites.map(invite => (
+                                <TableRow key={invite.email}>
+                                    <TableCell className="font-medium">{invite.email}</TableCell>
+                                    <TableCell><Badge variant="secondary">{invite.role}</Badge></TableCell>
+                                    <TableCell className="text-muted-foreground">{invite.invitedAt}</TableCell>
+                                    <TableCell className="text-right">
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button variant="ghost" className="h-8 w-8 p-0">
+                                                    <span className="sr-only">Open menu</span>
+                                                    <MoreHorizontal className="h-4 w-4" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                <DropdownMenuItem onClick={() => handleAction("Resending Invite...")}>Resend Invite</DropdownMenuItem>
+                                                <DropdownMenuSeparator />
+                                                <DropdownMenuItem className="text-destructive" onClick={() => handleAction("Invitation Revoked", `The invitation for ${invite.email} has been revoked.`, 'destructive')}>Revoke Invite</DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader>
+                    <CardTitle>Active Team Members</CardTitle>
+                    <CardDescription>Manage who has access to this employer account.</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <Table>
@@ -129,7 +196,6 @@ export default function SettingsTabs() {
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end">
                                                     <DropdownMenuItem onClick={() => handleAction("Edit Role")}>Edit Role</DropdownMenuItem>
-                                                    <DropdownMenuItem onClick={() => handleAction("Resending Invite...")}>Resend Invite</DropdownMenuItem>
                                                     <DropdownMenuSeparator />
                                                     <DropdownMenuItem className="text-destructive" onClick={() => handleAction("Removing Member...", `This will remove ${member.name} from the team.`, 'destructive')}>Remove from Team</DropdownMenuItem>
                                                 </DropdownMenuContent>
