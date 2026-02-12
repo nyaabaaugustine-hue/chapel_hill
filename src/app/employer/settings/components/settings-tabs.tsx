@@ -22,13 +22,12 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-const teamMembers = DUMMY_USERS.slice(1, 6).map((u, i) => ({ ...u, role: ['Hiring Manager', 'Recruiter', 'Viewer'][i % 3] }));
-
 const pendingInvites = [
     { email: 'new.hire@example.com', role: 'Hiring Manager', invitedAt: '2 days ago' },
     { email: 'recruiter@external.com', role: 'Recruiter', invitedAt: '5 days ago' },
     { email: 'ux.lead@example.com', role: 'Viewer', invitedAt: '1 day ago' },
     { email: 'dev.intern@example.com', role: 'Recruiter', invitedAt: '1 week ago' },
+    { email: 'another.dev@example.com', role: 'Viewer', invitedAt: '3 days ago' },
 ];
 
 const transactions = [
@@ -68,8 +67,22 @@ export default function SettingsTabs() {
   const tab = searchParams.get('tab') || 'team';
   const { toast } = useToast();
 
+  const [teamMembers, setTeamMembers] = React.useState(
+    DUMMY_USERS.slice(1, 8).map((u, i) => ({ ...u, role: ['Hiring Manager', 'Recruiter', 'Viewer'][i % 3] }))
+  );
+
   const handleAction = (title: string, description?: string, variant: 'default' | 'destructive' | 'vibrant' = 'vibrant') => {
       toast({ title, description, variant });
+  };
+  
+  const handleRoleChange = (memberId: string, newRole: string) => {
+    setTeamMembers(prevMembers => 
+        prevMembers.map(member => 
+            member.id === memberId ? { ...member, role: newRole } : member
+        )
+    );
+    const memberName = teamMembers.find(m => m.id === memberId)?.name;
+    handleAction(`Role updated for ${memberName}`, `Their new role is ${newRole}.`);
   };
 
   const handleSwitchChange = (feature: string, enabled: boolean) => {
@@ -187,7 +200,16 @@ export default function SettingsTabs() {
                                             </div>
                                         </TableCell>
                                         <TableCell>
-                                            <Badge variant="outline">{member.role}</Badge>
+                                            <Select value={member.role} onValueChange={(newRole) => handleRoleChange(member.id, newRole)}>
+                                                <SelectTrigger className="w-[160px]">
+                                                    <SelectValue placeholder="Select role" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="Hiring Manager">Hiring Manager</SelectItem>
+                                                    <SelectItem value="Recruiter">Recruiter</SelectItem>
+                                                    <SelectItem value="Viewer">Viewer</SelectItem>
+                                                </SelectContent>
+                                            </Select>
                                         </TableCell>
                                         <TableCell className="text-right">
                                             <DropdownMenu>
@@ -198,9 +220,7 @@ export default function SettingsTabs() {
                                                     </Button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end">
-                                                    <DropdownMenuItem onClick={() => handleAction("Edit Role")}>Edit Role</DropdownMenuItem>
-                                                    <DropdownMenuSeparator />
-                                                    <DropdownMenuItem className="text-destructive" onClick={() => handleAction("Removing Member...", `This will remove ${member.name} from the team.`, 'destructive')}>Remove from Team</DropdownMenuItem>
+                                                    <DropdownMenuItem onClick={() => handleAction("Removing Member...", `This will remove ${member.name} from the team.`, 'destructive')}>Remove from Team</DropdownMenuItem>
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
                                         </TableCell>
