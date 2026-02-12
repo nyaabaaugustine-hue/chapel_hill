@@ -138,7 +138,7 @@ export default function SettingsTabs() {
         <TabsContent value="team" className="space-y-8 mt-6">
             <Card>
                 <CardHeader>
-                    <CardTitle>Invite New Team Member</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><UserPlus /> Invite New Team Member</CardTitle>
                     <CardDescription>Enter the email address of the person you want to add to your team.</CardDescription>
                 </CardHeader>
                 <CardContent>
