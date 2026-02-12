@@ -51,8 +51,8 @@ export default function ContactsPage() {
       <main className="flex-1 py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6 space-y-12">
           <ContactMap />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <Card className="shadow-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-7xl mx-auto">
+            <Card className="lg:col-span-3 shadow-lg">
               <CardHeader>
                 <CardTitle>Send a Message</CardTitle>
                 <CardDescription>Our team will get back to you within 24 hours.</CardDescription>
@@ -85,7 +85,7 @@ export default function ContactsPage() {
               </CardContent>
             </Card>
 
-            <div className="space-y-6">
+            <div className="lg:col-span-2 space-y-6">
                  <Card>
                     <CardHeader>
                         <CardTitle>Contact Information</CardTitle>
