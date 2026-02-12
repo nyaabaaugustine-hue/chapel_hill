@@ -22,11 +22,13 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-const teamMembers = DUMMY_USERS.slice(1, 4).map(u => ({ ...u, role: 'Hiring Manager' }));
+const teamMembers = DUMMY_USERS.slice(1, 6).map((u, i) => ({ ...u, role: ['Hiring Manager', 'Recruiter', 'Viewer'][i % 3] }));
 
 const pendingInvites = [
     { email: 'new.hire@example.com', role: 'Hiring Manager', invitedAt: '2 days ago' },
     { email: 'recruiter@external.com', role: 'Recruiter', invitedAt: '5 days ago' },
+    { email: 'ux.lead@example.com', role: 'Viewer', invitedAt: '1 day ago' },
+    { email: 'dev.intern@example.com', role: 'Recruiter', invitedAt: '1 week ago' },
 ];
 
 const transactions = [
