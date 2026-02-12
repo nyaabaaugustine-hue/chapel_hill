@@ -109,7 +109,7 @@ export default function CandidateProfilePage() {
 
     if (!foundUser) {
       // The provided ID might be an applicant ID. Let's try to find the user that way.
-      const applicant = DUMMY_APPLICANTS.find(a => a.id === id);
+      const applicant = DUMMY_APPLICANTS.find(a => a.id === id || a.userId === id);
       if (applicant) {
         foundUser = DUMMY_USERS.find(u => u.id === applicant.userId);
       }
@@ -163,11 +163,13 @@ export default function CandidateProfilePage() {
                             <span>Accra, Ghana</span>
                         </div>
                     </CardContent>
-                    <CardContent className="border-t p-6 space-y-3">
-                        <Button className="w-full bg-accent-gradient" onClick={() => handleAction('Invitation Sent!')}><Send className="mr-2" /> Invite to Apply</Button>
-                        <Button variant="outline" className="w-full" onClick={() => handleAction('Message Sent!')}>
-                            <Mail className="mr-2" /> Message
-                        </Button>
+                    <CardContent className="border-t p-6">
+                        <div className="flex w-full gap-3">
+                            <Button className="flex-1 bg-accent-gradient" onClick={() => handleAction('Invitation Sent!')}><Send className="mr-2" /> Invite</Button>
+                            <Button variant="outline" className="flex-1" onClick={() => handleAction('Message Sent!')}>
+                                <Mail className="mr-2" /> Message
+                            </Button>
+                        </div>
                     </CardContent>
                 </Card>
                 <Card>
@@ -184,7 +186,7 @@ export default function CandidateProfilePage() {
                             <span className="text-muted-foreground">Availability</span>
                             <span className="font-semibold text-emerald-500">Open to offers</span>
                         </div>
-                        <Separator />
+                         <Separator />
                          <div className="flex justify-between">
                             <span className="text-muted-foreground">Preferred Role</span>
                             <span className="font-semibold">Full-time</span>
