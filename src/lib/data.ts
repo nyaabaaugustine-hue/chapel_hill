@@ -215,7 +215,7 @@ export const DUMMY_OPPORTUNITIES = [
     description: 'Gain real-world experience with leading companies in your field of study. Bridge the gap between theory and practice.',
     iconBg: 'bg-blue-500/10',
     iconColor: 'text-blue-500',
-    link: '/jobs?type=Internship'
+    filterValue: 'internship',
   },
   {
     icon: Handshake,
@@ -223,7 +223,7 @@ export const DUMMY_OPPORTUNITIES = [
     description: 'Make an impact by contributing your skills to NGOs and community projects. Build your network and character.',
     iconBg: 'bg-green-500/10',
     iconColor: 'text-green-500',
-    link: '/jobs?type=Volunteer'
+    filterValue: 'volunteer',
   },
   {
     icon: Lightbulb,
@@ -231,6 +231,6 @@ export const DUMMY_OPPORTUNITIES = [
     description: 'Participate in student-focused innovation challenges and hackathons sponsored by top tech firms.',
     iconBg: 'bg-yellow-500/10',
     iconColor: 'text-yellow-500',
-    link: '#'
+    filterValue: 'all',
   }
 ];
