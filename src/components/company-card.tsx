@@ -35,14 +35,14 @@ export default function CompanyCard({ company }: CompanyCardProps) {
                     {company.name}
                 </Link>
             </CardTitle>
-            <CardDescription className="flex flex-col items-center gap-2 text-sm">
+            <div className="text-sm text-muted-foreground flex flex-col items-center gap-2">
                 <div className="flex items-center gap-1.5">
                     <Building className="h-4 w-4" /> {company.industry}
                 </div>
                 <div className="flex items-center gap-1.5">
                     <MapPin className="h-4 w-4" /> {company.location}
                 </div>
-            </CardDescription>
+            </div>
              <div className="flex justify-center pt-2">
                 <StarRating rating={company.rating ?? 0} />
             </div>
