@@ -1,15 +1,46 @@
+'use client';
+
+import { useState } from 'react';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import PageHero from '@/components/shared/page-hero';
 import ContactMap from './components/contact-map';
+import { useToast } from '@/hooks/use-toast';
 
 export default function ContactsPage() {
+  const { toast } = useToast();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSending, setIsSending] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSending(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      setIsSending(false);
+      toast({
+        title: 'Message Sent!',
+        description: "Thank you for contacting us. We'll get back to you shortly.",
+        variant: 'vibrant',
+      });
+      // Reset form
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+    }, 1500);
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
@@ -26,26 +57,31 @@ export default function ContactsPage() {
                 <CardTitle>Send a Message</CardTitle>
                 <CardDescription>Our team will get back to you within 24 hours.</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="name">Your Name</Label>
-                        <Input id="name" placeholder="John Doe" />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="email">Your Email</Label>
-                        <Input id="email" type="email" placeholder="john@example.com" />
-                    </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" placeholder="Regarding a job posting..." />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" placeholder="Your message..." rows={6} />
-                </div>
-                <Button type="submit" className="w-full bg-accent-gradient" size="lg">Send Message</Button>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                          <Label htmlFor="name">Your Name</Label>
+                          <Input id="name" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} required />
+                      </div>
+                      <div className="space-y-2">
+                          <Label htmlFor="email">Your Email</Label>
+                          <Input id="email" type="email" placeholder="john@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                      </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Subject</Label>
+                    <Input id="subject" placeholder="Regarding a job posting..." value={subject} onChange={(e) => setSubject(e.target.value)} required />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea id="message" placeholder="Your message..." rows={6} value={message} onChange={(e) => setMessage(e.target.value)} required />
+                  </div>
+                  <Button type="submit" className="w-full bg-accent-gradient" size="lg" disabled={isSending}>
+                    {isSending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
+                    {isSending ? 'Sending...' : 'Send Message'}
+                  </Button>
+                </form>
               </CardContent>
             </Card>
 
