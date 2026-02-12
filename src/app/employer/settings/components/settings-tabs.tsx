@@ -23,7 +23,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { formatDistanceToNow } from 'date-fns';
 
-const pendingInvites = [
+const pendingInvitesData = [
     { email: 'new.hire@example.com', role: 'Hiring Manager', invitedAt: '2 days ago' },
     { email: 'recruiter@external.com', role: 'Recruiter', invitedAt: '5 days ago' },
     { email: 'ux.lead@example.com', role: 'Viewer', invitedAt: '1 day ago' },
@@ -71,6 +71,10 @@ export default function SettingsTabs() {
   const tab = searchParams.get('tab') || 'team';
   const { toast } = useToast();
 
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteRole, setInviteRole] = useState('Recruiter');
+  const [pendingInvites, setPendingInvites] = useState(pendingInvitesData);
+
   const [teamMembers, setTeamMembers] = React.useState(
     DUMMY_USERS.slice(1, 16).map((u, i) => ({ 
         ...u, 
@@ -110,6 +114,17 @@ export default function SettingsTabs() {
         'vibrant'
     );
   };
+  
+  const handleSendInvite = () => {
+    if (!inviteEmail || !inviteEmail.includes('@')) {
+        handleAction("Invalid Email", "Please enter a valid email address.", 'destructive');
+        return;
+    }
+    const newInvite = { email: inviteEmail, role: inviteRole, invitedAt: 'Just now' };
+    setPendingInvites(prev => [newInvite, ...prev]);
+    setInviteEmail('');
+    handleAction("Invite Sent!", `An invitation has been sent to ${inviteEmail}.`);
+  };
 
   return (
     <Tabs value={tab} defaultValue={tab} className="w-full">
@@ -127,18 +142,24 @@ export default function SettingsTabs() {
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <Input type="email" placeholder="new.member@example.com" className="flex-1" />
-                        <Select>
+                        <Input 
+                            type="email" 
+                            placeholder="new.member@example.com" 
+                            className="flex-1" 
+                            value={inviteEmail}
+                            onChange={e => setInviteEmail(e.target.value)}
+                        />
+                        <Select value={inviteRole} onValueChange={setInviteRole}>
                             <SelectTrigger className="sm:w-[200px]">
                                 <SelectValue placeholder="Select a role" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="manager">Hiring Manager</SelectItem>
-                                <SelectItem value="recruiter">Recruiter</SelectItem>
-                                <SelectItem value="viewer">Viewer</SelectItem>
+                                <SelectItem value="Hiring Manager">Hiring Manager</SelectItem>
+                                <SelectItem value="Recruiter">Recruiter</SelectItem>
+                                <SelectItem value="Viewer">Viewer</SelectItem>
                             </SelectContent>
                         </Select>
-                        <Button onClick={() => handleAction("Invite Sent", "An invitation has been sent to the email address.")}><UserPlus className="mr-2" /> Send Invite</Button>
+                        <Button onClick={handleSendInvite}><UserPlus className="mr-2" /> Send Invite</Button>
                     </div>
                 </CardContent>
             </Card>
@@ -418,3 +439,5 @@ export default function SettingsTabs() {
       </Tabs>
   );
 }
+
+  
