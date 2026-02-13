@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import {
   Menu,
-  LogOut,
-  LayoutDashboard,
   Home,
   Briefcase,
   Users,
@@ -25,32 +23,33 @@ import {
   SheetTrigger,
   SheetFooter,
 } from '@/components/ui/sheet';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 export default function Header() {
   const [isMounted, setIsMounted] = useState(false);
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // For demo purposes, we will assume the user is always logged out on public pages.
-  // The dashboard layouts will handle their own "logged in" state.
-  const user = null;
-
   const navLinks = [
-    { href: '/', label: 'Home', icon: Home },
-    { href: '/jobs', label: 'Find a Job', icon: Briefcase },
-    { href: '/browse-candidates', label: 'Browse Candidates', icon: Users },
-    { href: '/opportunities', label: 'Opportunities', icon: Sparkles },
-    { href: '/companies', label: 'Companies', icon: Building2 },
-    { href: '/pricing', label: 'Pricing', icon: CreditCard },
-    { href: '/blog', label: 'Blog', icon: PenSquare },
-    { href: '/contacts', label: 'Contacts', icon: Mail },
+    { href: '/', label: 'Home', icon: Home, color: 'text-sky-500' },
+    { href: '/jobs', label: 'Find a Job', icon: Briefcase, color: 'text-emerald-500' },
+    { href: '/browse-candidates', label: 'Browse Candidates', icon: Users, color: 'text-indigo-500' },
+    { href: '/opportunities', label: 'Opportunities', icon: Sparkles, color: 'text-yellow-500' },
+    { href: '/companies', label: 'Companies', icon: Building2, color: 'text-orange-500' },
+    { href: '/pricing', label: 'Pricing', icon: CreditCard, color: 'text-rose-500' },
+    { href: '/blog', label: 'Blog', icon: PenSquare, color: 'text-blue-500' },
+    { href: '/contacts', label: 'Contacts', icon: Mail, color: 'text-purple-500' },
   ];
 
   const renderAuthButtons = () => {
@@ -89,34 +88,40 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm">
       <div className="mx-auto flex h-[80px] max-w-7xl items-center justify-between px-6 lg:px-12">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2">
             <Logo />
           </Link>
-          <nav className="hidden items-center gap-6 md:flex">
-            {navLinks.map((link) => {
-              const isActive =
-                link.href === '/'
-                  ? pathname === '/'
-                  : pathname.startsWith(link.href);
-              const Icon = link.icon;
-              return (
-                <Link
-                  key={link.href + link.label}
-                  href={link.href}
-                  className={cn(
-                    'flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-primary',
-                    isActive
-                      ? 'text-primary font-semibold'
-                      : 'text-muted-foreground'
-                  )}
-                >
-                  <Icon className="h-4 w-4" />
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
+          <TooltipProvider>
+            <nav className="hidden items-center gap-2 md:flex">
+              {navLinks.map((link) => {
+                const isActive =
+                  link.href === '/'
+                    ? pathname === '/'
+                    : pathname.startsWith(link.href);
+                const Icon = link.icon;
+                return (
+                  <Tooltip key={link.href}>
+                    <TooltipTrigger asChild>
+                      <Link
+                        href={link.href}
+                        className={cn(
+                          'flex items-center gap-2 rounded-md p-2 text-sm font-medium transition-colors hover:bg-secondary',
+                           isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                        )}
+                      >
+                        <Icon className={cn('h-5 w-5', link.color)} />
+                        <span className="hidden lg:inline">{link.label}</span>
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent className="block lg:hidden">
+                      <p>{link.label}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                );
+              })}
+            </nav>
+          </TooltipProvider>
         </div>
         {renderAuthButtons()}
         {isMounted && (
@@ -155,7 +160,7 @@ export default function Header() {
                           : 'text-muted-foreground'
                       )}
                     >
-                      <Icon className="h-5 w-5" />
+                      <Icon className={cn('h-5 w-5', link.color)} />
                       {link.label}
                     </Link>
                   );
