@@ -19,9 +19,9 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'picsum.photos',
+        hostname: 'res.cloudinary.com',
         port: '',
-        pathname: '/**',
+        pathname: '/demo/**',
       },
       {
         protocol: 'https',
@@ -35,4 +35,5 @@ const nextConfig: NextConfig = {
 
 export default nextConfig;
 
+    
     
