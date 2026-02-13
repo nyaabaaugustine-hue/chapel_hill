@@ -4,7 +4,7 @@
       "id": "hero-main",
       "description": "A modern office scene with Black professionals collaborating around a table with laptops.",
       "imageUrl": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhZnJpY2FuJTIwYnVzaW5lc3MlMjBtZWV0aW5nfGVufDB8fHx8MTc3MTAxNzYyNXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "Ghanaian professionals collaborating"
+      "imageHint": "professionals collaborating"
     },
     {
       "id": "company-logo-1",
@@ -237,44 +237,44 @@
     {
       "id": "location-accra",
       "description": "Independence Arch in Accra, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1589332356910-358043457198?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1627852352348-2d5e3c79dc53?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       "imageHint": "Accra skyline"
     },
     {
       "id": "location-kumasi",
       "description": "Kejetia Market in Kumasi, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1634074967416-dd24d702c93c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1619451421064-334346b8e3a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       "imageHint": "Kumasi market"
     },
     {
       "id": "location-takoradi",
       "description": "Fishing boats at a harbour in Takoradi, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1618783430342-c651347f8c1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1618783430342-c651347f8c1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       "imageHint": "Takoradi harbour"
     },
     {
       "id": "location-cape-coast",
       "description": "Cape Coast Castle in Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1579003593418-22a4d7c3c43b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1596701126955-83e9365538b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       "imageHint": "CapeCoast castle"
     },
     {
       "id": "location-tamale",
       "description": "The central mosque in Tamale, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1619329272333-e187f5d625c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1619329272333-e187f5d625c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       "imageHint": "Tamale mosque"
     },
     {
       "id": "location-tema",
       "description": "The port of Tema, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1627993356238-d6b38c2925d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1605820336141-5c17462b489a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       "imageHint": "Tema port"
     },
     {
       "id": "hiring-main",
       "description": "A group of Black professionals in a business meeting.",
-      "imageUrl": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
-      "imageHint": "Ghana professionals"
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "imageHint": "business meeting"
     },
     {
       "id": "subscription-1",
@@ -309,14 +309,14 @@
     {
       "id": "category-bg",
       "description": "Modern office setting with Ghanaian people working.",
-      "imageUrl": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1543269664-56d93c1b41a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       "imageHint": "Ghana office"
     },
     {
       "id": "top-companies-bg",
       "description": "A vibrant market scene in Accra, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1601053245415-3a0429712a4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhY2NyYSUyMG1hcmtldHxlbnwwfHx8fDE3NzEwOTYxODV8MA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "Accra market"
+      "imageUrl": "https://images.unsplash.com/photo-1618925480413-5858d4a0445d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "imageHint": "Ghana market"
     },
     {
       "id": "latest-news-bg",
