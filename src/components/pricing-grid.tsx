@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { CheckCircle, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export const tiers = [
   {
@@ -57,13 +59,22 @@ export const tiers = [
   },
 ];
 
-const KenteCornerArt = () => (
-    <div className="absolute top-0 right-0 h-24 w-24 opacity-20 dark:opacity-30 pointer-events-none overflow-hidden rounded-tr-2xl">
-        <div className="absolute w-32 h-4 bg-destructive transform rotate-45 -translate-y-8 translate-x-8" />
-        <div className="absolute w-32 h-4 bg-chart-3 transform rotate-45 -translate-y-4 translate-x-8" />
-        <div className="absolute w-32 h-4 bg-accent transform rotate-45 translate-y-0 translate-x-8" />
-    </div>
-);
+const KenteCornerArt = () => {
+    const kenteImage = PlaceHolderImages.find(p => p.id === 'kente-corner-art');
+    if (!kenteImage) return null;
+
+    return (
+        <div className="absolute top-0 right-0 h-28 w-28 opacity-30 dark:opacity-40 pointer-events-none overflow-hidden rounded-tr-2xl">
+            <Image
+                src={kenteImage.imageUrl}
+                alt={kenteImage.description}
+                width={200}
+                height={200}
+                className="absolute -top-8 -right-8 object-contain transform rotate-12"
+            />
+        </div>
+    );
+};
 
 
 export default function PricingGrid() {
