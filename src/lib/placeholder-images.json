@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-main",
-      "description": "A professional person working on a laptop at a clean desk.",
-      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwd29tYW4lMjBsYXB0b3B8ZW58MHx8fHwxNzcxMDk1MzYyfDA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "remote work"
+      "description": "A modern office scene with Black professionals collaborating around a table with laptops.",
+      "imageUrl": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhZnJpY2FuJTIwYnVzaW5lc3MlMjBtZWV0aW5nfGVufDB8fHx8MTc3MTAxNzYyNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "Ghanaian professionals collaborating"
     },
     {
       "id": "company-logo-1",
@@ -273,8 +273,8 @@
     {
       "id": "hiring-main",
       "description": "A group of Black professionals in a business meeting.",
-      "imageUrl": "https://images.unsplash.com/photo-1613462538814-7d51073ce0ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
-      "imageHint": "business meeting"
+      "imageUrl": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "imageHint": "Ghana professionals"
     },
     {
       "id": "subscription-1",
@@ -315,8 +315,8 @@
     {
       "id": "top-companies-bg",
       "description": "A vibrant market scene in Accra, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1618925480413-5858d4a0445d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
-      "imageHint": "Ghana market"
+      "imageUrl": "https://images.unsplash.com/photo-1601053245415-3a0429712a4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhY2NyYSUyMG1hcmtldHxlbnwwfHx8fDE3NzEwOTYxODV8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "Accra market"
     },
     {
       "id": "latest-news-bg",
