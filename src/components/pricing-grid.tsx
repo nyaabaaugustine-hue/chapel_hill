@@ -109,7 +109,7 @@ export default function PricingGrid() {
                             alt={kenteImage.description}
                             width={96}
                             height={96}
-                            className="absolute top-0 right-0 h-16 w-16 lg:h-24 lg:w-24 opacity-20 pointer-events-none z-0"
+                            className="absolute top-0 right-0 h-16 w-16 lg:h-24 lg:w-24 opacity-20 pointer-events-none z-0 rounded-bl-full"
                         />
                      )}
                      <div className="relative z-10 flex flex-col h-full">
