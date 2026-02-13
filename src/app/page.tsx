@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { Briefcase, CheckCircle, MapPin } from 'lucide-react';
@@ -15,17 +13,18 @@ import { Suspense } from 'react';
 import HeroSearchForm from '@/components/hero-search-form';
 import SectionHeader from '@/components/shared/section-header';
 import dynamic from 'next/dynamic';
+import { DUMMY_JOBS, JOB_CATEGORIES, DUMMY_COMPANIES, DUMMY_REVIEWS, DUMMY_LOCATIONS, DUMMY_BLOG_POSTS } from '@/lib/data';
+import JobCategories from '@/components/job-categories';
+import HiringSection from '@/components/hiring-section';
+import LatestNews from '@/components/latest-news';
+import SubscriptionSection from '@/components/subscription-section';
+import WhyChooseUs from '@/components/why-choose-us';
+import Testimonials from '@/components/testimonials';
+import VolunteerSection from '@/components/volunteer-section';
+import PricingGrid from '@/components/pricing-grid';
+import JobsByLocation from '@/components/jobs-by-location';
 
 const LiveActivityBar = dynamic(() => import('@/components/live-activity-bar'), { ssr: false });
-const JobCategories = dynamic(() => import('@/components/job-categories'));
-const HiringSection = dynamic(() => import('@/components/hiring-section'));
-const LatestNews = dynamic(() => import('@/components/latest-news'));
-const SubscriptionSection = dynamic(() => import('@/components/subscription-section'));
-const WhyChooseUs = dynamic(() => import('@/components/why-choose-us'));
-const Testimonials = dynamic(() => import('@/components/testimonials'));
-const VolunteerSection = dynamic(() => import('@/components/volunteer-section'));
-const PricingGrid = dynamic(() => import('@/components/pricing-grid'));
-const JobsByLocation = dynamic(() => import('@/components/jobs-by-location'));
 const AISupportWidget = dynamic(() => import('@/components/ai-support-widget'), { ssr: false });
 
 
@@ -38,6 +37,8 @@ export default function HomePage() {
     { text: '4,500+ companies verified' },
     { text: '98% candidate satisfaction' },
   ];
+
+  const latestPosts = DUMMY_BLOG_POSTS.filter(p => p.status === 'Published').slice(0, 3);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -82,9 +83,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        <TopCompanies />
+        <TopCompanies companies={DUMMY_COMPANIES.slice(0, 10)} />
 
-        <FeaturedJobs />
+        <FeaturedJobs jobs={DUMMY_JOBS} categories={['All', ...JOB_CATEGORIES.map((c) => c.name)]} />
 
         <WhyChooseUs />
 
@@ -116,9 +117,13 @@ export default function HomePage() {
           </div>
         </section>
 
-        <Testimonials />
+        <Testimonials reviews={DUMMY_REVIEWS} />
 
-        <JobsByLocation />
+        <JobsByLocation locations={DUMMY_LOCATIONS} />
+        
+        <LatestNews posts={latestPosts} />
+
+        <SubscriptionSection />
 
       </main>
       <Footer />

@@ -1,4 +1,3 @@
-import { DUMMY_COMPANIES } from '@/lib/data';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -6,9 +5,9 @@ import { Card } from '@/components/ui/card';
 import StarRating from './shared/star-rating';
 import { MapPin, Briefcase } from 'lucide-react';
 import { Badge } from './ui/badge';
+import type { Company } from '@/lib/types';
 
-export default function TopCompanies() {
-  const topCompanies = DUMMY_COMPANIES.slice(0, 10);
+export default function TopCompanies({ companies }: { companies: Company[] }) {
   
   return (
     <section className="relative py-16 md:py-24 bg-secondary">
@@ -20,7 +19,7 @@ export default function TopCompanies() {
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {topCompanies.map((company, index) => {
+          {companies.map((company, index) => {
             const companyLogo = PlaceHolderImages.find((img) => img.id === company.logo);
             return (
               <Link key={company.id} href={`/companies/${company.id}`} className="block group animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${200 + index * 50}ms` }}>

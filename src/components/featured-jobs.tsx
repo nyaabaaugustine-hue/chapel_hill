@@ -1,19 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { DUMMY_JOBS, JOB_CATEGORIES } from '@/lib/data';
+import type { Job } from '@/lib/types';
 import JobCard from './job-card';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export default function FeaturedJobs() {
+export default function FeaturedJobs({ jobs, categories }: { jobs: Job[], categories: string[] }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', ...JOB_CATEGORIES.map((c) => c.name)];
-
-  const featuredJobs = DUMMY_JOBS.filter(job => {
+  const featuredJobs = jobs.filter(job => {
     if (selectedCategory === 'All') return true;
     return job.category === selectedCategory;
   }).slice(0, 9);

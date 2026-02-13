@@ -1,6 +1,6 @@
 'use client';
 
-import { DUMMY_REVIEWS } from '@/lib/data';
+import type { Review } from '@/lib/types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -12,11 +12,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import Autoplay from "embla-carousel-autoplay";
+import Autoplay from "embla-carousel-react";
 import React from 'react';
 import Image from 'next/image';
 
-export default function Testimonials() {
+export default function Testimonials({ reviews }: { reviews: Review[] }) {
 
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true })
@@ -43,7 +43,7 @@ export default function Testimonials() {
           onMouseLeave={plugin.current.reset}
         >
           <CarouselContent className="-ml-4">
-            {DUMMY_REVIEWS.map((review) => {
+            {reviews.map((review) => {
               const userAvatar = PlaceHolderImages.find((img) => img.id === review.user.avatar);
               return (
                 <CarouselItem key={review.id} className="pl-4 md:basis-1/2 lg:basis-1/3">

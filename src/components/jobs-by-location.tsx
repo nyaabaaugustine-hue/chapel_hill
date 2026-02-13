@@ -1,11 +1,17 @@
-import { DUMMY_LOCATIONS } from '@/lib/data';
 import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Briefcase, Building } from 'lucide-react';
 
-export default function JobsByLocation() {
+type Location = {
+    name: string;
+    jobs: number;
+    companies: number;
+    imageId: string;
+};
+
+export default function JobsByLocation({ locations }: { locations: Location[] }) {
   return (
     <section className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto max-w-7xl px-6 lg:px-12">
@@ -16,7 +22,7 @@ export default function JobsByLocation() {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {DUMMY_LOCATIONS.map((location, index) => {
+          {locations.map((location, index) => {
             const locationImage = PlaceHolderImages.find((img) => img.id === location.imageId);
             return (
               <Link key={location.name} href="#" className="block group animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${200 + index * 75}ms` }}>
