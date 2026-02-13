@@ -33,6 +33,35 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
+const DesktopAuthButtons = () => (
+  <div className="hidden items-center gap-2 md:flex">
+    <Button variant="ghost" asChild>
+      <Link href="/login">Login</Link>
+    </Button>
+    <Button
+      asChild
+      className="rounded-xl bg-accent-gradient px-5 py-2.5 font-semibold text-primary-foreground shadow-sm transition-transform hover:scale-105"
+    >
+      <Link href="/register">Register</Link>
+    </Button>
+  </div>
+);
+
+const MobileAuthButtons = () => (
+  <div className="grid w-full grid-cols-2 gap-4">
+    <Button variant="outline" asChild size="lg">
+      <Link href="/login">Login</Link>
+    </Button>
+    <Button
+      asChild
+      size="lg"
+      className="bg-accent-gradient font-semibold text-primary-foreground shadow-lg transition-transform hover:scale-105"
+    >
+      <Link href="/register">Register</Link>
+    </Button>
+  </div>
+);
+
 export default function Header() {
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
@@ -52,39 +81,6 @@ export default function Header() {
     { href: '/contacts', label: 'Contacts', icon: Mail, color: 'text-purple-500' },
   ];
 
-  const renderAuthButtons = () => {
-    return (
-      <div className="hidden items-center gap-2 md:flex">
-        <Button variant="ghost" asChild>
-          <Link href="/login">Login</Link>
-        </Button>
-        <Button
-          asChild
-          className="rounded-xl bg-accent-gradient px-5 py-2.5 font-semibold text-primary-foreground shadow-sm transition-transform hover:scale-105"
-        >
-          <Link href="/register">Register</Link>
-        </Button>
-      </div>
-    );
-  };
-
-  const renderMobileAuthButtons = () => {
-    return (
-      <div className="grid w-full grid-cols-2 gap-4">
-        <Button variant="outline" asChild size="lg">
-          <Link href="/login">Login</Link>
-        </Button>
-        <Button
-          asChild
-          size="lg"
-          className="bg-accent-gradient font-semibold text-primary-foreground shadow-lg transition-transform hover:scale-105"
-        >
-          <Link href="/register">Register</Link>
-        </Button>
-      </div>
-    );
-  };
-
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm">
       <div className="mx-auto flex h-[80px] max-w-7xl items-center justify-between px-6 lg:px-12">
@@ -97,7 +93,7 @@ export default function Header() {
         </div>
 
         {/* Center: Nav (Desktop) */}
-        <div className="hidden md:flex flex-1 justify-center">
+        <div className="hidden flex-1 justify-center md:flex">
             <TooltipProvider>
                 <nav className="flex items-center gap-1">
                     {navLinks.map((link) => {
@@ -129,7 +125,7 @@ export default function Header() {
 
         {/* Right: Auth & Mobile Menu */}
         <div className="flex flex-1 justify-end">
-            {renderAuthButtons()}
+            <DesktopAuthButtons />
             {isMounted && (
             <Sheet>
                 <SheetTrigger asChild>
@@ -173,7 +169,7 @@ export default function Header() {
                     })}
                 </nav>
                 <SheetFooter className="mt-auto border-t bg-background/30 p-4">
-                    {renderMobileAuthButtons()}
+                    <MobileAuthButtons />
                 </SheetFooter>
                 </SheetContent>
             </Sheet>
