@@ -35,7 +35,8 @@ export const DUMMY_COMPANIES: Company[] = Array.from({ length: 24 }, (_, i) => {
     const ratings = [4.5, 4.8, 4.2, 4.9, 4.6, 4.7, 4.3, 4.4, 4.8, 4.1, 4.0, 4.9, 4.7, 4.6, 4.2, 4.8, 4.5, 4.9, 4.3, 4.7, 4.1, 4.6, 4.4, 4.8];
     const jobCounts = [5, 8, 3, 12, 6, 9, 2, 7, 10, 4, 1, 15, 8, 5, 3, 11, 6, 9, 2, 7, 4, 8, 5, 10];
     const companyName = companyInfo.name;
-    // Special handling for Innovate Inc. to match employer dashboard demo
+    
+    // Special handling for the first company to be 'Innovate Inc.' for the employer dashboard demo
     if (i === 0) {
         return {
             id: '1',
