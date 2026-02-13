@@ -9,26 +9,13 @@ import { Badge } from './ui/badge';
 
 export default function TopCompanies() {
   const topCompanies = DUMMY_COMPANIES.slice(0, 10);
-  const bgImage = PlaceHolderImages.find((img) => img.id === 'top-companies-bg');
-
+  
   return (
-    <section className="relative py-16 md:py-24">
-      {bgImage && (
-        <>
-          <Image
-            src={bgImage.imageUrl}
-            alt={bgImage.description}
-            fill
-            className="object-cover z-0"
-            data-ai-hint={bgImage.imageHint}
-          />
-          <div className="absolute inset-0 bg-black/70 z-10" />
-        </>
-      )}
+    <section className="relative py-16 md:py-24 bg-secondary">
       <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
         <div className="mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-white">Top Companies Hiring</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
+          <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-foreground">Top Companies Hiring</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
             Discover your next career step with industry-leading firms.
           </p>
         </div>
@@ -37,10 +24,10 @@ export default function TopCompanies() {
             const companyLogo = PlaceHolderImages.find((img) => img.id === company.logo);
             return (
               <Link key={company.id} href={`/companies/${company.id}`} className="block group animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${200 + index * 50}ms` }}>
-                <Card className="h-full p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-background/80 backdrop-blur-sm flex flex-col items-center justify-center">
+                <Card className="h-full p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-card flex flex-col items-center justify-center">
                   {companyLogo && (
                     <div className="relative mb-3">
-                        <div className="bg-white rounded-full p-1.5 flex items-center justify-center">
+                        <div className="bg-background rounded-full p-1.5 flex items-center justify-center">
                             <Image
                               src={companyLogo.imageUrl}
                               alt={`${company.name} logo`}

@@ -30,31 +30,18 @@ const features = [
 ];
 
 export default function WhyChooseUs() {
-    const bgImage = PlaceHolderImages.find((p) => p.id === 'category-bg');
   return (
-    <section className="relative py-16 md:py-24">
-       {bgImage && (
-        <>
-          <Image
-            src={bgImage.imageUrl}
-            alt={bgImage.description}
-            fill
-            className="object-cover z-0"
-            data-ai-hint={bgImage.imageHint}
-          />
-          <div className="absolute inset-0 bg-black/70 z-10" />
-        </>
-      )}
+    <section className="relative py-16 md:py-24 bg-background">
       <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
         <div className="mb-10 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-white">Why Chapel Hill?</h2>
-            <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
+            <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-foreground">Why Chapel Hill?</h2>
+            <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                 We're more than just a job board. We're your career partner.
             </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {features.map((feature, index) => (
-            <Card key={index} className="text-center bg-card/80 backdrop-blur-sm border-white/20 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${200 + index * 100}ms` }}>
+            <Card key={index} className="text-center animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${200 + index * 100}ms` }}>
               <CardHeader className="items-center">
                 <div className={cn("flex h-16 w-16 items-center justify-center rounded-full", feature.iconBg)}>
                   <feature.icon className={cn("h-8 w-8", feature.iconColor)} />

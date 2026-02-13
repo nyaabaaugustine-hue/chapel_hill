@@ -16,7 +16,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export const CheckoutFormSkeleton = () => (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        <Card className="bg-card/80 backdrop-blur-sm border-white/20">
+        <Card>
             <CardHeader>
                 <Skeleton className="h-6 w-3/4 mb-2" />
                 <Skeleton className="h-4 w-1/2" />
@@ -28,16 +28,16 @@ export const CheckoutFormSkeleton = () => (
                     <Skeleton className="h-5 w-full" />
                     <Skeleton className="h-5 w-5/6" />
                 </div>
-                <Separator className="bg-white/20" />
+                <Separator />
                 <div className="space-y-2">
                     <Skeleton className="h-5 w-full" />
                     <Skeleton className="h-5 w-full" />
-                    <Separator className="bg-white/20"/>
+                    <Separator />
                     <Skeleton className="h-6 w-full" />
                 </div>
             </CardContent>
         </Card>
-        <Card className="bg-card/80 backdrop-blur-sm border-white/20">
+        <Card>
             <CardHeader>
                 <Skeleton className="h-6 w-1/2 mb-2" />
                 <Skeleton className="h-4 w-3/4" />
@@ -58,7 +58,7 @@ export const CheckoutFormSkeleton = () => (
                 <Skeleton className="h-12 w-full" />
             </CardContent>
              <CardFooter className="flex-col gap-4 text-center">
-                 <Separator className="bg-white/20" />
+                 <Separator />
                 <Skeleton className="h-5 w-1/3" />
                 <Skeleton className="h-10 w-1/2" />
             </CardFooter>
@@ -146,18 +146,18 @@ export default function CheckoutForm() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        <Card className="bg-card/80 backdrop-blur-sm border-white/20">
+        <Card>
             <CardHeader>
-                <CardTitle className="text-white">Order Summary</CardTitle>
-                <CardDescription className="text-gray-300">Review your subscription details before payment.</CardDescription>
+                <CardTitle>Order Summary</CardTitle>
+                <CardDescription>Review your subscription details before payment.</CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="space-y-6">
-                    <div className="p-6 rounded-lg border-2 border-primary bg-primary/20">
+                    <div className="p-6 rounded-lg border-2 border-primary bg-primary/10">
                         <h3 className="font-headline text-2xl font-bold text-primary">{selectedTier.name} Plan</h3>
-                        <p className="text-4xl font-bold mt-2 text-white">
+                        <p className="text-4xl font-bold mt-2 text-foreground">
                            GH₵{price}
-                           <span className="text-lg font-normal text-gray-300">/{billingCycle === 'yearly' ? 'year' : 'month'}</span>
+                           <span className="text-lg font-normal text-muted-foreground">/{billingCycle === 'yearly' ? 'year' : 'month'}</span>
                         </p>
                          {billingCycle === 'yearly' && (
                              <p className="text-sm text-primary font-medium">Billed annually</p>
@@ -166,23 +166,23 @@ export default function CheckoutForm() {
                      <ul className="space-y-3 text-sm">
                         {selectedTier.features.map((feature) => (
                             <li key={feature} className="flex items-center gap-3">
-                            <CheckCircle className="h-5 w-5 text-green-500" />
-                            <span className="text-gray-300">{feature}</span>
+                            <CheckCircle className="h-5 w-5 text-emerald-500" />
+                            <span className="text-muted-foreground">{feature}</span>
                             </li>
                         ))}
                     </ul>
-                    <Separator className="bg-white/20" />
+                    <Separator />
                     <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
-                            <span className="text-gray-300">Subtotal</span>
-                            <span className="font-medium text-white">GH₵{price.toFixed(2)}</span>
+                            <span className="text-muted-foreground">Subtotal</span>
+                            <span className="font-medium text-foreground">GH₵{price.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-gray-300">Taxes (10%)</span>
-                            <span className="font-medium text-white">GH₵{tax.toFixed(2)}</span>
+                            <span className="text-muted-foreground">Taxes (10%)</span>
+                            <span className="font-medium text-foreground">GH₵{tax.toFixed(2)}</span>
                         </div>
-                         <Separator className="bg-white/20"/>
-                        <div className="flex justify-between text-base font-bold text-white">
+                         <Separator />
+                        <div className="flex justify-between text-base font-bold text-foreground">
                             <span>Total</span>
                             <span>GH₵{total.toFixed(2)}</span>
                         </div>
@@ -190,42 +190,42 @@ export default function CheckoutForm() {
                 </div>
             </CardContent>
         </Card>
-        <Card className="bg-card/80 backdrop-blur-sm border-white/20">
+        <Card>
             <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white"><CreditCard /> Payment Details</CardTitle>
-                <CardDescription className="text-gray-300">Securely complete your purchase with Paystack.</CardDescription>
+                <CardTitle className="flex items-center gap-2"><CreditCard /> Payment Details</CardTitle>
+                <CardDescription>Securely complete your purchase with Paystack.</CardDescription>
             </CardHeader>
             <CardContent>
                 <form onSubmit={handlePayment} className="space-y-6">
                     <div className="space-y-2">
-                        <Label htmlFor="fullName" className="text-gray-300">Full Name</Label>
-                        <Input id="fullName" placeholder="Enter your full name" required value={fullName} onChange={(e) => setFullName(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus-visible:ring-primary" />
+                        <Label htmlFor="fullName">Full Name</Label>
+                        <Input id="fullName" placeholder="Enter your full name" required value={fullName} onChange={(e) => setFullName(e.target.value)} />
                     </div>
                      <div className="space-y-2">
-                        <Label htmlFor="email" className="text-gray-300">Email Address</Label>
-                        <Input id="email" type="email" placeholder="you@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus-visible:ring-primary" />
+                        <Label htmlFor="email">Email Address</Label>
+                        <Input id="email" type="email" placeholder="you@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
 
                     {price > 0 && (
                       <div className="space-y-2">
-                        <Label className="text-gray-300">Card Details</Label>
-                         <div className="border border-white/20 rounded-md p-4 space-y-3 bg-black/20">
+                        <Label>Card Details</Label>
+                         <div className="border rounded-md p-4 space-y-3 bg-secondary/50">
                            <div className="relative">
-                               <Input placeholder="Card Number" className="pr-20 bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus-visible:ring-primary"/>
+                               <Input placeholder="Card Number" className="pr-20"/>
                                <div className="absolute inset-y-0 right-2 flex items-center gap-1">
                                    {visaLogo && <Image src={visaLogo.imageUrl} alt="Visa" width={32} height={20} />}
                                    {mastercardLogo && <Image src={mastercardLogo.imageUrl} alt="Mastercard" width={32} height={20} />}
                                </div>
                            </div>
                             <div className="grid grid-cols-2 gap-4">
-                              <Input placeholder="MM / YY" className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus-visible:ring-primary" />
-                              <Input placeholder="CVC" className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus-visible:ring-primary" />
+                              <Input placeholder="MM / YY" />
+                              <Input placeholder="CVC" />
                             </div>
                          </div>
                       </div>
                     )}
                     
-                    <div className="text-xs text-gray-300 text-center pt-2 flex items-center justify-center gap-2">
+                    <div className="text-xs text-muted-foreground text-center pt-2 flex items-center justify-center gap-2">
                          {paystackLogo && <Image src={paystackLogo.imageUrl} alt="Paystack" width={80} height={20} />}
                         <span>| This is a simulated payment for demo purposes.</span>
                     </div>
@@ -235,9 +235,9 @@ export default function CheckoutForm() {
                 </form>
             </CardContent>
             <CardFooter className="flex-col gap-4 text-center">
-                <Separator className="bg-white/20" />
-                <div className="flex items-center gap-2 text-sm text-gray-300">
-                    <Lock className="h-4 w-4 text-green-500"/>
+                <Separator />
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Lock className="h-4 w-4 text-emerald-500"/>
                     <span>SSL Secure Payment</span>
                 </div>
                  {sslBadge && (

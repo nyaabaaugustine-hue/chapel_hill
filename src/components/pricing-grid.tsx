@@ -76,14 +76,14 @@ export default function PricingGrid() {
   return (
     <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex justify-center items-center gap-4 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <span className={cn("font-semibold text-lg", !isYearly ? 'text-primary' : 'text-gray-200')}>Monthly</span>
+            <span className={cn("font-semibold text-lg", !isYearly ? 'text-primary' : 'text-muted-foreground')}>Monthly</span>
             <Switch
                 id="billing-cycle"
                 checked={isYearly}
                 onCheckedChange={setIsYearly}
             />
-            <span className={cn("font-semibold text-lg", isYearly ? 'text-primary' : 'text-gray-200')}>
-                Annual <span className="text-green-400 font-normal text-base">(Save 20%)</span>
+            <span className={cn("font-semibold text-lg", isYearly ? 'text-primary' : 'text-muted-foreground')}>
+                Annual <span className="text-emerald-600 font-normal text-base">(Save 20%)</span>
             </span>
         </div>
 
@@ -100,8 +100,8 @@ export default function PricingGrid() {
                     </div>
                 )}
                 <Card className={cn(
-                    'relative flex flex-col h-full rounded-2xl transition-all duration-300 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-700 bg-card/80 backdrop-blur-sm border-white/20',
-                    tier.isPopular ? 'border-2 border-yellow-400 shadow-2xl' : 'hover:shadow-xl hover:-translate-y-1'
+                    'relative flex flex-col h-full rounded-2xl transition-all duration-300 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-700',
+                    tier.isPopular ? 'border-2 border-yellow-400 shadow-2xl bg-background' : 'hover:shadow-xl hover:-translate-y-1'
                 )} style={{ animationDelay: `${200 + index * 100}ms` }}>
                      {kenteImage && (
                         <Image
@@ -109,33 +109,33 @@ export default function PricingGrid() {
                             alt={kenteImage.description}
                             width={96}
                             height={96}
-                            className="absolute top-0 right-0 h-16 w-16 lg:h-24 lg:w-24 opacity-20 pointer-events-none z-0 rounded-bl-full"
+                            className="absolute top-0 right-0 h-16 w-16 lg:h-24 lg:w-24 opacity-20 mix-blend-soft-light pointer-events-none z-0 rounded-bl-full"
                         />
                      )}
                      <div className="relative z-10 flex flex-col h-full">
                         <CardHeader className="text-center pt-10">
-                            <CardTitle className="font-headline text-3xl text-white">{tier.name}</CardTitle>
-                            <CardDescription className="pt-1 text-gray-200">{tier.description}</CardDescription>
+                            <CardTitle className="font-headline text-3xl text-foreground">{tier.name}</CardTitle>
+                            <CardDescription className="pt-1">{tier.description}</CardDescription>
                         </CardHeader>
                         <CardContent className="flex-grow">
                             <div className="text-center mb-8">
-                            <span className="font-headline text-5xl font-bold text-white">
+                            <span className="font-headline text-5xl font-bold text-foreground">
                             {typeof tier.price.monthly === 'number' && typeof tier.price.yearly === 'number'
                                 ? `GH₵${isYearly ? Math.round(tier.price.yearly / 12) : tier.price.monthly}`
                                 : 'Custom'}
                             </span>
-                            <span className="text-gray-400">
+                            <span className="text-muted-foreground">
                                 {typeof tier.price.monthly === 'number' ? '/month' : ''}
                             </span>
                             {isYearly && typeof tier.price.yearly === 'number' && tier.price.yearly > 0 && (
-                                <p className="text-sm text-gray-400 mt-1">Billed as GH₵{tier.price.yearly}/year</p>
+                                <p className="text-sm text-muted-foreground mt-1">Billed as GH₵{tier.price.yearly}/year</p>
                             )}
                             </div>
                             <ul className="space-y-4">
                             {tier.features.map((feature) => (
                                 <li key={feature} className="flex items-center gap-3">
                                 <CheckCircle className="h-5 w-5 text-primary" />
-                                <span className="text-gray-200">{feature}</span>
+                                <span className="text-muted-foreground">{feature}</span>
                                 </li>
                             ))}
                             </ul>
@@ -146,8 +146,9 @@ export default function PricingGrid() {
                             size="lg"
                             className={cn(
                                 'w-full font-bold text-lg', 
-                                tier.isPopular ? 'bg-yellow-500 hover:bg-yellow-600 text-black' : 'bg-white/10 hover:bg-white/20 text-white'
+                                tier.isPopular ? 'bg-yellow-500 hover:bg-yellow-600 text-black' : ''
                             )}
+                            variant={tier.isPopular ? undefined : 'outline'}
                             >
                             <Link href={getCtaLink(tier)}>{tier.cta}</Link>
                             </Button>

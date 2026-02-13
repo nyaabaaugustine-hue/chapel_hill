@@ -5,14 +5,11 @@ import type { BlogPost } from '@/lib/types';
 import BlogPostCard from './blog-post-card';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Skeleton } from './ui/skeleton';
 import { Card, CardContent } from './ui/card';
 import { useEffect, useState } from 'react';
 
 export default function LatestNews() {
-  const bgImage = PlaceHolderImages.find((p) => p.id === 'latest-news-bg');
   const [latestPosts, setLatestPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   
@@ -25,23 +22,11 @@ export default function LatestNews() {
   }, []);
 
   return (
-    <section className="relative py-16 md:py-24">
-      {bgImage && (
-        <>
-          <Image
-            src={bgImage.imageUrl}
-            alt={bgImage.description}
-            fill
-            className="object-cover z-0"
-            data-ai-hint={bgImage.imageHint}
-          />
-          <div className="absolute inset-0 bg-black/70 z-10" />
-        </>
-      )}
+    <section className="relative py-16 md:py-24 bg-secondary">
       <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
         <div className="mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-white">Our News and Stories</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
+          <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-foreground">Our News and Stories</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
             Explore articles, tips, and insights to help you grow your career and stay ahead.
           </p>
         </div>
@@ -70,7 +55,7 @@ export default function LatestNews() {
           )}
         </div>
         <div className="mt-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: '500ms' }}>
-            <Button asChild size="lg" variant="secondary">
+            <Button asChild size="lg" variant="outline">
                 <Link href="/blog">
                     Show More
                 </Link>
