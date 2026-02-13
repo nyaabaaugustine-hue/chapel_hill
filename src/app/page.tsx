@@ -54,7 +54,9 @@ export default function HomePage() {
           <div className="relative z-20 container mx-auto px-6 max-w-4xl">
             <div className="flex flex-col justify-center space-y-6">
               <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl !leading-tight font-headline animate-in fade-in-20 slide-in-from-bottom-8 duration-700">
-                Find Your Next Job, Faster.
+                <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                  Find Your Next Job, Faster.
+                </span>
               </h1>
               <p className="max-w-3xl mx-auto text-lg text-gray-200 animate-in fade-in-30 slide-in-from-bottom-10 duration-700 delay-200">
                 Discover your next career move with verified employers and salary transparency.
@@ -62,9 +64,9 @@ export default function HomePage() {
               <Suspense>
                 <HeroSearchForm />
               </Suspense>
-              <div className="flex items-center gap-6 pt-4 flex-wrap justify-center animate-in fade-in-30 slide-in-from-bottom-14 duration-700 delay-600">
+              <div className="flex items-center gap-4 pt-6 flex-wrap justify-center animate-in fade-in-30 slide-in-from-bottom-14 duration-700 delay-600">
                 {trustIndicators.map((item, index) => (
-                  <div key={index} className="flex items-center gap-2 text-sm text-gray-200">
+                  <div key={index} className="flex items-center gap-2 text-sm text-gray-200 rounded-full bg-white/10 px-4 py-1.5 border border-white/20 backdrop-blur-sm">
                     <CheckCircle className="h-4 w-4 text-primary" />
                     <span>{item.text}</span>
                   </div>
