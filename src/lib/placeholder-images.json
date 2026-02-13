@@ -2,8 +2,8 @@
   "placeholderImages": [
     {
       "id": "hero-main",
-      "description": "A modern office scene with Black professionals collaborating around a table with laptops.",
-      "imageUrl": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1080&q=80",
+      "description": "A modern office scene with Ghanaian professionals collaborating.",
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1080&q=80",
       "imageHint": "professionals collaborating"
     },
     {
@@ -184,7 +184,7 @@
       "id": "blog-post-3",
       "description": "A diverse team of Black professionals collaborating around a whiteboard in an office.",
       "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=870&q=80",
-      "imageHint": "Ghanaian team"
+      "imageHint": "team meeting"
     },
     {
       "id": "blog-post-4",
@@ -212,7 +212,7 @@
     },
     {
       "id": "blog-post-8",
-      "description": "Modern office interior with Black professionals working in the background.",
+      "description": "Modern office interior with professionals working in the background.",
       "imageUrl": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=870&q=80",
       "imageHint": "office life"
     },
@@ -249,7 +249,7 @@
     {
       "id": "location-takoradi",
       "description": "Fishing boats at a harbour in Takoradi, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1627993356238-d6b38c2925d4?auto=format&fit=crop&w=600&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1618783430342-c651347f8c1e?auto=format&fit=crop&w=600&q=80",
       "imageHint": "Takoradi harbour"
     },
     {
@@ -267,61 +267,61 @@
     {
       "id": "location-tema",
       "description": "The port of Tema, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1605820336141-5c17462b489a?auto=format&fit=crop&w=600&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1627993356238-d6b38c2925d4?auto=format&fit=crop&w=600&q=80",
       "imageHint": "Tema port"
     },
     {
       "id": "hiring-main",
-      "description": "A group of Black professionals in a business meeting.",
-      "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
+      "description": "A group of Ghanaian professionals in a business meeting.",
+      "imageUrl": "https://images.unsplash.com/photo-1543269664-56d93c1b41a6?auto=format&fit=crop&w=800&q=80",
       "imageHint": "business meeting"
     },
     {
       "id": "subscription-1",
-      "description": "Team of Black professionals in a collaboration meeting.",
+      "description": "Team of Ghanaian professionals in a collaboration meeting.",
       "imageUrl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=870&q=80",
       "imageHint": "team meeting"
     },
     {
       "id": "subscription-2",
-      "description": "Black professional woman working at a desk.",
+      "description": "Ghanaian professional woman working at a desk.",
       "imageUrl": "https://images.unsplash.com/photo-1524508762098-fd966ffb6ef9?auto=format&fit=crop&w=387&q=80",
       "imageHint": "person working"
     },
     {
       "id": "subscription-3",
-      "description": "Group of Black students learning in a classroom.",
+      "description": "Group of Ghanaian students learning in a classroom.",
       "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=870&q=80",
       "imageHint": "students learning"
     },
     {
       "id": "subscription-4",
-      "description": "Black man with beard working at a desk.",
+      "description": "Ghanaian man with beard working at a desk.",
       "imageUrl": "https://images.unsplash.com/photo-1623679799634-841494762b38?auto=format&fit=crop&w=387&q=80",
       "imageHint": "man desk"
     },
     {
       "id": "subscription-5",
-      "description": "Two Black professionals in an office environment.",
+      "description": "Two Ghanaian professionals in an office environment.",
       "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1032&q=80",
       "imageHint": "office people"
     },
     {
       "id": "category-bg",
       "description": "Modern office setting with Ghanaian people working.",
-      "imageUrl": "https://images.unsplash.com/photo-1543269664-56d93c1b41a6?auto=format&fit=crop&w=800&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=870&q=80",
       "imageHint": "Ghana office"
     },
     {
       "id": "top-companies-bg",
       "description": "A vibrant market scene in Accra, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1618925480413-5858d4a0445d?auto=format&fit=crop&w=800&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1618925480413-5858d4a0445d?auto=format&fit=crop&w=870&q=80",
       "imageHint": "Ghana market"
     },
     {
       "id": "latest-news-bg",
-      "description": "A Black professional reading news on a digital tablet.",
-      "imageUrl": "https://images.unsplash.com/photo-1586953208448-39502e78315c?auto=format&fit=crop&w=800&q=80",
+      "description": "A Ghanaian professional reading news on a digital tablet.",
+      "imageUrl": "https://images.unsplash.com/photo-1586953208448-39502e78315c?auto=format&fit=crop&w=992&q=80",
       "imageHint": "news reading"
     },
     {
@@ -350,7 +350,7 @@
     },
     {
       "id": "pricing-basic",
-      "description": "Small team of Black professionals collaborating in a bright, modern startup office.",
+      "description": "Small team of Ghanaian professionals collaborating in a bright, modern startup office.",
       "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
       "imageHint": "startup office"
     },
@@ -362,7 +362,7 @@
     },
     {
       "id": "pricing-enterprise",
-      "description": "A bustling, large open-plan office with Black professionals.",
+      "description": "A bustling, large open-plan office with Ghanaian professionals.",
       "imageUrl": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80",
       "imageHint": "corporate office"
     },
