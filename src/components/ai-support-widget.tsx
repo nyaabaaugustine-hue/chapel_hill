@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 type Message = {
     id: number;
@@ -26,6 +27,7 @@ export default function AISupportWidget() {
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const { toast } = useToast();
+    const router = useRouter();
     
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -43,7 +45,7 @@ export default function AISupportWidget() {
             const aiResponse: Message = { 
                 id: Date.now() + 1, 
                 sender: 'ai', 
-                text: "Our most popular opening right now is 'Senior React Developer' at Innovate Inc. It's a great remote opportunity with a competitive salary.",
+                text: "Our most popular opening right now is 'Senior React Developer' at Innovate Inc. It's a great remote opportunity with a competitive salary. Would you like to see it?",
                 actions: [{
                     label: 'View Job Details',
                     onClick: () => {
@@ -52,6 +54,8 @@ export default function AISupportWidget() {
                             description: "Opening the 'Senior React Developer' position.",
                             variant: 'vibrant',
                         });
+                        router.push('/jobs/job-1');
+                        setIsOpen(false);
                     }
                 }]
             };
@@ -80,7 +84,8 @@ export default function AISupportWidget() {
                             title: "Navigating to Pricing...",
                             variant: 'vibrant',
                         });
-                        // In a real app, you might do router.push('/pricing')
+                        router.push('/pricing');
+                        setIsOpen(false);
                     }
                 }]
             };
@@ -125,7 +130,11 @@ export default function AISupportWidget() {
         if (inputValue.trim() === '') return;
 
         const userMessage: Message = { id: Date.now(), sender: 'user', text: inputValue };
-        setMessages(prev => [...prev, userMessage]);
+        
+        setMessages(prev => 
+            prev.map(m => (m.actions ? { ...m, actions: undefined } : m)).concat(userMessage)
+        );
+
         setInputValue('');
         
         setIsTyping(true);
@@ -170,18 +179,16 @@ export default function AISupportWidget() {
                     <div className="flex-1 overflow-y-auto p-4 space-y-4">
                         {messages.map((message) => (
                             <div key={message.id} className={cn(
-                                "flex gap-2 items-end animate-fade-in-up",
-                                message.sender === 'ai' ? 'flex-row-reverse' : 'flex-row'
+                                "flex w-full items-end gap-3 animate-fade-in-up",
+                                message.sender === 'user' ? 'justify-end' : 'justify-start'
                             )}>
-                                {message.sender === 'ai' 
-                                    ? <Bot className="h-6 w-6 text-primary shrink-0 mb-1" />
-                                    : <User className="h-6 w-6 text-muted-foreground shrink-0 mb-1" />
-                                }
+                                {message.sender === 'ai' && <Bot className="h-7 w-7 text-primary shrink-0 mb-1" />}
+                                
                                 <div className={cn(
                                     "px-4 py-2.5 rounded-xl max-w-[85%] text-sm",
                                     message.sender === 'user'
-                                        ? "bg-secondary text-secondary-foreground rounded-bl-none"
-                                        : "bg-primary text-primary-foreground rounded-br-none"
+                                        ? "bg-primary text-primary-foreground rounded-br-none"
+                                        : "bg-secondary text-secondary-foreground rounded-bl-none"
                                 )}>
                                     <p className="whitespace-pre-wrap">{message.text}</p>
                                     {message.actions && (
@@ -200,13 +207,15 @@ export default function AISupportWidget() {
                                         </div>
                                     )}
                                 </div>
+
+                                {message.sender === 'user' && <User className="h-7 w-7 text-muted-foreground shrink-0 mb-1" />}
                             </div>
                         ))}
                          {isTyping && (
-                            <div className="flex gap-2 items-end animate-fade-in-up flex-row-reverse">
-                                <Bot className="h-6 w-6 text-primary shrink-0 mb-1" />
-                                <div className="px-4 py-2.5 rounded-xl bg-primary/20 text-primary rounded-br-none">
-                                    <div className="flex items-center gap-1">
+                            <div className="flex items-end gap-3 animate-fade-in-up justify-start">
+                                <Bot className="h-7 w-7 text-primary shrink-0 mb-1" />
+                                <div className="px-4 py-2.5 rounded-xl bg-secondary rounded-bl-none">
+                                    <div className="flex items-center gap-1.5">
                                         <span className="h-1.5 w-1.5 bg-primary rounded-full animate-pulse [animation-delay:-0.3s]" />
                                         <span className="h-1.5 w-1.5 bg-primary rounded-full animate-pulse [animation-delay:-0.15s]" />
                                         <span className="h-1.5 w-1.5 bg-primary rounded-full animate-pulse" />
