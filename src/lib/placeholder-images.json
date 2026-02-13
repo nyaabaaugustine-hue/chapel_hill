@@ -332,9 +332,15 @@
     },
     {
       "id": "blog-post-7",
-      "description": "A vibrant image of CSS code on a screen, representing Tailwind CSS.",
-      "imageUrl": "https://images.unsplash.com/photo-1618335829737-25c01b97ba32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjc3MlMjBjb2RlfGVufDB8fHx8MTc3MTI3NDU5MXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "css code"
+      "description": "A person writing career goals in a notebook.",
+      "imageUrl": "https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXJlZXIlMjBhZHZpY2V8ZW58MHx8fHwxNzcxMjYxMjYyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "career advice"
+    },
+    {
+      "id": "blog-post-8",
+      "description": "Modern office interior with plants.",
+      "imageUrl": "https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxvZmZpY2UlMjBsaWZlfGVufDB8fHx8MTc3MTI2MTM0NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "office life"
     },
     {
       "id": "find-job-1",
@@ -369,25 +375,25 @@
     {
       "id": "location-takoradi",
       "description": "Fishing boats in Takoradi",
-      "imageUrl": "https://picsum.photos/seed/61/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1618997963248-3b3a628c1c5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNDE5ODJ8MHwxfHNlYXJjaHwxfHxHaGFuYSUyMGhhcmJvdXJ8ZW58MHx8fHwxNzcyNjM3MDkxfDA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "Takoradi harbour"
     },
     {
       "id": "location-cape-coast",
       "description": "Cape Coast castle",
-      "imageUrl": "https://picsum.photos/seed/62/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1557973070-524a52026131?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNDE5ODJ8MHwxfHNlYXJjaHwxfHxDYXBlJTIwQ29hc3QlMjBDYXN0bGV8ZW58MHx8fHwxNzcyNjM3MTcxfDA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "CapeCoast castle"
     },
     {
       "id": "location-tamale",
       "description": "Tamale mosque",
-      "imageUrl": "https://picsum.photos/seed/63/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1628102492128-099c27943de3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNDE5ODJ8MHwxfHNlYXJjaHwxfHxMYXJhYmFuZ2ElMjBNb3NxdWV8ZW58MHx8fHwxNzcyNjM3MjM0fDA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "Tamale mosque"
     },
     {
       "id": "location-tema",
       "description": "Tema port",
-      "imageUrl": "https://picsum.photos/seed/64/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1603513492128-a84175ff1010?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNDE5ODJ8MHwxfHNlYXJjaHwxfHxjb250YWluZXIlMjBwb3J0fGVufDB8fHx8MTc3MjYzNzI3N3ww&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "Tema port"
     },
     {
