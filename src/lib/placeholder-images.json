@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-main",
-      "description": "Abstract background graphic",
-      "imageUrl": "https://chapelhillmanagers.com/wp-content/uploads/2020/07/Vector-Smart-Object.png",
-      "imageHint": "abstract background"
+      "description": "A group of Black professionals collaborating in a modern office.",
+      "imageUrl": "https://images.unsplash.com/photo-1521791136064-7986c2920216?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxibGFjayUyMHByb2Zlc3Npb25hbHMlMjB3b3JraW5nfGVufDB8fHx8MTc3MDc3NDYyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professionals working"
     },
     {
       "id": "company-logo-1",
@@ -297,18 +297,18 @@
     {
       "id": "blog-post-1",
       "description": "Two Black people in an interview setting.",
-      "imageUrl": "https://images.unsplash.com/photo-1511376979163-f804dff7ad7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxpbnRlcnZpZXclMjBqb2J8ZW58MHx8fHwxNzcwNjY1OTQxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496130407-57329f01f769?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMHBlb3BsZSUyMGpvYiUyMGludGVydmlld3xlbnwwfHx8fDE3NzA3NzQ2Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "interview job"
     },
     {
       "id": "blog-post-2",
-      "description": "Code on a screen",
-      "imageUrl": "https://images.unsplash.com/photo-1658274474851-fda40d4c309d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2RlJTIwc2NyZWVufGVufDB8fHx8MTc3MDc1MDgyMnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "code screen"
+      "description": "Black developer coding on a laptop.",
+      "imageUrl": "https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMGRldmVsb3BlciUyMGNvZGluZ3xlbnwwfHx8fDE3NzA3NzQ2Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "developer coding"
     },
     {
       "id": "blog-post-3",
-      "description": "Diverse team collaborating around a whiteboard.",
+      "description": "Diverse Black team collaborating around a whiteboard.",
       "imageUrl": "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx0ZWFtJTIwY29sbGFib3JhdGlvbnxlbnwwfHx8fDE3NzA3MDg4NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "team collaboration"
     },
@@ -327,20 +327,20 @@
     {
       "id": "blog-post-6",
       "description": "Black person working remotely at a desk.",
-      "imageUrl": "https://images.unsplash.com/photo-1715210471871-590883e6a720?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cmVtb3RlJTIwd29ya3xlbnwwfHx8fDE3NzA3NzQ2Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1521119989659-a83eee488004?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1080&q=80",
       "imageHint": "remote work"
     },
     {
       "id": "blog-post-7",
       "description": "A person writing career goals in a notebook.",
-      "imageUrl": "https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXJlZXIlMjBhZHZpY2V8ZW58MHx8fHwxNzcxMjYxMjYyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1516534775068-ba3e7458af70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMHByb2Zlc3Npb25hbCUyMHdyaXRpbmd8ZW58MHx8fHwxNzcxMjYxMjYyfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "career advice"
     },
     {
       "id": "blog-post-8",
-      "description": "Modern office interior with plants.",
-      "imageUrl": "https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxvZmZpY2UlMjBsaWZlfGVufDB8fHx8MTc3MTI2MTM0NHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "office life"
+      "description": "Modern office interior in Accra.",
+      "imageUrl": "https://images.unsplash.com/photo-1620712953157-5f0c45d8b801?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhY2NyYSUyMG9mZmljZXxlbnwwfHx8fDE3NzEyNjEzNDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "accra office"
     },
     {
       "id": "find-job-1",
@@ -363,7 +363,7 @@
     {
       "id": "location-accra",
       "description": "Independence Arch in Accra",
-      "imageUrl": "https://images.unsplash.com/photo-1730453255648-af776b331035?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxBY2NyYSUyMHNreWxpbmV8ZW58MHx8fHwxNzcwNzc0NjI3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1594917453472-78805b539828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80",
       "imageHint": "Accra skyline"
     },
     {
@@ -404,39 +404,39 @@
     },
     {
       "id": "subscription-1",
-      "description": "Team collaboration meeting",
-      "imageUrl": "https://images.unsplash.com/photo-1631203928521-bde1e727e8b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0ZWFtJTIwbWVldGluZ3xlbnwwfHx8fDE3NzA3NDMzNTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Black team collaborating in a meeting.",
+      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMHRlYW0lMjBtZWV0aW5nfGVufDB8fHx8fDE3NzA3NDMzNTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "team meeting"
     },
     {
       "id": "subscription-2",
-      "description": "Person working at a desk",
-      "imageUrl": "https://images.unsplash.com/photo-1551434678-e076c223a692?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwZXJzb24lMjB3b3JraW5nfGVufDB8fHx8MTc3MDc3NDYyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person working"
+      "description": "Black professional working on a laptop with data visualizations.",
+      "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMHBlcnNvbiUyMHdvcmtpbmd8ZW58MHx8fHwxNzcwNzc0NjI3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional working"
     },
     {
       "id": "subscription-3",
-      "description": "Group of students learning",
-      "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzdHVkZW50cyUyMGxlYXJuaW5nfGVufDB8fHx8MTc3MDc0ODU5Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Group of Black students learning in a classroom.",
+      "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMHN0dWRlbnRzJTIwbGVhcm5pbmd8ZW58MHx8fHwxNzcwNzQ4NTkyfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "students learning"
     },
     {
       "id": "subscription-4",
-      "description": "Man with beard at a desk",
-      "imageUrl": "https://images.unsplash.com/photo-1622117527896-88712457ce81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtYW4lMjBkZXNrfGVufDB8fHx8MTc3MDc3NDYyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Black man smiling at his desk in a creative office.",
+      "imageUrl": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMG1hbiUyMGRlc2t8ZW58MHx8fHwxNzcwNzc0NjI3fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "man desk"
     },
     {
       "id": "subscription-5",
-      "description": "Two people in an office environment",
-      "imageUrl": "https://images.unsplash.com/photo-1556761175-b413da4baf72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxvZmZpY2UlMjBwZW9wbGV8ZW58MHx8fHwxNzcwNzc0NjI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Two Black professionals having a discussion in a modern office.",
+      "imageUrl": "https://images.unsplash.com/photo-1521737852577-6848d4a6f5d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMG9mZmljZSUyMHBlb3BsZXxlbnwwfHx8fDE3NzA3NzQ2MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "office people"
     },
     {
       "id": "category-bg",
-      "description": "Modern office setting with people working",
-      "imageUrl": "https://images.unsplash.com/photo-1686100510829-e5ba636736b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxvZmZpY2UlMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc3MDY4MjMwMnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "office background"
+      "description": "Modern office setting in Accra with professionals working.",
+      "imageUrl": "https://images.unsplash.com/photo-1618172193763-c586e9f58573?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBhY2NyYSUyMG9mZmljZXxlbnwwfHx8fDE3NzA2ODIzMDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "accra office"
     },
     {
       "id": "top-companies-bg",
@@ -476,20 +476,20 @@
     },
     {
       "id": "pricing-basic",
-      "description": "Small team collaborating in a bright, modern startup office.",
-      "imageUrl": "https://images.unsplash.com/photo-1572025442646-866d16c84a54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzdGFydHVwJTIwb2ZmaWNlfGVufDB8fHx8MTc3MDc2NTU5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Small Black startup team collaborating in a bright office.",
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMHN0YXJ0dXAlMjB0ZWFtfGVufDB8fHx8fDE3NzA3NjU1OTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "startup office"
     },
     {
       "id": "pricing-pro",
-      "description": "A professional team in a conference room discussing a project on a large screen.",
-      "imageUrl": "https://images.unsplash.com/photo-1688380692117-63178554d76d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxidXNpbmVzcyUyMG1lZXRpbmd8ZW58MHx8fHwxNzcwNzUxNDI0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "A professional Black team in a conference room discussing a project.",
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-b413da4baf72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxidXNpbmVzcyUyMG1lZXRpbmd8ZW58MHx8fHwxNzcwNzUxNDI0fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "business meeting"
     },
     {
       "id": "pricing-enterprise",
-      "description": "A bustling, large open-plan office of a major corporation.",
-      "imageUrl": "https://images.unsplash.com/photo-1606857521015-7f9fcf423740?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjb3Jwb3JhdGUlMjBvZmZpY2V8ZW58MHx8fHwxNzcwODE5Mzg4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "A large team of Black professionals in a corporate training session.",
+      "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMGNvcnBvcmF0ZSUyMG9mZmljZXxlbnwwfHx8fDE3NzA4MTkzODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "corporate office"
     },
     {
@@ -499,21 +499,9 @@
       "imageHint": "resume document"
     },
     {
-      "id": "blog-post-7",
-      "description": "A person writing career goals in a notebook.",
-      "imageUrl": "https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXJlZXIlMjBhZHZpY2V8ZW58MHx8fHwxNzcxMjYxMjYyfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "career advice"
-    },
-    {
-      "id": "blog-post-8",
-      "description": "Modern office interior with plants.",
-      "imageUrl": "https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxvZmZpY2UlMjBsaWZlfGVufDB8fHx8MTc3MTI2MTM0NHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "office life"
-    },
-    {
       "id": "contact-map",
       "description": "A vibrant, stylized map of a city showing streets and locations.",
-      "imageUrl": "https://images.unsplash.com/photo-1717700299581-c2fc3fad4ee8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaXR5JTIwbWFwfGVufDB8fHx8MTc3MDgxNDA5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1594398933336-951915c23d06?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGNpdHklMjBtYXB8ZW58MHx8fHwxNzcxMjYxMjYyfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "city map"
     }
   ]
