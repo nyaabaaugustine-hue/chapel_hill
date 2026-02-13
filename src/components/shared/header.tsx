@@ -88,90 +88,98 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm">
       <div className="mx-auto flex h-[80px] max-w-7xl items-center justify-between px-6 lg:px-12">
-        <div className="flex items-center gap-4">
-          <Link href="/" className="flex items-center gap-2">
-            <Logo />
-          </Link>
-          <TooltipProvider>
-            <nav className="hidden items-center gap-2 md:flex">
-              {navLinks.map((link) => {
-                const isActive =
-                  link.href === '/'
-                    ? pathname === '/'
-                    : pathname.startsWith(link.href);
-                const Icon = link.icon;
-                return (
-                  <Tooltip key={link.href}>
-                    <TooltipTrigger asChild>
-                      <Link
+        
+        {/* Left: Logo */}
+        <div className="flex-1 md:flex-none">
+            <Link href="/" className="flex items-center gap-2">
+                <Logo />
+            </Link>
+        </div>
+
+        {/* Center: Nav (Desktop) */}
+        <div className="hidden md:flex flex-1 justify-center">
+            <TooltipProvider>
+                <nav className="flex items-center gap-1">
+                    {navLinks.map((link) => {
+                        const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
+                        const Icon = link.icon;
+                        return (
+                        <Tooltip key={link.href}>
+                            <TooltipTrigger asChild>
+                            <Link
+                                href={link.href}
+                                className={cn(
+                                'flex items-center gap-2 rounded-md p-2 text-sm font-medium transition-colors hover:bg-secondary',
+                                isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                                )}
+                            >
+                                <Icon className={cn('h-5 w-5', link.color)} />
+                                <span className="hidden xl:inline">{link.label}</span>
+                            </Link>
+                            </TooltipTrigger>
+                            <TooltipContent className="block xl:hidden">
+                            <p>{link.label}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                        );
+                    })}
+                </nav>
+            </TooltipProvider>
+        </div>
+
+        {/* Right: Auth & Mobile Menu */}
+        <div className="flex flex-1 justify-end">
+            {renderAuthButtons()}
+            {isMounted && (
+            <Sheet>
+                <SheetTrigger asChild>
+                <Button variant="outline" size="icon" className="md:hidden">
+                    <Menu className="h-6 w-6" />
+                    <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="flex flex-col bg-card p-0">
+                <SheetHeader className="p-6 pb-4">
+                    <SheetTitle className="sr-only">Menu</SheetTitle>
+                    <SheetDescription className="sr-only">
+                    Main navigation links
+                    </SheetDescription>
+                    <Link href="/">
+                    <Logo />
+                    </Link>
+                </SheetHeader>
+                <nav className="flex-1 space-y-2 p-4">
+                    {navLinks.map((link) => {
+                    const isActive =
+                        link.href === '/'
+                        ? pathname === '/'
+                        : pathname.startsWith(link.href);
+                    const Icon = link.icon;
+                    return (
+                        <Link
+                        key={link.href + link.label}
                         href={link.href}
                         className={cn(
-                          'flex items-center gap-2 rounded-md p-2 text-sm font-medium transition-colors hover:bg-secondary',
-                           isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                            'flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:bg-primary/10 hover:text-primary',
+                            isActive
+                            ? 'text-primary bg-primary/10'
+                            : 'text-muted-foreground'
                         )}
-                      >
+                        >
                         <Icon className={cn('h-5 w-5', link.color)} />
-                        <span className="hidden lg:inline">{link.label}</span>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent className="block lg:hidden">
-                      <p>{link.label}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                );
-              })}
-            </nav>
-          </TooltipProvider>
+                        {link.label}
+                        </Link>
+                    );
+                    })}
+                </nav>
+                <SheetFooter className="mt-auto border-t bg-background/30 p-4">
+                    {renderMobileAuthButtons()}
+                </SheetFooter>
+                </SheetContent>
+            </Sheet>
+            )}
         </div>
-        {renderAuthButtons()}
-        {isMounted && (
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="md:hidden">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle navigation menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="flex flex-col bg-card p-0">
-              <SheetHeader className="p-6 pb-4">
-                <SheetTitle className="sr-only">Menu</SheetTitle>
-                <SheetDescription className="sr-only">
-                  Main navigation links
-                </SheetDescription>
-                <Link href="/">
-                  <Logo />
-                </Link>
-              </SheetHeader>
-              <nav className="flex-1 space-y-2 p-4">
-                {navLinks.map((link) => {
-                  const isActive =
-                    link.href === '/'
-                      ? pathname === '/'
-                      : pathname.startsWith(link.href);
-                  const Icon = link.icon;
-                  return (
-                    <Link
-                      key={link.href + link.label}
-                      href={link.href}
-                      className={cn(
-                        'flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:bg-primary/10 hover:text-primary',
-                        isActive
-                          ? 'text-primary bg-primary/10'
-                          : 'text-muted-foreground'
-                      )}
-                    >
-                      <Icon className={cn('h-5 w-5', link.color)} />
-                      {link.label}
-                    </Link>
-                  );
-                })}
-              </nav>
-              <SheetFooter className="mt-auto border-t bg-background/30 p-4">
-                {renderMobileAuthButtons()}
-              </SheetFooter>
-            </SheetContent>
-          </Sheet>
-        )}
+
       </div>
     </header>
   );
