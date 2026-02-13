@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-main",
-      "description": "A modern office scene with Black professionals collaborating around a table with laptops.",
-      "imageUrl": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
-      "imageHint": "Ghana professionals"
+      "description": "A diverse team of professionals collaborating in a modern office.",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771012435/hero_bg_uwn4fa.jpg",
+      "imageHint": "professionals collaborating"
     },
     {
       "id": "company-logo-1",
