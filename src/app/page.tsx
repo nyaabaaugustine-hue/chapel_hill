@@ -1,3 +1,4 @@
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,12 +11,12 @@ import Footer from '@/components/shared/footer';
 import { Separator } from '@/components/ui/separator';
 import FeaturedJobs from '@/components/featured-jobs';
 import TopCompanies from '@/components/top-companies';
-import LiveActivityBar from '@/components/live-activity-bar';
 import { Suspense } from 'react';
 import HeroSearchForm from '@/components/hero-search-form';
 import SectionHeader from '@/components/shared/section-header';
 import dynamic from 'next/dynamic';
 
+const LiveActivityBar = dynamic(() => import('@/components/live-activity-bar'), { ssr: false });
 const JobCategories = dynamic(() => import('@/components/job-categories'));
 const HiringSection = dynamic(() => import('@/components/hiring-section'));
 const LatestNews = dynamic(() => import('@/components/latest-news'));
