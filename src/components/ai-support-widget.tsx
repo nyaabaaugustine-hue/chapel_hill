@@ -13,15 +13,10 @@ type Message = {
     id: number;
     sender: 'user' | 'ai';
     text: string;
-    action?: {
+    actions?: {
         label: string;
         onClick: () => void;
-    };
-};
-
-type QuickAction = {
-    label: string;
-    action: () => void;
+    }[];
 };
 
 export default function AISupportWidget() {
@@ -37,22 +32,19 @@ export default function AISupportWidget() {
     };
 
      const handleShowPopularJob = () => {
-        // 1. Add a user message to simulate the click
-        const userMessage: Message = { id: Date.now(), sender: 'user', text: "Show me the popular job" };
+        const userMessage: Message = { id: Date.now(), sender: 'user', text: "Show me popular jobs" };
         
-        // 2. Remove the action from the previous AI message to prevent re-clicking
         setMessages(prev =>
-            prev.map(m => (m.action ? { ...m, action: undefined } : m)).concat(userMessage)
+            prev.map(m => (m.actions ? { ...m, actions: undefined } : m)).concat(userMessage)
         );
 
-        // 3. AI responds with the job
         setIsTyping(true);
         setTimeout(() => {
             const aiResponse: Message = { 
                 id: Date.now() + 1, 
                 sender: 'ai', 
                 text: "Our most popular opening right now is 'Senior React Developer' at Innovate Inc. It's a great remote opportunity with a competitive salary.",
-                action: {
+                actions: [{
                     label: 'View Job Details',
                     onClick: () => {
                         toast({
@@ -61,7 +53,36 @@ export default function AISupportWidget() {
                             variant: 'vibrant',
                         });
                     }
-                }
+                }]
+            };
+            setMessages(prev => [...prev, aiResponse]);
+            setIsTyping(false);
+        }, 1800);
+    };
+
+    const handleExplainPricing = () => {
+        const userMessage: Message = { id: Date.now(), sender: 'user', text: "Explain pricing plans" };
+        
+        setMessages(prev =>
+            prev.map(m => (m.actions ? { ...m, actions: undefined } : m)).concat(userMessage)
+        );
+
+        setIsTyping(true);
+        setTimeout(() => {
+            const aiResponse: Message = { 
+                id: Date.now() + 1, 
+                sender: 'ai', 
+                text: "We have three main plans:\n\n- **Basic**: Free, for getting started.\n- **Pro**: Our most popular plan for growing teams, with more job posts and AI features.\n- **Enterprise**: Custom solutions for large organizations.",
+                actions: [{
+                    label: 'View Pricing Details',
+                    onClick: () => {
+                        toast({
+                            title: "Navigating to Pricing...",
+                            variant: 'vibrant',
+                        });
+                        // In a real app, you might do router.push('/pricing')
+                    }
+                }]
             };
             setMessages(prev => [...prev, aiResponse]);
             setIsTyping(false);
@@ -75,11 +96,17 @@ export default function AISupportWidget() {
                 const initialAiMessage: Message = {
                     id: 1,
                     sender: 'ai',
-                    text: "Hello! I'm your AI Support Assistant. I can help you find jobs or answer your questions. For example, I can show you our most popular job right now.",
-                    action: {
-                        label: 'Show me the popular job',
-                        onClick: handleShowPopularJob,
-                    }
+                    text: "Hello! I'm your AI Support Assistant. How can I help you today? Here are a few things I can do:",
+                    actions: [
+                        {
+                            label: 'Show popular jobs',
+                            onClick: handleShowPopularJob,
+                        },
+                        {
+                            label: 'Explain pricing plans',
+                            onClick: handleExplainPricing,
+                        }
+                    ]
                 };
                 setMessages([initialAiMessage]);
                 setIsTyping(false);
@@ -92,18 +119,6 @@ export default function AISupportWidget() {
     }, [isOpen]);
     
     useEffect(scrollToBottom, [messages, isTyping]);
-    
-    const handleQuickAction = (text: string, response: string) => {
-        const userMessage: Message = { id: Date.now(), sender: 'user', text };
-        setMessages(prev => [...prev, userMessage]);
-        
-        setIsTyping(true);
-        setTimeout(() => {
-            const aiResponse: Message = { id: Date.now() + 1, sender: 'ai', text: response };
-            setMessages(prev => [...prev, aiResponse]);
-            setIsTyping(false);
-        }, 1200);
-    };
     
     const handleSendMessage = (e?: React.FormEvent) => {
         e?.preventDefault();
@@ -156,38 +171,45 @@ export default function AISupportWidget() {
                         {messages.map((message) => (
                             <div key={message.id} className={cn(
                                 "flex gap-2 items-end animate-fade-in-up",
-                                message.sender === 'user' ? 'flex-row-reverse' : 'flex-row'
+                                message.sender === 'ai' ? 'flex-row-reverse' : 'flex-row'
                             )}>
-                                {message.sender === 'ai' && <Bot className="h-6 w-6 text-primary shrink-0 mb-1" />}
-                                {message.sender === 'user' && <User className="h-6 w-6 text-primary shrink-0 mb-1" />}
+                                {message.sender === 'ai' 
+                                    ? <Bot className="h-6 w-6 text-primary shrink-0 mb-1" />
+                                    : <User className="h-6 w-6 text-muted-foreground shrink-0 mb-1" />
+                                }
                                 <div className={cn(
                                     "px-4 py-2.5 rounded-xl max-w-[85%] text-sm",
                                     message.sender === 'user'
-                                        ? "bg-primary text-primary-foreground rounded-br-none"
-                                        : "bg-secondary text-secondary-foreground rounded-bl-none"
+                                        ? "bg-secondary text-secondary-foreground rounded-bl-none"
+                                        : "bg-primary text-primary-foreground rounded-br-none"
                                 )}>
                                     <p className="whitespace-pre-wrap">{message.text}</p>
-                                     {message.action && (
-                                        <Button
-                                            size="sm"
-                                            className="mt-3 bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20"
-                                            onClick={message.action.onClick}
-                                        >
-                                            <Sparkles className="mr-2 h-3 w-3" />
-                                            {message.action.label}
-                                        </Button>
+                                    {message.actions && (
+                                        <div className="mt-3 flex flex-wrap gap-2">
+                                            {message.actions.map((action, index) => (
+                                                <Button
+                                                    key={index}
+                                                    size="sm"
+                                                    className="bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20"
+                                                    onClick={action.onClick}
+                                                >
+                                                    <Sparkles className="mr-2 h-3 w-3" />
+                                                    {action.label}
+                                                </Button>
+                                            ))}
+                                        </div>
                                     )}
                                 </div>
                             </div>
                         ))}
                          {isTyping && (
-                            <div className="flex gap-2 items-end animate-fade-in-up">
+                            <div className="flex gap-2 items-end animate-fade-in-up flex-row-reverse">
                                 <Bot className="h-6 w-6 text-primary shrink-0 mb-1" />
-                                <div className="px-4 py-2.5 rounded-xl bg-secondary text-secondary-foreground rounded-bl-none">
+                                <div className="px-4 py-2.5 rounded-xl bg-primary/20 text-primary rounded-br-none">
                                     <div className="flex items-center gap-1">
-                                        <span className="h-1.5 w-1.5 bg-muted-foreground rounded-full animate-pulse [animation-delay:-0.3s]" />
-                                        <span className="h-1.5 w-1.5 bg-muted-foreground rounded-full animate-pulse [animation-delay:-0.15s]" />
-                                        <span className="h-1.5 w-1.5 bg-muted-foreground rounded-full animate-pulse" />
+                                        <span className="h-1.5 w-1.5 bg-primary rounded-full animate-pulse [animation-delay:-0.3s]" />
+                                        <span className="h-1.5 w-1.5 bg-primary rounded-full animate-pulse [animation-delay:-0.15s]" />
+                                        <span className="h-1.5 w-1.5 bg-primary rounded-full animate-pulse" />
                                     </div>
                                 </div>
                             </div>
