@@ -87,10 +87,14 @@ export default function PricingGrid() {
             return (
             <Card key={tier.name} className={cn(
                 'relative flex flex-col h-full rounded-2xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2',
-                tier.isPopular ? 'border-2 border-yellow-400 shadow-xl bg-black/50' : 'border border-white/20 bg-secondary/50 backdrop-blur-sm'
+                {
+                  'border-2 border-red-500 shadow-xl bg-black/50': tier.id === 'pro',
+                  'border-2 border-green-500 bg-secondary/50 backdrop-blur-sm': tier.id === 'enterprise',
+                  'border border-white/20 bg-secondary/50 backdrop-blur-sm': tier.id === 'basic',
+                }
             )}>
                 {tier.isPopular && (
-                    <div className="absolute top-0 right-6 -mt-4 bg-black text-yellow-400 px-4 py-1.5 text-sm font-semibold rounded-full shadow-lg z-10 flex items-center gap-1.5">
+                    <div className="absolute top-0 right-6 -mt-4 bg-black text-red-500 px-4 py-1.5 text-sm font-semibold rounded-full shadow-lg z-10 flex items-center gap-1.5">
                         <Star className="h-4 w-4" fill="currentColor"/> Most Popular
                     </div>
                 )}
@@ -127,7 +131,7 @@ export default function PricingGrid() {
                     size="lg"
                     className={cn(
                         'w-full font-bold text-lg', 
-                        tier.isPopular ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'bg-white/10 hover:bg-white/20 text-white'
+                        tier.isPopular ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-white/10 hover:bg-white/20 text-white'
                     )}
                     >
                     <Link href={getCtaLink(tier)}>{tier.cta}</Link>
