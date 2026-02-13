@@ -3,8 +3,8 @@
     {
       "id": "hero-main",
       "description": "Abstract background graphic",
-      "imageUrl": "https://res.cloudinary.com/demo/image/upload/w_1200,h_800,c_fill/sample.jpg",
-      "imageHint": "abstract background"
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/w_1200,h_800,c_fill,g_auto/business-conference.jpg",
+      "imageHint": "business conference"
     },
     {
       "id": "company-logo-1",
@@ -303,13 +303,13 @@
     {
       "id": "blog-post-2",
       "description": "Code on a screen",
-      "imageUrl": "https://res.cloudinary.com/demo/image/upload/w_600,h_400,c_fill/people/programmers.jpg",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/w_600,h_400,c_fill,g_auto/people/programmers.jpg",
       "imageHint": "code screen"
     },
     {
       "id": "blog-post-3",
       "description": "Diverse team collaborating around a whiteboard.",
-      "imageUrl": "https://res.cloudinary.com/demo/image/upload/w_600,h_400,c_fill/people/business-people.jpg",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/w_600,h_400,c_fill,g_auto/people/business-people.jpg",
       "imageHint": "team collaboration"
     },
     {
@@ -333,7 +333,7 @@
     {
       "id": "blog-post-7",
       "description": "A person writing career goals in a notebook.",
-      "imageUrl": "https://res.cloudinary.com/demo/image/upload/w_600,h_400,c_fill/people/woman-writing.jpg",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/w_600,h_400,c_fill,g_auto/people/woman-writing.jpg",
       "imageHint": "career advice"
     },
     {
