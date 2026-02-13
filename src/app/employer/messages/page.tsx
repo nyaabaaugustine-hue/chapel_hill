@@ -49,17 +49,19 @@ export default function EmployerMessagesPage() {
     if (!messageText.trim() || !selectedConversation) return;
 
     const newMessage: Message = { from: 'me', text: messageText };
+    let updatedConversation: Conversation | null = null;
 
     const updatedConversations = conversations.map(convo => {
         if (convo.id === selectedConversation.id) {
             const updatedMessages = [...convo.messages, newMessage];
-            return { ...convo, messages: updatedMessages, lastMessage: messageText };
+            updatedConversation = { ...convo, messages: updatedMessages, lastMessage: messageText };
+            return updatedConversation;
         }
         return convo;
     });
 
     setConversations(updatedConversations);
-    setSelectedConversation(prev => prev ? { ...prev, messages: [...prev.messages, newMessage] } : null);
+    setSelectedConversation(updatedConversation);
     setMessageText('');
     toast({ title: "Message Sent", variant: 'vibrant' });
   };
