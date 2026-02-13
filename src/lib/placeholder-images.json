@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-main",
-      "description": "Two Black professionals working together on a laptop in a modern office.",
-      "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&q=80&w=1080&auto=format&fit=crop",
-      "imageHint": "professionals working"
+      "description": "A professional working on a laptop in a bright, modern setting.",
+      "imageUrl": "https://images.unsplash.com/photo-1554415707-6e8cf6b3cc23?ixlib=rb-4.0.3&q=80&w=1080&auto=format&fit=crop",
+      "imageHint": "professional working laptop"
     },
     {
       "id": "company-logo-1",
