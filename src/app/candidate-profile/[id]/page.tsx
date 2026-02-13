@@ -96,8 +96,8 @@ const CandidateProfileSkeleton = () => (
 );
 
 
-export default function CandidateProfilePage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
-  const { id } = React.use(paramsPromise);
+export default function CandidateProfilePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = React.use(params);
   const { toast } = useToast();
 
   const [user, setUser] = useState<(typeof DUMMY_USERS)[0] | undefined>(undefined);
