@@ -95,8 +95,11 @@ const CandidateProfileSkeleton = () => (
     </div>
 );
 
+interface CandidateProfilePageProps {
+  params: Promise<{ id: string }>;
+}
 
-export default function CandidateProfilePage({ params }: { params: Promise<{ id: string }> }) {
+export default function CandidateProfilePage({ params }: CandidateProfilePageProps) {
   const { id } = React.use(params);
   const { toast } = useToast();
 
