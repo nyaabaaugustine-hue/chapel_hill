@@ -16,7 +16,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Chapel Hill Ltd - Find Your Next Job',
+  title: 'Demo - Find Your Next Job',
   description: 'The Easiest Way to Get Your New Job',
 };
 
