@@ -1,9 +1,10 @@
+
 'use client'
 
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DUMMY_APPLICANTS } from "@/lib/data";
@@ -49,19 +50,19 @@ export default function EmployerMessagesPage() {
     if (!messageText.trim() || !selectedConversation) return;
 
     const newMessage: Message = { from: 'me', text: messageText };
-    let updatedConversation: Conversation | null = null;
+    
+    const newSelectedConversation = {
+      ...selectedConversation,
+      messages: [...selectedConversation.messages, newMessage],
+      lastMessage: messageText
+    };
 
-    const updatedConversations = conversations.map(convo => {
-        if (convo.id === selectedConversation.id) {
-            const updatedMessages = [...convo.messages, newMessage];
-            updatedConversation = { ...convo, messages: updatedMessages, lastMessage: messageText };
-            return updatedConversation;
-        }
-        return convo;
-    });
+    const updatedConversations = conversations.map(convo =>
+      convo.id === selectedConversation.id ? newSelectedConversation : convo
+    );
 
     setConversations(updatedConversations);
-    setSelectedConversation(updatedConversation);
+    setSelectedConversation(newSelectedConversation);
     setMessageText('');
     toast({ title: "Message Sent", variant: 'vibrant' });
   };
