@@ -24,7 +24,7 @@ import PricingGrid from '@/components/pricing-grid';
 import JobsByLocation from '@/components/jobs-by-location';
 
 export default function HomePage() {
-  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
+  const heroImage = PlaceHolderImages.find((p) => p.id === 'location-cape-coast');
   const pricingBgImage = PlaceHolderImages.find((p) => p.id === 'top-companies-bg');
 
   const trustIndicators = [
