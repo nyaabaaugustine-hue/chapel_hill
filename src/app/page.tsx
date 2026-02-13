@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Briefcase, CheckCircle, MapPin } from 'lucide-react';
@@ -24,7 +25,7 @@ import PricingGrid from '@/components/pricing-grid';
 import JobsByLocation from '@/components/jobs-by-location';
 
 export default function HomePage() {
-  const heroImage = PlaceHolderImages.find((p) => p.id === 'location-cape-coast');
+  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
   const pricingBgImage = PlaceHolderImages.find((p) => p.id === 'top-companies-bg');
 
   const trustIndicators = [

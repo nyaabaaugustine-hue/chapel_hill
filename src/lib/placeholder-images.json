@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-main",
-      "description": "The Cape Coast Castle in Ghana against a clear blue sky.",
-      "imageUrl": "https://images.unsplash.com/photo-1579003593418-22a4d7c3c43b?ixlib=rb-4.0.3&q=80&w=1080&auto=format&fit=crop",
-      "imageHint": "Cape Coast castle"
+      "description": "A Black professional woman working on a laptop while holding a coffee.",
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "professional working laptop"
     },
     {
       "id": "company-logo-1",
@@ -273,55 +273,55 @@
     {
       "id": "hiring-main",
       "description": "A group of Black professionals in a business meeting.",
-      "imageUrl": "https://images.unsplash.com/photo-1613462538814-7d51073ce0ce?ixlib=rb-4.0.3&q=80&w=800&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1613462538814-7d51073ce0ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
       "imageHint": "business meeting"
     },
     {
       "id": "subscription-1",
       "description": "Team of Black professionals in a collaboration meeting.",
-      "imageUrl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&q=80&w=400&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
       "imageHint": "team meeting"
     },
     {
       "id": "subscription-2",
       "description": "Black professional woman working at a desk.",
-      "imageUrl": "https://images.unsplash.com/photo-1524508762098-fd966ffb6ef9?ixlib=rb-4.0.3&q=80&w=400&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1524508762098-fd966ffb6ef9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
       "imageHint": "person working"
     },
     {
       "id": "subscription-3",
       "description": "Group of Black students learning in a classroom.",
-      "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&q=80&w=400&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
       "imageHint": "students learning"
     },
     {
       "id": "subscription-4",
       "description": "Black man with beard working at a desk.",
-      "imageUrl": "https://images.unsplash.com/photo-1623679799634-841494762b38?ixlib=rb-4.0.3&q=80&w=400&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1623679799634-841494762b38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
       "imageHint": "man desk"
     },
     {
       "id": "subscription-5",
       "description": "Two Black professionals in an office environment.",
-      "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&q=80&w=400&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80",
       "imageHint": "office people"
     },
     {
       "id": "category-bg",
       "description": "Modern office setting with Ghanaian people working.",
-      "imageUrl": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&q=80&w=1200&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
       "imageHint": "Ghana office"
     },
     {
       "id": "top-companies-bg",
       "description": "A vibrant market scene in Accra, Ghana.",
-      "imageUrl": "https://images.unsplash.com/photo-1618925480413-5858d4a0445d?ixlib=rb-4.0.3&q=80&w=1200&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1618925480413-5858d4a0445d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
       "imageHint": "Ghana market"
     },
     {
       "id": "latest-news-bg",
       "description": "A Black professional reading news on a digital tablet.",
-      "imageUrl": "https://images.unsplash.com/photo-1586953208448-39502e78315c?ixlib=rb-4.0.3&q=80&w=1200&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1586953208448-39502e78315c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=992&q=80",
       "imageHint": "news reading"
     },
     {
