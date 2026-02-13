@@ -28,7 +28,6 @@ const JobsByLocation = dynamic(() => import('@/components/jobs-by-location'));
 
 
 export default function HomePage() {
-  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
   const pricingBgImage = PlaceHolderImages.find((p) => p.id === 'top-companies-bg');
 
   const trustIndicators = [
@@ -43,17 +42,10 @@ export default function HomePage() {
       <LiveActivityBar />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative w-full py-20 lg:py-32 flex items-center justify-center text-center bg-hero-glow">
-          {heroImage && (
-            <Image
-              src={heroImage.imageUrl}
-              alt={heroImage.description}
-              fill
-              className="object-cover z-0"
-              data-ai-hint={heroImage.imageHint}
-              priority
-            />
-          )}
+        <section
+          className="relative w-full py-20 lg:py-32 flex items-center justify-center text-center bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
+        >
           <div className="absolute inset-0 bg-black/60 z-10" />
           <div className="relative z-20 container mx-auto px-6 max-w-4xl">
             <div className="flex flex-col justify-center space-y-6">
