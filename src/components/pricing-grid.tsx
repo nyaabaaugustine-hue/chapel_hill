@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -94,7 +95,7 @@ export default function PricingGrid() {
                 tier.isPopular && 'lg:scale-105'
             )}>
                 {tier.isPopular && (
-                    <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-yellow-400 text-black px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg z-20 flex items-center gap-1.5">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-semibold shadow-lg z-20 flex items-center gap-1.5">
                         <Star className="h-4 w-4" fill="currentColor"/> Most Popular
                     </div>
                 )}
@@ -108,7 +109,7 @@ export default function PricingGrid() {
                             alt={kenteImage.description}
                             width={96}
                             height={96}
-                            className="absolute top-0 right-0 h-16 w-16 lg:h-24 lg:w-24 opacity-20 mix-blend-soft-light pointer-events-none z-0"
+                            className="absolute top-0 right-0 h-16 w-16 lg:h-24 lg:w-24 opacity-20 pointer-events-none z-0"
                         />
                      )}
                      <div className="relative z-10 flex flex-col h-full">
