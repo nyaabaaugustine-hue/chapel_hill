@@ -36,10 +36,11 @@ export default function VolunteerSection() {
         <SectionHeader
           title="Kickstart Your Career"
           subtitle="Explore volunteer and attachment opportunities designed for students to gain hands-on experience and make a difference."
+          className="animate-in fade-in slide-in-from-bottom-4 duration-700"
         />
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {opportunities.map((opportunity, index) => (
-            <Card key={index} className="text-center">
+            <Card key={index} className="text-center animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${200 + index * 100}ms` }}>
               <CardHeader className="items-center">
                 <div className={cn("flex h-16 w-16 items-center justify-center rounded-full", opportunity.iconBg)}>
                   <opportunity.icon className={cn("h-8 w-8", opportunity.iconColor)} />
@@ -52,7 +53,7 @@ export default function VolunteerSection() {
             </Card>
           ))}
         </div>
-        <div className="mt-12 text-center">
+        <div className="mt-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: '500ms' }}>
           <Button asChild size="lg" variant="outline">
             <Link href="/opportunities">Explore Opportunities</Link>
           </Button>

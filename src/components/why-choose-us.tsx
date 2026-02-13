@@ -46,7 +46,7 @@ export default function WhyChooseUs() {
         </>
       )}
       <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="mb-10 text-center">
+        <div className="mb-10 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
             <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-white">Why Chapel Hill?</h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
                 We're more than just a job board. We're your career partner.
@@ -54,7 +54,7 @@ export default function WhyChooseUs() {
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {features.map((feature, index) => (
-            <Card key={index} className="text-center bg-card/80 backdrop-blur-sm border-white/20">
+            <Card key={index} className="text-center bg-card/80 backdrop-blur-sm border-white/20 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${200 + index * 100}ms` }}>
               <CardHeader className="items-center">
                 <div className={cn("flex h-16 w-16 items-center justify-center rounded-full", feature.iconBg)}>
                   <feature.icon className={cn("h-8 w-8", feature.iconColor)} />

@@ -26,17 +26,17 @@ export default function TopCompanies() {
         </>
       )}
       <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="mb-12 text-center">
+        <div className="mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
           <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-white">Top Companies Hiring</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
             Discover your next career step with industry-leading firms.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {topCompanies.map((company) => {
+          {topCompanies.map((company, index) => {
             const companyLogo = PlaceHolderImages.find((img) => img.id === company.logo);
             return (
-              <Link key={company.id} href={`/companies/${company.id}`} className="block group">
+              <Link key={company.id} href={`/companies/${company.id}`} className="block group animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${200 + index * 50}ms` }}>
                 <Card className="h-full p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-background/80 backdrop-blur-sm flex flex-col items-center justify-center">
                   {companyLogo && (
                     <div className="relative mb-3">

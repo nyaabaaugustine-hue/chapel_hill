@@ -21,14 +21,14 @@ export default function FeaturedJobs() {
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="mb-10 text-center">
+        <div className="mb-10 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
           <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Featured Jobs</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
             Get the most exciting jobs from all around the world and grow your career.
           </p>
         </div>
 
-        <div className="mb-8 flex justify-center flex-wrap gap-3">
+        <div className="mb-8 flex justify-center flex-wrap gap-3 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: '150ms' }}>
             {categories.map(category => (
                 <Button
                     key={category}
@@ -47,8 +47,10 @@ export default function FeaturedJobs() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featuredJobs.map((job) => (
-            <JobCard key={job.id} job={job} />
+          {featuredJobs.map((job, index) => (
+            <div key={job.id} className="animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${300 + index * 75}ms` }}>
+              <JobCard job={job} />
+            </div>
           ))}
         </div>
         
@@ -56,7 +58,7 @@ export default function FeaturedJobs() {
             <p className="text-center text-muted-foreground mt-8">No jobs found for this category.</p>
         )}
 
-        <div className="mt-10 text-center">
+        <div className="mt-10 text-center animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: '500ms' }}>
           <Button asChild variant="outline" size="lg">
             <Link href="/jobs">
               View All Jobs <ArrowRight className="ml-2 h-4 w-4" />

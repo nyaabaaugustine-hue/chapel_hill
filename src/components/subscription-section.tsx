@@ -35,7 +35,7 @@ export default function SubscriptionSection() {
   return (
     <section className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="relative rounded-3xl bg-accent p-10 md:p-16 lg:p-20 text-accent-foreground overflow-hidden">
+        <div className="relative rounded-3xl bg-accent p-10 md:p-16 lg:p-20 text-accent-foreground overflow-hidden animate-in fade-in zoom-in-95 duration-700">
             {/* Decorative images */}
              {images.img1 && (
                 <Image

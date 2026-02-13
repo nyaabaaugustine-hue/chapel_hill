@@ -38,7 +38,7 @@ export default function JobCategories() {
         </>
       )}
       <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-headline">
             Browse by Category
           </h2>
@@ -46,7 +46,7 @@ export default function JobCategories() {
             Find the job that’s perfect for you. Over 800+ new jobs posted every day.
           </p>
         </div>
-        <div className="relative px-12">
+        <div className="relative px-12 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: '200ms' }}>
           <Carousel
             opts={{
               align: "start",

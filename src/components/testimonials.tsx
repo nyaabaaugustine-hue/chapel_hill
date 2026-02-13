@@ -38,7 +38,7 @@ export default function Testimonials() {
         </>
       )}
       <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="mb-12 text-center">
+        <div className="mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
             <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl text-white">What Our Users Say</h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
                 Discover how we've helped professionals and companies achieve their goals.
@@ -51,7 +51,7 @@ export default function Testimonials() {
             align: 'start',
             loop: true,
           }}
-          className="relative px-4"
+          className="relative px-4 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: '200ms' }}
           onMouseEnter={plugin.current.stop}
           onMouseLeave={plugin.current.reset}
         >

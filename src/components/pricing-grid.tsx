@@ -79,7 +79,7 @@ export default function PricingGrid() {
 
   return (
     <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <div className="flex justify-center items-center gap-4 mb-12">
+        <div className="flex justify-center items-center gap-4 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <span className={cn("font-semibold text-lg", !isYearly ? 'text-primary' : 'text-gray-200')}>Monthly</span>
             <Switch
                 id="billing-cycle"
@@ -92,16 +92,16 @@ export default function PricingGrid() {
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
-        {tiers.map((tier) => {
+        {tiers.map((tier, index) => {
             return (
             <Card key={tier.name} className={cn(
-                'relative flex flex-col h-full rounded-2xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 overflow-hidden',
+                'relative flex flex-col h-full rounded-2xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-700',
                 {
                   'border-2 border-red-500 bg-secondary/50 backdrop-blur-sm': tier.id === 'basic',
                   'border-2 border-yellow-400 shadow-xl bg-black/50': tier.id === 'pro',
                   'border-2 border-green-500 bg-secondary/50 backdrop-blur-sm': tier.id === 'enterprise',
                 }
-            )}>
+            )} style={{ animationDelay: `${200 + index * 100}ms` }}>
                 <KenteCornerArt />
                 {tier.isPopular && (
                     <div className="absolute top-0 right-6 -mt-4 bg-black text-yellow-400 px-4 py-1.5 text-sm font-semibold rounded-full shadow-lg z-10 flex items-center gap-1.5">

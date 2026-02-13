@@ -16,7 +16,7 @@ export default function HiringSection() {
     <section className="bg-secondary py-16 md:py-24">
       <div className="container mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="flex flex-col space-y-6">
+          <div className="flex flex-col space-y-6 animate-in fade-in slide-in-from-left-12 duration-700">
             <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl !leading-tight">
               Hire Top-Tier React Talent in 48 Hours
             </h2>
@@ -40,7 +40,7 @@ export default function HiringSection() {
               </Button>
             </div>
           </div>
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center animate-in fade-in slide-in-from-right-12 duration-700 delay-200">
             {hiringImage && (
               <Image
                 src={hiringImage.imageUrl}
