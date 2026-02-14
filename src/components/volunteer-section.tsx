@@ -32,7 +32,7 @@ const opportunities = [
 ];
 
 export default function VolunteerSection() {
-  const bgImage = PlaceHolderImages.find((p) => p.id === 'subscription-3');
+  const bgImage = PlaceHolderImages.find((p) => p.id === 'featured-jobs-bg');
 
   return (
     <section className="relative py-16 md:py-24">
