@@ -15,7 +15,7 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export default function WhatsAppWidget() {
     // Replace with the administrator's actual WhatsApp number
-    const adminPhoneNumber = "233244123456"; // Example number for Ghana
+    const adminPhoneNumber = "233541988383"; // Example number for Ghana
     const prefilledMessage = "Hello, I have a question about the platform.";
 
     const whatsappLink = `https://wa.me/${adminPhoneNumber}?text=${encodeURIComponent(prefilledMessage)}`;
