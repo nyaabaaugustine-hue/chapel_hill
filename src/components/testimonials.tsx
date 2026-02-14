@@ -15,7 +15,6 @@ import {
 } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-react";
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 export default function Testimonials() {
   const [isMounted, setIsMounted] = useState(false);
@@ -28,15 +27,11 @@ export default function Testimonials() {
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  if (!isMounted) {
-    return null;
-  }
   
   if (!reviews || reviews.length === 0) {
     return null;
   }
-
+  
   return (
     <section className="relative py-16 md:py-24 bg-secondary">
       <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
@@ -47,46 +42,52 @@ export default function Testimonials() {
             </p>
         </div>
 
-        <Carousel
-          plugins={plugin.current ? [plugin.current] : []}
-          opts={{
-            align: 'start',
-            loop: true,
-          }}
-          className="relative px-4 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: '200ms' }}
-          onMouseEnter={() => plugin.current?.stop()}
-          onMouseLeave={() => plugin.current?.reset()}
-        >
-          <CarouselContent className="-ml-4">
-            {reviews.filter(review => review.user).map((review) => {
-              const userAvatar = PlaceHolderImages.find((img) => img.id === review.user.avatar);
-              return (
-                <CarouselItem key={review.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1 h-full">
-                    <Card className="flex h-full flex-col justify-between">
-                      <CardContent className="p-6">
-                        <StarRating rating={review.rating} />
-                        <p className="mt-4 text-muted-foreground italic">"{review.comment}"</p>
-                      </CardContent>
-                      <div className="flex items-center gap-4 border-t p-6">
-                        <Avatar>
-                          {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt={review.user.name} />}
-                          <AvatarFallback>{review.user.name?.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <p className="font-semibold">{review.user.name}</p>
-                          <p className="text-sm text-muted-foreground">{review.user.role}</p>
-                        </div>
+        {/* Only render the Carousel on the client-side */}
+        {isMounted ? (
+            <Carousel
+              plugins={[plugin.current]}
+              opts={{
+                align: 'start',
+                loop: true,
+              }}
+              className="relative px-4 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: '200ms' }}
+              onMouseEnter={() => plugin.current.stop()}
+              onMouseLeave={() => plugin.current.reset()}
+            >
+              <CarouselContent className="-ml-4">
+                {reviews.filter(review => review.user).map((review) => {
+                  const userAvatar = PlaceHolderImages.find((img) => img.id === review.user.avatar);
+                  return (
+                    <CarouselItem key={review.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                      <div className="p-1 h-full">
+                        <Card className="flex h-full flex-col justify-between">
+                          <CardContent className="p-6">
+                            <StarRating rating={review.rating} />
+                            <p className="mt-4 text-muted-foreground italic">"{review.comment}"</p>
+                          </CardContent>
+                          <div className="flex items-center gap-4 border-t p-6">
+                            <Avatar>
+                              {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt={review.user.name} />}
+                              <AvatarFallback>{review.user.name?.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                            </Avatar>
+                            <div>
+                              <p className="font-semibold">{review.user.name}</p>
+                              <p className="text-sm text-muted-foreground">{review.user.role}</p>
+                            </div>
+                          </div>
+                        </Card>
                       </div>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              );
-            })}
-          </CarouselContent>
-          <CarouselPrevious className="absolute left-[-2rem] top-1/2 -translate-y-1/2 hidden md:flex" />
-          <CarouselNext className="absolute right-[-2rem] top-1/2 -translate-y-1/2 hidden md:flex" />
-        </Carousel>
+                    </CarouselItem>
+                  );
+                })}
+              </CarouselContent>
+              <CarouselPrevious className="absolute left-[-2rem] top-1/2 -translate-y-1/2 hidden md:flex" />
+              <CarouselNext className="absolute right-[-2rem] top-1/2 -translate-y-1/2 hidden md:flex" />
+            </Carousel>
+        ) : (
+          // Render a static placeholder or skeleton on the server and before hydration
+          <div className="text-center text-muted-foreground">Loading testimonials...</div>
+        )}
       </div>
     </section>
   );
