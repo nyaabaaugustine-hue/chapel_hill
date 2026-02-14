@@ -22,6 +22,10 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
     Autoplay({ delay: 5000, stopOnInteraction: true })
   )
 
+  if (!reviews || reviews.length === 0) {
+    return null;
+  }
+
   return (
     <section className="relative py-16 md:py-24 bg-secondary">
       <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
@@ -43,7 +47,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
           onMouseLeave={plugin.current.reset}
         >
           <CarouselContent className="-ml-4">
-            {reviews.map((review) => {
+            {reviews.filter(review => review.user).map((review) => {
               const userAvatar = PlaceHolderImages.find((img) => img.id === review.user.avatar);
               return (
                 <CarouselItem key={review.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
@@ -56,7 +60,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
                       <div className="flex items-center gap-4 border-t p-6">
                         <Avatar>
                           {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt={review.user.name} />}
-                          <AvatarFallback>{review.user.name.charAt(0)}</AvatarFallback>
+                          <AvatarFallback>{review.user.name?.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                         </Avatar>
                         <div>
                           <p className="font-semibold">{review.user.name}</p>
