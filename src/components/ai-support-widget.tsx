@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { Bot, SendHorizonal, X, Loader, Sparkles, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 type Message = {
     id: number;
@@ -37,6 +39,8 @@ export default function AISupportWidget() {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const { toast } = useToast();
     const router = useRouter();
+
+    const aiSupportImage = PlaceHolderImages.find(p => p.id === 'ai-support-button');
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -282,11 +286,21 @@ export default function AISupportWidget() {
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className={cn(
-                                "relative w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-105 ring-2 ring-primary/40 shadow-[0_0_20px_rgba(59,130,246,0.4)] bg-[rgb(111,159,145)]",
+                                "relative w-16 h-16 rounded-full overflow-hidden flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-105 ring-2 ring-primary/40 shadow-[0_0_20px_rgba(59,130,246,0.4)]",
                                 isOpen && 'scale-0 opacity-0'
                             )}
                         >
-                            <Bot className="h-8 w-8 text-white" />
+                             {aiSupportImage ? (
+                                <Image
+                                    src={aiSupportImage.imageUrl}
+                                    alt={aiSupportImage.description}
+                                    fill
+                                    className="object-cover"
+                                    data-ai-hint={aiSupportImage.imageHint}
+                                />
+                            ) : (
+                                <Bot className="h-8 w-8 text-white" />
+                            )}
                         </button>
                     </TooltipTrigger>
                     <TooltipContent side="left" className="bg-black/80 text-white border-white/20">
