@@ -24,8 +24,8 @@ const features = [
     icon: BrainCircuit,
     title: '89% Match Accuracy',
     description: 'Our AI analyzes your profile to provide job recommendations with an 89% accuracy score, so you find the right fit, faster.',
-    iconBg: 'bg-emerald-500/10',
-    iconColor: 'text-emerald-500'
+    iconBg: 'bg-chart-4/10',
+    iconColor: 'text-chart-4'
   }
 ];
 
