@@ -188,9 +188,9 @@
     },
     {
       "id": "blog-post-4",
-      "description": "A young Black man working on a laptop in a cafe.",
-      "imageUrl": "https://images.unsplash.com/photo-1522881193457-33ae7c39524e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
-      "imageHint": "remote work"
+      "description": "Abstract visualization of serverless architecture.",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771061238/fff_lsri9o.jpg",
+      "imageHint": "serverless architecture"
     },
     {
       "id": "blog-post-5",
