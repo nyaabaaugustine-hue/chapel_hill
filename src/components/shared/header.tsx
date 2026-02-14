@@ -47,9 +47,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { ThemeToggle } from '../theme-toggle';
 
 const DesktopAuthButtons = () => (
     <div className="flex items-center gap-2">
+      <ThemeToggle />
       <Button variant="ghost" asChild>
         <Link href="/login">Login</Link>
       </Button>
@@ -146,7 +148,7 @@ export default function Header() {
                                 <AccordionItem value="item-1" className="border-b-0">
                                   <AccordionTrigger className={cn(
                                     'flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:no-underline [&>svg.lucide-chevron-down]:h-5 [&>svg.lucide-chevron-down]:w-5',
-                                    'text-white hover:bg-white/10 font-medium'
+                                    'hover:bg-muted font-medium'
                                   )}>
                                     <div className='flex items-center gap-4'>
                                       <Icon className={cn('h-4 w-4', link.color)} />
@@ -164,8 +166,8 @@ export default function Header() {
                                             href={subLink.href}
                                             onClick={() => setMobileMenuOpen(false)}
                                             className={cn(
-                                              'flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:bg-white/10 hover:text-white',
-                                              isSubActive ? 'text-white font-semibold bg-white/10' : 'text-neutral-300'
+                                              'flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:bg-muted',
+                                              isSubActive ? 'text-foreground font-semibold bg-muted' : 'text-muted-foreground'
                                             )}
                                           >
                                             <SubIcon className={cn('h-4 w-4', subLink.color)} />
@@ -189,10 +191,10 @@ export default function Header() {
                           href={link.href!}
                           onClick={() => setMobileMenuOpen(false)}
                           className={cn(
-                              'flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:bg-white/10',
+                              'flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:bg-muted',
                               isActive
-                              ? 'text-white font-semibold bg-white/10'
-                              : 'text-neutral-300 hover:text-white'
+                              ? 'text-foreground font-semibold bg-muted'
+                              : 'text-muted-foreground hover:text-foreground'
                           )}
                           >
                           <Icon className={cn('h-4 w-4', link.color)} />
@@ -201,8 +203,9 @@ export default function Header() {
                       );
                       })}
                   </nav>
-                  <SheetFooter className="mt-auto border-t bg-background/30 p-4">
+                  <SheetFooter className="mt-auto border-t bg-background/30 p-4 flex flex-col items-center gap-4">
                       <MobileAuthButtons onLinkClick={() => setMobileMenuOpen(false)} />
+                      <ThemeToggle />
                   </SheetFooter>
                   </SheetContent>
               </Sheet>
@@ -229,7 +232,7 @@ export default function Header() {
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="ghost" className={cn(
                                                     'flex items-center gap-2 rounded-md p-2 text-sm font-medium transition-colors',
-                                                    isDropdownActive ? 'text-white font-bold' : 'text-neutral-300 hover:text-white'
+                                                    isDropdownActive ? 'text-foreground font-bold' : 'text-muted-foreground hover:text-foreground'
                                                 )}>
                                                     <Icon className={cn('h-4 w-4', link.color)} />
                                                     <span className="hidden xl:inline whitespace-nowrap">{link.label}</span>
@@ -237,15 +240,15 @@ export default function Header() {
                                                 </Button>
                                             </DropdownMenuTrigger>
                                         </TooltipTrigger>
-                                        <TooltipContent className="block xl:hidden">
+                                        <TooltipContent>
                                             <p>{link.label}</p>
                                         </TooltipContent>
                                     </Tooltip>
-                                    <DropdownMenuContent className="bg-sky-800/90 backdrop-blur-sm border-sky-600">
+                                    <DropdownMenuContent className="bg-background/90 backdrop-blur-sm border-border">
                                         {link.subLinks.map(subLink => {
                                             const SubIcon = subLink.icon;
                                             return (
-                                                <DropdownMenuItem key={subLink.href} asChild className="focus:bg-sky-700">
+                                                <DropdownMenuItem key={subLink.href} asChild className="focus:bg-muted">
                                                     <Link href={subLink.href} className="flex items-center gap-2">
                                                         <SubIcon className={cn('h-4 w-4', subLink.color)} />
                                                         {subLink.label}
@@ -266,14 +269,14 @@ export default function Header() {
                                 href={link.href!}
                                 className={cn(
                                 'flex items-center gap-2 rounded-md p-2 text-sm transition-colors',
-                                isActive ? 'text-white font-bold' : 'text-neutral-300 hover:text-white'
+                                isActive ? 'text-foreground font-bold' : 'text-muted-foreground hover:text-foreground'
                                 )}
                             >
                                 <Icon className={cn('h-4 w-4', link.color)} />
                                 <span className="hidden xl:inline whitespace-nowrap">{link.label}</span>
                             </Link>
                             </TooltipTrigger>
-                            <TooltipContent className="block xl:hidden">
+                            <TooltipContent>
                             <p>{link.label}</p>
                             </TooltipContent>
                         </Tooltip>
