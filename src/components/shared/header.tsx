@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -126,7 +127,7 @@ export default function Header() {
                               : 'text-muted-foreground'
                           )}
                           >
-                          <Icon className={cn('h-5 w-5', link.color)} />
+                          <Icon className={cn('h-4 w-4', link.color)} />
                           {link.label}
                           </Link>
                       );
@@ -161,7 +162,7 @@ export default function Header() {
                                 isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
                                 )}
                             >
-                                <Icon className={cn('h-5 w-5', link.color)} />
+                                <Icon className={cn('h-4 w-4', link.color)} />
                                 <span className="hidden xl:inline whitespace-nowrap">{link.label}</span>
                             </Link>
                             </TooltipTrigger>
