@@ -13,6 +13,7 @@ import {
   PenSquare,
   Mail,
   Info,
+  ChevronDown,
 } from 'lucide-react';
 import Logo from './logo';
 import { Button } from '@/components/ui/button';
@@ -34,6 +35,18 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { ThemeToggle } from '../theme-toggle';
 
 const DesktopAuthButtons = () => (
@@ -78,8 +91,15 @@ export default function Header() {
   const navLinks = [
     { href: '/', label: 'Home', icon: Home, color: 'text-sky-500' },
     { href: '/about', label: 'About Us', icon: Info, color: 'text-gray-500' },
-    { href: '/browse-candidates', label: 'Browse Candidates', icon: Users, color: 'text-indigo-500' },
-    { href: '/opportunities', label: 'Opportunities', icon: Sparkles, color: 'text-yellow-500' },
+    { 
+      label: 'Candidates',
+      icon: Users,
+      color: 'text-indigo-500',
+      subLinks: [
+        { href: '/browse-candidates', label: 'Browse Candidates', icon: Users, color: 'text-indigo-500' },
+        { href: '/opportunities', label: 'Opportunities', icon: Sparkles, color: 'text-yellow-500' },
+      ]
+    },
     { href: '/jobs', label: 'Find a Job', icon: Briefcase, color: 'text-emerald-500' },
     { href: '/companies', label: 'Companies', icon: Building2, color: 'text-orange-500' },
     { href: '/pricing', label: 'Pricing', icon: CreditCard, color: 'text-rose-500' },
@@ -112,17 +132,56 @@ export default function Header() {
                         <Logo />
                       </Link>
                   </SheetHeader>
-                  <nav className="flex-1 space-y-2 p-4">
+                  <nav className="flex-1 space-y-1 p-4">
                       {navLinks.map((link) => {
-                      const isActive =
-                          link.href === '/'
-                          ? pathname === '/'
-                          : pathname.startsWith(link.href);
-                      const Icon = link.icon;
-                      return (
+                        const Icon = link.icon;
+                        if (link.subLinks) {
+                           return (
+                              <Accordion key={link.label} type="single" collapsible className="w-full">
+                                <AccordionItem value="item-1" className="border-b-0">
+                                  <AccordionTrigger className={cn(
+                                    'flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:bg-primary/10 hover:text-primary hover:no-underline [&>svg.lucide-chevron-down]:h-5 [&>svg.lucide-chevron-down]:w-5',
+                                    'text-muted-foreground'
+                                  )}>
+                                    <div className='flex items-center gap-4'>
+                                      <Icon className={cn('h-4 w-4', link.color)} />
+                                      {link.label}
+                                    </div>
+                                  </AccordionTrigger>
+                                  <AccordionContent className="pb-0 pl-8">
+                                    <nav className="flex flex-col space-y-1">
+                                      {link.subLinks.map(subLink => {
+                                        const isSubActive = pathname.startsWith(subLink.href);
+                                        const SubIcon = subLink.icon;
+                                        return (
+                                          <Link
+                                            key={subLink.href}
+                                            href={subLink.href}
+                                            onClick={() => setMobileMenuOpen(false)}
+                                            className={cn(
+                                              'flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:bg-primary/10 hover:text-primary',
+                                              isSubActive ? 'text-primary bg-primary/10' : 'text-muted-foreground'
+                                            )}
+                                          >
+                                            <SubIcon className={cn('h-4 w-4', subLink.color)} />
+                                            {subLink.label}
+                                          </Link>
+                                        )
+                                      })}
+                                    </nav>
+                                  </AccordionContent>
+                                </AccordionItem>
+                              </Accordion>
+                           )
+                        }
+                        const isActive =
+                            link.href === '/'
+                            ? pathname === '/'
+                            : pathname.startsWith(link.href!);
+                        return (
                           <Link
-                          key={link.href + link.label}
-                          href={link.href}
+                          key={link.href! + link.label}
+                          href={link.href!}
                           onClick={() => setMobileMenuOpen(false)}
                           className={cn(
                               'flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:bg-primary/10 hover:text-primary',
@@ -154,13 +213,52 @@ export default function Header() {
             <TooltipProvider>
                 <nav className="flex items-center gap-1 lg:gap-2">
                     {navLinks.map((link) => {
-                        const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
                         const Icon = link.icon;
+
+                        if (link.subLinks) {
+                            const isDropdownActive = link.subLinks.some(subLink => pathname.startsWith(subLink.href));
+                            return (
+                                <DropdownMenu key={link.label}>
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button variant="ghost" className={cn(
+                                                    'flex items-center gap-2 rounded-md p-2 text-sm font-medium transition-colors hover:bg-secondary',
+                                                    isDropdownActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                                                )}>
+                                                    <Icon className={cn('h-4 w-4', link.color)} />
+                                                    <span className="hidden xl:inline whitespace-nowrap">{link.label}</span>
+                                                    <ChevronDown className="h-4 w-4 hidden xl:inline opacity-50" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                        </TooltipTrigger>
+                                        <TooltipContent className="block xl:hidden">
+                                            <p>{link.label}</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                    <DropdownMenuContent>
+                                        {link.subLinks.map(subLink => {
+                                            const SubIcon = subLink.icon;
+                                            return (
+                                                <DropdownMenuItem key={subLink.href} asChild>
+                                                    <Link href={subLink.href} className="flex items-center gap-2">
+                                                        <SubIcon className={cn('h-4 w-4', subLink.color)} />
+                                                        {subLink.label}
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                            )
+                                        })}
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            )
+                        }
+                        
+                        const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href!);
                         return (
                         <Tooltip key={link.href}>
                             <TooltipTrigger asChild>
                             <Link
-                                href={link.href}
+                                href={link.href!}
                                 className={cn(
                                 'flex items-center gap-2 rounded-md p-2 text-sm font-medium transition-colors hover:bg-secondary',
                                 isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
