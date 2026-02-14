@@ -171,19 +171,19 @@
     {
       "id": "blog-post-1",
       "description": "Two Black professionals in a job interview setting.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496130407-57329f01f769?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771061299/ddddd_exsis3.jpg",
       "imageHint": "job interview"
     },
     {
       "id": "blog-post-2",
       "description": "A Black developer coding on a laptop screen.",
-      "imageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771061239/1750667763790_rgywl3.jpg",
       "imageHint": "code screen"
     },
     {
       "id": "blog-post-3",
       "description": "A diverse team of Black professionals collaborating around a whiteboard in an office.",
-      "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771061238/dfgfg_idgonn.jpg",
       "imageHint": "Ghanaian team"
     },
     {
@@ -333,7 +333,7 @@
     {
       "id": "visa-logo",
       "description": "Visa logo",
-      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDUwIDI1Ij48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iMjUiIGZpbGw9IiMxQTFGNzEiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNGRkZGRkYiPlZJU0E8L3RleHQ+PC9zdmc+",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDUwIDI1Ij48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iMjUiIGZpbGw9IiMxQTFGNzEiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnSyc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNGRkZGRkYiPlZJU0E8L3RleHQ+PC9zdmc+",
       "imageHint": "Visa logo"
     },
     {
