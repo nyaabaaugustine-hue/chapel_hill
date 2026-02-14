@@ -137,7 +137,7 @@ export default function AISupportWidget() {
                             onClick: handleExplainPricing,
                         },
                         {
-                            label: 'Chat on WhatsApp',
+                            label: 'WhatsApp Chat',
                             onClick: handleOpenWhatsApp,
                         }
                     ]
@@ -296,7 +296,7 @@ export default function AISupportWidget() {
                                     src={aiButtonImage.imageUrl}
                                     alt={aiButtonImage.description}
                                     fill
-                                    className="object-cover"
+                                    className="w-full h-full object-cover"
                                 />
                                 )}
                             </div>
