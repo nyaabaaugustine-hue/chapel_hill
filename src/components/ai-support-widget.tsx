@@ -286,7 +286,7 @@ export default function AISupportWidget() {
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className={cn(
-                                "relative w-16 h-16 rounded-full overflow-hidden shadow-2xl bg-black transition-all duration-300 ease-out hover:scale-105 ring-2 ring-primary/40 shadow-[0_0_20px_rgba(59,130,246,0.4)]",
+                                "relative w-14 h-14 sm:w-12 sm:h-12 rounded-full overflow-hidden shadow-2xl transition-all duration-300 hover:scale-105 ring-2 ring-primary/40 shadow-[0_0_20px_rgba(59,130,246,0.4)]",
                                 isOpen && 'scale-0 opacity-0'
                             )}
                         >
@@ -297,6 +297,7 @@ export default function AISupportWidget() {
                                     alt={aiButtonImage.description}
                                     fill
                                     className="w-full h-full object-cover"
+                                    data-ai-hint={aiButtonImage.imageHint}
                                 />
                                 )}
                             </div>
