@@ -153,7 +153,7 @@ export default function SettingsTabs() {
                                     onChange={e => setInviteEmail(e.target.value)}
                                 />
                                 <Select value={inviteRole} onValueChange={setInviteRole}>
-                                    <SelectTrigger className="sm:w-[200px]">
+                                    <SelectTrigger className="w-full sm:w-[200px]">
                                         <SelectValue placeholder="Select a role" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -249,7 +249,7 @@ export default function SettingsTabs() {
                                                     </TableCell>
                                                     <TableCell>
                                                         <Select value={member.role} onValueChange={(newRole) => handleRoleChange(member.id, newRole)}>
-                                                            <SelectTrigger className="w-[160px]">
+                                                            <SelectTrigger className="min-w-[140px]">
                                                                 <SelectValue placeholder="Select role" />
                                                             </SelectTrigger>
                                                             <SelectContent>

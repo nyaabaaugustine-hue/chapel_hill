@@ -115,7 +115,7 @@ export default function ApplicantsPage() {
               />
              <div className="flex gap-4">
                  <Select value={jobFilter} onValueChange={setJobFilter}>
-                    <SelectTrigger className="w-[180px]">
+                    <SelectTrigger className="w-full sm:w-[180px]">
                         <SelectValue placeholder="Filter by job" />
                     </SelectTrigger>
                     <SelectContent>
@@ -126,7 +126,7 @@ export default function ApplicantsPage() {
                     </SelectContent>
                 </Select>
                  <Select value={statusFilter} onValueChange={setStatusFilter}>
-                    <SelectTrigger className="w-[180px]">
+                    <SelectTrigger className="w-full sm:w-[180px]">
                         <SelectValue placeholder="Filter by status" />
                     </SelectTrigger>
                     <SelectContent>
@@ -184,7 +184,7 @@ export default function ApplicantsPage() {
                           value={applicant.status}
                           onValueChange={(newStatus) => handleStatusChange(applicant.id, newStatus as ApplicantStatus)}
                         >
-                        <SelectTrigger className={cn("text-xs h-8 font-medium w-[130px]", getStatusBadgeClass(applicant.status))}>
+                        <SelectTrigger className={cn("text-xs h-8 font-medium min-w-[120px]", getStatusBadgeClass(applicant.status))}>
                             <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
