@@ -249,10 +249,10 @@ export default function AISupportWidget() {
                 {/* Floating Button */}
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <Button 
+                        <button
                             onClick={() => setIsOpen(!isOpen)}
                             className={cn(
-                                "h-20 w-20 rounded-full bg-accent-gradient p-0 shadow-lg hover:scale-110 active:scale-105 transition-all duration-300 animate-pulse-glow overflow-hidden ring-4 ring-primary/20 ring-offset-4 ring-offset-background",
+                                "relative w-14 h-14 md:w-16 md:h-16 rounded-full p-0 overflow-hidden shadow-xl shadow-[0_0_20px_rgba(59,130,246,0.4)] ring-2 ring-primary/40 transition-all duration-300 ease-out hover:scale-105",
                                 isOpen && 'scale-0 opacity-0'
                             )}
                         >
@@ -266,7 +266,7 @@ export default function AISupportWidget() {
                             ) : (
                                 <Sparkles className="h-8 w-8 text-white" />
                             )}
-                        </Button>
+                        </button>
                     </TooltipTrigger>
                     <TooltipContent side="left" className="bg-black/80 text-white border-white/20">
                         <p>Chat with AI Support</p>
