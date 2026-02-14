@@ -68,8 +68,8 @@ export default function AiPoweredTools() {
                 src={heroImage.imageUrl}
                 alt={heroImage.description}
                 width={500}
-                height={700}
-                className="rounded-3xl shadow-2xl object-cover w-full aspect-[3/4]"
+                height={500}
+                className="object-contain w-full aspect-square"
                 data-ai-hint={heroImage.imageHint}
               />
             )}
@@ -81,8 +81,8 @@ export default function AiPoweredTools() {
                 src={heroImage.imageUrl}
                 alt={heroImage.description}
                 width={300}
-                height={400}
-                className="rounded-3xl shadow-2xl object-cover w-full max-w-xs aspect-[3/4]"
+                height={300}
+                className="object-contain w-full max-w-xs aspect-square"
                 data-ai-hint={heroImage.imageHint}
               />
             )}
