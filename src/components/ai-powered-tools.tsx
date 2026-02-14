@@ -52,7 +52,7 @@ export default function AiPoweredTools() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'ai-tools-hero');
 
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto max-w-7xl px-6 lg:px-12">
         <SectionHeader
           title="Own your career one bold step at a time"
@@ -68,7 +68,7 @@ export default function AiPoweredTools() {
                 <FeatureCard {...features[3]} />
             </div>
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="relative w-96 h-96">
+                <div className="relative w-[500px] h-[500px]">
                     {heroImage && (
                         <Image
                             src={heroImage.imageUrl}
