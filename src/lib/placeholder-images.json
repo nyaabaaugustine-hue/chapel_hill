@@ -386,9 +386,9 @@
     },
     {
       "id": "ai-support-button",
-      "description": "Cropped image of a man in a military-style hat for an AI support button.",
-      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771061079/fggh_eyzchi.png",
-      "imageHint": "man portrait"
+      "description": "A futuristic AI robot head icon for the support button.",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771070833/ai_rkwthg.png",
+      "imageHint": "AI robot"
     }
   ]
 }
