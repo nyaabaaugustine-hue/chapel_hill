@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -11,7 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Briefcase, Clock, Wallet, MapPin, Zap, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, addDays, format } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
 import type { Application, Applicant, User } from '@/lib/types';
 import {
@@ -125,6 +126,8 @@ export default function JobDetailPage({ params }: JobDetailPageProps) {
   };
 
   const companyLogo = PlaceHolderImages.find((img) => img.id === job.company.logo);
+  
+  const deadline = format(addDays(new Date(job.postedDate), 30), 'MMMM dd, yyyy');
 
   return (
       <main className="flex-1 py-12 md:py-16">
@@ -266,7 +269,14 @@ export default function JobDetailPage({ params }: JobDetailPageProps) {
                 </Card>
                 <Card>
                     <CardContent className="p-6">
-                        <SocialShareButtons title={job.title} />
+                        <SocialShareButtons
+                          type="job"
+                          title={job.title}
+                          description={job.description}
+                          location={job.location}
+                          salary={job.salaryRange}
+                          deadline={deadline}
+                        />
                     </CardContent>
                 </Card>
             </div>

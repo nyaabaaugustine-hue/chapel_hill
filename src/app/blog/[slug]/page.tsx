@@ -87,7 +87,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </Card>
                  <Card>
                     <CardContent className="p-6">
-                        <SocialShareButtons title={post.title} />
+                        <SocialShareButtons title={post.title} description={post.excerpt} />
                     </CardContent>
                 </Card>
                 <Card>

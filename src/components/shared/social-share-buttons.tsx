@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Facebook, Linkedin, Twitter } from 'lucide-react';
@@ -8,6 +9,11 @@ import React from 'react';
 
 type SocialShareButtonsProps = {
   title: string;
+  type?: 'job' | 'post';
+  description?: string;
+  location?: string;
+  salary?: string;
+  deadline?: string;
 };
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -20,18 +26,40 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 
-export default function SocialShareButtons({ title }: SocialShareButtonsProps) {
+export default function SocialShareButtons({ title, type = 'post', description, location, salary, deadline }: SocialShareButtonsProps) {
   const pathname = usePathname();
   const url = `https://chapel-hill-ltd.com${pathname}`;
-
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
 
+  let shareText: string;
+
+  if (type === 'job') {
+    let jobDetails = `Check out this job opportunity: "${title}" at ${location}.`;
+    if (salary) {
+      jobDetails += `\n\n💰 Salary: ${salary}`;
+    }
+    if (deadline) {
+      jobDetails += `\n📅 Apply by: ${deadline}`;
+    }
+    if (description) {
+      jobDetails += `\n\n${description.substring(0, 100)}...`;
+    }
+    shareText = jobDetails;
+  } else {
+    shareText = `Check out this article: "${title}"`;
+    if(description) {
+        shareText += `\n\n${description.substring(0, 150)}...`
+    }
+  }
+
+  const encodedText = encodeURIComponent(shareText);
+
   const socialLinks = {
-    twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
-    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}`,
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-    whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`
+    twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`,
+    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodeURIComponent(description || '')}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`,
+    whatsapp: `https://wa.me/?text=${encodedText}%20${encodedUrl}`
   };
 
   return (
