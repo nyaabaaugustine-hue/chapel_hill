@@ -1,4 +1,3 @@
-
 'use client';
 
 import type { Review } from '@/lib/types';
@@ -15,17 +14,22 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-react";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export default function Testimonials() {
+  const [isMounted, setIsMounted] = useState(false);
   const reviews: Review[] = DUMMY_REVIEWS;
 
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true })
   )
 
-  if (!reviews || reviews.length === 0) {
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted || !reviews || reviews.length === 0) {
     return null;
   }
 
