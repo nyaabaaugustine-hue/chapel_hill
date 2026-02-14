@@ -401,6 +401,12 @@
       "description": "A futuristic AI robot head icon for the support button.",
       "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771070833/ai_rkwthg.png",
       "imageHint": "AI robot"
+    },
+    {
+      "id": "ai-tools-hero",
+      "description": "A woman interacting with a futuristic user interface.",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771109968/sss_c2a1nb.png",
+      "imageHint": "woman technology"
     }
   ]
 }

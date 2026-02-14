@@ -21,6 +21,7 @@ import Testimonials from '@/components/testimonials';
 import PricingGrid from '@/components/pricing-grid';
 import JobsByLocation from '@/components/jobs-by-location';
 import VolunteerSection from '@/components/volunteer-section';
+import AiPoweredTools from '@/components/ai-powered-tools';
 
 export default function HomePage() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
@@ -81,6 +82,8 @@ export default function HomePage() {
         <TopCompanies companies={companies} />
 
         <FeaturedJobs jobs={jobs} categories={categories} />
+
+        <AiPoweredTools />
 
         <WhyChooseUs />
 
