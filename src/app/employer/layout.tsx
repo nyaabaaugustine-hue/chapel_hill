@@ -21,6 +21,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import DashboardHeader from '@/components/shared/dashboard-header';
+import LiveActivityBar from '@/components/live-activity-bar';
 
 function EmployerNav() {
   const pathname = usePathname();
@@ -118,7 +119,10 @@ export default function EmployerLayout({ children }: { children: React.ReactNode
       <div className="flex min-h-screen bg-background">
         <EmployerNav />
         <SidebarInset>
-             <DashboardHeader />
+             <div className="sticky top-0 z-30">
+                <DashboardHeader />
+                <LiveActivityBar />
+             </div>
              <main className="flex-1 p-4 sm:p-6 lg:p-8 bg-secondary/50">
                 {children}
             </main>
