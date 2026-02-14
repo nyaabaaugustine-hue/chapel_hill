@@ -35,7 +35,7 @@ export default function AdminSettingsPage() {
     <div className="space-y-8">
       <div>
         <h1 className="font-headline text-3xl font-bold">Platform Settings</h1>
-        <p className="text-muted-foreground">Manage global settings for the Demo platform.</p>
+        <p className="text-muted-foreground">Manage global settings for the ReactHire platform.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -59,7 +59,7 @@ export default function AdminSettingsPage() {
                       <CardContent className="space-y-6">
                           <div className="space-y-2">
                               <Label htmlFor="site-name">Platform Name</Label>
-                              <Input id="site-name" defaultValue="Demo" />
+                              <Input id="site-name" defaultValue="ReactHire" />
                           </div>
                            <div className="space-y-2">
                               <Label htmlFor="tagline">Tagline</Label>

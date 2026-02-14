@@ -3,11 +3,10 @@ import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import HiredNotification from '@/components/hired-notification';
 import { ThemeProvider } from '@/components/theme-provider';
-import DynamicClientWidgets from '@/components/DynamicClientWidgets';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
+import ClientWidgets from '@/components/shared/client-widgets';
 
 const inter = Inter({ 
   subsets: ['latin'], 
@@ -21,7 +20,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Demo - Find Your Next Job',
+  title: 'ReactHire - Find Your Next Job',
   description: 'The Easiest Way to Get Your New Job',
 };
 
@@ -45,8 +44,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <Toaster />
-          <HiredNotification />
-          <DynamicClientWidgets />
+          <ClientWidgets />
         </ThemeProvider>
       </body>
     </html>

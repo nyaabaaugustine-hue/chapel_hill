@@ -1,3 +1,5 @@
+'use client';
+
 import { Award, Briefcase, Building, CheckCircle } from 'lucide-react';
 
 const activityItems = [
