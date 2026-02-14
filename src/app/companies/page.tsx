@@ -1,13 +1,11 @@
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
+
 import { DUMMY_COMPANIES } from '@/lib/data';
 import CompanyCard from '@/components/company-card';
 import PageHero from '@/components/shared/page-hero';
 
 export default function CompaniesPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
+    <>
       <PageHero
         title="Browse Companies"
         subtitle="Find your next opportunity by exploring the best companies."
@@ -21,7 +19,6 @@ export default function CompaniesPage() {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }

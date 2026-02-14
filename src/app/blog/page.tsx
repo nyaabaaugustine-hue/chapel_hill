@@ -1,5 +1,4 @@
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
+
 import BlogPostCard from '@/components/blog-post-card';
 import PageHero from '@/components/shared/page-hero';
 import { DUMMY_BLOG_POSTS } from '@/lib/data';
@@ -9,8 +8,7 @@ export default function BlogPage() {
   const posts: BlogPost[] = DUMMY_BLOG_POSTS.filter(p => p.status === 'Published');
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
+    <>
       <PageHero
         title="Our News and Stories"
         subtitle="Explore articles, tips, and insights to help you grow your career and stay ahead."
@@ -27,7 +25,6 @@ export default function BlogPage() {
           )}
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }

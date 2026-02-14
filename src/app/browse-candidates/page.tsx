@@ -1,8 +1,7 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import PageHero from '@/components/shared/page-hero';
 import { DUMMY_USERS, DUMMY_JOBS } from '@/lib/data';
 import type { User } from '@/lib/types';
@@ -177,8 +176,7 @@ export default function BrowseCandidatesPage() {
   );
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
+    <>
       <PageHero
         title="Browse Top Candidates"
         subtitle="Discover the best talent for your team from our community of skilled professionals."
@@ -192,7 +190,6 @@ export default function BrowseCandidatesPage() {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }

@@ -1,16 +1,13 @@
+
 'use client';
 
 import { Suspense } from 'react';
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import CheckoutForm, { CheckoutFormSkeleton } from './_components/checkout-form';
 
 
 export default function CheckoutPage() {
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
       <main className="flex-1 flex flex-col items-center justify-center py-16 md:py-24 bg-secondary">
         <div className="relative z-20 container mx-auto max-w-4xl px-4 md:px-6">
             <div className="text-center mb-8">
@@ -22,7 +19,5 @@ export default function CheckoutPage() {
             </Suspense>
         </div>
       </main>
-      <Footer />
-    </div>
   );
 }

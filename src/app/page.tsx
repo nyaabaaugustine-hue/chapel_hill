@@ -5,8 +5,6 @@ import { Briefcase, CheckCircle, MapPin } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import { Separator } from '@/components/ui/separator';
 import FeaturedJobs from '@/components/featured-jobs';
 import TopCompanies from '@/components/top-companies';
@@ -22,7 +20,6 @@ import WhyChooseUs from '@/components/why-choose-us';
 import Testimonials from '@/components/testimonials';
 import PricingGrid from '@/components/pricing-grid';
 import JobsByLocation from '@/components/jobs-by-location';
-import DynamicClientWidgets from '@/components/DynamicClientWidgets';
 import VolunteerSection from '@/components/volunteer-section';
 
 export default function HomePage() {
@@ -42,8 +39,6 @@ export default function HomePage() {
   const locations = DUMMY_LOCATIONS;
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
       <main className="flex-1">
         {/* Hero Section */}
         <section
@@ -126,8 +121,5 @@ export default function HomePage() {
         <SubscriptionSection />
 
       </main>
-      <Footer />
-      <DynamicClientWidgets />
-    </div>
   );
 }

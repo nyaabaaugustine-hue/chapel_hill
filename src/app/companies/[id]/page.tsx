@@ -1,6 +1,4 @@
 
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import { DUMMY_COMPANIES, DUMMY_JOBS, DUMMY_APPLICANTS } from '@/lib/data';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -33,8 +31,6 @@ export default async function CompanyDetailPage({ params }: CompanyDetailPagePro
   const companyBanner = PlaceHolderImages.find((img) => img.id === 'hiring-main');
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header />
       <main className="flex-1 bg-background bg-hero-glow py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
           <Card className="mb-8 overflow-hidden shadow-lg">
@@ -164,7 +160,5 @@ export default async function CompanyDetailPage({ params }: CompanyDetailPagePro
 
         </div>
       </main>
-      <Footer />
-    </div>
   );
 }

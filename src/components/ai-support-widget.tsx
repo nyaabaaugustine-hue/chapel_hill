@@ -286,21 +286,19 @@ export default function AISupportWidget() {
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className={cn(
-                                "relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden shadow-2xl transition-all duration-300 hover:scale-105 ring-2 ring-primary/40 shadow-[0_0_20px_rgba(59,130,246,0.4)] bg-[rgb(111,159,145)]",
+                                "relative w-16 h-16 rounded-full overflow-hidden shadow-2xl transition-all duration-300 hover:scale-105 ring-2 ring-primary/40 shadow-[0_0_20px_rgba(59,130,246,0.4)]",
                                 isOpen && 'scale-0 opacity-0'
                             )}
                         >
-                            <div className="absolute inset-0 w-full h-full">
-                                {aiButtonImage && (
-                                <Image
-                                    src={aiButtonImage.imageUrl}
-                                    alt={aiButtonImage.description}
-                                    fill
-                                    className="w-full h-full object-cover"
-                                    data-ai-hint={aiButtonImage.imageHint}
-                                />
-                                )}
-                            </div>
+                            {aiButtonImage && (
+                            <Image
+                                src={aiButtonImage.imageUrl}
+                                alt={aiButtonImage.description}
+                                fill
+                                className="object-cover"
+                                data-ai-hint={aiButtonImage.imageHint}
+                            />
+                            )}
                         </button>
                     </TooltipTrigger>
                     <TooltipContent side="left" className="bg-black/80 text-white border-white/20">

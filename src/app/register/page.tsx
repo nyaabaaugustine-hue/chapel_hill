@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Button } from "@/components/ui/button"
@@ -5,8 +6,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
-import Header from "@/components/shared/header"
-import Footer from "@/components/shared/footer"
 import Image from "next/image"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { useState } from 'react';
@@ -62,8 +61,6 @@ export default function RegisterPage() {
     };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
-      <Header />
       <main className="flex-1 flex items-center justify-center p-4 relative">
          {heroImage && (
             <Image
@@ -137,7 +134,5 @@ export default function RegisterPage() {
             </Card>
         </div>
       </main>
-      <Footer />
-    </div>
   )
 }

@@ -2,8 +2,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import { DUMMY_USERS, DUMMY_APPLICANTS } from '@/lib/data';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -29,70 +27,66 @@ const mockEducation = [
 const mockSkills = ['React', 'TypeScript', 'Next.js', 'Node.js', 'GraphQL', 'JavaScript', 'Redux', 'Tailwind CSS', 'Figma', 'CI/CD'];
 
 const CandidateProfileSkeleton = () => (
-    <div className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-1 bg-background bg-hero-glow py-16 md:py-24">
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-                    <aside className="space-y-6 lg:order-last lg:sticky lg:top-24 self-start">
-                        <Card className="text-center">
-                            <CardContent className="p-6">
-                                <Skeleton className="h-32 w-32 rounded-full mx-auto mb-4" />
-                                <Skeleton className="h-7 w-48 mx-auto" />
-                                <Skeleton className="h-4 w-56 mx-auto mt-2" />
-                                <Skeleton className="h-4 w-32 mx-auto mt-2" />
-                            </CardContent>
-                            <CardContent className="border-t p-6 space-y-3">
-                                <Skeleton className="h-10 w-full" />
-                                <Skeleton className="h-10 w-full" />
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardHeader><Skeleton className="h-6 w-32" /></CardHeader>
-                            <CardContent className="space-y-6">
-                                <Skeleton className="h-5 w-full" />
-                                <Skeleton className="h-5 w-full" />
-                                <Skeleton className="h-5 w-full" />
-                                <Skeleton className="h-5 w-full" />
-                            </CardContent>
-                        </Card>
-                    </aside>
-                    <div className="lg:col-span-2 space-y-8">
-                        <Card>
-                            <CardHeader><Skeleton className="h-7 w-32" /></CardHeader>
-                            <CardContent className="space-y-2">
-                                <Skeleton className="h-4 w-full" />
-                                <Skeleton className="h-4 w-full" />
-                                <Skeleton className="h-4 w-5/6" />
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardHeader><Skeleton className="h-7 w-48" /></CardHeader>
-                            <CardContent className="space-y-6">
-                                <div className="flex gap-4">
-                                    <Skeleton className="h-12 w-12 rounded-lg" />
-                                    <div className="flex-1 space-y-2">
-                                        <Skeleton className="h-4 w-3/4" />
-                                        <Skeleton className="h-4 w-1/2" />
-                                        <Skeleton className="h-4 w-1/3" />
-                                    </div>
+    <main className="flex-1 bg-background bg-hero-glow py-16 md:py-24">
+        <div className="container mx-auto px-4 md:px-6">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                <aside className="space-y-6 lg:order-last lg:sticky lg:top-24 self-start">
+                    <Card className="text-center">
+                        <CardContent className="p-6">
+                            <Skeleton className="h-32 w-32 rounded-full mx-auto mb-4" />
+                            <Skeleton className="h-7 w-48 mx-auto" />
+                            <Skeleton className="h-4 w-56 mx-auto mt-2" />
+                            <Skeleton className="h-4 w-32 mx-auto mt-2" />
+                        </CardContent>
+                        <CardContent className="border-t p-6 space-y-3">
+                            <Skeleton className="h-10 w-full" />
+                            <Skeleton className="h-10 w-full" />
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardHeader><Skeleton className="h-6 w-32" /></CardHeader>
+                        <CardContent className="space-y-6">
+                            <Skeleton className="h-5 w-full" />
+                            <Skeleton className="h-5 w-full" />
+                            <Skeleton className="h-5 w-full" />
+                            <Skeleton className="h-5 w-full" />
+                        </CardContent>
+                    </Card>
+                </aside>
+                <div className="lg:col-span-2 space-y-8">
+                    <Card>
+                        <CardHeader><Skeleton className="h-7 w-32" /></CardHeader>
+                        <CardContent className="space-y-2">
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-5/6" />
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardHeader><Skeleton className="h-7 w-48" /></CardHeader>
+                        <CardContent className="space-y-6">
+                            <div className="flex gap-4">
+                                <Skeleton className="h-12 w-12 rounded-lg" />
+                                <div className="flex-1 space-y-2">
+                                    <Skeleton className="h-4 w-3/4" />
+                                    <Skeleton className="h-4 w-1/2" />
+                                    <Skeleton className="h-4 w-1/3" />
                                 </div>
-                                <div className="flex gap-4">
-                                    <Skeleton className="h-12 w-12 rounded-lg" />
-                                    <div className="flex-1 space-y-2">
-                                        <Skeleton className="h-4 w-3/4" />
-                                        <Skeleton className="h-4 w-1/2" />
-                                        <Skeleton className="h-4 w-1/3" />
-                                    </div>
+                            </div>
+                            <div className="flex gap-4">
+                                <Skeleton className="h-12 w-12 rounded-lg" />
+                                <div className="flex-1 space-y-2">
+                                    <Skeleton className="h-4 w-3/4" />
+                                    <Skeleton className="h-4 w-1/2" />
+                                    <Skeleton className="h-4 w-1/3" />
                                 </div>
-                            </CardContent>
-                        </Card>
-                    </div>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
             </div>
-        </main>
-        <Footer />
-    </div>
+        </div>
+    </main>
 );
 
 interface CandidateProfilePageProps {
@@ -145,8 +139,6 @@ export default function CandidateProfilePage({ params }: CandidateProfilePagePro
   const userAvatar = PlaceHolderImages.find((img) => img.id === user.avatar);
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header />
       <main className="flex-1 bg-background bg-hero-glow py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
           
@@ -288,7 +280,5 @@ export default function CandidateProfilePage({ params }: CandidateProfilePagePro
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
   );
 }

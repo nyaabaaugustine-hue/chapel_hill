@@ -1,9 +1,8 @@
+
 'use client';
 
 import { useState } from 'react';
 import type { Job } from '@/lib/types';
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import SectionHeader from '@/components/shared/section-header';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DUMMY_OPPORTUNITIES, DUMMY_JOBS } from '@/lib/data';
@@ -47,8 +46,7 @@ export default function OpportunitiesPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
+    <>
       <PageHero
         title="Kickstart Your Career"
         subtitle="Explore volunteer and attachment opportunities designed for students to gain hands-on experience and make a difference."
@@ -102,7 +100,6 @@ export default function OpportunitiesPage() {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }

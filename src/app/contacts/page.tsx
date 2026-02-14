@@ -1,8 +1,7 @@
+
 'use client';
 
 import { useState } from 'react';
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -42,8 +41,7 @@ export default function ContactsPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
-      <Header />
+    <>
       <PageHero
         title="Contact Us"
         subtitle="We'd love to hear from you. Fill out the form below or use our contact details."
@@ -129,7 +127,6 @@ export default function ContactsPage() {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }

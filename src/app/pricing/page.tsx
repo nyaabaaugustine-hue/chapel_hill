@@ -1,7 +1,6 @@
+
 'use client';
 
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import PageHero from '@/components/shared/page-hero';
 import PricingGrid from '@/components/pricing-grid';
 import Image from 'next/image';
@@ -11,8 +10,7 @@ export default function PricingPage() {
   const categoryBgImage = PlaceHolderImages.find((p) => p.id === 'category-bg');
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
+    <>
       <PageHero
         title="Flexible Pricing for Every Team"
         subtitle="Choose the plan that's right for you. Get started for free or unlock powerful features with our Pro plan."
@@ -32,7 +30,6 @@ export default function PricingPage() {
           <PricingGrid />
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }

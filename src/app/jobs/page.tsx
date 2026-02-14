@@ -1,6 +1,5 @@
+
 import JobFilters from '@/components/job-filters';
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import PageHero from '@/components/shared/page-hero';
 import { DUMMY_JOBS } from '@/lib/data';
 import JobListings from './job-listings';
@@ -10,8 +9,7 @@ export default function JobSearchPage() {
   const jobCount = jobs.length;
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-background">
-      <Header />
+    <>
       <PageHero
         title="Find Your Next Opportunity"
         subtitle={`Browse through ${jobCount} open positions to find your perfect match.`}
@@ -26,7 +24,6 @@ export default function JobSearchPage() {
             <JobListings initialJobs={jobs} />
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }

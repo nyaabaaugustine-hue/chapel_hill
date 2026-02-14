@@ -1,11 +1,10 @@
+
 'use client';
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import Header from "@/components/shared/header"
-import Footer from "@/components/shared/footer"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
@@ -98,8 +97,6 @@ export default function LoginPage() {
     };
 
   return (
-     <div className="flex flex-col min-h-screen bg-background">
-      <Header />
       <main className="flex-1 flex items-center justify-center p-4 relative">
         {heroImage && (
             <Image
@@ -194,7 +191,5 @@ export default function LoginPage() {
             </Card>
         </div>
       </main>
-      <Footer />
-    </div>
   )
 }

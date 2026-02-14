@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
@@ -5,6 +6,8 @@ import { Toaster } from '@/components/ui/toaster';
 import HiredNotification from '@/components/hired-notification';
 import { ThemeProvider } from '@/components/theme-provider';
 import DynamicClientWidgets from '@/components/DynamicClientWidgets';
+import Header from '@/components/shared/header';
+import Footer from '@/components/shared/footer';
 
 const inter = Inter({ 
   subsets: ['latin'], 
@@ -36,7 +39,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            {children}
+            <Footer />
+          </div>
           <Toaster />
           <HiredNotification />
           <DynamicClientWidgets />

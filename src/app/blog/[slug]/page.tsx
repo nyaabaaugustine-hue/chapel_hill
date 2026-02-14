@@ -1,6 +1,4 @@
 
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import { DUMMY_BLOG_POSTS } from '@/lib/data';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -32,8 +30,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const tags = ['React', 'Web Development', 'Career', 'Interview Tips'];
 
   return (
-    <div className="flex min-h-screen flex-col bg-background bg-hero-glow">
-      <Header />
       <main className="flex-1 py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
            <header className="mb-8 text-center">
@@ -103,7 +99,5 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
   );
 }

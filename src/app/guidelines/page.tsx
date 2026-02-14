@@ -1,5 +1,4 @@
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
+
 import PageHero from '@/components/shared/page-hero';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ShieldCheck, UserCheck, MessageSquareWarning } from 'lucide-react';
@@ -24,8 +23,7 @@ export default function GuidelinesPage() {
   ];
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
+    <>
       <PageHero
         title="Community Guidelines"
         subtitle="Fostering a safe, professional, and trustworthy environment for everyone."
@@ -47,7 +45,6 @@ export default function GuidelinesPage() {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }

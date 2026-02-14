@@ -2,8 +2,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
 import { DUMMY_JOBS, DUMMY_USERS } from '@/lib/data';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -125,8 +123,6 @@ export default function JobDetailPage({ params }: JobDetailPageProps) {
   const companyLogo = PlaceHolderImages.find((img) => img.id === job.company.logo);
 
   return (
-    <div className="flex min-h-screen flex-col bg-background bg-hero-glow">
-      <Header />
       <main className="flex-1 py-12 md:py-16">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -273,7 +269,5 @@ export default function JobDetailPage({ params }: JobDetailPageProps) {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
   );
 }
