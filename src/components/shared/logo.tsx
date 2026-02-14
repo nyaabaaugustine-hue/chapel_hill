@@ -13,7 +13,7 @@ export default function Logo({ className }: LogoProps) {
     // Fallback to text if image is not found
     return (
       <div className={cn('flex items-center', className)}>
-        <span className="text-xl font-bold text-foreground font-headline">Chapel Hill</span>
+        <span className="text-xl font-bold text-foreground font-headline">ReactHire</span>
       </div>
     );
   }
@@ -22,9 +22,9 @@ export default function Logo({ className }: LogoProps) {
     <div className={cn('flex items-center', className)}>
       <Image
         src={logoImage.imageUrl}
-        alt="Chapel Hill Logo"
-        width={120}
-        height={30}
+        alt="ReactHire Logo"
+        width={130}
+        height={35}
         className="object-contain"
         priority
       />

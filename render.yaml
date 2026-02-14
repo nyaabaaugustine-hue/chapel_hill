@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: chapel-hill-jobs-management
+    name: react-hire-jobs-management
     env: node
     plan: free
     buildCommand: "npm install && npm run build"
