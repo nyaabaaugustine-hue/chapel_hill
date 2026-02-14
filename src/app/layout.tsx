@@ -22,6 +22,9 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: 'Chapel Hill - Find Your Next Job',
   description: 'The Easiest Way to Get Your New Job',
+  icons: {
+    icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771103002/klo_vappbs.png',
+  },
 };
 
 export default function RootLayout({
