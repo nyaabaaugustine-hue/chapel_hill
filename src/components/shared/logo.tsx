@@ -20,7 +20,7 @@ export default function Logo({ className }: LogoProps) {
 
   return (
     <div className={cn('flex items-center', className)}>
-      <div className="bg-[#F5F1ED] p-2 rounded-[8px]">
+      <div className="bg-[#F5F1ED] p-2 rounded-[8%]">
         <Image
           src={logoImage.imageUrl}
           alt="Chapel Hill Logo"
