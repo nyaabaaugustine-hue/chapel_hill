@@ -23,13 +23,17 @@ export default function Testimonials() {
 
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true })
-  )
+  );
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  if (!isMounted || !reviews || reviews.length === 0) {
+  if (!isMounted) {
+    return null;
+  }
+  
+  if (!reviews || reviews.length === 0) {
     return null;
   }
 
@@ -44,14 +48,14 @@ export default function Testimonials() {
         </div>
 
         <Carousel
-          plugins={[plugin.current]}
+          plugins={plugin.current ? [plugin.current] : []}
           opts={{
             align: 'start',
             loop: true,
           }}
           className="relative px-4 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: '200ms' }}
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.reset}
+          onMouseEnter={() => plugin.current?.stop()}
+          onMouseLeave={() => plugin.current?.reset()}
         >
           <CarouselContent className="-ml-4">
             {reviews.filter(review => review.user).map((review) => {
