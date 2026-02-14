@@ -252,14 +252,14 @@ export default function AISupportWidget() {
                         <Button 
                             onClick={() => setIsOpen(!isOpen)}
                             className={cn(
-                                "h-16 w-16 rounded-full bg-accent-gradient p-0 shadow-lg hover:scale-110 active:scale-105 transition-all duration-300 animate-pulse-glow overflow-hidden",
+                                "h-20 w-20 rounded-2xl bg-accent-gradient p-0 shadow-lg hover:scale-110 active:scale-105 transition-all duration-300 animate-pulse-glow overflow-hidden border-2 border-white/20",
                                 isOpen && 'scale-0 opacity-0'
                             )}
                         >
                             {aiButtonImage ? (
                                 <Image
                                     src={aiButtonImage.imageUrl}
-                                    alt={aiButtonImage.description}
+                                    alt={aiButton-image.description}
                                     fill
                                     className="object-cover"
                                 />
