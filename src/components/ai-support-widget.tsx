@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -252,7 +251,7 @@ export default function AISupportWidget() {
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className={cn(
-                                "relative w-14 h-14 md:w-16 md:h-16 rounded-full p-0 overflow-hidden shadow-xl shadow-[0_0_20px_rgba(59,130,246,0.4)] ring-2 ring-primary/40 transition-all duration-300 ease-out hover:scale-105",
+                                "relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden shadow-xl shadow-[0_0_20px_rgba(59,130,246,0.4)] ring-2 ring-primary/40 transition-all duration-300 ease-out hover:scale-105",
                                 isOpen && 'scale-0 opacity-0'
                             )}
                         >
@@ -276,3 +275,4 @@ export default function AISupportWidget() {
         </TooltipProvider>
     );
 }
+    
