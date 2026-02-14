@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -124,6 +125,7 @@ export default function AISupportWidget() {
             setMessages([]);
             setInputValue('');
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen]);
     
     useEffect(scrollToBottom, [messages, isTyping]);
@@ -248,10 +250,10 @@ export default function AISupportWidget() {
                 {/* Floating Button */}
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <button
+                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className={cn(
-                                "relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden shadow-xl shadow-[0_0_20px_rgba(59,130,246,0.4)] ring-2 ring-primary/40 transition-all duration-300 ease-out hover:scale-105",
+                                "relative w-16 h-16 sm:w-14 sm:h-14 rounded-full overflow-hidden shadow-xl shadow-[0_0_20px_rgba(59,130,246,0.4)] ring-2 ring-primary/40 transition-all duration-300 ease-out hover:scale-105",
                                 isOpen && 'scale-0 opacity-0'
                             )}
                         >
