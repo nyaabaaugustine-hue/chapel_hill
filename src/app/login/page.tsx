@@ -237,7 +237,7 @@ export default function LoginPage() {
           )}
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 w-full">
-            <Card className="w-full max-w-lg mx-auto bg-card/80 backdrop-blur-lg border border-white/10 shadow-2xl">
+            <Card className="w-full max-w-lg mx-auto bg-card/50 backdrop-blur-lg border border-white/10 shadow-2xl">
             <CardHeader className="text-center">
                 <CardTitle className="text-2xl">Welcome Back</CardTitle>
                 <CardDescription>
