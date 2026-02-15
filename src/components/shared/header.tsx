@@ -17,6 +17,8 @@ import {
   PlusCircle,
   LayoutDashboard,
   LogOut,
+  UserCircle,
+  Settings,
 } from 'lucide-react';
 import Logo from './logo';
 import { Button } from '@/components/ui/button';
@@ -44,6 +46,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import {
   Accordion,
@@ -123,11 +127,38 @@ export default function Header() {
       default: return '/dashboard';
     }
   };
+  
+  const getProfileLink = () => {
+    if (!userData?.role) return '/dashboard/profile';
+    switch (userData.role) {
+      case 'employer':
+      case 'recruiter':
+      case 'hiringManager':
+        return '/employer/company-profile';
+      case 'admin':
+        return null; // Admin doesn't have a profile page
+      default: // jobSeeker
+        return '/dashboard/profile';
+    }
+  };
+
+  const getSettingsLink = () => {
+    if (!userData?.role) return '/dashboard/settings';
+    switch (userData.role) {
+      case 'employer':
+      case 'recruiter':
+      case 'hiringManager':
+        return '/employer/settings';
+      case 'admin':
+        return '/admin/settings';
+      default: // jobSeeker
+        return '/dashboard/settings';
+    }
+  };
 
   const handleLogout = () => {
     if (auth) {
       signOut(auth);
-      // Let onAuthStateChanged handle the UI updates.
     }
   };
 
@@ -171,38 +202,59 @@ export default function Header() {
       return (
         <div className="flex items-center gap-4">
           <Skeleton className="h-10 w-10 rounded-full" />
-          <Skeleton className="h-8 w-20 rounded-md" />
         </div>
       );
     }
     
     if (authUser && userData) {
       const userAvatar = PlaceHolderImages.find(p => p.id === userData.avatar);
+      const profileLink = getProfileLink();
+      const settingsLink = getSettingsLink();
+
       return (
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Button asChild>
-            <Link href={getDashboardLink()}>
-              <LayoutDashboard className="mr-2 h-4 w-4" />
-              Dashboard
-            </Link>
-          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                <Avatar className="h-10 w-10">
+              <Button variant="ghost" className="relative h-10 w-10 rounded-full transition-transform hover:scale-110">
+                <Avatar className="h-10 w-10 border-2 border-primary/50">
                   {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt={userData.name} />}
                   <AvatarFallback>{userData.name?.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
-              <DropdownMenuItem disabled>
+              <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">{userData.name}</p>
                   <p className="text-xs leading-none text-muted-foreground">{userData.email}</p>
                 </div>
-              </DropdownMenuItem>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem asChild>
+                  <Link href={getDashboardLink()}>
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    <span>Dashboard</span>
+                  </Link>
+                </DropdownMenuItem>
+                {profileLink && (
+                  <DropdownMenuItem asChild>
+                    <Link href={profileLink}>
+                      <UserCircle className="mr-2 h-4 w-4" />
+                      <span>Profile</span>
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+                {settingsLink && (
+                  <DropdownMenuItem asChild>
+                    <Link href={settingsLink}>
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>Settings</span>
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+              </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut className="mr-2 h-4 w-4" />
@@ -215,31 +267,6 @@ export default function Header() {
     }
 
     return <DesktopAuthButtons />;
-  };
-
-  const MobileAuthDisplay = ({ onLinkClick }: { onLinkClick?: () => void }) => {
-    if (isLoading) {
-      return <Skeleton className="h-24 w-full" />
-    }
-
-    if (authUser && userData) {
-      return (
-        <div className="w-full space-y-2">
-          <Button asChild size="lg" className="w-full">
-            <Link href={getDashboardLink()} onClick={onLinkClick}>
-              <LayoutDashboard className="mr-2 h-4 w-4" />
-              Go to Dashboard
-            </Link>
-          </Button>
-          <Button variant="outline" size="lg" className="w-full" onClick={() => { handleLogout(); onLinkClick?.(); }}>
-            <LogOut className="mr-2 h-4 w-4" />
-            Log Out
-          </Button>
-        </div>
-      );
-    }
-
-    return <MobileAuthButtons onLinkClick={onLinkClick} />
   };
 
   return (
@@ -332,7 +359,30 @@ export default function Header() {
                       })}
                   </nav>
                   <SheetFooter className="mt-auto border-t bg-background/30 p-4 flex flex-col items-center gap-4">
-                      <MobileAuthDisplay onLinkClick={() => setMobileMenuOpen(false)} />
+                      {isLoading ? (
+                          <Skeleton className="h-24 w-full" />
+                      ) : authUser && userData ? (
+                          <>
+                              <div className="w-full p-2 text-center border-b mb-2">
+                                  <p className="font-semibold">{userData.name}</p>
+                                  <p className="text-xs text-muted-foreground">{userData.email}</p>
+                              </div>
+                              <div className="w-full space-y-2">
+                                  <Button asChild size="lg" className="w-full">
+                                      <Link href={getDashboardLink()} onClick={() => setMobileMenuOpen(false)}>
+                                          <LayoutDashboard className="mr-2 h-4 w-4" />
+                                          Go to Dashboard
+                                      </Link>
+                                  </Button>
+                                  <Button variant="outline" size="lg" className="w-full" onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>
+                                      <LogOut className="mr-2 h-4 w-4" />
+                                      Log Out
+                                  </Button>
+                              </div>
+                          </>
+                      ) : (
+                          <MobileAuthButtons onLinkClick={() => setMobileMenuOpen(false)} />
+                      )}
                       <ThemeToggle />
                   </SheetFooter>
                   </SheetContent>
