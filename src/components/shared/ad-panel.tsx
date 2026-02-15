@@ -45,7 +45,7 @@ export default function AdPanel({ isOpen, onClose }: AdPanelProps) {
       <aside
         className={cn(
           'fixed top-0 left-0 h-full w-full max-w-md bg-background shadow-2xl z-[100] transition-transform duration-500 ease-in-out flex flex-col',
-          'md:w-[40%] lg:w-[35%]',
+          'md:w-[30%] lg:w-[25%]',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
         role="dialog"
@@ -73,7 +73,7 @@ export default function AdPanel({ isOpen, onClose }: AdPanelProps) {
                 fill
                 className="object-cover"
                 data-ai-hint={promoImage.imageHint}
-                sizes="(max-width: 768px) 100vw, 40vw"
+                sizes="(max-width: 768px) 100vw, 30vw"
               />
             </div>
           )}
