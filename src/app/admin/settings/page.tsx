@@ -41,7 +41,7 @@ export default function AdminSettingsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2">
             <Tabs defaultValue="general" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto">
+              <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto">
                   <TabsTrigger value="general"><Globe className="mr-2"/> General</TabsTrigger>
                   <TabsTrigger value="jobs"><Briefcase className="mr-2"/> Jobs</TabsTrigger>
                   <TabsTrigger value="users"><Users className="mr-2"/> Users</TabsTrigger>
