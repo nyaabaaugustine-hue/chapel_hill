@@ -3,23 +3,32 @@
 
 import { useEffect } from 'react';
 import Image from 'next/image';
-import { X } from 'lucide-react';
+import { X, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import type { PlaceHolderImages, ImagePlaceholder } from '@/lib/placeholder-images';
+import type { Company } from '@/lib/types';
+
+
+type Ad = {
+  companyId: string;
+  headline: string;
+  description: string;
+  imageId: string;
+  company: Company | undefined;
+  image: ImagePlaceholder | undefined;
+};
 
 interface AdPanelProps {
   isOpen: boolean;
   onClose: () => void;
+  ad: Ad | undefined;
 }
 
-export default function AdPanel({ isOpen, onClose }: AdPanelProps) {
-  // Using the first blog post image as requested by the user for styling reference
-  const promoImage = PlaceHolderImages.find((p) => p.id === 'blog-post-1');
-
+export default function AdPanel({ isOpen, onClose, ad }: AdPanelProps) {
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -32,6 +41,10 @@ export default function AdPanel({ isOpen, onClose }: AdPanelProps) {
       window.removeEventListener('keydown', handleEsc);
     };
   }, [onClose]);
+
+  if (!ad || !ad.company || !ad.image) {
+    return null;
+  }
 
   return (
     <>
@@ -48,7 +61,7 @@ export default function AdPanel({ isOpen, onClose }: AdPanelProps) {
       {/* Panel */}
       <aside
         className={cn(
-          'fixed bottom-6 left-6 w-full max-w-sm bg-transparent border-none z-[100] transition-all duration-500 ease-in-out',
+          'fixed bottom-6 left-6 w-full max-w-sm bg-transparent border-none z-[100] transition-all duration-700 ease-in-out',
           isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
         )}
         role="dialog"
@@ -66,31 +79,32 @@ export default function AdPanel({ isOpen, onClose }: AdPanelProps) {
             <span className="sr-only">Close panel</span>
           </Button>
 
-          <Link href="#" className="block overflow-hidden">
-            {promoImage && (
-                <div className="relative">
-                  <Image
-                      src={promoImage.imageUrl}
-                      alt="Boost your productivity"
-                      width={600}
-                      height={400}
-                      className="w-full object-cover aspect-[16/9] transition-transform duration-300 group-hover:scale-105"
-                      data-ai-hint={promoImage.imageHint}
-                      sizes="(max-width: 768px) 100vw, 30vw"
-                  />
-                </div>
-            )}
+          <Link href={`/companies/${ad.company.id}`} className="block overflow-hidden">
+            <div className="relative">
+              <Image
+                  src={ad.image.imageUrl}
+                  alt={ad.headline}
+                  width={600}
+                  height={400}
+                  className="w-full object-cover aspect-[16/9] transition-transform duration-300 group-hover:scale-105"
+                  data-ai-hint={ad.image.imageHint}
+                  sizes="(max-width: 768px) 100vw, 30vw"
+              />
+            </div>
           </Link>
           <CardContent className="p-6 flex flex-col flex-grow bg-card">
               <h3 id="ad-panel-headline" className="font-headline text-lg font-bold group-hover:text-primary transition-colors">
-                Boost Your Productivity Today
+                {ad.headline}
               </h3>
             <p className="text-muted-foreground text-sm mt-2 flex-grow">
-                Discover powerful tools designed to streamline your workflow and maximize efficiency.
+                {ad.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-2 pt-4 mt-4 border-t">
-              <Button size="sm" className="flex-1 hover:brightness-110">Get Started</Button>
-              <Button size="sm" variant="outline" className="flex-1">Learn More</Button>
+            <div className="pt-4 mt-4 border-t">
+              <Button asChild size="sm" className="w-full hover:brightness-110">
+                <Link href={`/companies/${ad.company.id}`}>
+                  View Careers at {ad.company.name} <ArrowRight className="ml-2 h-4 w-4"/>
+                </Link>
+              </Button>
             </div>
           </CardContent>
         </Card>

@@ -25,8 +25,36 @@ import JobsByLocation from '@/components/jobs-by-location';
 import AdPanel from '@/components/shared/ad-panel';
 import CompanyAds from '@/components/company-ads';
 
+const adData = [
+  {
+    companyId: '1', // mPharma
+    headline: 'Revolutionize Healthcare in Africa',
+    description: "Join mPharma and build the future of medicine. We're hiring top tech talent to improve access to healthcare across the continent.",
+    imageId: 'ad-mpharma',
+  },
+  {
+    companyId: '2', // Hubtel
+    headline: 'Powering the Digital Economy',
+    description: 'At Hubtel, you will build the payment and messaging solutions used by millions. Ready to make a massive impact?',
+    imageId: 'ad-hubtel',
+  },
+  {
+    companyId: '3', // MTN Ghana
+    headline: 'Connect Ghana to the World',
+    description: 'Be part of the team building the largest network in Ghana. Explore exciting careers in telecommunications and digital services.',
+    imageId: 'ad-mtn',
+  },
+];
+
+const ads = adData.map(ad => {
+    const company = DUMMY_COMPANIES.find(c => c.id === ad.companyId);
+    const image = PlaceHolderImages.find(p => p.id === ad.imageId);
+    return { ...ad, company, image };
+});
+
 export default function HomePage() {
   const [isAdPanelOpen, setIsAdPanelOpen] = useState(false);
+  const [currentAdIndex, setCurrentAdIndex] = useState(0);
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
   const categoryBgImage = PlaceHolderImages.find((p) => p.id === 'category-bg');
 
@@ -40,16 +68,16 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    let closeTimer: NodeJS.Timeout;
+    let rotationTimer: NodeJS.Timeout;
     if (isAdPanelOpen) {
-      // Automatically close the panel after 4 seconds of being open
-      closeTimer = setTimeout(() => {
-        setIsAdPanelOpen(false);
-      }, 4000);
+      // Rotate the ad every 10 seconds
+      rotationTimer = setInterval(() => {
+        setCurrentAdIndex(prevIndex => (prevIndex + 1) % ads.length);
+      }, 10000);
     }
 
-    // Cleanup the timer if the panel is closed manually or the component unmounts
-    return () => clearTimeout(closeTimer);
+    // Cleanup the timer if the panel is closed or the component unmounts
+    return () => clearInterval(rotationTimer);
   }, [isAdPanelOpen]);
 
   const trustIndicators = [
@@ -63,10 +91,15 @@ export default function HomePage() {
   const companies = DUMMY_COMPANIES.slice(0, 10);
   const categories = ['All', ...JOB_CATEGORIES.map((c) => c.name)];
   const locations = DUMMY_LOCATIONS;
+  const currentAd = ads[currentAdIndex];
 
   return (
       <main className="flex-1">
-        <AdPanel isOpen={isAdPanelOpen} onClose={() => setIsAdPanelOpen(false)} />
+        <AdPanel 
+          isOpen={isAdPanelOpen} 
+          onClose={() => setIsAdPanelOpen(false)} 
+          ad={currentAd}
+        />
         {/* Hero Section */}
         <section
           className="relative w-full py-20 lg:py-32 flex items-center justify-center text-center"
