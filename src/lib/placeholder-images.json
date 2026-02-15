@@ -27,7 +27,7 @@
     {
       "id": "ad-mtn",
       "description": "A vibrant cityscape at night, representing connectivity.",
-      "imageUrl": "https://images.unsplash.com/photo-1531215459359-0f19565070a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771164842/assd_bawlbh.jpg",
       "imageHint": "city connectivity"
     },
     {
@@ -93,7 +93,7 @@
     {
       "id": "company-logo-8",
       "description": "Logo for Ecobank Ghana.",
-      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMwMDQzODYiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNjAiIGZpbGw9IiNGRkZGRkYiPkU8L3RleHQ+PC9zdmc+",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMwMDQzODYiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnS5c2VyaWYiIGZvbnQtc2l6ZT0iNjAiIGZpbGw9IiNGRkZGRkYiPkU8L3RleHQ+PC9zdmc+",
       "imageHint": "company logo"
     },
     {
@@ -375,7 +375,7 @@
     {
       "id": "visa-logo",
       "description": "Visa logo",
-      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDUwIDI1Ij48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iMjUiIGZpbGw9IiMxQTFGNzEiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnSyc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNGRkZGRkYiPlZJU0E8L3RleHQ+PC9zdmc+",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDUwIDI1Ij48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iMjUiIGZpbGw9IiMxQTFGNzEiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNGRkZGRkYiPlZJU0E8L3RleHQ+PC9zdmc+",
       "imageHint": "Visa logo"
     },
     {
@@ -449,6 +449,12 @@
       "description": "A person working on a laptop in a modern, bright office setting.",
       "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771163025/contacts_amr2rb.jpg",
       "imageHint": "office workspace"
+    },
+    {
+      "id": "blog-post-9",
+      "description": "A person writing notes on a notepad at a desk.",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1771165456/htr_w8ve2g.jpg",
+      "imageHint": "writing notes"
     }
   ]
 }
