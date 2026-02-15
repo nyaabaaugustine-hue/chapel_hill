@@ -3,6 +3,8 @@ import SectionHeader from './shared/section-header';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const routes = [
   {
@@ -40,9 +42,21 @@ const routes = [
 ];
 
 export default function FastRoutes() {
+  const bgImage = PlaceHolderImages.find((p) => p.id === 'featured-jobs-bg');
+
   return (
-    <section className="py-16 md:py-24 bg-secondary/50">
-      <div className="container mx-auto max-w-7xl px-6 lg:px-12">
+    <section className="relative py-16 md:py-24">
+      {bgImage && (
+        <Image
+          src={bgImage.imageUrl}
+          alt={bgImage.description}
+          fill
+          className="object-cover z-0"
+          data-ai-hint={bgImage.imageHint}
+        />
+      )}
+      <div className="absolute inset-0 bg-background/90 z-10" />
+      <div className="relative z-20 container mx-auto max-w-7xl px-6 lg:px-12">
         <SectionHeader
           title="Fast Routes to Your Next Job"
           subtitle="Utilize our powerful tools and features designed to accelerate your job search and help you land your dream role sooner."
