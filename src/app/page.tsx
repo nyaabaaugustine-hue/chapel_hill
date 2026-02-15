@@ -31,12 +31,25 @@ export default function HomePage() {
 
   useEffect(() => {
     // Open the panel automatically after a short delay on page load
-    const timer = setTimeout(() => {
+    const openTimer = setTimeout(() => {
       setIsAdPanelOpen(true);
-    }, 2000); // 2-second delay
+    }, 2000);
 
-    return () => clearTimeout(timer); // Cleanup the timer
-  }, []); // Empty dependency array ensures this runs only once on mount
+    return () => clearTimeout(openTimer);
+  }, []);
+
+  useEffect(() => {
+    let closeTimer: NodeJS.Timeout;
+    if (isAdPanelOpen) {
+      // Automatically close the panel after 4 seconds of being open
+      closeTimer = setTimeout(() => {
+        setIsAdPanelOpen(false);
+      }, 4000);
+    }
+
+    // Cleanup the timer if the panel is closed manually or the component unmounts
+    return () => clearTimeout(closeTimer);
+  }, [isAdPanelOpen]);
 
   const trustIndicators = [
     { text: '12,430+ jobs available' },

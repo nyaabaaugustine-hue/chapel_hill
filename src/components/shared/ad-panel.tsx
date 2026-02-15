@@ -35,7 +35,7 @@ export default function AdPanel({ isOpen, onClose }: AdPanelProps) {
       <div
         aria-hidden="true"
         className={cn(
-          'fixed inset-0 bg-black/60 z-[99] transition-opacity duration-400 ease-in-out',
+          'fixed inset-0 bg-black/60 z-[99] transition-opacity duration-500 ease-in-out',
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
         onClick={onClose}
@@ -44,7 +44,7 @@ export default function AdPanel({ isOpen, onClose }: AdPanelProps) {
       {/* Panel */}
       <aside
         className={cn(
-          'fixed top-0 left-0 h-full w-full max-w-md bg-background shadow-2xl z-[100] transition-transform duration-400 ease-in-out flex flex-col',
+          'fixed top-0 left-0 h-full w-full max-w-md bg-background shadow-2xl z-[100] transition-transform duration-500 ease-in-out flex flex-col',
           'md:w-[40%] lg:w-[35%]',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
