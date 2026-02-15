@@ -98,11 +98,12 @@ export default function Header() {
 
   const { auth } = useFirebase();
   const { user: authUser, isUserLoading: isAuthUserLoading } = useUser();
+  const firestore = useFirestore();
 
   const userDocRef = useMemoFirebase(() => {
-    if (!authUser) return null;
-    return doc(useFirestore(), 'users', authUser.uid);
-  }, [authUser]);
+    if (!authUser || !firestore) return null;
+    return doc(firestore, 'users', authUser.uid);
+  }, [authUser, firestore]);
   
   const { data: userData, isLoading: isUserDataLoading } = useDoc<AppUser>(userDocRef);
 
