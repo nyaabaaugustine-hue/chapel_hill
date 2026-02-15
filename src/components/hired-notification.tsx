@@ -26,15 +26,15 @@ export default function HiredNotification() {
         variant: 'vibrant',
         description: (
           <div className="flex items-center gap-4">
-            <PartyPopper className="h-8 w-8 shrink-0 text-yellow-300" />
+            <PartyPopper className="h-10 w-10 shrink-0 text-yellow-300" />
             <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 border-2 border-white/50">
+              <Avatar className="h-12 w-12 border-2 border-white/50">
                 {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt={example.name} />}
                 <AvatarFallback>{example.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
               </Avatar>
               <div>
-                <p className="font-bold">{`${example.name.split(' ')[0]} was hired!`} 🇬🇭</p>
-                <p>{`For the ${example.job} role.`}</p>
+                <p className="font-bold text-base">{`${example.name.split(' ')[0]} was hired!`} 🇬🇭</p>
+                <p className="text-sm">{`For the ${example.job} role.`}</p>
               </div>
             </div>
           </div>
