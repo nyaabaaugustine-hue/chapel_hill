@@ -107,7 +107,7 @@ export default function Header() {
   
   const { data: userData, isLoading: isUserDataLoading } = useDoc<AppUser>(userDocRef);
 
-  const isLoading = isAuthUserLoading || (!!authUser && !userData);
+  const isLoading = isAuthUserLoading || (!!authUser && isUserDataLoading);
 
   useEffect(() => {
     setIsMounted(true);
