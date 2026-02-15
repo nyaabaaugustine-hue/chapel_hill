@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
 import DynamicWidgetsWrapper from '@/components/shared/dynamic-widgets-wrapper';
-import LiveActivityBar from '@/components/live-activity-bar';
+import ConditionalLiveActivityBar from '@/components/shared/conditional-live-activity-bar';
 
 const inter = Inter({ 
   subsets: ['latin'], 
@@ -44,7 +44,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <div className="sticky top-0 z-50">
               <Header />
-              <LiveActivityBar />
+              <ConditionalLiveActivityBar />
             </div>
             {children}
             <Footer />
