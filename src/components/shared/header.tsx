@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -16,6 +15,7 @@ import {
   ChevronDown,
   PlusCircle,
   LayoutDashboard,
+  LogOut,
 } from 'lucide-react';
 import Logo from './logo';
 import { Button } from '@/components/ui/button';
@@ -42,6 +42,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import {
   Accordion,
@@ -50,6 +51,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ThemeToggle } from '../theme-toggle';
+import { useFirebase, useUser, useDoc, useFirestore, useMemoFirebase } from '@/firebase';
+import { signOut } from 'firebase/auth';
+import { doc } from 'firebase/firestore';
+import type { User as AppUser } from '@/lib/types';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+
 
 const DesktopAuthButtons = () => (
     <div className="flex items-center gap-2">
@@ -86,9 +95,39 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  const { auth } = useFirebase();
+  const { user: authUser, isUserLoading: isAuthUserLoading } = useUser();
+
+  const userDocRef = useMemoFirebase(() => {
+    if (!authUser) return null;
+    return doc(useFirestore(), 'users', authUser.uid);
+  }, [authUser]);
+  
+  const { data: userData, isLoading: isUserDataLoading } = useDoc<AppUser>(userDocRef);
+
+  const isLoading = isAuthUserLoading || (!!authUser && !userData);
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  const getDashboardLink = () => {
+    if (!userData?.role) return '/dashboard';
+    switch (userData.role) {
+      case 'admin': return '/admin';
+      case 'employer':
+      case 'recruiter':
+      case 'hiringManager': return '/employer';
+      default: return '/dashboard';
+    }
+  };
+
+  const handleLogout = () => {
+    if (auth) {
+      signOut(auth);
+      // Let onAuthStateChanged handle the UI updates.
+    }
+  };
 
   const navLinks = [
     { href: '/', label: 'Home', icon: Home, color: 'text-sky-500' },
@@ -125,6 +164,82 @@ export default function Header() {
     },
   ];
 
+  const DesktopAuthDisplay = () => {
+    if (isLoading) {
+      return (
+        <div className="flex items-center gap-4">
+          <Skeleton className="h-10 w-10 rounded-full" />
+          <Skeleton className="h-8 w-20 rounded-md" />
+        </div>
+      );
+    }
+    
+    if (authUser && userData) {
+      const userAvatar = PlaceHolderImages.find(p => p.id === userData.avatar);
+      return (
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button asChild>
+            <Link href={getDashboardLink()}>
+              <LayoutDashboard className="mr-2 h-4 w-4" />
+              Dashboard
+            </Link>
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                <Avatar className="h-10 w-10">
+                  {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt={userData.name} />}
+                  <AvatarFallback>{userData.name?.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56" align="end" forceMount>
+              <DropdownMenuItem disabled>
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium leading-none">{userData.name}</p>
+                  <p className="text-xs leading-none text-muted-foreground">{userData.email}</p>
+                </div>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Log out</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      );
+    }
+
+    return <DesktopAuthButtons />;
+  };
+
+  const MobileAuthDisplay = ({ onLinkClick }: { onLinkClick?: () => void }) => {
+    if (isLoading) {
+      return <Skeleton className="h-24 w-full" />
+    }
+
+    if (authUser && userData) {
+      return (
+        <div className="w-full space-y-2">
+          <Button asChild size="lg" className="w-full">
+            <Link href={getDashboardLink()} onClick={onLinkClick}>
+              <LayoutDashboard className="mr-2 h-4 w-4" />
+              Go to Dashboard
+            </Link>
+          </Button>
+          <Button variant="outline" size="lg" className="w-full" onClick={() => { handleLogout(); onLinkClick?.(); }}>
+            <LogOut className="mr-2 h-4 w-4" />
+            Log Out
+          </Button>
+        </div>
+      );
+    }
+
+    return <MobileAuthButtons onLinkClick={onLinkClick} />
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm">
       <div className="mx-auto flex h-[80px] max-w-7xl items-center justify-between px-6 lg:px-12">
@@ -150,7 +265,7 @@ export default function Header() {
                         <Logo />
                       </Link>
                   </SheetHeader>
-                  <nav className="flex-1 space-y-1 p-4">
+                  <nav className="flex-1 space-y-1 p-4 overflow-y-auto">
                       {navLinks.map((link) => {
                         const Icon = link.icon;
                         if (link.subLinks) {
@@ -215,7 +330,7 @@ export default function Header() {
                       })}
                   </nav>
                   <SheetFooter className="mt-auto border-t bg-background/30 p-4 flex flex-col items-center gap-4">
-                      <MobileAuthButtons onLinkClick={() => setMobileMenuOpen(false)} />
+                      <MobileAuthDisplay onLinkClick={() => setMobileMenuOpen(false)} />
                       <ThemeToggle />
                   </SheetFooter>
                   </SheetContent>
@@ -299,7 +414,7 @@ export default function Header() {
 
         {/* Right: Auth (Desktop) */}
         <div className="hidden md:flex items-center">
-          <DesktopAuthButtons />
+          <DesktopAuthDisplay />
         </div>
 
       </div>
