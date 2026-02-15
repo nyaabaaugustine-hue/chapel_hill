@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -97,12 +96,18 @@ export default function ContactsPage() {
                                 <p className="text-muted-foreground">123 Job Seeker Lane, Accra, Ghana</p>
                             </div>
                         </div>
-                         <div className="flex items-start gap-4">
-                            <Phone className="h-6 w-6 text-primary mt-1" />
-                            <div>
+                         <div className="flex items-center gap-4">
+                            <Phone className="h-6 w-6 text-primary" />
+                            <div className="flex-1">
                                 <h4 className="font-semibold">Call Us</h4>
-                                <p className="text-muted-foreground">+233 (55) 123-4567</p>
+                                <p className="text-muted-foreground">+233 54 198 8383</p>
                             </div>
+                            <Button asChild size="sm" className="bg-accent-gradient">
+                                <a href="tel:+233541988383">
+                                    <Phone className="mr-2 h-4 w-4" />
+                                    Call Now
+                                </a>
+                            </Button>
                         </div>
                          <div className="flex items-start gap-4">
                             <Mail className="h-6 w-6 text-primary mt-1" />
