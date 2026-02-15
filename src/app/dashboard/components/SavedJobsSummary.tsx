@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { DUMMY_JOBS } from '@/lib/data';
-import { ArrowRight, Bookmark } from 'lucide-react';
+import { Bookmark } from 'lucide-react';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
@@ -20,7 +20,7 @@ export default function SavedJobsSummary() {
             <CardDescription>Jobs you are keeping an eye on.</CardDescription>
         </div>
          <Button asChild variant="outline" size="sm">
-            <Link href="/dashboard/applications">View All</Link>
+            <Link href="/jobs">View All</Link>
         </Button>
       </CardHeader>
       <CardContent className="space-y-3">
@@ -29,13 +29,13 @@ export default function SavedJobsSummary() {
             return (
              <div key={job.id} className="flex items-center gap-4 p-3 rounded-lg border hover:bg-secondary/50 transition-colors">
                 {logo && 
-                    <div className="bg-background rounded-md p-1 border">
-                        <Image src={logo.imageUrl} alt={job.company.name} width={32} height={32} />
+                    <div className="bg-background rounded-md p-1 border flex-shrink-0">
+                        <Image src={logo.imageUrl} alt={job.company.name} width={40} height={40} className="rounded-sm object-contain" />
                     </div>
                 }
-                <div className="flex-1">
-                    <Link href={`/jobs/${job.id}`} className="font-semibold text-sm hover:text-primary leading-tight line-clamp-1">{job.title}</Link>
-                    <p className="text-xs text-muted-foreground">{job.company.name}</p>
+                <div className="flex-1 min-w-0">
+                    <Link href={`/jobs/${job.id}`} className="font-semibold text-sm hover:text-primary leading-tight truncate block">{job.title}</Link>
+                    <p className="text-xs text-muted-foreground truncate">{job.company.name}</p>
                 </div>
                 <Button variant="secondary" size="sm" asChild>
                     <Link href={`/jobs/${job.id}`}>View</Link>

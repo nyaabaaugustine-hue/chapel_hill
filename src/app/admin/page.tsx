@@ -1,12 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import {
   DollarSign,
   Users,
   Briefcase,
   Shield,
-  FileBarChart,
-  Building,
   UserPlus,
   Download,
 } from 'lucide-react';
@@ -19,11 +18,26 @@ import ModerationCenter from './components/moderation-center';
 import LocationBreakdown from './components/location-breakdown';
 import SystemHealth from './components/system-health';
 import { Button } from '@/components/ui/button';
-import SectionHeader from '@/components/shared/section-header';
 import { useToast } from '@/hooks/use-toast';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export default function AdminDashboard() {
   const { toast } = useToast();
+  const [isInviteDialogOpen, setIsInviteDialogOpen] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteName, setInviteName] = useState('');
+  const [inviteCompany, setInviteCompany] = useState('');
 
   const handleAction = (title: string, description: string) => {
     toast({
@@ -31,6 +45,24 @@ export default function AdminDashboard() {
       description,
       variant: 'vibrant',
     });
+  };
+
+  const handleSendInvite = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inviteEmail || !inviteName || !inviteCompany) {
+        toast({
+            title: "Missing Information",
+            description: "Please fill out all fields to send an invitation.",
+            variant: "destructive",
+        });
+        return;
+    }
+    handleAction('Invite Sent', `An invitation has been sent to ${inviteName} at ${inviteCompany}.`);
+    setIsInviteDialogOpen(false);
+    // Reset form
+    setInviteEmail('');
+    setInviteName('');
+    setInviteCompany('');
   };
 
   return (
@@ -41,9 +73,43 @@ export default function AdminDashboard() {
             <p className="text-muted-foreground">Welcome back, Admin. Here is the platform's performance overview.</p>
         </div>
         <div className="flex items-center gap-2">
-            <Button variant="outline" onClick={() => handleAction('Invite Sent', 'An invitation has been sent to the employer.')}>
-              <UserPlus /> Invite Employer
-            </Button>
+            <Dialog open={isInviteDialogOpen} onOpenChange={setIsInviteDialogOpen}>
+                <DialogTrigger asChild>
+                    <Button variant="outline">
+                      <UserPlus /> Invite Employer
+                    </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                    <form onSubmit={handleSendInvite}>
+                        <DialogHeader>
+                            <DialogTitle>Invite New Employer</DialogTitle>
+                            <DialogDescription>
+                                Send an invitation to a new employer to join the platform.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="invite-name">Contact Name</Label>
+                                <Input id="invite-name" placeholder="e.g., Esi Owusu" value={inviteName} onChange={e => setInviteName(e.target.value)} required />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="invite-company">Company Name</Label>
+                                <Input id="invite-company" placeholder="e.g., Ghana Tech Solutions" value={inviteCompany} onChange={e => setInviteCompany(e.target.value)} required />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="invite-email">Email Address</Label>
+                                <Input id="invite-email" type="email" placeholder="contact@ghtech.com" value={inviteEmail} onChange={e => setInviteEmail(e.target.value)} required />
+                            </div>
+                        </div>
+                        <DialogFooter>
+                            <DialogClose asChild>
+                                <Button type="button" variant="outline">Cancel</Button>
+                            </DialogClose>
+                            <Button type="submit">Send Invite</Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
             <Button onClick={() => handleAction('Exporting Reports', 'Your reports are being generated.')}>
               <Download /> Export Reports
             </Button>

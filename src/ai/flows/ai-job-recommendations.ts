@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -32,8 +33,10 @@ const AiJobRecommendationsOutputSchema = z.object({
     .describe('Suggestions for addressing any skill gaps.'),
   resumeMatchingScore: z
     .number()
+    .min(70)
+    .max(100)
     .optional()
-    .describe('A score indicating how well the resume matches the recommended jobs.'),
+    .describe('A score between 70-100 indicating how well the resume matches the recommended jobs.'),
   shouldRecommend: z
     .boolean()
     .describe(
@@ -60,7 +63,7 @@ Skill Gaps: {{{skillGaps}}}
 
 Based on the profile summary, decide whether the job recommendations should be shown or not. Set shouldRecommend accordingly.
 
-Respond with a list of recommended jobs, suggestions for addressing skill gaps, and a resume matching score, if applicable.`,
+Respond with a list of recommended jobs, suggestions for addressing skill gaps, and a resume matching score (a number between 70 and 100), if applicable.`,
   config: {
     safetySettings: [
       {
