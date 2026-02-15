@@ -71,7 +71,7 @@ export default function RegisterPage() {
               data-ai-hint={heroImage.imageHint}
             />
           )}
-        <div className="absolute inset-0 bg-black/70 z-10" />
+        <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 w-full">
             <Card className="w-full max-w-lg mx-auto shadow-lg">
             <CardHeader className="text-center">
