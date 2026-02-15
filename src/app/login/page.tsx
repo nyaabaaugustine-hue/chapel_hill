@@ -12,8 +12,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { useFirebase } from '@/firebase/provider';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default function LoginPage() {
     const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
@@ -115,11 +115,11 @@ export default function LoginPage() {
             });
             return;
         }
-
+    
         let demoEmail = '';
         let roleName = '';
         let destination = '';
-
+    
         switch (role) {
             case 'employer':
                 demoEmail = 'employer@example.com';
@@ -142,8 +142,9 @@ export default function LoginPage() {
         setEmail(demoEmail);
         setPassword('password');
         setIsLoading(true);
-
+    
         try {
+            // First, try to sign in
             await signInWithEmailAndPassword(auth, demoEmail, 'password');
             toast({
                 title: `Logged in as ${roleName}`,
@@ -151,13 +152,62 @@ export default function LoginPage() {
                 variant: 'vibrant',
             });
             router.push(destination);
-        } catch (error) {
-            toast({
-                title: 'Demo Login Failed',
-                description: `Could not log in as ${roleName}. Please ensure demo users (e.g., ${demoEmail}) exist in Firebase Authentication with the password 'password'.`,
-                variant: 'destructive',
-            });
-            setIsLoading(false);
+        } catch (error: any) {
+            // If sign-in fails because the user doesn't exist, create the user
+            if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
+                try {
+                    toast({
+                        title: 'Creating Demo User...',
+                        description: `The ${roleName} demo user doesn't exist yet. Creating it for you.`,
+                    });
+                    const userCredential = await createUserWithEmailAndPassword(auth, demoEmail, 'password');
+                    const user = userCredential.user;
+    
+                    // Create user document in Firestore
+                    const userDocRef = doc(firestore, "users", user.uid);
+                    await setDoc(userDocRef, {
+                        email: user.email,
+                        firstName: roleName,
+                        lastName: "User",
+                        name: `${roleName} User`,
+                        role: role,
+                        createdAt: new Date().toISOString(),
+                        avatar: `avatar-${role === 'admin' ? 2 : (role === 'employer' ? 4 : 1)}`
+                    });
+    
+                    // If admin, also create admin role document
+                    if (role === 'admin') {
+                        const adminDocRef = doc(firestore, "roles_admin", user.uid);
+                        await setDoc(adminDocRef, {
+                            userId: user.uid,
+                            permissions: ['all'] 
+                        });
+                    }
+                    
+                    toast({
+                        title: `Logged in as ${roleName}`,
+                        description: 'Redirecting to your dashboard...',
+                        variant: 'vibrant',
+                    });
+                    router.push(destination);
+    
+                } catch (creationError: any) {
+                    toast({
+                        title: 'Demo Login Failed',
+                        description: `Could not create the demo user. Error: ${creationError.message}`,
+                        variant: 'destructive',
+                    });
+                    setIsLoading(false);
+                }
+            } else {
+                // Handle other login errors
+                toast({
+                    title: 'Demo Login Failed',
+                    description: `Could not log in as ${roleName}. Error: ${error.message}`,
+                    variant: 'destructive',
+                });
+                setIsLoading(false);
+            }
         }
     };
 
@@ -186,7 +236,7 @@ export default function LoginPage() {
               data-ai-hint={heroImage.imageHint}
             />
           )}
-        <div className="absolute inset-0 bg-black/50 z-10" />
+        <div className="absolute inset-0 bg-black/60 z-10" />
         <div className="relative z-20 w-full">
             <Card className="w-full max-w-lg mx-auto shadow-lg">
             <CardHeader className="text-center">
