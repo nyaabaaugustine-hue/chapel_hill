@@ -23,7 +23,6 @@ import JobsByLocation from '@/components/jobs-by-location';
 import AiPoweredTools from '@/components/ai-powered-tools';
 
 export default function HomePage() {
-  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-main');
   const categoryBgImage = PlaceHolderImages.find((p) => p.id === 'category-bg');
 
   const trustIndicators = [
@@ -42,33 +41,31 @@ export default function HomePage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section
-          className="relative w-full py-20 lg:py-32 flex items-center justify-center text-center animate-in fade-in slide-in-from-bottom-4 duration-700"
+          className="relative w-full py-20 lg:py-32 flex items-center justify-center text-center bg-background overflow-hidden"
         >
-          {heroImage && (
-            <Image
-              src={heroImage.imageUrl}
-              alt={heroImage.description}
-              fill
-              priority
-              className="object-cover z-0"
-              data-ai-hint={heroImage.imageHint}
-            />
-          )}
-          <div className="absolute inset-0 bg-black/60 z-10" />
+          {/* Background Effects */}
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5 animate-calm-shift [background-size:200%_200%]" />
+            <div className="absolute top-[10%] left-[5%] h-64 w-64 rounded-full bg-primary/5 blur-3xl animate-drift opacity-50" />
+            <div className="absolute bottom-[10%] right-[5%] h-64 w-64 rounded-full bg-accent/5 blur-3xl animate-drift [animation-delay:'-8s'] opacity-70" />
+          </div>
+
           <div className="relative z-20 container mx-auto px-6 max-w-4xl">
             <div className="flex flex-col justify-center space-y-6">
-              <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl !leading-tight font-headline animate-in fade-in-20 slide-in-from-bottom-8 duration-700">
+              <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl !leading-tight font-headline animate-calm-fade-in-up">
                 Find Your Next Job, <span className="text-primary">Faster.</span>
               </h1>
-              <p className="max-w-3xl mx-auto text-lg text-gray-200 animate-in fade-in-30 slide-in-from-bottom-10 duration-700 delay-200">
+              <p className="max-w-3xl mx-auto text-lg text-muted-foreground animate-calm-fade-in-up [animation-delay:'200ms']">
                 Discover your next career move with verified employers and salary transparency.
               </p>
-              <Suspense>
-                <HeroSearchForm />
-              </Suspense>
-              <div className="flex items-center gap-4 pt-6 flex-wrap justify-center animate-in fade-in-30 slide-in-from-bottom-14 duration-700 delay-600">
+              <div className="animate-calm-fade-in-up [animation-delay:'400ms']">
+                <Suspense>
+                  <HeroSearchForm />
+                </Suspense>
+              </div>
+              <div className="flex items-center gap-4 pt-6 flex-wrap justify-center animate-calm-fade-in-up [animation-delay:'600ms']">
                 {trustIndicators.map((item, index) => (
-                  <div key={index} className="flex items-center gap-2 text-sm text-gray-200 rounded-full bg-white/10 px-4 py-1.5 border border-white/20 backdrop-blur-sm">
+                  <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground rounded-full bg-background/50 px-4 py-1.5 border border-border/50 backdrop-blur-sm">
                     <CheckCircle className="h-4 w-4 text-primary" />
                     <span>{item.text}</span>
                   </div>
