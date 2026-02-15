@@ -4,71 +4,84 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
+    /* Light Mode Palette from PRD */
+    --background: 188 78% 93%; /* #E0F7FA */
+    --foreground: 222 47% 11%; /* Dark blue-black for text */
+    
+    --card: 0 0% 100%; /* White cards for contrast */
     --card-foreground: 222 47% 11%;
+    
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 204 53% 40%;
+    --primary: 196 76% 52%; /* #29ABE2 */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 215 35% 95%;
+    --secondary: 196 76% 95%; /* Lighter shade of primary */
     --secondary-foreground: 222 47% 11%;
-    --muted: 215 35% 95%;
+    
+    --muted: 196 76% 95%;
     --muted-foreground: 215 25% 65%;
     
-    --accent: 204 53% 40%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 175 76% 52%; /* #29E2D2 */
+    --accent-foreground: 222 47% 11%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 215 30% 90%;
-    --input: 215 30% 90%;
-    --ring: 204 53% 40%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 196 76% 85%; /* Border based on primary */
+    --input: 196 76% 85%;
+    --ring: 196 76% 52%;
+
     --radius: 0.75rem;
 
+    /* Chart colors to match the theme */
     --chart-1: hsl(var(--primary));
     --chart-2: hsl(var(--accent));
     --chart-3: 180 50% 45%;
     --chart-4: 260 50% 60%;
     --chart-5: 50 90% 55%;
     
-    --sidebar-background: 204 50% 17%;
+    /* Sidebar remains dark for a modern look */
+    --sidebar-background: 222 47% 11%; /* Dark blue-black */
     --sidebar-foreground: 210 40% 90%;
-    --sidebar-primary: 204 53% 65%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 204 53% 65%;
-    --sidebar-accent-foreground: 222 47% 11%;
-    --sidebar-border: 204 50% 25%;
-    --sidebar-ring: 204 53% 65%;
+    --sidebar-primary: 196 76% 65%; /* Lighter primary */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 175 76% 65%; /* Lighter accent */
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 222 47% 15%;
+    --sidebar-ring: 196 76% 65%;
   }
 
   .dark {
-    --background: 204 50% 15%;
-    --foreground: 210 40% 98%;
-    --card: 204 50% 18%;
+    /* Dark Mode Palette based on PRD */
+    --background: 222 47% 11%; /* Dark blue-black */
+    --foreground: 210 40% 98%; /* Light text */
+    
+    --card: 222 47% 15%; /* Slightly lighter than background */
     --card-foreground: 210 40% 98%;
-    --popover: 204 50% 15%;
+    
+    --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 204 53% 60%;
-    --primary-foreground: 204 50% 10%;
+    --primary: 196 76% 60%; /* Lighter primary for dark mode */
+    --primary-foreground: 222 47% 11%;
     
-    --secondary: 204 50% 20%;
+    --secondary: 222 47% 20%; /* Lighter secondary for dark mode */
     --secondary-foreground: 210 40% 98%;
-    --muted: 204 50% 20%;
+    
+    --muted: 222 47% 20%;
     --muted-foreground: 215 25% 65%;
     
-    --accent: 204 53% 60%;
-    --accent-foreground: 204 50% 10%;
+    --accent: 175 76% 60%; /* Lighter accent for dark mode */
+    --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 204 50% 23%;
-    --input: 204 50% 23%;
-    --ring: 204 53% 60%;
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 222 47% 20%;
+    --input: 222 47% 20%;
+    --ring: 196 76% 60%;
   }
 }
 
