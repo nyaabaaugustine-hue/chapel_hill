@@ -111,8 +111,6 @@ export default function Header() {
   
   const { data: userData, isLoading: isUserDataLoading } = useDoc<AppUser>(userDocRef);
 
-  const isLoading = isAuthUserLoading || (!!authUser && isUserDataLoading);
-
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -198,63 +196,108 @@ export default function Header() {
   ];
 
   const DesktopAuthDisplay = () => {
-    if (isLoading) {
+    // If auth state is still loading, show skeleton.
+    if (isAuthUserLoading) {
       return (
         <div className="flex items-center gap-4">
           <Skeleton className="h-10 w-10 rounded-full" />
         </div>
       );
     }
-    
-    if (authUser && userData) {
-      const userAvatar = PlaceHolderImages.find(p => p.id === userData.avatar);
-      const profileLink = getProfileLink();
-      const settingsLink = getSettingsLink();
 
+    // If user is authenticated
+    if (authUser) {
+      // If user data is still loading, show a skeleton version of the avatar.
+      if (isUserDataLoading) {
+        return (
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Skeleton className="h-10 w-10 rounded-full" />
+          </div>
+        );
+      }
+      
+      // If user data loaded successfully
+      if (userData) {
+        const userAvatar = PlaceHolderImages.find(p => p.id === userData.avatar);
+        const profileLink = getProfileLink();
+        const settingsLink = getSettingsLink();
+
+        return (
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-10 w-10 rounded-full transition-transform hover:scale-110">
+                  <Avatar className="h-10 w-10 border-2 border-primary/50">
+                    {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt={userData.name} />}
+                    <AvatarFallback>{userData.name?.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">{userData.name}</p>
+                    <p className="text-xs leading-none text-muted-foreground">{userData.email}</p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  <DropdownMenuItem asChild>
+                    <Link href={getDashboardLink()}>
+                      <LayoutDashboard className="mr-2 h-4 w-4" />
+                      <span>Dashboard</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  {profileLink && (
+                    <DropdownMenuItem asChild>
+                      <Link href={profileLink}>
+                        <UserCircle className="mr-2 h-4 w-4" />
+                        <span>Profile</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
+                  {settingsLink && (
+                    <DropdownMenuItem asChild>
+                      <Link href={settingsLink}>
+                        <Settings className="mr-2 h-4 w-4" />
+                        <span>Settings</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        );
+      }
+      
+      // If user is authenticated but user data failed to load (or doesn't exist)
+      // We can show a generic user menu with just a logout button.
       return (
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-full transition-transform hover:scale-110">
-                <Avatar className="h-10 w-10 border-2 border-primary/50">
-                  {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt={userData.name} />}
-                  <AvatarFallback>{userData.name?.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+              <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                <Avatar className="h-10 w-10 border-2 border-destructive/50">
+                  <AvatarFallback>??</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">{userData.name}</p>
-                  <p className="text-xs leading-none text-muted-foreground">{userData.email}</p>
+                  <p className="text-sm font-medium leading-none">User</p>
+                  <p className="text-xs leading-none text-muted-foreground">{authUser.email}</p>
                 </div>
               </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem asChild>
-                  <Link href={getDashboardLink()}>
-                    <LayoutDashboard className="mr-2 h-4 w-4" />
-                    <span>Dashboard</span>
-                  </Link>
-                </DropdownMenuItem>
-                {profileLink && (
-                  <DropdownMenuItem asChild>
-                    <Link href={profileLink}>
-                      <UserCircle className="mr-2 h-4 w-4" />
-                      <span>Profile</span>
-                    </Link>
-                  </DropdownMenuItem>
-                )}
-                {settingsLink && (
-                  <DropdownMenuItem asChild>
-                    <Link href={settingsLink}>
-                      <Settings className="mr-2 h-4 w-4" />
-                      <span>Settings</span>
-                    </Link>
-                  </DropdownMenuItem>
-                )}
-              </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut className="mr-2 h-4 w-4" />
@@ -265,7 +308,8 @@ export default function Header() {
         </div>
       );
     }
-
+    
+    // If user is not authenticated
     return <DesktopAuthButtons />;
   };
 
@@ -359,14 +403,18 @@ export default function Header() {
                       })}
                   </nav>
                   <SheetFooter className="mt-auto border-t bg-background/30 p-4 flex flex-col items-center gap-4">
-                      {isLoading ? (
+                      {isAuthUserLoading ? (
                           <Skeleton className="h-24 w-full" />
-                      ) : authUser && userData ? (
+                      ) : authUser ? (
                           <>
-                              <div className="w-full p-2 text-center border-b mb-2">
-                                  <p className="font-semibold">{userData.name}</p>
-                                  <p className="text-xs text-muted-foreground">{userData.email}</p>
-                              </div>
+                              {isUserDataLoading ? (
+                                <Skeleton className="h-12 w-full" />
+                              ) : userData && (
+                                <div className="w-full p-2 text-center border-b mb-2">
+                                    <p className="font-semibold">{userData.name}</p>
+                                    <p className="text-xs text-muted-foreground">{userData.email}</p>
+                                </div>
+                              )}
                               <div className="w-full space-y-2">
                                   <Button asChild size="lg" className="w-full">
                                       <Link href={getDashboardLink()} onClick={() => setMobileMenuOpen(false)}>
